@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rent Management</title>
+<title>Rent Management System</title>
 
 <style>
 *{
@@ -51,7 +51,7 @@ header{
 }
 
 .card p{
-    font-size:25px;
+    font-size:24px;
     font-weight:bold;
     margin-top:8px;
 }
@@ -74,12 +74,20 @@ input,select{
 
 button{
     border:0;
-    padding:12px 18px;
+    padding:11px 15px;
     border-radius:7px;
     cursor:pointer;
     background:#1f2937;
     color:white;
-    margin-top:8px;
+    margin:5px 3px;
+}
+
+.delete{
+    background:#dc2626;
+}
+
+.edit{
+    background:#2563eb;
 }
 
 table{
@@ -104,12 +112,20 @@ th,td{
     font-weight:bold;
 }
 
+.search{
+    margin-top:15px;
+}
+
 @media(max-width:700px){
+
     .cards{
         grid-template-columns:repeat(2,1fr);
     }
 
     table{
+        display:block;
+        overflow-x:auto;
+        white-space:nowrap;
         font-size:13px;
     }
 }
@@ -125,7 +141,7 @@ th,td{
 
 <div class="container">
 
-<h2>Dashboard</h2>
+<h2>📊 Dashboard</h2>
 
 <div class="cards">
 
@@ -154,7 +170,7 @@ th,td{
 
 <div class="section">
 
-<h2>➕ Add Tenant / Property</h2>
+<h2>🏢 Add Property / Tenant</h2>
 
 <input id="tenantName" placeholder="Tenant Name">
 
@@ -164,19 +180,35 @@ th,td{
 
 <input id="rent" type="number" placeholder="Monthly Rent">
 
+<input id="dueDate" type="date">
+
+<select id="propertyStatus">
+<option value="Occupied">Occupied</option>
+<option value="Vacant">Vacant</option>
+</select>
+
 <select id="paymentStatus">
 <option value="Paid">Paid</option>
 <option value="Pending">Pending</option>
 </select>
 
-<button onclick="addTenant()">Add Record</button>
+<button onclick="saveRecord()" id="saveButton">
+Add Property
+</button>
 
 </div>
 
 
 <div class="section">
 
-<h2>👤 Tenant Records</h2>
+<h2>📋 Property Records</h2>
+
+<input
+class="search"
+id="search"
+placeholder="🔎 Search tenant, property or room..."
+oninput="displayRecords()"
+>
 
 <table>
 
@@ -186,12 +218,14 @@ th,td{
 <th>Property</th>
 <th>Room</th>
 <th>Rent</th>
+<th>Due Date</th>
 <th>Status</th>
+<th>Payment</th>
+<th>Action</th>
 </tr>
 </thead>
 
-<tbody id="tenantTable">
-</tbody>
+<tbody id="propertyTable"></tbody>
 
 </table>
 
@@ -204,73 +238,277 @@ th,td{
 
 let records = JSON.parse(localStorage.getItem("rentRecords")) || [];
 
-function addTenant(){
+let editIndex = -1;
 
-    let tenantName = document.getElementById("tenantName").value;
-    let propertyName = document.getElementById("propertyName").value;
-    let roomNumber = document.getElementById("roomNumber").value;
-    let rent = Number(document.getElementById("rent").value);
-    let paymentStatus = document.getElementById("paymentStatus").value;
 
-    if(!tenantName || !propertyName || !roomNumber || !rent){
-        alert("Please fill all details");
+function saveRecord(){
+
+    let tenantName =
+        document.getElementById("tenantName").value;
+
+    let propertyName =
+        document.getElementById("propertyName").value;
+
+    let roomNumber =
+        document.getElementById("roomNumber").value;
+
+    let rent =
+        Number(document.getElementById("rent").value);
+
+    let dueDate =
+        document.getElementById("dueDate").value;
+
+    let propertyStatus =
+        document.getElementById("propertyStatus").value;
+
+    let paymentStatus =
+        document.getElementById("paymentStatus").value;
+
+
+    if(
+        !tenantName ||
+        !propertyName ||
+        !roomNumber ||
+        !rent
+    ){
+
+        alert("Please fill all required details");
+
         return;
     }
 
-    records.push({
+
+    let record = {
+
         tenantName,
         propertyName,
         roomNumber,
         rent,
+        dueDate,
+        propertyStatus,
         paymentStatus
-    });
 
-    localStorage.setItem("rentRecords", JSON.stringify(records));
+    };
 
-    document.getElementById("tenantName").value="";
-    document.getElementById("propertyName").value="";
-    document.getElementById("roomNumber").value="";
-    document.getElementById("rent").value="";
+
+    if(editIndex === -1){
+
+        records.push(record);
+
+    }else{
+
+        records[editIndex] = record;
+
+        editIndex = -1;
+
+        document.getElementById("saveButton").innerText =
+            "Add Property";
+    }
+
+
+    localStorage.setItem(
+        "rentRecords",
+        JSON.stringify(records)
+    );
+
+
+    clearForm();
 
     displayRecords();
 }
 
 
+function editRecord(index){
+
+    let record = records[index];
+
+    document.getElementById("tenantName").value =
+        record.tenantName;
+
+    document.getElementById("propertyName").value =
+        record.propertyName;
+
+    document.getElementById("roomNumber").value =
+        record.roomNumber;
+
+    document.getElementById("rent").value =
+        record.rent;
+
+    document.getElementById("dueDate").value =
+        record.dueDate;
+
+    document.getElementById("propertyStatus").value =
+        record.propertyStatus;
+
+    document.getElementById("paymentStatus").value =
+        record.paymentStatus;
+
+
+    editIndex = index;
+
+    document.getElementById("saveButton").innerText =
+        "Update Property";
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+
+function deleteRecord(index){
+
+    if(
+        confirm(
+            "Are you sure you want to delete this record?"
+        )
+    ){
+
+        records.splice(index,1);
+
+        localStorage.setItem(
+            "rentRecords",
+            JSON.stringify(records)
+        );
+
+        displayRecords();
+    }
+}
+
+
+function clearForm(){
+
+    document.getElementById("tenantName").value = "";
+
+    document.getElementById("propertyName").value = "";
+
+    document.getElementById("roomNumber").value = "";
+
+    document.getElementById("rent").value = "";
+
+    document.getElementById("dueDate").value = "";
+
+    document.getElementById("propertyStatus").value =
+        "Occupied";
+
+    document.getElementById("paymentStatus").value =
+        "Paid";
+}
+
+
 function displayRecords(){
 
-    let table = document.getElementById("tenantTable");
+    let table =
+        document.getElementById("propertyTable");
 
-    table.innerHTML="";
+    let search =
+        document.getElementById("search")
+        .value
+        .toLowerCase();
 
-    let pending=0;
+
+    table.innerHTML = "";
+
+
+    let filteredRecords = records.filter(record =>
+
+        record.tenantName.toLowerCase().includes(search) ||
+
+        record.propertyName.toLowerCase().includes(search) ||
+
+        record.roomNumber.toLowerCase().includes(search)
+
+    );
+
+
+    let occupied = 0;
+
+    let vacant = 0;
+
+    let pending = 0;
+
 
     records.forEach(record => {
 
-        if(record.paymentStatus === "Pending"){
-            pending += record.rent;
-        }
+        if(record.propertyStatus === "Occupied")
+            occupied++;
+
+        if(record.propertyStatus === "Vacant")
+            vacant++;
+
+        if(record.paymentStatus === "Pending")
+            pending += Number(record.rent);
+
+    });
+
+
+    filteredRecords.forEach(record => {
+
+        let index = records.indexOf(record);
+
 
         table.innerHTML += `
+
         <tr>
-            <td>${record.tenantName}</td>
-            <td>${record.propertyName}</td>
-            <td>${record.roomNumber}</td>
-            <td>₹${record.rent}</td>
-            <td class="${record.paymentStatus === "Paid" ? "status-paid" : "status-pending"}">
-                ${record.paymentStatus}
-            </td>
+
+        <td>${record.tenantName}</td>
+
+        <td>${record.propertyName}</td>
+
+        <td>${record.roomNumber}</td>
+
+        <td>₹${record.rent}</td>
+
+        <td>${record.dueDate || "-"}</td>
+
+        <td>${record.propertyStatus}</td>
+
+        <td class="${
+            record.paymentStatus === "Paid"
+            ? "status-paid"
+            : "status-pending"
+        }">
+
+        ${record.paymentStatus}
+
+        </td>
+
+        <td>
+
+        <button
+        class="edit"
+        onclick="editRecord(${index})">
+        Edit
+        </button>
+
+        <button
+        class="delete"
+        onclick="deleteRecord(${index})">
+        Delete
+        </button>
+
+        </td>
+
         </tr>
+
         `;
     });
 
-    document.getElementById("totalProperties").innerText = records.length;
 
-    document.getElementById("occupied").innerText = records.length;
+    document.getElementById("totalProperties")
+        .innerText = records.length;
 
-    document.getElementById("vacant").innerText = 0;
+    document.getElementById("occupied")
+        .innerText = occupied;
 
-    document.getElementById("pendingRent").innerText = "₹" + pending;
+    document.getElementById("vacant")
+        .innerText = vacant;
+
+    document.getElementById("pendingRent")
+        .innerText = "₹" + pending;
 }
+
 
 displayRecords();
 
