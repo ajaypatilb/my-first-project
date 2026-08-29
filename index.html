@@ -295,11 +295,48 @@ oninput="displayRecords()"
 </table>
 
 </div>
+    <div class="section">
+
+<h2>🧾 Rent Receipt</h2>
+
+<select id="receiptTenant">
+    <option value="">Select Tenant</option>
+</select>
+
+<button onclick="generateReceipt()">
+    Generate Receipt
+</button>
+
+<div id="receipt"></div>
+
+    </div>
 <script>
 
 let records = JSON.parse(localStorage.getItem("rentRecords")) || [];
 
 let editIndex = -1;
+    function loadReceiptTenants(){
+
+    let select = document.getElementById("receiptTenant");
+
+    select.innerHTML = '<option value="">Select Tenant</option>';
+
+    records.forEach((record, index) => {
+
+        if(record.lastPaymentDate){
+
+            select.innerHTML += `
+                <option value="${index}">
+                    ${record.tenantName} - ${record.roomNumber}
+                </option>
+            `;
+
+        }
+
+    });
+}
+
+loadReceiptTenants();
 function displayPaymentHistory(){
 
     let history = document.getElementById("paymentHistory");
@@ -677,7 +714,52 @@ loadPaymentTenants();
 
 displayRecords();
 displayPaymentHistory();
-</script>
+    function generateReceipt(){
 
+    let index = document.getElementById("receiptTenant").value;
+
+    if(index === ""){
+        alert("Please select a tenant");
+        return;
+    }
+
+    let record = records[index];
+
+    let receiptNumber = "REC-" + Date.now();
+
+    document.getElementById("receipt").innerHTML = `
+        <div style="
+            margin-top:20px;
+            padding:20px;
+            border:2px solid #222;
+            border-radius:10px;
+            background:white;
+        ">
+
+            <h2 style="text-align:center;">
+                🧾 RENT RECEIPT
+            </h2>
+
+            <hr>
+
+            <p><b>Receipt No:</b> ${receiptNumber}</p>
+            <p><b>Tenant:</b> ${record.tenantName}</p>
+            <p><b>Property:</b> ${record.propertyName}</p>
+            <p><b>Room / Shop:</b> ${record.roomNumber}</p>
+            <p><b>Month:</b> ${record.lastPaymentMonth || "-"}</p>
+            <p><b>Amount Paid:</b> ₹${record.lastPaymentAmount || record.rent}</p>
+            <p><b>Payment Date:</b> ${record.lastPaymentDate}</p>
+            <p><b>Status:</b> Paid</p>
+
+            <hr>
+
+            <button onclick="window.print()">
+                🖨️ Print Receipt
+            </button>
+
+        </div>
+    `;
+}
+</script>
 </body>
 </html>
