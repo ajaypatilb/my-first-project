@@ -272,13 +272,59 @@ oninput="displayRecords()"
 </button>
 
 </div>
+<div class="section">
 
+<h2>📋 Payment History</h2>
+
+<table>
+
+<thead>
+<tr>
+<th>Tenant</th>
+<th>Property</th>
+<th>Month</th>
+<th>Amount</th>
+<th>Payment Date</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody id="paymentHistory">
+</tbody>
+
+</table>
+
+</div>
 <script>
 
 let records = JSON.parse(localStorage.getItem("rentRecords")) || [];
 
 let editIndex = -1;
+function displayPaymentHistory(){
 
+    let history = document.getElementById("paymentHistory");
+
+    history.innerHTML = "";
+
+    records.forEach(record => {
+
+        if(record.lastPaymentDate){
+
+            history.innerHTML += `
+            <tr>
+                <td>${record.tenantName}</td>
+                <td>${record.propertyName}</td>
+                <td>${record.lastPaymentMonth || "-"}</td>
+                <td>₹${record.lastPaymentAmount || record.rent}</td>
+                <td>${record.lastPaymentDate}</td>
+                <td class="status-paid">Paid</td>
+            </tr>
+            `;
+
+        }
+
+    });
+}
 
 function saveRecord(){
 
@@ -630,7 +676,7 @@ function recordPayment(){
 loadPaymentTenants();
 
 displayRecords();
-
+displayPaymentHistory();
 </script>
 
 </body>
