@@ -232,7 +232,46 @@ oninput="displayRecords()"
 </div>
 
 </div>
+<div class="section">
 
+<h2>💰 Rent Collection</h2>
+
+<select id="paymentTenant">
+    <option value="">Select Tenant</option>
+</select>
+
+<select id="paymentMonth">
+    <option value="">Select Month</option>
+    <option>January</option>
+    <option>February</option>
+    <option>March</option>
+    <option>April</option>
+    <option>May</option>
+    <option>June</option>
+    <option>July</option>
+    <option>August</option>
+    <option>September</option>
+    <option>October</option>
+    <option>November</option>
+    <option>December</option>
+</select>
+
+<input
+    id="paymentAmount"
+    type="number"
+    placeholder="Rent Amount"
+>
+
+<input
+    id="paymentDate"
+    type="date"
+>
+
+<button onclick="recordPayment()">
+    💰 Record Payment
+</button>
+
+</div>
 
 <script>
 
@@ -509,7 +548,88 @@ function displayRecords(){
         .innerText = "₹" + pending;
 }
 
+function loadPaymentTenants(){
 
+    let select = document.getElementById("paymentTenant");
+
+    select.innerHTML = '<option value="">Select Tenant</option>';
+
+    records.forEach((record, index) => {
+
+        select.innerHTML += `
+            <option value="${index}">
+                ${record.tenantName} - ${record.roomNumber}
+            </option>
+        `;
+
+    });
+}
+
+
+function recordPayment(){
+
+    let tenantIndex =
+        document.getElementById("paymentTenant").value;
+
+    let month =
+        document.getElementById("paymentMonth").value;
+
+    let amount =
+        Number(document.getElementById("paymentAmount").value);
+
+    let date =
+        document.getElementById("paymentDate").value;
+
+
+    if(
+        tenantIndex === "" ||
+        !month ||
+        !amount ||
+        !date
+    ){
+
+        alert("Please fill all payment details");
+
+        return;
+    }
+
+
+    records[tenantIndex].paymentStatus = "Paid";
+
+    records[tenantIndex].lastPaymentMonth = month;
+
+    records[tenantIndex].lastPaymentAmount = amount;
+
+    records[tenantIndex].lastPaymentDate = date;
+
+
+    localStorage.setItem(
+        "rentRecords",
+        JSON.stringify(records)
+    );
+
+
+    alert("Payment recorded successfully!");
+
+
+    document.getElementById("paymentTenant").value = "";
+
+    document.getElementById("paymentMonth").value = "";
+
+    document.getElementById("paymentAmount").value = "";
+
+    document.getElementById("paymentDate").value = "";
+
+
+    displayRecords();
+
+    loadPaymentTenants();
+}
+
+
+loadPaymentTenants();
+
+displayRecords();
 displayRecords();
 
 </script>
