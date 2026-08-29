@@ -1,150 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rent Management</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rent Management</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
 
-        body {
-            background: #f5f6fa;
-            color: #222;
-        }
+body{
+    background:#f4f6f8;
+    color:#222;
+}
 
-        header {
-            background: #1f2937;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
+header{
+    background:#1f2937;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
 
-        header h1 {
-            font-size: 25px;
-        }
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:20px;
+}
 
-        .container {
-            padding: 20px;
-            max-width: 1100px;
-            margin: auto;
-        }
+.cards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin:20px 0;
+}
 
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-top: 20px;
-        }
+.card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 2px 8px #ddd;
+}
 
-        .card {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
+.card h3{
+    color:#666;
+    font-size:14px;
+}
 
-        .card h3 {
-            color: #666;
-            font-size: 15px;
-            margin-bottom: 10px;
-        }
+.card p{
+    font-size:25px;
+    font-weight:bold;
+    margin-top:8px;
+}
 
-        .card p {
-            font-size: 25px;
-            font-weight: bold;
-        }
+.section{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    margin-top:20px;
+    box-shadow:0 2px 8px #ddd;
+}
 
-        .menu {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 30px;
-        }
+input,select{
+    width:100%;
+    padding:12px;
+    margin:7px 0;
+    border:1px solid #ccc;
+    border-radius:7px;
+}
 
-        .menu button {
-            padding: 18px;
-            border: none;
-            border-radius: 10px;
-            background: white;
-            font-size: 16px;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
+button{
+    border:0;
+    padding:12px 18px;
+    border-radius:7px;
+    cursor:pointer;
+    background:#1f2937;
+    color:white;
+    margin-top:8px;
+}
 
-        .menu button:hover {
-            background: #e5e7eb;
-        }
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
 
-        @media (max-width: 700px) {
-            .cards {
-                grid-template-columns: repeat(2, 1fr);
-            }
+th,td{
+    padding:12px;
+    border-bottom:1px solid #ddd;
+    text-align:left;
+}
 
-            .menu {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+.status-paid{
+    color:green;
+    font-weight:bold;
+}
+
+.status-pending{
+    color:red;
+    font-weight:bold;
+}
+
+@media(max-width:700px){
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    table{
+        font-size:13px;
+    }
+}
+</style>
 </head>
 
 <body>
 
 <header>
     <h1>🏠 Rent Management</h1>
-    <p>Property & Rent Management System</p>
+    <p>Property & Tenant Management System</p>
 </header>
 
 <div class="container">
 
-    <h2>Dashboard</h2>
+<h2>Dashboard</h2>
 
-    <div class="cards">
+<div class="cards">
 
-        <div class="card">
-            <h3>Total Properties</h3>
-            <p>0</p>
-        </div>
+<div class="card">
+<h3>Total Properties</h3>
+<p id="totalProperties">0</p>
+</div>
 
-        <div class="card">
-            <h3>Occupied</h3>
-            <p>0</p>
-        </div>
+<div class="card">
+<h3>Occupied</h3>
+<p id="occupied">0</p>
+</div>
 
-        <div class="card">
-            <h3>Vacant</h3>
-            <p>0</p>
-        </div>
+<div class="card">
+<h3>Vacant</h3>
+<p id="vacant">0</p>
+</div>
 
-        <div class="card">
-            <h3>Pending Rent</h3>
-            <p>₹0</p>
-        </div>
-
-    </div>
-
-    <div class="menu">
-
-        <button>🏢 Properties</button>
-
-        <button>👤 Tenants</button>
-
-        <button>💰 Rent Collection</button>
-
-        <button>📋 Payment History</button>
-
-        <button>📊 Reports</button>
-
-        <button>⚙️ Settings</button>
-
-    </div>
+<div class="card">
+<h3>Pending Rent</h3>
+<p id="pendingRent">₹0</p>
+</div>
 
 </div>
+
+
+<div class="section">
+
+<h2>➕ Add Tenant / Property</h2>
+
+<input id="tenantName" placeholder="Tenant Name">
+
+<input id="propertyName" placeholder="Property / Shop Name">
+
+<input id="roomNumber" placeholder="Room / Shop Number">
+
+<input id="rent" type="number" placeholder="Monthly Rent">
+
+<select id="paymentStatus">
+<option value="Paid">Paid</option>
+<option value="Pending">Pending</option>
+</select>
+
+<button onclick="addTenant()">Add Record</button>
+
+</div>
+
+
+<div class="section">
+
+<h2>👤 Tenant Records</h2>
+
+<table>
+
+<thead>
+<tr>
+<th>Tenant</th>
+<th>Property</th>
+<th>Room</th>
+<th>Rent</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody id="tenantTable">
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<script>
+
+let records = JSON.parse(localStorage.getItem("rentRecords")) || [];
+
+function addTenant(){
+
+    let tenantName = document.getElementById("tenantName").value;
+    let propertyName = document.getElementById("propertyName").value;
+    let roomNumber = document.getElementById("roomNumber").value;
+    let rent = Number(document.getElementById("rent").value);
+    let paymentStatus = document.getElementById("paymentStatus").value;
+
+    if(!tenantName || !propertyName || !roomNumber || !rent){
+        alert("Please fill all details");
+        return;
+    }
+
+    records.push({
+        tenantName,
+        propertyName,
+        roomNumber,
+        rent,
+        paymentStatus
+    });
+
+    localStorage.setItem("rentRecords", JSON.stringify(records));
+
+    document.getElementById("tenantName").value="";
+    document.getElementById("propertyName").value="";
+    document.getElementById("roomNumber").value="";
+    document.getElementById("rent").value="";
+
+    displayRecords();
+}
+
+
+function displayRecords(){
+
+    let table = document.getElementById("tenantTable");
+
+    table.innerHTML="";
+
+    let pending=0;
+
+    records.forEach(record => {
+
+        if(record.paymentStatus === "Pending"){
+            pending += record.rent;
+        }
+
+        table.innerHTML += `
+        <tr>
+            <td>${record.tenantName}</td>
+            <td>${record.propertyName}</td>
+            <td>${record.roomNumber}</td>
+            <td>₹${record.rent}</td>
+            <td class="${record.paymentStatus === "Paid" ? "status-paid" : "status-pending"}">
+                ${record.paymentStatus}
+            </td>
+        </tr>
+        `;
+    });
+
+    document.getElementById("totalProperties").innerText = records.length;
+
+    document.getElementById("occupied").innerText = records.length;
+
+    document.getElementById("vacant").innerText = 0;
+
+    document.getElementById("pendingRent").innerText = "₹" + pending;
+}
+
+displayRecords();
+
+</script>
 
 </body>
 </html>
