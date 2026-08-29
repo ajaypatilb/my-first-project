@@ -323,17 +323,13 @@ let editIndex = -1;
 
     records.forEach((record, index) => {
 
-        if(record.lastPaymentDate){
+    select.innerHTML += `
+        <option value="${index}">
+            ${record.tenantName} - ${record.roomNumber}
+        </option>
+    `;
 
-            select.innerHTML += `
-                <option value="${index}">
-                    ${record.tenantName} - ${record.roomNumber}
-                </option>
-            `;
-
-        }
-
-    });
+});
 }
 
 loadReceiptTenants();
