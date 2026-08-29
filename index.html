@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
 <title>Rent Management System</title>
 
 <style>
+
 *{
     box-sizing:border-box;
     margin:0;
@@ -90,6 +96,10 @@ button{
     background:#2563eb;
 }
 
+.print{
+    background:#16a34a;
+}
+
 table{
     width:100%;
     border-collapse:collapse;
@@ -116,6 +126,23 @@ th,td{
     margin-top:15px;
 }
 
+.receipt{
+    margin-top:20px;
+    padding:20px;
+    border:2px solid #222;
+    border-radius:10px;
+    background:white;
+}
+
+.receipt h2{
+    text-align:center;
+    margin-bottom:15px;
+}
+
+.receipt p{
+    margin:10px 0;
+}
+
 @media(max-width:700px){
 
     .cards{
@@ -129,75 +156,138 @@ th,td{
         font-size:13px;
     }
 }
+
 </style>
+
 </head>
 
 <body>
 
 <header>
-    <h1>🏠 Rent Management</h1>
-    <p>Property & Tenant Management System</p>
+
+<h1>🏠 Rent Management</h1>
+
+<p>Property & Tenant Management System</p>
+
 </header>
+
 
 <div class="container">
 
 <h2>📊 Dashboard</h2>
 
+
 <div class="cards">
 
 <div class="card">
+
 <h3>Total Properties</h3>
+
 <p id="totalProperties">0</p>
+
 </div>
 
+
 <div class="card">
+
 <h3>Occupied</h3>
+
 <p id="occupied">0</p>
+
 </div>
 
+
 <div class="card">
+
 <h3>Vacant</h3>
+
 <p id="vacant">0</p>
+
 </div>
+
 
 <div class="card">
+
 <h3>Pending Rent</h3>
+
 <p id="pendingRent">₹0</p>
-</div>
 
 </div>
 
+</div>
+
+
+<!-- ADD PROPERTY -->
 
 <div class="section">
 
 <h2>🏢 Add Property / Tenant</h2>
 
-<input id="tenantName" placeholder="Tenant Name">
+<input
+id="tenantName"
+placeholder="Tenant Name"
+>
 
-<input id="propertyName" placeholder="Property / Shop Name">
+<input
+id="propertyName"
+placeholder="Property / Shop Name"
+>
 
-<input id="roomNumber" placeholder="Room / Shop Number">
+<input
+id="roomNumber"
+placeholder="Room / Shop Number"
+>
 
-<input id="rent" type="number" placeholder="Monthly Rent">
+<input
+id="rent"
+type="number"
+placeholder="Monthly Rent"
+>
 
-<input id="dueDate" type="date">
+<input
+id="dueDate"
+type="date"
+>
 
 <select id="propertyStatus">
-<option value="Occupied">Occupied</option>
-<option value="Vacant">Vacant</option>
+
+<option value="Occupied">
+Occupied
+</option>
+
+<option value="Vacant">
+Vacant
+</option>
+
 </select>
+
 
 <select id="paymentStatus">
-<option value="Paid">Paid</option>
-<option value="Pending">Pending</option>
+
+<option value="Paid">
+Paid
+</option>
+
+<option value="Pending">
+Pending
+</option>
+
 </select>
 
-<button onclick="saveRecord()" id="saveButton">
+
+<button
+onclick="saveRecord()"
+id="saveButton"
+>
+
 Add Property
+
 </button>
 
 </div>
 
+
+<!-- PROPERTY RECORDS -->
 
 <div class="section">
 
@@ -210,177 +300,356 @@ placeholder="🔎 Search tenant, property or room..."
 oninput="displayRecords()"
 >
 
+
 <table>
 
 <thead>
+
 <tr>
+
 <th>Tenant</th>
+
 <th>Property</th>
+
 <th>Room</th>
+
 <th>Rent</th>
+
 <th>Due Date</th>
+
 <th>Status</th>
+
 <th>Payment</th>
+
 <th>Action</th>
+
 </tr>
+
 </thead>
 
-<tbody id="propertyTable"></tbody>
 
-</table>
+<tbody id="propertyTable">
 
-</div>
-
-</div>
-<div class="section">
-
-<h2>💰 Rent Collection</h2>
-
-<select id="paymentTenant">
-    <option value="">Select Tenant</option>
-</select>
-
-<select id="paymentMonth">
-    <option value="">Select Month</option>
-    <option>January</option>
-    <option>February</option>
-    <option>March</option>
-    <option>April</option>
-    <option>May</option>
-    <option>June</option>
-    <option>July</option>
-    <option>August</option>
-    <option>September</option>
-    <option>October</option>
-    <option>November</option>
-    <option>December</option>
-</select>
-
-<input
-    id="paymentAmount"
-    type="number"
-    placeholder="Rent Amount"
->
-
-<input
-    id="paymentDate"
-    type="date"
->
-
-<button onclick="recordPayment()">
-    💰 Record Payment
-</button>
-
-</div>
-<div class="section">
-
-<h2>📋 Payment History</h2>
-
-<table>
-
-<thead>
-<tr>
-<th>Tenant</th>
-<th>Property</th>
-<th>Month</th>
-<th>Amount</th>
-<th>Payment Date</th>
-<th>Status</th>
-</tr>
-</thead>
-
-<tbody id="paymentHistory">
 </tbody>
 
 </table>
 
 </div>
-    <div class="section">
+
+
+<!-- RENT COLLECTION -->
+
+<div class="section">
+
+<h2>💰 Rent Collection</h2>
+
+
+<select id="paymentTenant">
+
+<option value="">
+Select Tenant
+</option>
+
+</select>
+
+
+<select id="paymentMonth">
+
+<option value="">
+Select Month
+</option>
+
+<option>January</option>
+<option>February</option>
+<option>March</option>
+<option>April</option>
+<option>May</option>
+<option>June</option>
+<option>July</option>
+<option>August</option>
+<option>September</option>
+<option>October</option>
+<option>November</option>
+<option>December</option>
+
+</select>
+
+
+<input
+id="paymentAmount"
+type="number"
+placeholder="Rent Amount"
+>
+
+
+<input
+id="paymentDate"
+type="date"
+>
+
+
+<button
+onclick="recordPayment()"
+>
+
+💰 Record Payment
+
+</button>
+
+</div>
+
+
+<!-- PAYMENT HISTORY -->
+
+<div class="section">
+
+<h2>📋 Payment History</h2>
+
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Tenant</th>
+
+<th>Property</th>
+
+<th>Month</th>
+
+<th>Amount</th>
+
+<th>Payment Date</th>
+
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="paymentHistory">
+
+</tbody>
+
+</table>
+
+</div>
+
+
+<!-- RENT RECEIPT -->
+
+<div class="section">
 
 <h2>🧾 Rent Receipt</h2>
 
+
 <select id="receiptTenant">
-    <option value="">Select Tenant</option>
+
+<option value="">
+Select Tenant
+</option>
+
 </select>
 
-<button onclick="generateReceipt()">
-    Generate Receipt
+
+<button
+onclick="generateReceipt()"
+>
+
+Generate Receipt
+
 </button>
 
-<div id="receipt"></div>
 
-    </div>
+<div id="receipt">
+
+</div>
+
+</div>
+
+
+</div>
+
+
 <script>
 
-let records = JSON.parse(localStorage.getItem("rentRecords")) || [];
+
+/* DATA */
+
+let records =
+JSON.parse(
+localStorage.getItem("rentRecords")
+) || [];
+
 
 let editIndex = -1;
-    function loadReceiptTenants(){
 
-    let select = document.getElementById("receiptTenant");
 
-    select.innerHTML = '<option value="">Select Tenant</option>';
+/* LOAD PAYMENT TENANTS */
 
-    records.forEach((record, index) => {
+function loadPaymentTenants(){
 
-    select.innerHTML += `
-        <option value="${index}">
-            ${record.tenantName} - ${record.roomNumber}
-        </option>
-    `;
+    let select =
+        document.getElementById(
+            "paymentTenant"
+        );
 
-});
-}
+    select.innerHTML =
+        '<option value="">Select Tenant</option>';
 
-loadReceiptTenants();
-function displayPaymentHistory(){
 
-    let history = document.getElementById("paymentHistory");
+    records.forEach(
+        function(record,index){
 
-    history.innerHTML = "";
-
-    records.forEach(record => {
-
-        if(record.lastPaymentDate){
-
-            history.innerHTML += `
-            <tr>
-                <td>${record.tenantName}</td>
-                <td>${record.propertyName}</td>
-                <td>${record.lastPaymentMonth || "-"}</td>
-                <td>₹${record.lastPaymentAmount || record.rent}</td>
-                <td>${record.lastPaymentDate}</td>
-                <td class="status-paid">Paid</td>
-            </tr>
+            select.innerHTML += `
+                <option value="${index}">
+                    ${record.tenantName}
+                    - ${record.roomNumber}
+                </option>
             `;
 
         }
+    );
 
-    });
 }
+
+
+/* LOAD RECEIPT TENANTS */
+
+function loadReceiptTenants(){
+
+    let select =
+        document.getElementById(
+            "receiptTenant"
+        );
+
+
+    select.innerHTML =
+        '<option value="">Select Tenant</option>';
+
+
+    records.forEach(
+        function(record,index){
+
+            select.innerHTML += `
+                <option value="${index}">
+                    ${record.tenantName}
+                    - ${record.roomNumber}
+                </option>
+            `;
+
+        }
+    );
+
+}
+
+
+/* PAYMENT HISTORY */
+
+function displayPaymentHistory(){
+
+    let history =
+        document.getElementById(
+            "paymentHistory"
+        );
+
+
+    history.innerHTML = "";
+
+
+    records.forEach(
+        function(record){
+
+            if(record.lastPaymentDate){
+
+                history.innerHTML += `
+
+                <tr>
+
+                    <td>
+                        ${record.tenantName}
+                    </td>
+
+                    <td>
+                        ${record.propertyName}
+                    </td>
+
+                    <td>
+                        ${record.lastPaymentMonth || "-"}
+                    </td>
+
+                    <td>
+                        ₹${record.lastPaymentAmount || record.rent}
+                    </td>
+
+                    <td>
+                        ${record.lastPaymentDate}
+                    </td>
+
+                    <td class="status-paid">
+                        Paid
+                    </td>
+
+                </tr>
+
+                `;
+
+            }
+
+        }
+    );
+
+}
+
+
+/* SAVE PROPERTY */
 
 function saveRecord(){
 
     let tenantName =
-        document.getElementById("tenantName").value;
+        document.getElementById(
+            "tenantName"
+        ).value.trim();
+
 
     let propertyName =
-        document.getElementById("propertyName").value;
+        document.getElementById(
+            "propertyName"
+        ).value.trim();
+
 
     let roomNumber =
-        document.getElementById("roomNumber").value;
+        document.getElementById(
+            "roomNumber"
+        ).value.trim();
+
 
     let rent =
-        Number(document.getElementById("rent").value);
+        Number(
+            document.getElementById(
+                "rent"
+            ).value
+        );
+
 
     let dueDate =
-        document.getElementById("dueDate").value;
+        document.getElementById(
+            "dueDate"
+        ).value;
+
 
     let propertyStatus =
-        document.getElementById("propertyStatus").value;
+        document.getElementById(
+            "propertyStatus"
+        ).value;
+
 
     let paymentStatus =
-        document.getElementById("paymentStatus").value;
+        document.getElementById(
+            "paymentStatus"
+        ).value;
 
 
     if(
@@ -390,21 +659,37 @@ function saveRecord(){
         !rent
     ){
 
-        alert("Please fill all required details");
+        alert(
+            "Please fill all required details"
+        );
 
         return;
+
     }
 
 
     let record = {
 
-        tenantName,
-        propertyName,
-        roomNumber,
-        rent,
-        dueDate,
-        propertyStatus,
-        paymentStatus
+        tenantName:
+            tenantName,
+
+        propertyName:
+            propertyName,
+
+        roomNumber:
+            roomNumber,
+
+        rent:
+            rent,
+
+        dueDate:
+            dueDate,
+
+        propertyStatus:
+            propertyStatus,
+
+        paymentStatus:
+            paymentStatus
 
     };
 
@@ -413,14 +698,23 @@ function saveRecord(){
 
         records.push(record);
 
-    }else{
+    }
 
-        records[editIndex] = record;
+    else{
+
+        records[editIndex] =
+            {
+                ...records[editIndex],
+                ...record
+            };
 
         editIndex = -1;
 
-        document.getElementById("saveButton").innerText =
+        document.getElementById(
+            "saveButton"
+        ).innerText =
             "Add Property";
+
     }
 
 
@@ -433,47 +727,85 @@ function saveRecord(){
     clearForm();
 
     displayRecords();
+
+    loadPaymentTenants();
+
+    loadReceiptTenants();
+
 }
 
 
+/* EDIT */
+
 function editRecord(index){
 
-    let record = records[index];
+    let record =
+        records[index];
 
-    document.getElementById("tenantName").value =
+
+    document.getElementById(
+        "tenantName"
+    ).value =
         record.tenantName;
 
-    document.getElementById("propertyName").value =
+
+    document.getElementById(
+        "propertyName"
+    ).value =
         record.propertyName;
 
-    document.getElementById("roomNumber").value =
+
+    document.getElementById(
+        "roomNumber"
+    ).value =
         record.roomNumber;
 
-    document.getElementById("rent").value =
+
+    document.getElementById(
+        "rent"
+    ).value =
         record.rent;
 
-    document.getElementById("dueDate").value =
+
+    document.getElementById(
+        "dueDate"
+    ).value =
         record.dueDate;
 
-    document.getElementById("propertyStatus").value =
+
+    document.getElementById(
+        "propertyStatus"
+    ).value =
         record.propertyStatus;
 
-    document.getElementById("paymentStatus").value =
+
+    document.getElementById(
+        "paymentStatus"
+    ).value =
         record.paymentStatus;
 
 
     editIndex = index;
 
-    document.getElementById("saveButton").innerText =
+
+    document.getElementById(
+        "saveButton"
+    ).innerText =
         "Update Property";
 
 
     window.scrollTo({
+
         top:0,
+
         behavior:"smooth"
+
     });
+
 }
 
+
+/* DELETE */
 
 function deleteRecord(index){
 
@@ -485,59 +817,114 @@ function deleteRecord(index){
 
         records.splice(index,1);
 
+
         localStorage.setItem(
             "rentRecords",
             JSON.stringify(records)
         );
 
+
         displayRecords();
+
+        loadPaymentTenants();
+
+        loadReceiptTenants();
+
+        displayPaymentHistory();
+
     }
+
 }
 
+
+/* CLEAR FORM */
 
 function clearForm(){
 
-    document.getElementById("tenantName").value = "";
+    document.getElementById(
+        "tenantName"
+    ).value = "";
 
-    document.getElementById("propertyName").value = "";
 
-    document.getElementById("roomNumber").value = "";
+    document.getElementById(
+        "propertyName"
+    ).value = "";
 
-    document.getElementById("rent").value = "";
 
-    document.getElementById("dueDate").value = "";
+    document.getElementById(
+        "roomNumber"
+    ).value = "";
 
-    document.getElementById("propertyStatus").value =
+
+    document.getElementById(
+        "rent"
+    ).value = "";
+
+
+    document.getElementById(
+        "dueDate"
+    ).value = "";
+
+
+    document.getElementById(
+        "propertyStatus"
+    ).value =
         "Occupied";
 
-    document.getElementById("paymentStatus").value =
+
+    document.getElementById(
+        "paymentStatus"
+    ).value =
         "Paid";
+
 }
 
+
+/* DISPLAY RECORDS */
 
 function displayRecords(){
 
     let table =
-        document.getElementById("propertyTable");
+        document.getElementById(
+            "propertyTable"
+        );
+
 
     let search =
-        document.getElementById("search")
-        .value
-        .toLowerCase();
+        document.getElementById(
+            "search"
+        ).value.toLowerCase();
 
 
     table.innerHTML = "";
 
 
-    let filteredRecords = records.filter(record =>
+    let filteredRecords =
+        records.filter(
+            function(record){
 
-        record.tenantName.toLowerCase().includes(search) ||
+                return (
 
-        record.propertyName.toLowerCase().includes(search) ||
+                    record.tenantName
+                    .toLowerCase()
+                    .includes(search)
 
-        record.roomNumber.toLowerCase().includes(search)
+                    ||
 
-    );
+                    record.propertyName
+                    .toLowerCase()
+                    .includes(search)
+
+                    ||
+
+                    record.roomNumber
+                    .toLowerCase()
+                    .includes(search)
+
+                );
+
+            }
+        );
 
 
     let occupied = 0;
@@ -547,117 +934,170 @@ function displayRecords(){
     let pending = 0;
 
 
-    records.forEach(record => {
+    records.forEach(
+        function(record){
 
-        if(record.propertyStatus === "Occupied")
-            occupied++;
+            if(
+                record.propertyStatus
+                === "Occupied"
+            ){
 
-        if(record.propertyStatus === "Vacant")
-            vacant++;
+                occupied++;
 
-        if(record.paymentStatus === "Pending")
-            pending += Number(record.rent);
-
-    });
-
-
-    filteredRecords.forEach(record => {
-
-        let index = records.indexOf(record);
+            }
 
 
-        table.innerHTML += `
+            if(
+                record.propertyStatus
+                === "Vacant"
+            ){
 
-        <tr>
+                vacant++;
 
-        <td>${record.tenantName}</td>
-
-        <td>${record.propertyName}</td>
-
-        <td>${record.roomNumber}</td>
-
-        <td>₹${record.rent}</td>
-
-        <td>${record.dueDate || "-"}</td>
-
-        <td>${record.propertyStatus}</td>
-
-        <td class="${
-            record.paymentStatus === "Paid"
-            ? "status-paid"
-            : "status-pending"
-        }">
-
-        ${record.paymentStatus}
-
-        </td>
-
-        <td>
-
-        <button
-        class="edit"
-        onclick="editRecord(${index})">
-        Edit
-        </button>
-
-        <button
-        class="delete"
-        onclick="deleteRecord(${index})">
-        Delete
-        </button>
-
-        </td>
-
-        </tr>
-
-        `;
-    });
+            }
 
 
-    document.getElementById("totalProperties")
-        .innerText = records.length;
+            if(
+                record.paymentStatus
+                === "Pending"
+            ){
 
-    document.getElementById("occupied")
-        .innerText = occupied;
+                pending +=
+                    Number(record.rent);
 
-    document.getElementById("vacant")
-        .innerText = vacant;
+            }
 
-    document.getElementById("pendingRent")
-        .innerText = "₹" + pending;
+        }
+    );
+
+
+    filteredRecords.forEach(
+        function(record){
+
+            let index =
+                records.indexOf(record);
+
+
+            table.innerHTML += `
+
+            <tr>
+
+                <td>
+                    ${record.tenantName}
+                </td>
+
+                <td>
+                    ${record.propertyName}
+                </td>
+
+                <td>
+                    ${record.roomNumber}
+                </td>
+
+                <td>
+                    ₹${record.rent}
+                </td>
+
+                <td>
+                    ${record.dueDate || "-"}
+                </td>
+
+                <td>
+                    ${record.propertyStatus}
+                </td>
+
+                <td class="${
+                    record.paymentStatus
+                    === "Paid"
+                    ? "status-paid"
+                    : "status-pending"
+                }">
+
+                    ${record.paymentStatus}
+
+                </td>
+
+                <td>
+
+                    <button
+                        class="edit"
+                        onclick="editRecord(${index})"
+                    >
+                        Edit
+                    </button>
+
+
+                    <button
+                        class="delete"
+                        onclick="deleteRecord(${index})"
+                    >
+                        Delete
+                    </button>
+
+                </td>
+
+            </tr>
+
+            `;
+
+        }
+    );
+
+
+    document.getElementById(
+        "totalProperties"
+    ).innerText =
+        records.length;
+
+
+    document.getElementById(
+        "occupied"
+    ).innerText =
+        occupied;
+
+
+    document.getElementById(
+        "vacant"
+    ).innerText =
+        vacant;
+
+
+    document.getElementById(
+        "pendingRent"
+    ).innerText =
+        "₹" + pending;
+
 }
 
-function loadPaymentTenants(){
 
-    let select = document.getElementById("paymentTenant");
-
-    select.innerHTML = '<option value="">Select Tenant</option>';
-
-    records.forEach((record, index) => {
-
-        select.innerHTML += `
-            <option value="${index}">
-                ${record.tenantName} - ${record.roomNumber}
-            </option>
-        `;
-
-    });
-}
-
+/* RECORD PAYMENT */
 
 function recordPayment(){
 
     let tenantIndex =
-        document.getElementById("paymentTenant").value;
+        document.getElementById(
+            "paymentTenant"
+        ).value;
+
 
     let month =
-        document.getElementById("paymentMonth").value;
+        document.getElementById(
+            "paymentMonth"
+        ).value;
+
 
     let amount =
-        Number(document.getElementById("paymentAmount").value);
+        Number(
+            document.getElementById(
+                "paymentAmount"
+            ).value
+        );
+
 
     let date =
-        document.getElementById("paymentDate").value;
+        document.getElementById(
+            "paymentDate"
+        ).value;
 
 
     if(
@@ -667,19 +1107,33 @@ function recordPayment(){
         !date
     ){
 
-        alert("Please fill all payment details");
+        alert(
+            "Please fill all payment details"
+        );
 
         return;
+
     }
 
 
-    records[tenantIndex].paymentStatus = "Paid";
+    records[tenantIndex]
+        .paymentStatus =
+        "Paid";
 
-    records[tenantIndex].lastPaymentMonth = month;
 
-    records[tenantIndex].lastPaymentAmount = amount;
+    records[tenantIndex]
+        .lastPaymentMonth =
+        month;
 
-    records[tenantIndex].lastPaymentDate = date;
+
+    records[tenantIndex]
+        .lastPaymentAmount =
+        amount;
+
+
+    records[tenantIndex]
+        .lastPaymentDate =
+        date;
 
 
     localStorage.setItem(
@@ -688,75 +1142,167 @@ function recordPayment(){
     );
 
 
-    alert("Payment recorded successfully!");
+    alert(
+        "Payment recorded successfully!"
+    );
 
 
-    document.getElementById("paymentTenant").value = "";
+    document.getElementById(
+        "paymentTenant"
+    ).value = "";
 
-    document.getElementById("paymentMonth").value = "";
 
-    document.getElementById("paymentAmount").value = "";
+    document.getElementById(
+        "paymentMonth"
+    ).value = "";
 
-    document.getElementById("paymentDate").value = "";
+
+    document.getElementById(
+        "paymentAmount"
+    ).value = "";
+
+
+    document.getElementById(
+        "paymentDate"
+    ).value = "";
 
 
     displayRecords();
 
     loadPaymentTenants();
+
     loadReceiptTenants();
+
+    displayPaymentHistory();
+
 }
 
 
-loadPaymentTenants();
-loadReceiptTenants();
-displayRecords();
-displayPaymentHistory();
-    function generateReceipt(){
+/* GENERATE RECEIPT */
 
-    let index = document.getElementById("receiptTenant").value;
+function generateReceipt(){
+
+    let index =
+        document.getElementById(
+            "receiptTenant"
+        ).value;
+
 
     if(index === ""){
-        alert("Please select a tenant");
+
+        alert(
+            "Please select a tenant"
+        );
+
         return;
+
     }
 
-    let record = records[index];
 
-    let receiptNumber = "REC-" + Date.now();
+    let record =
+        records[index];
 
-    document.getElementById("receipt").innerHTML = `
-        <div style="
-            margin-top:20px;
-            padding:20px;
-            border:2px solid #222;
-            border-radius:10px;
-            background:white;
-        ">
 
-            <h2 style="text-align:center;">
+    let receiptNumber =
+        "REC-" +
+        Date.now();
+
+
+    document.getElementById(
+        "receipt"
+    ).innerHTML = `
+
+        <div class="receipt">
+
+            <h2>
                 🧾 RENT RECEIPT
             </h2>
 
             <hr>
 
-            <p><b>Receipt No:</b> ${receiptNumber}</p>
-            <p><b>Tenant:</b> ${record.tenantName}</p>
-            <p><b>Property:</b> ${record.propertyName}</p>
-            <p><b>Room / Shop:</b> ${record.roomNumber}</p>
-            <p><b>Month:</b> ${record.lastPaymentMonth || "-"}</p>
-            <p><b>Amount Paid:</b> ₹${record.lastPaymentAmount || record.rent}</p>
-            <p><b>Payment Date:</b> ${record.lastPaymentDate}</p>
-            <p><b>Status:</b> Paid</p>
+
+            <p>
+                <b>Receipt No:</b>
+                ${receiptNumber}
+            </p>
+
+
+            <p>
+                <b>Tenant:</b>
+                ${record.tenantName}
+            </p>
+
+
+            <p>
+                <b>Property:</b>
+                ${record.propertyName}
+            </p>
+
+
+            <p>
+                <b>Room / Shop:</b>
+                ${record.roomNumber}
+            </p>
+
+
+            <p>
+                <b>Month:</b>
+                ${record.lastPaymentMonth || "-"}
+            </p>
+
+
+            <p>
+                <b>Amount Paid:</b>
+                ₹${record.lastPaymentAmount || record.rent}
+            </p>
+
+
+            <p>
+                <b>Payment Date:</b>
+                ${record.lastPaymentDate || "-"}
+            </p>
+
+
+            <p>
+                <b>Status:</b>
+                <span class="status-paid">
+                    Paid
+                </span>
+            </p>
+
 
             <hr>
 
-            <button onclick="window.print()">
+
+            <button
+                class="print"
+                onclick="window.print()"
+            >
+
                 🖨️ Print Receipt
+
             </button>
 
         </div>
+
     `;
+
 }
+
+
+/* START */
+
+displayRecords();
+
+loadPaymentTenants();
+
+loadReceiptTenants();
+
+displayPaymentHistory();
+
+
 </script>
+
 </body>
+
 </html>
