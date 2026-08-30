@@ -1,537 +1,314 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Rent Management System</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:Arial,sans-serif;
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{margin:0;background:#f3f4f6;color:#222}
+header{background:#1f2937;color:white;padding:20px;text-align:center}
+.container{max-width:1200px;margin:auto;padding:20px}
+.hidden{display:none!important}
+
+.login-page{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#eef2f7
 }
-
-body{
-    background:#f4f6f8;
-    color:#222;
-}
-
-header{
-    background:#1f2937;
-    color:white;
-    padding:20px;
-    text-align:center;
-    position:relative;
-}
-
-.container{
-    max-width:1200px;
-    margin:auto;
-    padding:20px;
-}
-
-.hidden{
-    display:none !important;
-}
-
-/* LOGIN */
-
-#loginPage{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:#f4f6f8;
-}
-
 .login-box{
-    width:92%;
-    max-width:420px;
-    background:white;
-    padding:30px;
-    border-radius:15px;
-    box-shadow:0 4px 15px #ccc;
-    text-align:center;
+  background:white;
+  width:92%;
+  max-width:430px;
+  padding:30px;
+  border-radius:15px;
+  box-shadow:0 4px 20px #ccc
 }
-
-.login-box h1{
-    margin-bottom:10px;
-}
-
-.login-box p{
-    color:#666;
-    margin-bottom:20px;
-}
-
 input,select{
-    width:100%;
-    padding:12px;
-    margin:7px 0;
-    border:1px solid #ccc;
-    border-radius:7px;
+  width:100%;
+  padding:12px;
+  margin:6px 0;
+  border:1px solid #ccc;
+  border-radius:7px
 }
-
 button{
-    border:0;
-    padding:11px 15px;
-    border-radius:7px;
-    cursor:pointer;
-    background:#1f2937;
-    color:white;
-    margin:5px 3px;
+  padding:11px 16px;
+  margin:5px 2px;
+  border:0;
+  border-radius:7px;
+  cursor:pointer;
+  background:#1f2937;
+  color:white
 }
-
-button:hover{
-    opacity:.9;
-}
-
-.login-button{
-    width:100%;
-    background:#2563eb;
-}
-
-.logout{
-    background:#dc2626;
-    position:absolute;
-    right:20px;
-    top:20px;
-}
-
-.error{
-    color:#dc2626 !important;
-    display:none;
-    margin-top:10px;
-}
-
-.success{
-    color:#16a34a !important;
-    display:none;
-    margin-top:10px;
-}
-
-/* CARDS */
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
-    margin:20px 0;
-}
-
-.card{
-    background:white;
-    padding:20px;
-    border-radius:12px;
-    box-shadow:0 2px 8px #ddd;
-}
-
-.card h3{
-    color:#666;
-    font-size:14px;
-}
-
-.card p{
-    font-size:24px;
-    font-weight:bold;
-    margin-top:8px;
-}
-
-/* SECTION */
+button:hover{opacity:.9}
+.primary{background:#2563eb}
+.success-btn{background:#16a34a}
+.danger{background:#dc2626}
+.warning{background:#d97706}
+.logout{background:#dc2626}
 
 .section{
-    background:white;
-    padding:20px;
-    border-radius:12px;
-    margin-top:20px;
-    box-shadow:0 2px 8px #ddd;
+  background:white;
+  margin-top:20px;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 2px 8px #ddd
 }
-
-.section h2{
-    margin-bottom:12px;
+.cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin-top:15px
 }
-
-/* TABLE */
-
-.table-wrap{
-    overflow-x:auto;
+.card{
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 2px 8px #ddd
 }
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    margin-top:15px;
-}
-
-th,td{
-    padding:12px;
-    border-bottom:1px solid #ddd;
-    text-align:left;
-    white-space:nowrap;
-}
-
-.status-paid{
-    color:green;
-    font-weight:bold;
-}
-
-.status-pending{
-    color:red;
-    font-weight:bold;
-}
-
-.status-partial{
-    color:#d97706;
-    font-weight:bold;
-}
-
-.edit{
-    background:#2563eb;
-}
-
-.delete{
-    background:#dc2626;
-}
-
-.print{
-    background:#16a34a;
-}
-
-.small{
-    color:#666;
-    font-size:13px;
-}
+.card h3{font-size:14px;color:#666}
+.card p{font-size:25px;font-weight:bold}
 
 .form-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:10px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:8px
 }
 
-/* RECEIPT */
-
-.receipt{
-    margin-top:20px;
-    padding:25px;
-    border:2px solid #222;
-    border-radius:10px;
-    background:white;
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;margin-top:15px}
+th,td{
+  padding:11px;
+  border-bottom:1px solid #ddd;
+  text-align:left;
+  white-space:nowrap
 }
+.paid{color:green;font-weight:bold}
+.pending{color:red;font-weight:bold}
+.partial{color:#d97706;font-weight:bold}
 
-.receipt h2{
-    text-align:center;
-    margin-bottom:15px;
-}
-
-.receipt p{
-    margin:10px 0;
-}
-
-/* CONSUMER */
-
-.consumer-welcome{
-    background:white;
-    padding:20px;
-    border-radius:12px;
-    box-shadow:0 2px 8px #ddd;
-    margin-bottom:20px;
-}
-
-/* MOBILE */
+.message{margin-top:10px;font-weight:bold}
+.error{color:red}
+.success{color:green}
 
 @media(max-width:700px){
-
-    .cards{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .form-grid{
-        grid-template-columns:1fr;
-    }
-
-    .logout{
-        position:static;
-        margin-top:12px;
-    }
-
-    header{
-        padding-bottom:15px;
-    }
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .form-grid{grid-template-columns:1fr}
 }
 
-/* PRINT */
+.receipt{
+  margin-top:20px;
+  padding:25px;
+  border:2px solid #222;
+  background:white
+}
 
 @media print{
-
-    body *{
-        visibility:hidden;
-    }
-
-    #receipt,
-    #receipt *{
-        visibility:visible;
-    }
-
-    #receipt{
-        position:absolute;
-        left:0;
-        top:0;
-        width:100%;
-    }
-
-    .print{
-        display:none;
-    }
+  body *{visibility:hidden}
+  #receipt,#receipt *{visibility:visible}
+  #receipt{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================================================= -->
-<!-- LOGIN -->
-<!-- ================================================= -->
+<!-- =====================================================
+     LOGIN
+===================================================== -->
 
-<div id="loginPage">
+<div id="loginPage" class="login-page">
 
-    <div class="login-box">
+<div class="login-box">
 
-        <h1>🏠 Rent Management</h1>
-        <p>Owner / Consumer Login</p>
+<h1>🏠 Rent Management</h1>
+<p>Owner / Consumer Login</p>
 
-        <input
-            id="loginEmail"
-            type="email"
-            placeholder="Email"
-        >
+<input id="loginEmail" type="email" placeholder="Email">
 
-        <input
-            id="loginPassword"
-            type="password"
-            placeholder="Password"
-        >
+<input id="loginPassword" type="password" placeholder="Password">
 
-        <button
-            class="login-button"
-            onclick="loginUser()"
-        >
-            🔐 Login
-        </button>
+<button class="primary" style="width:100%" onclick="loginUser()">
+🔐 Login
+</button>
 
-        <p id="loginError" class="error"></p>
+<button style="width:100%" onclick="showRegister()">
+👤 New Consumer? Register
+</button>
 
-    </div>
+<p id="loginError" class="message error"></p>
 
+</div>
 </div>
 
 
-<!-- ================================================= -->
-<!-- OWNER DASHBOARD -->
-<!-- ================================================= -->
+<!-- =====================================================
+     CONSUMER REGISTRATION
+===================================================== -->
+
+<div id="registerPage" class="login-page hidden">
+
+<div class="login-box">
+
+<h1>👤 Consumer Registration</h1>
+
+<p>Enter your complete details</p>
+
+<input id="regName" placeholder="Full Name">
+
+<input id="regEmail" type="email" placeholder="Email">
+
+<input id="regPassword" type="password" placeholder="Password (minimum 6 characters)">
+
+<input id="regMobile" placeholder="Mobile Number">
+
+<input id="regProperty" placeholder="Property / Shop Name">
+
+<input id="regRoom" placeholder="Room / Shop Number">
+
+<input id="regRent" type="number" placeholder="Monthly Rent">
+
+<label>Rent Due Date</label>
+<input id="regDueDate" type="date">
+
+<label>Joined Date</label>
+<input id="regJoinedDate" type="date">
+
+<input id="regAddress" placeholder="Property Address">
+
+<button class="success-btn" style="width:100%" onclick="registerConsumer()">
+💾 Save & Create Account
+</button>
+
+<button style="width:100%" onclick="showLogin()">
+⬅ Back to Login
+</button>
+
+<p id="registerError" class="message error"></p>
+<p id="registerSuccess" class="message success"></p>
+
+</div>
+</div>
+
+
+<!-- =====================================================
+     OWNER DASHBOARD
+===================================================== -->
 
 <div id="ownerDashboard" class="hidden">
 
 <header>
-
-    <h1>🏠 Rent Management</h1>
-    <p>Owner Dashboard</p>
-
-    <button
-        class="logout"
-        onclick="logoutUser()"
-    >
-        🚪 Logout
-    </button>
-
+<h1>🏠 Rent Management</h1>
+<p>Owner Dashboard</p>
+<button class="logout" onclick="logoutUser()">🚪 Logout</button>
 </header>
 
 <div class="container">
 
-<!-- DASHBOARD CARDS -->
-
-<h2>📊 Dashboard</h2>
-
 <div class="cards">
 
-    <div class="card">
-        <h3>Total Properties</h3>
-        <p id="totalProperties">0</p>
-    </div>
+<div class="card">
+<h3>Total Properties</h3>
+<p id="totalProperties">0</p>
+</div>
 
-    <div class="card">
-        <h3>Occupied</h3>
-        <p id="occupied">0</p>
-    </div>
+<div class="card">
+<h3>Occupied</h3>
+<p id="occupied">0</p>
+</div>
 
-    <div class="card">
-        <h3>Vacant</h3>
-        <p id="vacant">0</p>
-    </div>
+<div class="card">
+<h3>Vacant</h3>
+<p id="vacant">0</p>
+</div>
 
-    <div class="card">
-        <h3>Pending Rent</h3>
-        <p id="pendingRent">₹0</p>
-    </div>
+<div class="card">
+<h3>Pending Rent</h3>
+<p id="pendingRent">₹0</p>
+</div>
 
 </div>
 
 
-<!-- ================================================= -->
-<!-- CREATE CONSUMER -->
-<!-- ================================================= -->
+<!-- =====================================================
+     SELECT CONSUMER / PROPERTY
+===================================================== -->
 
 <div class="section">
 
-<h2>👤 Create Consumer Account</h2>
+<h2>👤 Consumer Details</h2>
 
-<p class="small">
-Create a Firebase login account for your tenant/consumer.
-</p>
-
-<div class="form-grid">
-
-<input
-    id="consumerName"
-    placeholder="Consumer Name"
->
-
-<input
-    id="consumerEmail"
-    type="email"
-    placeholder="Consumer Email"
->
-
-<input
-    id="consumerPassword"
-    type="password"
-    placeholder="Temporary Password"
->
-
-</div>
-
-<button onclick="createConsumer()">
-    ➕ Create Consumer
-</button>
-
-<p id="consumerMessage" class="success"></p>
-<p id="consumerError" class="error"></p>
-
-</div>
-
-
-<!-- ================================================= -->
-<!-- ADD PROPERTY -->
-<!-- ================================================= -->
-
-<div class="section">
-
-<h2>🏢 Add Property / Tenant</h2>
-
-<select id="propertyConsumer">
-    <option value="">Select Consumer</option>
+<select id="ownerConsumerSelect" onchange="selectConsumer()">
+<option value="">Select Consumer</option>
 </select>
 
 <div class="form-grid">
 
-<input
-    id="tenantName"
-    placeholder="Tenant Name"
-    readonly
->
+<input id="ownerConsumerName" placeholder="Consumer Name" readonly>
 
-<input
-    id="propertyName"
-    placeholder="Property / Shop Name"
->
+<input id="ownerConsumerEmail" placeholder="Email" readonly>
 
-<input
-    id="roomNumber"
-    placeholder="Room / Shop Number"
->
+<input id="ownerMobile" placeholder="Mobile" readonly>
 
-<input
-    id="rent"
-    type="number"
-    placeholder="Monthly Rent"
->
+<input id="ownerProperty" placeholder="Property / Shop" readonly>
 
-<input
-    id="dueDate"
-    type="date"
->
+<input id="ownerRoom" placeholder="Room / Shop No." readonly>
 
-<select id="propertyStatus">
+<input id="ownerRent" type="number" placeholder="Monthly Rent" readonly>
 
-<option value="Occupied">
-Occupied
-</option>
+<input id="ownerDueDate" type="date" readonly>
 
-<option value="Vacant">
-Vacant
-</option>
+<input id="ownerJoinedDate" type="date" readonly>
 
-</select>
+<input id="ownerAddress" placeholder="Property Address" readonly>
 
-<select id="paymentStatus">
-
-<option value="Pending">
-Pending
-</option>
-
-<option value="Paid">
-Paid
-</option>
-
-<option value="Partial">
-Partial
-</option>
-
+<select id="ownerPaymentStatus">
+<option value="Pending">Pending</option>
+<option value="Paid">Paid</option>
+<option value="Partial">Partial</option>
 </select>
 
 </div>
 
-<button
-    onclick="saveProperty()"
-    id="saveButton"
->
-    Add Property
+<button class="success-btn" onclick="saveOwnerProperty()">
+💾 Save / Update Property
 </button>
 
 </div>
 
 
-<!-- ================================================= -->
-<!-- PROPERTY RECORDS -->
-<!-- ================================================= -->
+<!-- =====================================================
+     PROPERTY RECORDS
+===================================================== -->
 
 <div class="section">
 
 <h2>📋 Property Records</h2>
-
-<input
-    id="search"
-    placeholder="🔎 Search consumer, property or room..."
-    oninput="displayProperties()"
->
 
 <div class="table-wrap">
 
 <table>
 
 <thead>
-
 <tr>
 <th>Consumer</th>
 <th>Property</th>
 <th>Room</th>
 <th>Rent</th>
 <th>Due Date</th>
+<th>Joined</th>
 <th>Status</th>
 <th>Payment</th>
-<th>Action</th>
 </tr>
-
 </thead>
 
 <tbody id="propertyTable"></tbody>
@@ -539,51 +316,30 @@ Partial
 </table>
 
 </div>
-
 </div>
 
 
-<!-- ================================================= -->
-<!-- RENT COLLECTION -->
-<!-- ================================================= -->
+<!-- =====================================================
+     RENT PAYMENT
+===================================================== -->
 
 <div class="section">
 
 <h2>💰 Rent Collection</h2>
 
-<select
-    id="paymentConsumer"
-    onchange="fillPaymentDetails()"
->
-    <option value="">Select Consumer</option>
+<select id="paymentConsumer" onchange="fillPaymentDetails()">
+<option value="">Select Consumer</option>
 </select>
 
 <div class="form-grid">
 
-<input
-    id="paymentTenantName"
-    placeholder="Consumer Name"
-    readonly
->
+<input id="paymentName" placeholder="Consumer Name" readonly>
 
-<input
-    id="paymentProperty"
-    placeholder="Property"
-    readonly
->
+<input id="paymentProperty" placeholder="Property" readonly>
 
-<input
-    id="paymentRent"
-    type="number"
-    placeholder="Monthly Rent"
-    readonly
->
+<input id="paymentRent" type="number" placeholder="Rent" readonly>
 
-<input
-    id="paymentDueDate"
-    type="date"
-    readonly
->
+<input id="paymentDueDate" type="date" placeholder="Due Date" readonly>
 
 <select id="paymentMonth">
 <option value="">Select Month</option>
@@ -601,45 +357,28 @@ Partial
 <option>December</option>
 </select>
 
-<input
-    id="paymentAmount"
-    type="number"
-    placeholder="Amount"
->
+<input id="paymentAmount" type="number" placeholder="Payment Amount">
 
-<input
-    id="paymentDate"
-    type="date"
->
+<input id="paymentDate" type="date">
 
-<select id="manualPaymentStatus">
-
-<option value="Pending">
-Pending
-</option>
-
-<option value="Paid">
-Paid
-</option>
-
-<option value="Partial">
-Partial
-</option>
-
+<select id="paymentStatus">
+<option value="Paid">Paid</option>
+<option value="Pending">Pending</option>
+<option value="Partial">Partial</option>
 </select>
 
 </div>
 
-<button onclick="recordPayment()">
-💰 Save Payment
+<button class="success-btn" onclick="recordPayment()">
+💰 Record Payment
 </button>
 
 </div>
 
 
-<!-- ================================================= -->
-<!-- PAYMENT HISTORY -->
-<!-- ================================================= -->
+<!-- =====================================================
+     PAYMENT HISTORY
+===================================================== -->
 
 <div class="section">
 
@@ -650,64 +389,43 @@ Partial
 <table>
 
 <thead>
-
 <tr>
 <th>Consumer</th>
 <th>Property</th>
 <th>Month</th>
 <th>Amount</th>
-<th>Payment Date</th>
+<th>Date</th>
 <th>Status</th>
 </tr>
-
 </thead>
 
-<tbody id="paymentHistory"></tbody>
+<tbody id="paymentTable"></tbody>
 
 </table>
 
 </div>
-
 </div>
 
 
-<!-- ================================================= -->
-<!-- RECEIPT -->
-<!-- ================================================= -->
+<!-- =====================================================
+     RECEIPT
+===================================================== -->
 
 <div class="section">
 
 <h2>🧾 Rent Receipt</h2>
 
-<div class="form-grid">
+<input id="receiptOwner" placeholder="Owner Name">
 
-<input
-    id="ownerName"
-    placeholder="Owner Name"
->
+<input id="receiptMobile" placeholder="Owner Mobile">
 
-<input
-    id="ownerContact"
-    placeholder="Owner Contact Number"
-    type="tel"
->
-
-</div>
-
-<input
-    id="propertyAddress"
-    placeholder="Property Address"
->
+<input id="receiptAddress" placeholder="Property Address">
 
 <select id="receiptConsumer">
-
-<option value="">
-Select Consumer
-</option>
-
+<option value="">Select Consumer</option>
 </select>
 
-<button onclick="generateReceipt()">
+<button class="primary" onclick="generateReceipt()">
 🧾 Generate Receipt
 </button>
 
@@ -716,95 +434,92 @@ Select Consumer
 </div>
 
 </div>
-
 </div>
 
 
-<!-- ================================================= -->
-<!-- CONSUMER DASHBOARD -->
-<!-- ================================================= -->
+<!-- =====================================================
+     CONSUMER DASHBOARD
+===================================================== -->
 
 <div id="consumerDashboard" class="hidden">
 
 <header>
 
-    <h1>🏠 Rent Management</h1>
-    <p>Consumer Dashboard</p>
+<h1>🏠 Rent Management</h1>
+<p>Consumer Dashboard</p>
 
-    <button
-        class="logout"
-        onclick="logoutUser()"
-    >
-        🚪 Logout
-    </button>
+<button class="logout" onclick="logoutUser()">
+🚪 Logout
+</button>
 
 </header>
 
 <div class="container">
 
-<div class="consumer-welcome">
+<div class="section">
 
 <h2>
 👋 Welcome,
-<span id="consumerWelcomeName">Consumer</span>
+<span id="consumerWelcome"></span>
 </h2>
 
-<p id="consumerEmailDisplay" class="small"></p>
+<p id="consumerEmail"></p>
 
 </div>
 
 
 <div class="cards">
 
-    <div class="card">
-        <h3>Property</h3>
-        <p id="consumerPropertyCount">0</p>
-    </div>
+<div class="card">
+<h3>Property</h3>
+<p id="myProperty">-</p>
+</div>
 
-    <div class="card">
-        <h3>Monthly Rent</h3>
-        <p id="consumerRent">₹0</p>
-    </div>
+<div class="card">
+<h3>Monthly Rent</h3>
+<p id="myRent">₹0</p>
+</div>
 
-    <div class="card">
-        <h3>Due Date</h3>
-        <p id="consumerDueDate">-</p>
-    </div>
+<div class="card">
+<h3>Due Date</h3>
+<p id="myDueDate">-</p>
+</div>
 
-    <div class="card">
-        <h3>Rent Status</h3>
-        <p id="consumerStatus">-</p>
-    </div>
+<div class="card">
+<h3>Payment</h3>
+<p id="myPaymentStatus">-</p>
+</div>
 
 </div>
 
 
 <div class="section">
 
-<h2>🏠 My Property</h2>
+<h2>📋 My Details</h2>
 
-<div class="table-wrap">
+<div class="form-grid">
 
-<table>
+<input id="myName" placeholder="Name">
 
-<thead>
+<input id="myMobile" placeholder="Mobile">
 
-<tr>
-<th>Property</th>
-<th>Room</th>
-<th>Monthly Rent</th>
-<th>Due Date</th>
-<th>Status</th>
-<th>Payment</th>
-</tr>
+<input id="myPropertyInput" placeholder="Property / Shop">
 
-</thead>
+<input id="myRoom" placeholder="Room / Shop">
 
-<tbody id="consumerPropertyTable"></tbody>
+<input id="myRentInput" type="number" placeholder="Monthly Rent">
 
-</table>
+<input id="myDueDateInput" type="date">
+
+<input id="myJoinedDate" type="date">
+
+<input id="myAddress" placeholder="Address">
 
 </div>
+
+<button class="success-btn" onclick="updateConsumerProfile()">
+💾 Update My Details
+</button>
 
 </div>
 
@@ -818,7 +533,6 @@ Select Consumer
 <table>
 
 <thead>
-
 <tr>
 <th>Property</th>
 <th>Month</th>
@@ -826,10 +540,9 @@ Select Consumer
 <th>Date</th>
 <th>Status</th>
 </tr>
-
 </thead>
 
-<tbody id="consumerPaymentTable"></tbody>
+<tbody id="consumerPayments"></tbody>
 
 </table>
 
@@ -838,2093 +551,1631 @@ Select Consumer
 </div>
 
 </div>
-
 </div>
 
 
-<!-- ================================================= -->
-<!-- FIREBASE -->
-<!-- ================================================= -->
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
 
 <script type="module">
 
 import {
-    initializeApp
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+initializeApp
+}
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
 import {
-    getAuth,
-    signInWithEmailAndPassword,
-    signOut,
-    onAuthStateChanged,
-    createUserWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+getAuth,
+signInWithEmailAndPassword,
+createUserWithEmailAndPassword,
+signOut,
+onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
 import {
-    getFirestore,
-    collection,
-    addDoc,
-    getDocs,
-    getDoc,
-    doc,
-    setDoc,
-    updateDoc,
-    deleteDoc,
-    query,
-    where,
-    serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+getFirestore,
+doc,
+getDoc,
+setDoc,
+addDoc,
+updateDoc,
+collection,
+getDocs,
+query,
+where,
+serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
-/* ================================================= */
-/* FIREBASE CONFIG */
-/* ================================================= */
+/* =====================================================
+   FIREBASE CONFIG
+===================================================== */
 
 const firebaseConfig = {
 
-    apiKey:
-    "AIzaSyBJPjJO0xlRlBCxLmbtFIcgYiiDA4JAWMM",
+apiKey:
+"AIzaSyBJPjJO0xlRlBCxLmbtFIcgYiiDA4JAWMM",
 
-    authDomain:
-    "rent-management-system-3babb.firebaseapp.com",
+authDomain:
+"rent-management-system-3babb.firebaseapp.com",
 
-    projectId:
-    "rent-management-system-3babb",
+projectId:
+"rent-management-system-3babb",
 
-    storageBucket:
-    "rent-management-system-3babb.firebasestorage.app",
+storageBucket:
+"rent-management-system-3babb.firebasestorage.app",
 
-    messagingSenderId:
-    "25025742095",
+messagingSenderId:
+"25025742095",
 
-    appId:
-    "1:25025742095:web:f3b3f05bf2575c05e42a7a",
+appId:
+"1:25025742095:web:f3b3f05bf2575c05e42a7a",
 
-    measurementId:
-    "G-PCPR2W35EX"
+measurementId:
+"G-PCPR2W35EX"
+
 };
 
 
 const app =
-    initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 const auth =
-    getAuth(app);
+getAuth(app);
 
 const db =
-    getFirestore(app);
+getFirestore(app);
 
 
-/* ================================================= */
-/* GLOBAL DATA */
-/* ================================================= */
+/* =====================================================
+   GLOBAL
+===================================================== */
 
 let currentUser = null;
 let currentRole = null;
 
-let users = [];
+let consumers = [];
 let properties = [];
 let payments = [];
 
-let editPropertyId = null;
+
+/* =====================================================
+   SHOW LOGIN
+===================================================== */
+
+window.showLogin = function(){
+
+document.getElementById("loginPage")
+.classList.remove("hidden");
+
+document.getElementById("registerPage")
+.classList.add("hidden");
+
+};
 
 
-/* ================================================= */
-/* LOGIN */
-/* ================================================= */
+/* =====================================================
+   SHOW REGISTER
+===================================================== */
+
+window.showRegister = function(){
+
+document.getElementById("loginPage")
+.classList.add("hidden");
+
+document.getElementById("registerPage")
+.classList.remove("hidden");
+
+};
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
 
 window.loginUser = async function(){
 
-    const email =
-        document.getElementById("loginEmail")
-        .value.trim();
+const email =
+document.getElementById("loginEmail").value.trim();
 
-    const password =
-        document.getElementById("loginPassword")
-        .value;
+const password =
+document.getElementById("loginPassword").value;
 
-    const error =
-        document.getElementById("loginError");
+const error =
+document.getElementById("loginError");
 
-    error.style.display = "none";
+error.innerText = "";
 
-    if(!email || !password){
+if(!email || !password){
 
-        error.innerText =
-            "Please enter email and password.";
+error.innerText =
+"Email and password required.";
 
-        error.style.display = "block";
+return;
+}
 
-        return;
-    }
+try{
 
-    try{
-
-        await signInWithEmailAndPassword(
-            auth,
-            email,
-            password
-        );
-
-    }catch(error){
-
-        console.error(error);
-
-        document.getElementById(
-            "loginError"
-        ).innerText =
-            "Invalid email or password.";
-
-        document.getElementById(
-            "loginError"
-        ).style.display =
-            "block";
-    }
-};
-
-
-/* ================================================= */
-/* LOGOUT */
-/* ================================================= */
-
-window.logoutUser = async function(){
-
-    await signOut(auth);
-
-    location.reload();
-};
-
-
-/* ================================================= */
-/* AUTH STATE */
-/* ================================================= */
-
-onAuthStateChanged(
-    auth,
-    async function(user){
-
-        if(!user){
-
-            showLogin();
-
-            return;
-        }
-
-        currentUser = user;
-
-        try{
-
-            const userDoc =
-                await getDoc(
-                    doc(
-                        db,
-                        "users",
-                        user.uid
-                    )
-                );
-
-            if(!userDoc.exists()){
-
-                await signOut(auth);
-
-                alert(
-                    "User profile not found in Firestore."
-                );
-
-                return;
-            }
-
-            currentRole =
-                userDoc.data().role;
-
-            if(currentRole === "owner"){
-
-                showOwner();
-
-                await loadOwnerData();
-
-            }
-
-            else if(currentRole === "consumer"){
-
-                showConsumer();
-
-                await loadConsumerData();
-
-            }
-
-            else{
-
-                await signOut(auth);
-
-                alert(
-                    "Invalid user role."
-                );
-            }
-
-        }catch(error){
-
-            console.error(error);
-
-            alert(
-                "Unable to load user data."
-            );
-        }
-
-    }
+await signInWithEmailAndPassword(
+auth,
+email,
+password
 );
 
+}catch(e){
 
-/* ================================================= */
-/* SHOW LOGIN */
-/* ================================================= */
+console.error(e);
 
-function showLogin(){
+error.innerText =
+"Login failed. Check email/password.";
 
-    document.getElementById(
-        "loginPage"
-    ).classList.remove("hidden");
+}
 
-    document.getElementById(
-        "ownerDashboard"
-    ).classList.add("hidden");
+};
 
-    document.getElementById(
-        "consumerDashboard"
-    ).classList.add("hidden");
+
+/* =====================================================
+   CONSUMER REGISTER
+===================================================== */
+
+window.registerConsumer = async function(){
+
+const name =
+document.getElementById("regName").value.trim();
+
+const email =
+document.getElementById("regEmail").value.trim();
+
+const password =
+document.getElementById("regPassword").value;
+
+const mobile =
+document.getElementById("regMobile").value.trim();
+
+const property =
+document.getElementById("regProperty").value.trim();
+
+const room =
+document.getElementById("regRoom").value.trim();
+
+const rent =
+Number(document.getElementById("regRent").value);
+
+const dueDate =
+document.getElementById("regDueDate").value;
+
+const joinedDate =
+document.getElementById("regJoinedDate").value;
+
+const address =
+document.getElementById("regAddress").value.trim();
+
+const error =
+document.getElementById("registerError");
+
+const success =
+document.getElementById("registerSuccess");
+
+error.innerText="";
+success.innerText="";
+
+
+if(
+!name ||
+!email ||
+!password ||
+!mobile ||
+!property ||
+!rent ||
+!dueDate ||
+!joinedDate
+){
+
+error.innerText =
+"Please fill all required details.";
+
+return;
+}
+
+if(password.length < 6){
+
+error.innerText =
+"Password must be at least 6 characters.";
+
+return;
 }
 
 
-/* ================================================= */
-/* SHOW OWNER */
-/* ================================================= */
+try{
+
+const result =
+await createUserWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+const uid =
+result.user.uid;
+
+
+/*
+SAVE COMPLETE CONSUMER PROFILE
+*/
+
+await setDoc(
+doc(db,"users",uid),
+{
+
+name:name,
+
+email:email,
+
+role:"consumer",
+
+mobile:mobile,
+
+propertyName:property,
+
+roomNumber:room,
+
+rent:rent,
+
+dueDate:dueDate,
+
+joinedDate:joinedDate,
+
+address:address,
+
+createdAt:serverTimestamp(),
+
+updatedAt:serverTimestamp()
+
+}
+);
+
+
+success.innerText =
+"Account created successfully!";
+
+
+/*
+Consumer automatically logged in.
+*/
+
+}catch(e){
+
+console.error(e);
+
+error.innerText =
+e.message;
+
+}
+
+};
+
+
+/* =====================================================
+   AUTH STATE
+===================================================== */
+
+onAuthStateChanged(
+auth,
+async(user)=>{
+
+if(!user){
+
+showLogin();
+
+return;
+}
+
+currentUser=user;
+
+try{
+
+const profile =
+await getDoc(
+doc(db,"users",user.uid)
+);
+
+if(!profile.exists()){
+
+await signOut(auth);
+
+alert(
+"User profile not found."
+);
+
+return;
+}
+
+const data =
+profile.data();
+
+currentRole =
+data.role;
+
+
+if(currentRole==="owner"){
+
+showOwner();
+
+await loadOwner();
+
+}
+
+else if(currentRole==="consumer"){
+
+showConsumer();
+
+await loadConsumer();
+
+}
+
+else{
+
+alert("Invalid user role.");
+
+await signOut(auth);
+
+}
+
+}catch(e){
+
+console.error(e);
+
+alert(
+"Unable to load account."
+);
+
+}
+
+});
+
+
+/* =====================================================
+   SHOW OWNER
+===================================================== */
 
 function showOwner(){
 
-    document.getElementById(
-        "loginPage"
-    ).classList.add("hidden");
+document.getElementById("loginPage")
+.classList.add("hidden");
 
-    document.getElementById(
-        "consumerDashboard"
-    ).classList.add("hidden");
+document.getElementById("registerPage")
+.classList.add("hidden");
 
-    document.getElementById(
-        "ownerDashboard"
-    ).classList.remove("hidden");
+document.getElementById("consumerDashboard")
+.classList.add("hidden");
+
+document.getElementById("ownerDashboard")
+.classList.remove("hidden");
+
 }
 
 
-/* ================================================= */
-/* SHOW CONSUMER */
-/* ================================================= */
+/* =====================================================
+   SHOW CONSUMER
+===================================================== */
 
 function showConsumer(){
 
-    document.getElementById(
-        "loginPage"
-    ).classList.add("hidden");
+document.getElementById("loginPage")
+.classList.add("hidden");
 
-    document.getElementById(
-        "ownerDashboard"
-    ).classList.add("hidden");
+document.getElementById("registerPage")
+.classList.add("hidden");
 
-    document.getElementById(
-        "consumerDashboard"
-    ).classList.remove("hidden");
+document.getElementById("ownerDashboard")
+.classList.add("hidden");
+
+document.getElementById("consumerDashboard")
+.classList.remove("hidden");
+
 }
 
 
-/* ================================================= */
-/* CREATE CONSUMER */
-/* ================================================= */
+/* =====================================================
+   LOGOUT
+===================================================== */
 
-window.createConsumer = async function(){
+window.logoutUser = async function(){
 
-    const name =
-        document.getElementById(
-            "consumerName"
-        ).value.trim();
+await signOut(auth);
 
-    const email =
-        document.getElementById(
-            "consumerEmail"
-        ).value.trim();
-
-    const password =
-        document.getElementById(
-            "consumerPassword"
-        ).value;
-
-    const message =
-        document.getElementById(
-            "consumerMessage"
-        );
-
-    const errorBox =
-        document.getElementById(
-            "consumerError"
-        );
-
-    message.style.display = "none";
-    errorBox.style.display = "none";
-
-    if(!name || !email || !password){
-
-        errorBox.innerText =
-            "Please fill all consumer details.";
-
-        errorBox.style.display =
-            "block";
-
-        return;
-    }
-
-    if(password.length < 6){
-
-        errorBox.innerText =
-            "Password must contain at least 6 characters.";
-
-        errorBox.style.display =
-            "block";
-
-        return;
-    }
-
-    try{
-
-        /*
-        Important:
-        Creating another Firebase Auth user
-        can change the currently signed-in user.
-        We therefore remember the Owner first.
-        */
-
-        const ownerEmail =
-            currentUser.email;
-
-        const ownerPassword =
-            prompt(
-                "For security, enter Owner password again:"
-            );
-
-        if(!ownerPassword){
-
-            return;
-        }
-
-
-        const secondaryUser =
-            await createUserWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
-
-        const consumerUid =
-            secondaryUser.user.uid;
-
-
-        /*
-        Create consumer profile
-        */
-
-        await setDoc(
-            doc(
-                db,
-                "users",
-                consumerUid
-            ),
-            {
-                name:name,
-                email:email,
-                role:"consumer",
-                createdAt:serverTimestamp()
-            }
-        );
-
-
-        /*
-        Login back as Owner
-        */
-
-        await signInWithEmailAndPassword(
-            auth,
-            ownerEmail,
-            ownerPassword
-        );
-
-
-        message.innerText =
-            "Consumer account created successfully.";
-
-        message.style.display =
-            "block";
-
-
-        document.getElementById(
-            "consumerName"
-        ).value = "";
-
-        document.getElementById(
-            "consumerEmail"
-        ).value = "";
-
-        document.getElementById(
-            "consumerPassword"
-        ).value = "";
-
-
-        await loadOwnerData();
-
-    }catch(error){
-
-        console.error(error);
-
-        errorBox.innerText =
-            error.message;
-
-        errorBox.style.display =
-            "block";
-    }
 };
 
 
-/* ================================================= */
-/* LOAD OWNER DATA */
-/* ================================================= */
+/* =====================================================
+   LOAD OWNER
+===================================================== */
 
-async function loadOwnerData(){
+async function loadOwner(){
 
-    await loadUsers();
-    await loadProperties();
-    await loadPayments();
+await loadConsumers();
 
-    populateConsumerSelects();
+await loadProperties();
 
-    displayProperties();
+await loadPayments();
 
-    displayPaymentHistory();
+fillConsumerLists();
 
-    updateDashboard();
+displayProperties();
+
+displayPayments();
+
+updateDashboard();
+
 }
 
 
-/* ================================================= */
-/* LOAD USERS */
-/* ================================================= */
+/* =====================================================
+   LOAD CONSUMERS
+===================================================== */
 
-async function loadUsers(){
+async function loadConsumers(){
 
-    users = [];
+consumers=[];
 
-    const snapshot =
-        await getDocs(
-            collection(
-                db,
-                "users"
-            )
-        );
+const snap =
+await getDocs(
+collection(db,"users")
+);
 
-    snapshot.forEach(
-        function(item){
+snap.forEach(item=>{
 
-            const data =
-                item.data();
+const data=item.data();
 
-            users.push({
-                id:item.id,
-                ...data
-            });
+if(data.role==="consumer"){
 
-        }
-    );
+consumers.push({
 
-    users =
-        users.filter(
-            user =>
-                user.role === "consumer"
-        );
+id:item.id,
+
+...data
+
+});
+
+}
+
+});
+
 }
 
 
-/* ================================================= */
-/* LOAD PROPERTIES */
-/* ================================================= */
+/* =====================================================
+   LOAD PROPERTIES
+===================================================== */
 
 async function loadProperties(){
 
-    properties = [];
+properties=[];
 
-    const snapshot =
-        await getDocs(
-            collection(
-                db,
-                "properties"
-            )
-        );
+const snap =
+await getDocs(
+collection(db,"properties")
+);
 
-    snapshot.forEach(
-        function(item){
+snap.forEach(item=>{
 
-            properties.push({
-                id:item.id,
-                ...item.data()
-            });
+properties.push({
 
-        }
-    );
+id:item.id,
+
+...item.data()
+
+});
+
+});
+
 }
 
 
-/* ================================================= */
-/* LOAD PAYMENTS */
-/* ================================================= */
+/* =====================================================
+   LOAD PAYMENTS
+===================================================== */
 
 async function loadPayments(){
 
-    payments = [];
+payments=[];
 
-    const snapshot =
-        await getDocs(
-            collection(
-                db,
-                "payments"
-            )
-        );
+const snap =
+await getDocs(
+collection(db,"payments")
+);
 
-    snapshot.forEach(
-        function(item){
+snap.forEach(item=>{
 
-            payments.push({
-                id:item.id,
-                ...item.data()
-            });
+payments.push({
 
-        }
-    );
+id:item.id,
+
+...item.data()
+
+});
+
+});
+
 }
 
 
-/* ================================================= */
-/* CONSUMER SELECTS */
-/* ================================================= */
+/* =====================================================
+   CONSUMER SELECT LIST
+===================================================== */
 
-function populateConsumerSelects(){
+function fillConsumerLists(){
 
-    const selects = [
+const ids=[
+"ownerConsumerSelect",
+"paymentConsumer",
+"receiptConsumer"
+];
 
-        document.getElementById(
-            "propertyConsumer"
-        ),
+ids.forEach(id=>{
 
-        document.getElementById(
-            "paymentConsumer"
-        ),
+const select =
+document.getElementById(id);
 
-        document.getElementById(
-            "receiptConsumer"
-        )
+select.innerHTML =
+'<option value="">Select Consumer</option>';
 
-    ];
+consumers.forEach(c=>{
 
-    selects.forEach(
-        function(select){
+select.innerHTML += `
 
-            select.innerHTML =
-                '<option value="">Select Consumer</option>';
+<option value="${c.id}">
+${safe(c.name || c.email)}
+</option>
 
-            users.forEach(
-                function(user){
+`;
 
-                    select.innerHTML += `
+});
 
-                        <option value="${user.id}">
-                            ${escapeHtml(user.name || user.email)}
-                        </option>
+});
 
-                    `;
-                }
-            );
-        }
-    );
 }
 
 
-/* ================================================= */
-/* PROPERTY CONSUMER SELECT */
-/* ================================================= */
+/* =====================================================
+   SELECT CONSUMER
+===================================================== */
+
+window.selectConsumer = function(){
+
+const uid =
+document.getElementById(
+"ownerConsumerSelect"
+).value;
+
+const c =
+consumers.find(
+x=>x.id===uid
+);
+
+if(!c){
+
+return;
+}
+
+
+/*
+AUTOMATIC DETAILS
+*/
 
 document.getElementById(
-    "propertyConsumer"
-).addEventListener(
-    "change",
-    function(){
+"ownerConsumerName"
+).value =
+c.name || "";
 
-        const uid =
-            this.value;
+document.getElementById(
+"ownerConsumerEmail"
+).value =
+c.email || "";
 
-        const user =
-            users.find(
-                u => u.id === uid
-            );
+document.getElementById(
+"ownerMobile"
+).value =
+c.mobile || "";
 
-        document.getElementById(
-            "tenantName"
-        ).value =
-            user ? (user.name || "") : "";
+document.getElementById(
+"ownerProperty"
+).value =
+c.propertyName || "";
 
-    }
+document.getElementById(
+"ownerRoom"
+).value =
+c.roomNumber || "";
+
+document.getElementById(
+"ownerRent"
+).value =
+c.rent || "";
+
+document.getElementById(
+"ownerDueDate"
+).value =
+c.dueDate || "";
+
+document.getElementById(
+"ownerJoinedDate"
+).value =
+c.joinedDate || "";
+
+document.getElementById(
+"ownerAddress"
+).value =
+c.address || "";
+
+
+/*
+If property already exists,
+show its current payment status.
+*/
+
+const p =
+properties.find(
+x=>x.consumerId===uid
+);
+
+document.getElementById(
+"ownerPaymentStatus"
+).value =
+p?.paymentStatus || "Pending";
+
+};
+
+
+/* =====================================================
+   SAVE PROPERTY
+===================================================== */
+
+window.saveOwnerProperty = async function(){
+
+const uid =
+document.getElementById(
+"ownerConsumerSelect"
+).value;
+
+if(!uid){
+
+alert(
+"Select Consumer first."
+);
+
+return;
+}
+
+const c =
+consumers.find(
+x=>x.id===uid
+);
+
+if(!c){
+
+return;
+}
+
+const paymentStatus =
+document.getElementById(
+"ownerPaymentStatus"
+).value;
+
+
+const existing =
+properties.find(
+x=>x.consumerId===uid
 );
 
 
-/* ================================================= */
-/* SAVE PROPERTY */
-/* ================================================= */
+const data={
 
-window.saveProperty = async function(){
+consumerId:uid,
 
-    const consumerId =
-        document.getElementById(
-            "propertyConsumer"
-        ).value;
+consumerName:c.name || "",
 
-    const propertyName =
-        document.getElementById(
-            "propertyName"
-        ).value.trim();
+propertyName:c.propertyName || "",
 
-    const roomNumber =
-        document.getElementById(
-            "roomNumber"
-        ).value.trim();
+roomNumber:c.roomNumber || "",
 
-    const rent =
-        Number(
-            document.getElementById(
-                "rent"
-            ).value
-        );
+rent:Number(c.rent || 0),
 
-    const dueDate =
-        document.getElementById(
-            "dueDate"
-        ).value;
+dueDate:c.dueDate || "",
 
-    const propertyStatus =
-        document.getElementById(
-            "propertyStatus"
-        ).value;
+joinedDate:c.joinedDate || "",
 
-    const paymentStatus =
-        document.getElementById(
-            "paymentStatus"
-        ).value;
+mobile:c.mobile || "",
 
+address:c.address || "",
 
-    if(
-        !consumerId ||
-        !propertyName ||
-        !roomNumber ||
-        !rent ||
-        !dueDate
-    ){
+propertyStatus:"Occupied",
 
-        alert(
-            "Please fill all required details."
-        );
+paymentStatus:paymentStatus,
 
-        return;
-    }
+updatedAt:serverTimestamp()
 
-
-    const user =
-        users.find(
-            u => u.id === consumerId
-        );
-
-
-    const data = {
-
-        consumerId:consumerId,
-
-        consumerName:
-            user ? user.name : "",
-
-        propertyName:propertyName,
-
-        roomNumber:roomNumber,
-
-        rent:rent,
-
-        dueDate:dueDate,
-
-        propertyStatus:propertyStatus,
-
-        paymentStatus:paymentStatus,
-
-        updatedAt:serverTimestamp()
-
-    };
-
-
-    try{
-
-        if(editPropertyId){
-
-            await updateDoc(
-                doc(
-                    db,
-                    "properties",
-                    editPropertyId
-                ),
-                data
-            );
-
-            editPropertyId = null;
-
-            document.getElementById(
-                "saveButton"
-            ).innerText =
-                "Add Property";
-
-        }else{
-
-            await addDoc(
-                collection(
-                    db,
-                    "properties"
-                ),
-                {
-                    ...data,
-                    createdAt:
-                        serverTimestamp()
-                }
-            );
-        }
-
-
-        clearPropertyForm();
-
-        await loadProperties();
-
-        displayProperties();
-
-        updateDashboard();
-
-        alert(
-            "Property saved successfully."
-        );
-
-    }catch(error){
-
-        console.error(error);
-
-        alert(
-            "Unable to save property: " +
-            error.message
-        );
-    }
 };
 
 
-/* ================================================= */
-/* DISPLAY PROPERTIES */
-/* ================================================= */
+try{
+
+if(existing){
+
+await updateDoc(
+doc(
+db,
+"properties",
+existing.id
+),
+data
+);
+
+}else{
+
+await addDoc(
+collection(db,"properties"),
+{
+
+...data,
+
+createdAt:serverTimestamp()
+
+}
+);
+
+}
+
+await loadProperties();
+
+displayProperties();
+
+updateDashboard();
+
+alert(
+"Property saved successfully."
+);
+
+}catch(e){
+
+console.error(e);
+
+alert(
+"Save failed: "+e.message
+);
+
+}
+
+};
+
+
+/* =====================================================
+   DISPLAY PROPERTIES
+===================================================== */
 
 function displayProperties(){
 
-    const table =
-        document.getElementById(
-            "propertyTable"
-        );
+const table =
+document.getElementById(
+"propertyTable"
+);
 
-    const search =
-        document.getElementById(
-            "search"
-        ).value
-        .toLowerCase();
+table.innerHTML="";
 
-    table.innerHTML = "";
+properties.forEach(p=>{
 
+const cls =
+p.paymentStatus==="Paid"
+?"paid"
+:p.paymentStatus==="Partial"
+?"partial"
+:"pending";
 
-    const filtered =
-        properties.filter(
-            function(record){
+table.innerHTML += `
 
-                return (
+<tr>
 
-                    String(
-                        record.consumerName || ""
-                    )
-                    .toLowerCase()
-                    .includes(search)
+<td>${safe(p.consumerName)}</td>
 
-                    ||
+<td>${safe(p.propertyName)}</td>
 
-                    String(
-                        record.propertyName || ""
-                    )
-                    .toLowerCase()
-                    .includes(search)
+<td>${safe(p.roomNumber)}</td>
 
-                    ||
+<td>₹${Number(p.rent||0)}</td>
 
-                    String(
-                        record.roomNumber || ""
-                    )
-                    .toLowerCase()
-                    .includes(search)
+<td>${safe(p.dueDate)}</td>
 
-                );
-            }
-        );
+<td>${safe(p.joinedDate)}</td>
 
+<td>${safe(p.propertyStatus)}</td>
 
-    filtered.forEach(
-        function(record){
+<td class="${cls}">
+${safe(p.paymentStatus)}
+</td>
 
-            const paymentClass =
-                record.paymentStatus === "Paid"
-                ? "status-paid"
-                : record.paymentStatus === "Partial"
-                ? "status-partial"
-                : "status-pending";
+</tr>
 
+`;
 
-            table.innerHTML += `
-
-                <tr>
-
-                    <td>
-                        ${escapeHtml(record.consumerName || "-")}
-                    </td>
-
-                    <td>
-                        ${escapeHtml(record.propertyName || "-")}
-                    </td>
-
-                    <td>
-                        ${escapeHtml(record.roomNumber || "-")}
-                    </td>
-
-                    <td>
-                        ₹${Number(record.rent || 0)}
-                    </td>
-
-                    <td>
-                        ${escapeHtml(record.dueDate || "-")}
-                    </td>
-
-                    <td>
-                        ${escapeHtml(record.propertyStatus || "-")}
-                    </td>
-
-                    <td class="${paymentClass}">
-                        ${escapeHtml(record.paymentStatus || "-")}
-                    </td>
-
-                    <td>
-
-                        <button
-                            class="edit"
-                            onclick="editProperty('${record.id}')"
-                        >
-                            Edit
-                        </button>
-
-                        <button
-                            class="delete"
-                            onclick="deleteProperty('${record.id}')"
-                        >
-                            Delete
-                        </button>
-
-                    </td>
-
-                </tr>
-
-            `;
-        }
-    );
+});
 
 }
 
 
-/* ================================================= */
-/* EDIT PROPERTY */
-/* ================================================= */
-
-window.editProperty = function(id){
-
-    const record =
-        properties.find(
-            p => p.id === id
-        );
-
-    if(!record){
-        return;
-    }
-
-
-    document.getElementById(
-        "propertyConsumer"
-    ).value =
-        record.consumerId;
-
-
-    document.getElementById(
-        "tenantName"
-    ).value =
-        record.consumerName || "";
-
-
-    document.getElementById(
-        "propertyName"
-    ).value =
-        record.propertyName || "";
-
-
-    document.getElementById(
-        "roomNumber"
-    ).value =
-        record.roomNumber || "";
-
-
-    document.getElementById(
-        "rent"
-    ).value =
-        record.rent || "";
-
-
-    document.getElementById(
-        "dueDate"
-    ).value =
-        record.dueDate || "";
-
-
-    document.getElementById(
-        "propertyStatus"
-    ).value =
-        record.propertyStatus || "Occupied";
-
-
-    document.getElementById(
-        "paymentStatus"
-    ).value =
-        record.paymentStatus || "Pending";
-
-
-    editPropertyId = id;
-
-
-    document.getElementById(
-        "saveButton"
-    ).innerText =
-        "Update Property";
-
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-};
-
-
-/* ================================================= */
-/* DELETE PROPERTY */
-/* ================================================= */
-
-window.deleteProperty = async function(id){
-
-    if(
-        !confirm(
-            "Delete this property?"
-        )
-    ){
-
-        return;
-    }
-
-
-    try{
-
-        await deleteDoc(
-            doc(
-                db,
-                "properties",
-                id
-            )
-        );
-
-
-        await loadProperties();
-
-        displayProperties();
-
-        updateDashboard();
-
-        alert(
-            "Property deleted."
-        );
-
-    }catch(error){
-
-        console.error(error);
-
-        alert(
-            "Delete failed."
-        );
-    }
-};
-
-
-/* ================================================= */
-/* CLEAR PROPERTY FORM */
-/* ================================================= */
-
-function clearPropertyForm(){
-
-    document.getElementById(
-        "propertyConsumer"
-    ).value = "";
-
-    document.getElementById(
-        "tenantName"
-    ).value = "";
-
-    document.getElementById(
-        "propertyName"
-    ).value = "";
-
-    document.getElementById(
-        "roomNumber"
-    ).value = "";
-
-    document.getElementById(
-        "rent"
-    ).value = "";
-
-    document.getElementById(
-        "dueDate"
-    ).value = "";
-
-    document.getElementById(
-        "propertyStatus"
-    ).value =
-        "Occupied";
-
-    document.getElementById(
-        "paymentStatus"
-    ).value =
-        "Pending";
-
-    editPropertyId = null;
-
-    document.getElementById(
-        "saveButton"
-    ).innerText =
-        "Add Property";
-}
-
-
-/* ================================================= */
-/* DASHBOARD */
-/* ================================================= */
+/* =====================================================
+   DASHBOARD
+===================================================== */
 
 function updateDashboard(){
 
-    let occupied = 0;
-    let vacant = 0;
-    let pending = 0;
+let occupied=0;
+let vacant=0;
+let pending=0;
 
+properties.forEach(p=>{
 
-    properties.forEach(
-        function(record){
+if(p.propertyStatus==="Occupied")
+occupied++;
 
-            if(
-                record.propertyStatus ===
-                "Occupied"
-            ){
+if(p.propertyStatus==="Vacant")
+vacant++;
 
-                occupied++;
-            }
+if(
+p.paymentStatus==="Pending"
+||
+p.paymentStatus==="Partial"
+){
 
-            if(
-                record.propertyStatus ===
-                "Vacant"
-            ){
+pending += Number(p.rent||0);
 
-                vacant++;
-            }
+}
 
-            if(
-                record.paymentStatus ===
-                "Pending"
-            ){
+});
 
-                pending +=
-                    Number(
-                        record.rent || 0
-                    );
-            }
+document.getElementById(
+"totalProperties"
+).innerText =
+properties.length;
 
-            if(
-                record.paymentStatus ===
-                "Partial"
-            ){
+document.getElementById(
+"occupied"
+).innerText =
+occupied;
 
-                /*
-                Remaining amount for Partial
-                */
+document.getElementById(
+"vacant"
+).innerText =
+vacant;
 
-                const paid =
-                    Number(
-                        record.lastPaymentAmount || 0
-                    );
+document.getElementById(
+"pendingRent"
+).innerText =
+"₹"+pending;
 
-                const rent =
-                    Number(
-                        record.rent || 0
-                    );
-
-                pending +=
-                    Math.max(
-                        rent - paid,
-                        0
-                    );
-            }
-        }
-    );
-
-
-    document.getElementById(
-        "totalProperties"
-    ).innerText =
-        properties.length;
-
-    document.getElementById(
-        "occupied"
-    ).innerText =
-        occupied;
-
-    document.getElementById(
-        "vacant"
-    ).innerText =
-        vacant;
-
-    document.getElementById(
-        "pendingRent"
-    ).innerText =
-        "₹" + pending;
 }
 
 
-/* ================================================= */
-/* PAYMENT DETAILS AUTOMATIC */
-/* ================================================= */
+/* =====================================================
+   PAYMENT AUTO FILL
+===================================================== */
 
-function fillPaymentDetails(){
+window.fillPaymentDetails = function(){
 
-    const consumerId =
-        document.getElementById(
-            "paymentConsumer"
-        ).value;
+const uid =
+document.getElementById(
+"paymentConsumer"
+).value;
 
+const c =
+consumers.find(
+x=>x.id===uid
+);
 
-    const user =
-        users.find(
-            u => u.id === consumerId
-        );
+if(!c){
 
-
-    const property =
-        properties.find(
-            p =>
-                p.consumerId === consumerId
-                &&
-                p.propertyStatus === "Occupied"
-        );
-
-
-    document.getElementById(
-        "paymentTenantName"
-    ).value =
-        user ? user.name || "" : "";
-
-
-    document.getElementById(
-        "paymentProperty"
-    ).value =
-        property
-        ? property.propertyName || ""
-        : "";
-
-
-    document.getElementById(
-        "paymentRent"
-    ).value =
-        property
-        ? property.rent || ""
-        : "";
-
-
-    document.getElementById(
-        "paymentDueDate"
-    ).value =
-        property
-        ? property.dueDate || ""
-        : "";
-
-
-    /*
-    Amount automatically equal to rent
-    */
-
-    document.getElementById(
-        "paymentAmount"
-    ).value =
-        property
-        ? property.rent || ""
-        : "";
-
-
-    /*
-    Current date
-    */
-
-    document.getElementById(
-        "paymentDate"
-    ).value =
-        getToday();
-
-
-    /*
-    Current month
-    */
-
-    const months = [
-
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-
-    ];
-
-
-    document.getElementById(
-        "paymentMonth"
-    ).value =
-        months[
-            new Date().getMonth()
-        ] || "";
+return;
 }
 
+document.getElementById(
+"paymentName"
+).value =
+c.name || "";
 
-/* ================================================= */
-/* RECORD PAYMENT */
-/* ================================================= */
+document.getElementById(
+"paymentProperty"
+).value =
+c.propertyName || "";
+
+document.getElementById(
+"paymentRent"
+).value =
+c.rent || "";
+
+document.getElementById(
+"paymentDueDate"
+).value =
+c.dueDate || "";
+
+document.getElementById(
+"paymentAmount"
+).value =
+c.rent || "";
+
+document.getElementById(
+"paymentDate"
+).value =
+today();
+
+const months=[
+"January",
+"February",
+"March",
+"April",
+"May",
+"June",
+"July",
+"August",
+"September",
+"October",
+"November",
+"December"
+];
+
+document.getElementById(
+"paymentMonth"
+).value =
+months[new Date().getMonth()];
+
+};
+
+
+/* =====================================================
+   RECORD PAYMENT
+===================================================== */
 
 window.recordPayment = async function(){
 
-    const consumerId =
-        document.getElementById(
-            "paymentConsumer"
-        ).value;
+const uid =
+document.getElementById(
+"paymentConsumer"
+).value;
 
-    const month =
-        document.getElementById(
-            "paymentMonth"
-        ).value;
+if(!uid){
 
-    const amount =
-        Number(
-            document.getElementById(
-                "paymentAmount"
-            ).value
-        );
+alert(
+"Select Consumer."
+);
 
-    const date =
-        document.getElementById(
-            "paymentDate"
-        ).value;
+return;
+}
 
-    const status =
-        document.getElementById(
-            "manualPaymentStatus"
-        ).value;
+const c =
+consumers.find(
+x=>x.id===uid
+);
 
+const p =
+properties.find(
+x=>x.consumerId===uid
+);
 
-    if(
-        !consumerId ||
-        !month ||
-        !amount ||
-        !date
-    ){
+if(!c){
 
-        alert(
-            "Please fill payment details."
-        );
+return;
+}
 
-        return;
-    }
+const month =
+document.getElementById(
+"paymentMonth"
+).value;
 
+const amount =
+Number(
+document.getElementById(
+"paymentAmount"
+).value
+);
 
-    const user =
-        users.find(
-            u => u.id === consumerId
-        );
+const date =
+document.getElementById(
+"paymentDate"
+).value;
 
-
-    const property =
-        properties.find(
-            p =>
-                p.consumerId === consumerId
-                &&
-                p.propertyStatus === "Occupied"
-        );
+const status =
+document.getElementById(
+"paymentStatus"
+).value;
 
 
-    if(!property){
+if(
+!month ||
+!amount ||
+!date
+){
 
-        alert(
-            "No occupied property found for this consumer."
-        );
+alert(
+"Fill payment details."
+);
 
-        return;
-    }
-
-
-    try{
-
-        /*
-        Save payment
-        */
-
-        await addDoc(
-            collection(
-                db,
-                "payments"
-            ),
-            {
-
-                consumerId:consumerId,
-
-                consumerName:
-                    user
-                    ? user.name
-                    : "",
-
-                propertyId:
-                    property.id,
-
-                propertyName:
-                    property.propertyName,
-
-                month:month,
-
-                amount:amount,
-
-                paymentDate:date,
-
-                status:status,
-
-                createdAt:
-                    serverTimestamp()
-
-            }
-        );
+return;
+}
 
 
-        /*
-        Update property payment status
-        */
+try{
 
-        await updateDoc(
-            doc(
-                db,
-                "properties",
-                property.id
-            ),
-            {
+await addDoc(
+collection(db,"payments"),
+{
 
-                paymentStatus:status,
+consumerId:uid,
 
-                lastPaymentMonth:month,
+consumerName:c.name || "",
 
-                lastPaymentAmount:amount,
+propertyId:p?.id || "",
 
-                lastPaymentDate:date,
+propertyName:
+c.propertyName || "",
 
-                updatedAt:
-                    serverTimestamp()
+month:month,
 
-            }
-        );
+amount:amount,
 
+paymentDate:date,
 
-        alert(
-            "Payment saved successfully."
-        );
+status:status,
+
+createdAt:serverTimestamp()
+
+}
+);
 
 
-        await loadProperties();
+/*
+UPDATE PROPERTY PAYMENT STATUS
+*/
 
-        await loadPayments();
+if(p){
 
-        displayProperties();
+await updateDoc(
+doc(
+db,
+"properties",
+p.id
+),
+{
 
-        displayPaymentHistory();
+paymentStatus:status,
 
-        updateDashboard();
+lastPaymentAmount:amount,
 
-        clearPaymentForm();
+lastPaymentDate:date,
 
-    }catch(error){
+lastPaymentMonth:month,
 
-        console.error(error);
+updatedAt:serverTimestamp()
 
-        alert(
-            "Payment save failed: " +
-            error.message
-        );
-    }
+}
+);
+
+}
+
+await loadPayments();
+
+await loadProperties();
+
+displayPayments();
+
+displayProperties();
+
+updateDashboard();
+
+alert(
+"Payment saved successfully."
+);
+
+}catch(e){
+
+console.error(e);
+
+alert(
+"Payment failed: "+e.message
+);
+
+}
+
 };
 
 
-/* ================================================= */
-/* CLEAR PAYMENT */
-/* ================================================= */
+/* =====================================================
+   DISPLAY PAYMENTS
+===================================================== */
 
-function clearPaymentForm(){
+function displayPayments(){
 
-    document.getElementById(
-        "paymentConsumer"
-    ).value = "";
+const table =
+document.getElementById(
+"paymentTable"
+);
 
-    document.getElementById(
-        "paymentTenantName"
-    ).value = "";
+table.innerHTML="";
 
-    document.getElementById(
-        "paymentProperty"
-    ).value = "";
+payments.forEach(p=>{
 
-    document.getElementById(
-        "paymentRent"
-    ).value = "";
+const cls =
+p.status==="Paid"
+?"paid"
+:p.status==="Partial"
+?"partial"
+:"pending";
 
-    document.getElementById(
-        "paymentDueDate"
-    ).value = "";
+table.innerHTML += `
 
-    document.getElementById(
-        "paymentAmount"
-    ).value = "";
+<tr>
 
-    document.getElementById(
-        "paymentDate"
-    ).value = "";
+<td>${safe(p.consumerName)}</td>
 
-    document.getElementById(
-        "paymentMonth"
-    ).value = "";
+<td>${safe(p.propertyName)}</td>
+
+<td>${safe(p.month)}</td>
+
+<td>₹${Number(p.amount||0)}</td>
+
+<td>${safe(p.paymentDate)}</td>
+
+<td class="${cls}">
+${safe(p.status)}
+</td>
+
+</tr>
+
+`;
+
+});
+
 }
 
 
-/* ================================================= */
-/* PAYMENT HISTORY */
-/* ================================================= */
-
-function displayPaymentHistory(){
-
-    const table =
-        document.getElementById(
-            "paymentHistory"
-        );
-
-    table.innerHTML = "";
-
-
-    payments.forEach(
-        function(payment){
-
-            const statusClass =
-                payment.status === "Paid"
-                ? "status-paid"
-                : payment.status === "Partial"
-                ? "status-partial"
-                : "status-pending";
-
-
-            table.innerHTML += `
-
-                <tr>
-
-                    <td>
-                        ${escapeHtml(payment.consumerName || "-")}
-                    </td>
-
-                    <td>
-                        ${escapeHtml(payment.propertyName || "-")}
-                    </td>
-
-                    <td>
-                        ${escapeHtml(payment.month || "-")}
-                    </td>
-
-                    <td>
-                        ₹${Number(payment.amount || 0)}
-                    </td>
-
-                    <td>
-                        ${escapeHtml(payment.paymentDate || "-")}
-                    </td>
-
-                    <td class="${statusClass}">
-                        ${escapeHtml(payment.status || "-")}
-                    </td>
-
-                </tr>
-
-            `;
-        }
-    );
-}
-
-
-/* ================================================= */
-/* RECEIPT */
-/* ================================================= */
+/* =====================================================
+   RECEIPT
+===================================================== */
 
 window.generateReceipt = function(){
 
-    const consumerId =
-        document.getElementById(
-            "receiptConsumer"
-        ).value;
+const uid =
+document.getElementById(
+"receiptConsumer"
+).value;
+
+const c =
+consumers.find(
+x=>x.id===uid
+);
+
+if(!c){
+
+alert(
+"Select Consumer."
+);
+
+return;
+}
+
+const consumerPayments =
+payments
+.filter(
+p=>p.consumerId===uid
+)
+.sort(
+(a,b)=>
+String(b.paymentDate||"")
+.localeCompare(
+String(a.paymentDate||"")
+)
+);
+
+const last =
+consumerPayments[0];
+
+const owner =
+document.getElementById(
+"receiptOwner"
+).value
+||"Owner";
+
+const mobile =
+document.getElementById(
+"receiptMobile"
+).value
+||"-";
+
+const address =
+document.getElementById(
+"receiptAddress"
+).value
+||c.address
+||"-";
 
 
-    if(!consumerId){
+document.getElementById(
+"receipt"
+).innerHTML=`
 
-        alert(
-            "Please select a consumer."
-        );
+<div class="receipt">
 
-        return;
-    }
+<h2>🧾 RENT RECEIPT</h2>
 
+<hr>
 
-    const user =
-        users.find(
-            u => u.id === consumerId
-        );
+<p><b>Owner:</b> ${safe(owner)}</p>
 
+<p><b>Owner Mobile:</b> ${safe(mobile)}</p>
 
-    const property =
-        properties.find(
-            p => p.consumerId === consumerId
-        );
+<p><b>Address:</b> ${safe(address)}</p>
 
+<hr>
 
-    const lastPayment =
-        payments
-        .filter(
-            p =>
-                p.consumerId === consumerId
-        )
-        .sort(
-            (a,b) =>
-                String(b.paymentDate || "")
-                .localeCompare(
-                    String(a.paymentDate || "")
-                )
-        )[0];
+<p><b>Consumer:</b> ${safe(c.name)}</p>
 
+<p><b>Mobile:</b> ${safe(c.mobile)}</p>
 
-    const ownerName =
-        document.getElementById(
-            "ownerName"
-        ).value.trim()
-        || "Property Owner";
+<p><b>Property:</b> ${safe(c.propertyName)}</p>
 
+<p><b>Room / Shop:</b> ${safe(c.roomNumber)}</p>
 
-    const ownerContact =
-        document.getElementById(
-            "ownerContact"
-        ).value.trim()
-        || "-";
+<p><b>Monthly Rent:</b> ₹${Number(c.rent||0)}</p>
 
+<p><b>Joined Date:</b> ${safe(c.joinedDate)}</p>
 
-    const address =
-        document.getElementById(
-            "propertyAddress"
-        ).value.trim()
-        || "-";
+<p><b>Rent Due Date:</b> ${safe(c.dueDate)}</p>
 
+<hr>
 
-    const receiptNumber =
-        "REC-" +
-        Date.now();
+<p><b>Payment Month:</b>
+${safe(last?.month || "-")}
+</p>
 
+<p><b>Amount Paid:</b>
+₹${Number(last?.amount || 0)}
+</p>
 
-    document.getElementById(
-        "receipt"
-    ).innerHTML = `
+<p><b>Payment Date:</b>
+${safe(last?.paymentDate || "-")}
+</p>
 
-        <div class="receipt">
+<p><b>Status:</b>
+${safe(last?.status || "Pending")}
+</p>
 
-            <h2>🧾 RENT RECEIPT</h2>
+<hr>
 
-            <hr>
+<button
+class="success-btn"
+onclick="window.print()">
+🖨️ Print Receipt
+</button>
 
-            <p>
-                <b>Owner:</b>
-                ${escapeHtml(ownerName)}
-            </p>
+</div>
 
-            <p>
-                <b>Contact:</b>
-                ${escapeHtml(ownerContact)}
-            </p>
+`;
 
-            <p>
-                <b>Property Address:</b>
-                ${escapeHtml(address)}
-            </p>
-
-            <hr>
-
-            <p>
-                <b>Receipt No:</b>
-                ${receiptNumber}
-            </p>
-
-            <p>
-                <b>Consumer:</b>
-                ${escapeHtml(user?.name || "-")}
-            </p>
-
-            <p>
-                <b>Property:</b>
-                ${escapeHtml(property?.propertyName || "-")}
-            </p>
-
-            <p>
-                <b>Room / Shop:</b>
-                ${escapeHtml(property?.roomNumber || "-")}
-            </p>
-
-            <p>
-                <b>Month:</b>
-                ${escapeHtml(lastPayment?.month || "-")}
-            </p>
-
-            <p>
-                <b>Amount Paid:</b>
-                ₹${Number(
-                    lastPayment?.amount ||
-                    property?.rent ||
-                    0
-                )}
-            </p>
-
-            <p>
-                <b>Payment Date:</b>
-                ${escapeHtml(
-                    lastPayment?.paymentDate || "-"
-                )}
-            </p>
-
-            <p>
-                <b>Status:</b>
-
-                <span class="${
-                    lastPayment?.status === "Partial"
-                    ? "status-partial"
-                    : lastPayment?.status === "Pending"
-                    ? "status-pending"
-                    : "status-paid"
-                }">
-
-                    ${escapeHtml(
-                        lastPayment?.status ||
-                        property?.paymentStatus ||
-                        "-"
-                    )}
-
-                </span>
-
-            </p>
-
-            <hr>
-
-            <button
-                class="print"
-                onclick="window.print()"
-            >
-                🖨️ Print Receipt
-            </button>
-
-        </div>
-    `;
 };
 
 
-/* ================================================= */
-/* CONSUMER DATA */
-/* ================================================= */
+/* =====================================================
+   CONSUMER LOAD
+===================================================== */
 
-async function loadConsumerData(){
+async function loadConsumer(){
 
-    const uid =
-        currentUser.uid;
+const uid =
+currentUser.uid;
 
+const profile =
+await getDoc(
+doc(db,"users",uid)
+);
 
-    const profile =
-        await getDoc(
-            doc(
-                db,
-                "users",
-                uid
-            )
-        );
+if(!profile.exists()){
 
+return;
+}
 
-    if(profile.exists()){
-
-        const data =
-            profile.data();
+const c =
+profile.data();
 
 
-        document.getElementById(
-            "consumerWelcomeName"
-        ).innerText =
-            data.name || "Consumer";
+document.getElementById(
+"consumerWelcome"
+).innerText =
+c.name || "Consumer";
+
+document.getElementById(
+"consumerEmail"
+).innerText =
+c.email || currentUser.email;
 
 
-        document.getElementById(
-            "consumerEmailDisplay"
-        ).innerText =
-            data.email ||
-            currentUser.email ||
-            "";
-    }
+/*
+SHOW DETAILS
+*/
+
+document.getElementById(
+"myName"
+).value =
+c.name || "";
+
+document.getElementById(
+"myMobile"
+).value =
+c.mobile || "";
+
+document.getElementById(
+"myPropertyInput"
+).value =
+c.propertyName || "";
+
+document.getElementById(
+"myRoom"
+).value =
+c.roomNumber || "";
+
+document.getElementById(
+"myRentInput"
+).value =
+c.rent || "";
+
+document.getElementById(
+"myDueDateInput"
+).value =
+c.dueDate || "";
+
+document.getElementById(
+"myJoinedDate"
+).value =
+c.joinedDate || "";
+
+document.getElementById(
+"myAddress"
+).value =
+c.address || "";
 
 
-    /*
-    IMPORTANT:
-    Consumer query is filtered by consumerId.
-    */
+/*
+SUMMARY
+*/
 
-    const propertyQuery =
-        query(
-            collection(
-                db,
-                "properties"
-            ),
-            where(
-                "consumerId",
-                "==",
-                uid
-            )
-        );
+document.getElementById(
+"myProperty"
+).innerText =
+c.propertyName || "-";
 
+document.getElementById(
+"myRent"
+).innerText =
+"₹"+Number(c.rent||0);
 
-    const propertySnapshot =
-        await getDocs(
-            propertyQuery
-        );
+document.getElementById(
+"myDueDate"
+).innerText =
+c.dueDate || "-";
 
 
-    const myProperties = [];
+/*
+GET OWN PROPERTY
+*/
+
+const propertyQuery =
+query(
+collection(db,"properties"),
+where(
+"consumerId",
+"==",
+uid
+)
+);
+
+const propertySnap =
+await getDocs(propertyQuery);
+
+let paymentStatus =
+"Pending";
+
+propertySnap.forEach(item=>{
+
+paymentStatus =
+item.data().paymentStatus
+||"Pending";
+
+});
+
+document.getElementById(
+"myPaymentStatus"
+).innerText =
+paymentStatus;
 
 
-    propertySnapshot.forEach(
-        item => {
+/*
+GET OWN PAYMENTS
+*/
 
-            myProperties.push({
-                id:item.id,
-                ...item.data()
-            });
+const paymentQuery =
+query(
+collection(db,"payments"),
+where(
+"consumerId",
+"==",
+uid
+)
+);
 
-        }
-    );
+const paymentSnap =
+await getDocs(paymentQuery);
 
+const table =
+document.getElementById(
+"consumerPayments"
+);
 
-    /*
-    Payments
-    */
+table.innerHTML="";
 
-    const paymentQuery =
-        query(
-            collection(
-                db,
-                "payments"
-            ),
-            where(
-                "consumerId",
-                "==",
-                uid
-            )
-        );
+paymentSnap.forEach(item=>{
 
+const p=item.data();
 
-    const paymentSnapshot =
-        await getDocs(
-            paymentQuery
-        );
+const cls =
+p.status==="Paid"
+?"paid"
+:p.status==="Partial"
+?"partial"
+:"pending";
 
+table.innerHTML += `
 
-    const myPayments = [];
+<tr>
 
+<td>${safe(p.propertyName)}</td>
 
-    paymentSnapshot.forEach(
-        item => {
+<td>${safe(p.month)}</td>
 
-            myPayments.push({
-                id:item.id,
-                ...item.data()
-            });
+<td>₹${Number(p.amount||0)}</td>
 
-        }
-    );
+<td>${safe(p.paymentDate)}</td>
 
+<td class="${cls}">
+${safe(p.status)}
+</td>
 
-    displayConsumerProperties(
-        myProperties
-    );
+</tr>
 
-    displayConsumerPayments(
-        myPayments
-    );
+`;
+
+});
+
 }
 
 
-/* ================================================= */
-/* CONSUMER PROPERTIES */
-/* ================================================= */
+/* =====================================================
+   CONSUMER UPDATE
+===================================================== */
 
-function displayConsumerProperties(
-    records
-){
+window.updateConsumerProfile = async function(){
 
-    const table =
-        document.getElementById(
-            "consumerPropertyTable"
-        );
+const uid =
+currentUser.uid;
 
-    table.innerHTML = "";
+const data={
 
+name:
+document.getElementById(
+"myName"
+).value.trim(),
 
-    document.getElementById(
-        "consumerPropertyCount"
-    ).innerText =
-        records.length;
+mobile:
+document.getElementById(
+"myMobile"
+).value.trim(),
 
+propertyName:
+document.getElementById(
+"myPropertyInput"
+).value.trim(),
 
-    if(records.length === 0){
+roomNumber:
+document.getElementById(
+"myRoom"
+).value.trim(),
 
-        document.getElementById(
-            "consumerRent"
-        ).innerText =
-            "₹0";
+rent:
+Number(
+document.getElementById(
+"myRentInput"
+).value
+),
 
-        document.getElementById(
-            "consumerDueDate"
-        ).innerText =
-            "-";
+dueDate:
+document.getElementById(
+"myDueDateInput"
+).value,
 
-        document.getElementById(
-            "consumerStatus"
-        ).innerText =
-            "-";
-    }
+joinedDate:
+document.getElementById(
+"myJoinedDate"
+).value,
 
+address:
+document.getElementById(
+"myAddress"
+).value.trim(),
 
-    records.forEach(
-        function(record){
+updatedAt:
+serverTimestamp()
 
-            const statusClass =
-                record.paymentStatus === "Paid"
-                ? "status-paid"
-                : record.paymentStatus === "Partial"
-                ? "status-partial"
-                : "status-pending";
-
-
-            table.innerHTML += `
-
-                <tr>
-
-                    <td>
-                        ${escapeHtml(record.propertyName || "-")}
-                    </td>
-
-                    <td>
-                        ${escapeHtml(record.roomNumber || "-")}
-                    </td>
-
-                    <td>
-                        ₹${Number(record.rent || 0)}
-                    </td>
-
-                    <td>
-                        ${escapeHtml(record.dueDate || "-")}
-                    </td>
-
-                    <td>
-                        ${escapeHtml(record.propertyStatus || "-")}
-                    </td>
-
-                    <td class="${statusClass}">
-                        ${escapeHtml(record.paymentStatus || "-")}
-                    </td>
-
-                </tr>
-
-            `;
-        }
-    );
+};
 
 
-    if(records.length > 0){
+try{
 
-        const first =
-            records[0];
+await updateDoc(
+doc(db,"users",uid),
+data
+);
 
-        document.getElementById(
-            "consumerRent"
-        ).innerText =
-            "₹" + Number(
-                first.rent || 0
-            );
+alert(
+"Your details updated successfully."
+);
 
-        document.getElementById(
-            "consumerDueDate"
-        ).innerText =
-            first.dueDate || "-";
+await loadConsumer();
 
-        document.getElementById(
-            "consumerStatus"
-        ).innerText =
-            first.paymentStatus || "-";
-    }
+}catch(e){
+
+console.error(e);
+
+alert(
+"Update failed: "+e.message
+);
+
+}
+
+};
+
+
+/* =====================================================
+   TODAY
+===================================================== */
+
+function today(){
+
+const d=new Date();
+
+return d.getFullYear()
++"-"+
+String(d.getMonth()+1).padStart(2,"0")
++"-"+
+String(d.getDate()).padStart(2,"0");
+
 }
 
 
-/* ================================================= */
-/* CONSUMER PAYMENTS */
-/* ================================================= */
+/* =====================================================
+   HTML SECURITY
+===================================================== */
 
-function displayConsumerPayments(
-    paymentsList
-){
+function safe(value){
 
-    const table =
-        document.getElementById(
-            "consumerPaymentTable"
-        );
+return String(value ?? "")
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
 
-    table.innerHTML = "";
-
-
-    paymentsList.forEach(
-        function(payment){
-
-            const statusClass =
-                payment.status === "Paid"
-                ? "status-paid"
-                : payment.status === "Partial"
-                ? "status-partial"
-                : "status-pending";
-
-
-            table.innerHTML += `
-
-                <tr>
-
-                    <td>
-                        ${escapeHtml(payment.propertyName || "-")}
-                    </td>
-
-                    <td>
-                        ${escapeHtml(payment.month || "-")}
-                    </td>
-
-                    <td>
-                        ₹${Number(payment.amount || 0)}
-                    </td>
-
-                    <td>
-                        ${escapeHtml(payment.paymentDate || "-")}
-                    </td>
-
-                    <td class="${statusClass}">
-                        ${escapeHtml(payment.status || "-")}
-                    </td>
-
-                </tr>
-
-            `;
-        }
-    );
-}
-
-
-/* ================================================= */
-/* TODAY */
-/* ================================================= */
-
-function getToday(){
-
-    const d =
-        new Date();
-
-    const month =
-        String(
-            d.getMonth() + 1
-        ).padStart(2,"0");
-
-    const day =
-        String(
-            d.getDate()
-        ).padStart(2,"0");
-
-    return (
-        d.getFullYear()
-        + "-"
-        + month
-        + "-"
-        + day
-    );
-}
-
-
-/* ================================================= */
-/* HTML SECURITY */
-/* ================================================= */
-
-function escapeHtml(value){
-
-    return String(value ?? "")
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
 }
 
 </script>
 
 </body>
 </html>
+```
