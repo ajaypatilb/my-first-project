@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -149,6 +148,11 @@ th,td{
   font-weight:bold;
 }
 
+.closed{
+  color:#6b7280;
+  font-weight:bold;
+}
+
 .badge{
   display:inline-block;
   padding:5px 9px;
@@ -172,6 +176,11 @@ th,td{
   color:#92400e;
 }
 
+.badge-closed{
+  background:#e5e7eb;
+  color:#374151;
+}
+
 .info-box{
   background:#eff6ff;
   padding:12px;
@@ -186,11 +195,23 @@ th,td{
   border:1px solid #fed7aa;
 }
 
+.close-box{
+  background:#fef2f2;
+  border:1px solid #fecaca;
+  padding:15px;
+  border-radius:10px;
+}
+
 .receipt{
   margin-top:20px;
   border:2px solid #222;
   padding:25px;
   background:white;
+}
+
+.small{
+  font-size:13px;
+  color:#666;
 }
 
 @media(max-width:700px){
@@ -202,6 +223,7 @@ th,td{
   .form-grid{
     grid-template-columns:1fr;
   }
+
 }
 
 @media print{
@@ -221,11 +243,13 @@ th,td{
     top:0;
     width:100%;
   }
+
 }
 </style>
 </head>
 
 <body>
+
 
 <!-- =====================================================
      LOGIN
@@ -273,7 +297,7 @@ onclick="showRegister()"
 
 
 <!-- =====================================================
-     REGISTER
+     CONSUMER REGISTRATION
 ===================================================== -->
 
 <div id="registerPage" class="login-page hidden">
@@ -355,6 +379,9 @@ onclick="logoutUser()"
 
 <div class="container">
 
+
+<!-- DASHBOARD -->
+
 <div class="cards">
 
 <div class="card">
@@ -363,7 +390,7 @@ onclick="logoutUser()"
 </div>
 
 <div class="card">
-<h3>Verified Consumers</h3>
+<h3>Active Consumers</h3>
 <p id="verifiedConsumers">0</p>
 </div>
 
@@ -380,7 +407,7 @@ onclick="logoutUser()"
 </div>
 
 
-<!-- SECURITY DEPOSIT -->
+<!-- SECURITY DEPOSIT LIABILITY -->
 
 <div class="section">
 
@@ -390,7 +417,9 @@ onclick="logoutUser()"
 
 <h3>
 Total Security Deposit Held:
-<span id="totalDepositLiability">₹0</span>
+<span id="totalDepositLiability">
+₹0
+</span>
 </h3>
 
 <p>
@@ -414,7 +443,6 @@ It remains Owner's liability until refunded to the Consumer.
 <table>
 
 <thead>
-
 <tr>
 <th>Name</th>
 <th>Email</th>
@@ -422,7 +450,6 @@ It remains Owner's liability until refunded to the Consumer.
 <th>Status</th>
 <th>Action</th>
 </tr>
-
 </thead>
 
 <tbody id="pendingConsumerTable"></tbody>
@@ -445,7 +472,9 @@ id="ownerConsumerSelect"
 onchange="selectConsumer()"
 >
 
-<option value="">Select Consumer</option>
+<option value="">
+Select Consumer
+</option>
 
 </select>
 
@@ -516,12 +545,8 @@ placeholder="Property Address"
 
 <div class="info-box">
 
-🔒 <b>Security Deposit is permanent.</b><br>
-
-Joined Date is also permanent after verification.
-
-Monthly rent can be updated by Owner, but old rent records
-will not be changed.
+🔒 <b>Joined Date and Security Deposit are permanent.</b><br>
+Consumer cannot change these details.
 
 </div>
 
@@ -542,18 +567,111 @@ onclick="updateConsumerDetails()"
 </div>
 
 
-<!-- REFUND -->
+<!-- =====================================================
+     CLOSE CONSUMER
+===================================================== -->
 
 <div class="section">
 
-<h2>🚪 Security Deposit Refund</h2>
+<h2>🚪 Close Consumer Account</h2>
+
+<div class="close-box">
+
+<p>
+Closing a Consumer does <b>not delete their old data</b>.
+</p>
+
+<p>
+Previous Rent Records, Payment History and Security Deposit
+records will remain saved permanently.
+</p>
+
+<p>
+After closing, <b>no new monthly rent records</b> will be
+created for that Consumer.
+</p>
+
+</div>
+
+<select
+id="closeConsumerSelect"
+>
+
+<option value="">
+Select Consumer
+</option>
+
+</select>
+
+<input
+id="closeDate"
+type="date"
+>
+
+<input
+id="closeReason"
+placeholder="Closing Reason"
+>
+
+<button
+class="danger"
+onclick="closeConsumerAccount()"
+>
+🚪 Close Consumer
+</button>
+
+</div>
+
+
+<!-- =====================================================
+     CLOSED CONSUMERS
+===================================================== -->
+
+<div class="section">
+
+<h2>📁 Closed Consumers</h2>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>Property</th>
+<th>Joined Date</th>
+<th>Closed Date</th>
+<th>Security Deposit</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody id="closedConsumerTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     SECURITY DEPOSIT REFUND
+===================================================== -->
+
+<div class="section">
+
+<h2>💸 Security Deposit Refund</h2>
 
 <select
 id="refundConsumer"
 onchange="loadRefundDetails()"
 >
 
-<option value="">Select Consumer</option>
+<option value="">
+Select Consumer
+</option>
 
 </select>
 
@@ -562,7 +680,7 @@ onchange="loadRefundDetails()"
 <input
 id="refundOriginalDeposit"
 type="number"
-placeholder="Original Deposit ₹"
+placeholder="Deposit ₹"
 readonly
 >
 
@@ -603,23 +721,18 @@ onclick="refundSecurityDeposit()"
 </div>
 
 
-<!-- MONTHLY RENT -->
+<!-- =====================================================
+     MONTHLY RENT
+===================================================== -->
 
 <div class="section">
 
 <h2>📅 Monthly Rent Records</h2>
 
 <div class="info-box">
-
-Only rent records whose <b>due date has arrived</b>
-are shown.
-
-Future months will NOT appear as Pending.
-
-Example:
-If today is 30-08-2026, September rent will not appear
-until its due date arrives.
-
+Only rent records whose <b>due date has arrived</b> are created.
+Future months will not show as Pending.
+Closed Consumers will not receive new rent records.
 </div>
 
 <div class="table-wrap">
@@ -627,19 +740,16 @@ until its due date arrives.
 <table>
 
 <thead>
-
 <tr>
 <th>Consumer</th>
 <th>Month</th>
 <th>Rent</th>
 <th>Due Date</th>
 <th>Paid</th>
-<th>Remaining</th>
 <th>Payment Date</th>
 <th>Status</th>
 <th>Action</th>
 </tr>
-
 </thead>
 
 <tbody id="rentRecordsTable"></tbody>
@@ -651,7 +761,9 @@ until its due date arrives.
 </div>
 
 
-<!-- RENT COLLECTION -->
+<!-- =====================================================
+     RENT COLLECTION
+===================================================== -->
 
 <div class="section">
 
@@ -662,7 +774,9 @@ id="paymentConsumer"
 onchange="fillPaymentDetails()"
 >
 
-<option value="">Select Consumer</option>
+<option value="">
+Select Consumer
+</option>
 
 </select>
 
@@ -671,7 +785,9 @@ id="paymentRentRecord"
 onchange="selectRentRecord()"
 >
 
-<option value="">Select Due Rent</option>
+<option value="">
+Select Due Rent
+</option>
 
 </select>
 
@@ -703,13 +819,6 @@ readonly
 >
 
 <input
-id="paymentRemaining"
-type="number"
-placeholder="Remaining"
-readonly
->
-
-<input
 id="paymentAmount"
 type="number"
 placeholder="Payment Amount ₹"
@@ -732,18 +841,36 @@ onclick="recordPayment()"
 </div>
 
 
-<!-- PAYMENT HISTORY -->
+<!-- =====================================================
+     PAYMENT HISTORY
+===================================================== -->
 
 <div class="section">
 
 <h2>📋 Payment History</h2>
+
+<div class="info-box">
+Select a Consumer to see only that Consumer's complete
+payment history. Old records remain available even after
+the Consumer account is closed.
+</div>
+
+<select
+id="paymentHistoryConsumer"
+onchange="displaySelectedPaymentHistory()"
+>
+
+<option value="">
+All Consumers
+</option>
+
+</select>
 
 <div class="table-wrap">
 
 <table>
 
 <thead>
-
 <tr>
 <th>Consumer</th>
 <th>Property</th>
@@ -752,7 +879,6 @@ onclick="recordPayment()"
 <th>Payment Date</th>
 <th>Status</th>
 </tr>
-
 </thead>
 
 <tbody id="paymentTable"></tbody>
@@ -764,7 +890,9 @@ onclick="recordPayment()"
 </div>
 
 
-<!-- PROPERTY -->
+<!-- =====================================================
+     PROPERTY
+===================================================== -->
 
 <div class="section">
 
@@ -775,7 +903,6 @@ onclick="recordPayment()"
 <table>
 
 <thead>
-
 <tr>
 <th>Consumer</th>
 <th>Property</th>
@@ -783,8 +910,8 @@ onclick="recordPayment()"
 <th>Rent</th>
 <th>Joined Date</th>
 <th>Due Date</th>
+<th>Status</th>
 </tr>
-
 </thead>
 
 <tbody id="propertyTable"></tbody>
@@ -796,7 +923,9 @@ onclick="recordPayment()"
 </div>
 
 
-<!-- RECEIPT -->
+<!-- =====================================================
+     RECEIPT
+===================================================== -->
 
 <div class="section">
 
@@ -819,7 +948,9 @@ placeholder="Owner Address"
 
 <select id="receiptConsumer">
 
-<option value="">Select Consumer</option>
+<option value="">
+Select Consumer
+</option>
 
 </select>
 
@@ -833,6 +964,7 @@ onclick="generateReceipt()"
 <div id="receipt"></div>
 
 </div>
+
 
 </div>
 </div>
@@ -895,9 +1027,29 @@ become available.
 
 
 <div
+id="closedMessage"
+class="section hidden"
+>
+
+<h2>🚪 Account Closed</h2>
+
+<p>
+Your Consumer account has been closed by the Owner.
+</p>
+
+<p>
+Your previous Rent Records and Payment History remain saved.
+No new rent will be generated for this account.
+</p>
+
+</div>
+
+
+<div
 id="verifiedConsumerArea"
 class="hidden"
 >
+
 
 <div class="cards">
 
@@ -923,6 +1075,8 @@ class="hidden"
 
 </div>
 
+
+<!-- MY DETAILS -->
 
 <div class="section">
 
@@ -995,15 +1149,13 @@ readonly
 </div>
 
 <div class="info-box">
-
 🔒 Security Deposit and Joined Date are controlled by Owner.
-
 </div>
 
 </div>
 
 
-<!-- CONSUMER RENT -->
+<!-- RENT -->
 
 <div class="section">
 
@@ -1014,17 +1166,14 @@ readonly
 <table>
 
 <thead>
-
 <tr>
 <th>Month</th>
 <th>Rent</th>
 <th>Due Date</th>
 <th>Paid</th>
-<th>Remaining</th>
 <th>Payment Date</th>
 <th>Status</th>
 </tr>
-
 </thead>
 
 <tbody id="consumerRentRecords"></tbody>
@@ -1036,7 +1185,7 @@ readonly
 </div>
 
 
-<!-- CONSUMER PAYMENT -->
+<!-- PAYMENT -->
 
 <div class="section">
 
@@ -1047,14 +1196,12 @@ readonly
 <table>
 
 <thead>
-
 <tr>
 <th>Month</th>
 <th>Amount</th>
 <th>Payment Date</th>
 <th>Status</th>
 </tr>
-
 </thead>
 
 <tbody id="consumerPayments"></tbody>
@@ -1095,6 +1242,7 @@ separate from monthly rent.
 
 </div>
 
+
 </div>
 </div>
 </div>
@@ -1103,62 +1251,64 @@ separate from monthly rent.
 <script type="module">
 
 import {
-initializeApp
+  initializeApp
 }
 from
 "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
 import {
-getAuth,
-signInWithEmailAndPassword,
-createUserWithEmailAndPassword,
-signOut,
-onAuthStateChanged
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
 }
 from
 "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
 import {
-getFirestore,
-doc,
-getDoc,
-setDoc,
-addDoc,
-updateDoc,
-collection,
-getDocs,
-serverTimestamp
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  addDoc,
+  updateDoc,
+  collection,
+  getDocs,
+  query,
+  where,
+  serverTimestamp
 }
 from
 "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
 /* =====================================================
-   FIREBASE
+   FIREBASE CONFIG
 ===================================================== */
 
-const firebaseConfig={
+const firebaseConfig = {
 
-apiKey:
-"AIzaSyBJPjJO0xlRlBCxLmbtFIcgYiiDA4JAWMM",
+  apiKey:
+  "AIzaSyBJPjJO0xlRlBCxLmbtFIcgYiiDA4JAWMM",
 
-authDomain:
-"rent-management-system-3babb.firebaseapp.com",
+  authDomain:
+  "rent-management-system-3babb.firebaseapp.com",
 
-projectId:
-"rent-management-system-3babb",
+  projectId:
+  "rent-management-system-3babb",
 
-storageBucket:
-"rent-management-system-3babb.firebasestorage.app",
+  storageBucket:
+  "rent-management-system-3babb.firebasestorage.app",
 
-messagingSenderId:
-"25025742095",
+  messagingSenderId:
+  "25025742095",
 
-appId:
-"1:25025742095:web:f3b3f05bf2575c05e42a7a",
+  appId:
+  "1:25025742095:web:f3b3f05bf2575c05e42a7a",
 
-measurementId:
-"G-PCPR2W35EX"
+  measurementId:
+  "G-PCPR2W35EX"
 
 };
 
@@ -1184,25 +1334,21 @@ let deposits=[];
 
 window.showLogin=function(){
 
-document
-.getElementById("loginPage")
-.classList.remove("hidden");
+  document.getElementById("loginPage")
+  .classList.remove("hidden");
 
-document
-.getElementById("registerPage")
-.classList.add("hidden");
+  document.getElementById("registerPage")
+  .classList.add("hidden");
 
 };
 
 window.showRegister=function(){
 
-document
-.getElementById("loginPage")
-.classList.add("hidden");
+  document.getElementById("loginPage")
+  .classList.add("hidden");
 
-document
-.getElementById("registerPage")
-.classList.remove("hidden");
+  document.getElementById("registerPage")
+  .classList.remove("hidden");
 
 };
 
@@ -1213,47 +1359,43 @@ document
 
 window.loginUser=async function(){
 
-const email=
-document
-.getElementById("loginEmail")
-.value
-.trim();
+  const email=
+  document.getElementById("loginEmail")
+  .value.trim();
 
-const password=
-document
-.getElementById("loginPassword")
-.value;
+  const password=
+  document.getElementById("loginPassword")
+  .value;
 
-const error=
-document
-.getElementById("loginError");
+  const error=
+  document.getElementById("loginError");
 
-error.innerText="";
+  error.innerText="";
 
-if(!email || !password){
+  if(!email || !password){
 
-error.innerText=
-"Email and password required.";
+    error.innerText=
+    "Email and password required.";
 
-return;
-}
+    return;
+  }
 
-try{
+  try{
 
-await signInWithEmailAndPassword(
-auth,
-email,
-password
-);
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
 
-}catch(e){
+  }catch(e){
 
-console.error(e);
+    console.error(e);
 
-error.innerText=
-"Login failed. Check email and password.";
+    error.innerText=
+    "Login failed. Check email and password.";
 
-}
+  }
 
 };
 
@@ -1264,98 +1406,97 @@ error.innerText=
 
 window.registerConsumer=async function(){
 
-const name=
-document
-.getElementById("regName")
-.value
-.trim();
+  const name=
+  document.getElementById("regName")
+  .value.trim();
 
-const email=
-document
-.getElementById("regEmail")
-.value
-.trim();
+  const email=
+  document.getElementById("regEmail")
+  .value.trim();
 
-const password=
-document
-.getElementById("regPassword")
-.value;
+  const password=
+  document.getElementById("regPassword")
+  .value;
 
-const mobile=
-document
-.getElementById("regMobile")
-.value
-.trim();
+  const mobile=
+  document.getElementById("regMobile")
+  .value.trim();
 
-const error=
-document
-.getElementById("registerError");
+  const error=
+  document.getElementById("registerError");
 
-const success=
-document
-.getElementById("registerSuccess");
+  const success=
+  document.getElementById("registerSuccess");
 
-error.innerText="";
-success.innerText="";
+  error.innerText="";
+  success.innerText="";
 
-if(!name || !email || !password || !mobile){
+  if(
+    !name ||
+    !email ||
+    !password ||
+    !mobile
+  ){
 
-error.innerText=
-"Fill all details.";
+    error.innerText=
+    "Fill all details.";
 
-return;
-}
+    return;
+  }
 
-if(password.length<6){
+  if(password.length<6){
 
-error.innerText=
-"Password must be at least 6 characters.";
+    error.innerText=
+    "Password must be at least 6 characters.";
 
-return;
-}
+    return;
+  }
 
-try{
+  try{
 
-const result=
-await createUserWithEmailAndPassword(
-auth,
-email,
-password
-);
+    const result=
+    await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
 
-const uid=result.user.uid;
+    const uid=result.user.uid;
 
-await setDoc(
-doc(db,"users",uid),
-{
+    await setDoc(
+      doc(
+        db,
+        "users",
+        uid
+      ),
+      {
 
-name:name,
-email:email,
-mobile:mobile,
+        name:name,
+        email:email,
+        mobile:mobile,
+        role:"consumer",
+        status:"pending",
 
-role:"consumer",
+        createdAt:
+        serverTimestamp(),
 
-status:"pending",
+        updatedAt:
+        serverTimestamp()
 
-createdAt:
-serverTimestamp(),
+      }
+    );
 
-updatedAt:
-serverTimestamp()
+    success.innerText=
+    "Account created. Waiting for Owner verification.";
 
-}
-);
+  }catch(e){
 
-success.innerText=
-"Account created. Waiting for Owner verification.";
+    console.error(e);
 
-}catch(e){
+    error.innerText=
+    e.message;
 
-console.error(e);
-
-error.innerText=e.message;
-
-}
+  }
 
 };
 
@@ -1365,127 +1506,119 @@ error.innerText=e.message;
 ===================================================== */
 
 onAuthStateChanged(
-auth,
-async(user)=>{
+  auth,
+  async(user)=>{
 
-if(!user){
+    if(!user){
 
-showLogin();
+      showLogin();
 
-return;
-}
+      return;
+    }
 
-currentUser=user;
+    currentUser=user;
 
-try{
+    try{
 
-const snap=
-await getDoc(
-doc(
-db,
-"users",
-user.uid
-)
-);
+      const snap=
+      await getDoc(
+        doc(
+          db,
+          "users",
+          user.uid
+        )
+      );
 
-if(!snap.exists()){
+      if(!snap.exists()){
 
-alert(
-"User profile not found."
-);
+        alert(
+          "User profile not found."
+        );
 
-await signOut(auth);
+        await signOut(auth);
 
-return;
-}
+        return;
+      }
 
-const data=snap.data();
+      const data=snap.data();
 
-currentRole=data.role;
+      currentRole=data.role;
 
-if(currentRole==="owner"){
+      if(currentRole==="owner"){
 
-showOwner();
+        showOwner();
 
-await loadOwner();
+        await loadOwner();
 
-}
-else if(currentRole==="consumer"){
+      }
+      else if(currentRole==="consumer"){
 
-showConsumer();
+        showConsumer();
 
-await loadConsumer();
+        await loadConsumer();
 
-}
-else{
+      }
+      else{
 
-alert("Invalid role.");
+        alert("Invalid role.");
 
-await signOut(auth);
+        await signOut(auth);
 
-}
+      }
 
-}catch(e){
+    }catch(e){
 
-console.error(e);
+      console.error(e);
 
-alert(
-"Unable to load account: "+e.message
-);
+      alert(
+        "Unable to load account."
+      );
 
-}
+    }
 
-}
+  }
 );
 
 
 /* =====================================================
-   SHOW
+   SHOW DASHBOARDS
 ===================================================== */
 
 function showOwner(){
 
-document
-.getElementById("loginPage")
-.classList.add("hidden");
+  document.getElementById("loginPage")
+  .classList.add("hidden");
 
-document
-.getElementById("registerPage")
-.classList.add("hidden");
+  document.getElementById("registerPage")
+  .classList.add("hidden");
 
-document
-.getElementById("consumerDashboard")
-.classList.add("hidden");
+  document.getElementById("consumerDashboard")
+  .classList.add("hidden");
 
-document
-.getElementById("ownerDashboard")
-.classList.remove("hidden");
+  document.getElementById("ownerDashboard")
+  .classList.remove("hidden");
 
 }
 
 function showConsumer(){
 
-document
-.getElementById("loginPage")
-.classList.add("hidden");
+  document.getElementById("loginPage")
+  .classList.add("hidden");
 
-document
-.getElementById("registerPage")
-.classList.add("hidden");
+  document.getElementById("registerPage")
+  .classList.add("hidden");
 
-document
-.getElementById("ownerDashboard")
-.classList.add("hidden");
+  document.getElementById("ownerDashboard")
+  .classList.add("hidden");
 
-document
-.getElementById("consumerDashboard")
-.classList.remove("hidden");
+  document.getElementById("consumerDashboard")
+  .classList.remove("hidden");
 
 }
 
 window.logoutUser=async function(){
 
-await signOut(auth);
+  await signOut(auth);
 
 };
 
@@ -1496,161 +1629,171 @@ await signOut(auth);
 
 async function loadOwner(){
 
-await loadConsumers();
+  await loadConsumers();
 
-await loadProperties();
+  await loadProperties();
 
-await loadPayments();
+  await loadPayments();
 
-await loadRentRecords();
+  await loadRentRecords();
 
-await loadDeposits();
+  await loadDeposits();
 
-/*
-IMPORTANT:
-Only due records are created.
-Future records already existing in Firestore
-are NOT displayed.
-*/
+  await ensureDueRentRecordsForAllConsumers();
 
-await ensureDueRentRecordsForAllConsumers();
+  await loadRentRecords();
 
-await loadRentRecords();
+  fillConsumerLists();
 
-fillConsumerLists();
+  displayPendingConsumers();
 
-displayPendingConsumers();
+  displayClosedConsumers();
 
-displayProperties();
+  displayProperties();
 
-displayRentRecords();
+  displayRentRecords();
 
-displayPayments();
+  displayPayments();
 
-displayDeposits();
+  displayDeposits();
 
-updateDashboard();
+  updateDashboard();
 
 }
 
 
 /* =====================================================
-   LOAD
+   LOAD COLLECTIONS
 ===================================================== */
 
 async function loadConsumers(){
 
-consumers=[];
+  consumers=[];
 
-const snap=
-await getDocs(
-collection(db,"users")
-);
+  const snap=
+  await getDocs(
+    collection(
+      db,
+      "users"
+    )
+  );
 
-snap.forEach(item=>{
+  snap.forEach(item=>{
 
-const data=item.data();
+    const data=item.data();
 
-if(data.role==="consumer"){
+    if(data.role==="consumer"){
 
-consumers.push({
+      consumers.push({
 
-id:item.id,
-...data
+        id:item.id,
+        ...data
 
-});
+      });
 
-}
+    }
 
-});
+  });
 
 }
 
 async function loadProperties(){
 
-properties=[];
+  properties=[];
 
-const snap=
-await getDocs(
-collection(db,"properties")
-);
+  const snap=
+  await getDocs(
+    collection(
+      db,
+      "properties"
+    )
+  );
 
-snap.forEach(item=>{
+  snap.forEach(item=>{
 
-properties.push({
+    properties.push({
 
-id:item.id,
-...item.data()
+      id:item.id,
+      ...item.data()
 
-});
+    });
 
-});
+  });
 
 }
 
 async function loadPayments(){
 
-payments=[];
+  payments=[];
 
-const snap=
-await getDocs(
-collection(db,"payments")
-);
+  const snap=
+  await getDocs(
+    collection(
+      db,
+      "payments"
+    )
+  );
 
-snap.forEach(item=>{
+  snap.forEach(item=>{
 
-payments.push({
+    payments.push({
 
-id:item.id,
-...item.data()
+      id:item.id,
+      ...item.data()
 
-});
+    });
 
-});
+  });
 
 }
 
 async function loadRentRecords(){
 
-rentRecords=[];
+  rentRecords=[];
 
-const snap=
-await getDocs(
-collection(db,"rentRecords")
-);
+  const snap=
+  await getDocs(
+    collection(
+      db,
+      "rentRecords"
+    )
+  );
 
-snap.forEach(item=>{
+  snap.forEach(item=>{
 
-rentRecords.push({
+    rentRecords.push({
 
-id:item.id,
-...item.data()
+      id:item.id,
+      ...item.data()
 
-});
+    });
 
-});
+  });
 
 }
 
 async function loadDeposits(){
 
-deposits=[];
+  deposits=[];
 
-const snap=
-await getDocs(
-collection(db,"securityDeposits")
-);
+  const snap=
+  await getDocs(
+    collection(
+      db,
+      "securityDeposits"
+    )
+  );
 
-snap.forEach(item=>{
+  snap.forEach(item=>{
 
-deposits.push({
+    deposits.push({
 
-id:item.id,
-...item.data()
+      id:item.id,
+      ...item.data()
 
-});
+    });
 
-});
+  });
 
 }
 
@@ -1661,654 +1804,1033 @@ id:item.id,
 
 function displayPendingConsumers(){
 
-const table=
-document.getElementById(
-"pendingConsumerTable"
-);
+  const table=
+  document.getElementById(
+    "pendingConsumerTable"
+  );
 
-table.innerHTML="";
+  table.innerHTML="";
 
-consumers
-.filter(c=>c.status==="pending")
-.forEach(c=>{
+  consumers
+  .filter(
+    c=>c.status==="pending"
+  )
+  .forEach(c=>{
 
-table.innerHTML+=`
+    table.innerHTML+=`
 
-<tr>
+      <tr>
 
-<td>${safe(c.name)}</td>
+        <td>${safe(c.name)}</td>
 
-<td>${safe(c.email)}</td>
+        <td>${safe(c.email)}</td>
 
-<td>${safe(c.mobile)}</td>
+        <td>${safe(c.mobile)}</td>
 
-<td>
-<span class="badge badge-pending">
-Pending
-</span>
-</td>
+        <td>
+          <span class="badge badge-pending">
+            Pending
+          </span>
+        </td>
 
-<td>
+        <td>
 
-<button
-class="primary"
-onclick="choosePendingConsumer('${c.id}')"
->
-Verify
-</button>
+          <button
+          class="primary"
+          onclick="choosePendingConsumer('${c.id}')"
+          >
+          Verify
+          </button>
 
-</td>
+        </td>
 
-</tr>
+      </tr>
 
-`;
+    `;
 
-});
+  });
 
 }
 
 window.choosePendingConsumer=function(uid){
 
-document
-.getElementById(
-"ownerConsumerSelect"
-)
-.value=uid;
+  document.getElementById(
+    "ownerConsumerSelect"
+  ).value=uid;
 
-selectConsumer();
+  selectConsumer();
 
-document
-.getElementById(
-"ownerConsumerSelect"
-)
-.scrollIntoView({
-behavior:"smooth"
-});
+  document.getElementById(
+    "ownerConsumerSelect"
+  ).scrollIntoView({
+    behavior:"smooth"
+  });
 
 };
 
 
 /* =====================================================
-   LISTS
+   CLOSED CONSUMERS
+===================================================== */
+
+function displayClosedConsumers(){
+
+  const table=
+  document.getElementById(
+    "closedConsumerTable"
+  );
+
+  table.innerHTML="";
+
+  consumers
+  .filter(
+    c=>c.status==="closed"
+  )
+  .forEach(c=>{
+
+    table.innerHTML+=`
+
+      <tr>
+
+        <td>${safe(c.name)}</td>
+
+        <td>${safe(c.email)}</td>
+
+        <td>${safe(c.propertyName)}</td>
+
+        <td>${formatDate(c.joinedDate)}</td>
+
+        <td>${formatDate(c.closedDate)}</td>
+
+        <td>
+          ₹${Number(c.securityDeposit||0)}
+        </td>
+
+        <td>
+          <span class="badge badge-closed">
+            Closed
+          </span>
+        </td>
+
+      </tr>
+
+    `;
+
+  });
+
+}
+
+
+/* =====================================================
+   CONSUMER LISTS
 ===================================================== */
 
 function fillConsumerLists(){
 
-const ids=[
-"ownerConsumerSelect",
-"paymentConsumer",
-"receiptConsumer",
-"refundConsumer"
-];
+  const ownerSelect=
+  document.getElementById(
+    "ownerConsumerSelect"
+  );
 
-ids.forEach(id=>{
+  ownerSelect.innerHTML=
+  `<option value="">
+    Select Consumer
+  </option>`;
 
-const select=
-document.getElementById(id);
+  consumers
+  .filter(
+    c=>c.status!=="closed"
+  )
+  .forEach(c=>{
 
-select.innerHTML=
-`<option value="">
-Select Consumer
-</option>`;
+    ownerSelect.innerHTML+=`
 
-consumers.forEach(c=>{
+      <option value="${c.id}">
+        ${safe(c.name || c.email)}
+      </option>
 
-if(
-id!=="ownerConsumerSelect" &&
-c.status!=="verified"
-){
+    `;
 
-return;
-}
+  });
 
-select.innerHTML+=`
 
-<option value="${c.id}">
-${safe(c.name || c.email)}
-</option>
+  const closeSelect=
+  document.getElementById(
+    "closeConsumerSelect"
+  );
 
-`;
+  closeSelect.innerHTML=
+  `<option value="">
+    Select Consumer
+  </option>`;
 
-});
+  consumers
+  .filter(
+    c=>c.status==="verified"
+  )
+  .forEach(c=>{
 
-});
+    closeSelect.innerHTML+=`
+
+      <option value="${c.id}">
+        ${safe(c.name || c.email)}
+      </option>
+
+    `;
+
+  });
+
+
+  const paymentSelect=
+  document.getElementById(
+    "paymentConsumer"
+  );
+
+  paymentSelect.innerHTML=
+  `<option value="">
+    Select Active Consumer
+  </option>`;
+
+  consumers
+  .filter(
+    c=>c.status==="verified"
+  )
+  .forEach(c=>{
+
+    paymentSelect.innerHTML+=`
+
+      <option value="${c.id}">
+        ${safe(c.name || c.email)}
+      </option>
+
+    `;
+
+  });
+
+
+  const receiptSelect=
+  document.getElementById(
+    "receiptConsumer"
+  );
+
+  receiptSelect.innerHTML=
+  `<option value="">
+    Select Consumer
+  </option>`;
+
+  consumers.forEach(c=>{
+
+    receiptSelect.innerHTML+=`
+
+      <option value="${c.id}">
+        ${safe(c.name || c.email)}
+      </option>
+
+    `;
+
+  });
+
+
+  const refundSelect=
+  document.getElementById(
+    "refundConsumer"
+  );
+
+  refundSelect.innerHTML=
+  `<option value="">
+    Select Consumer
+  </option>`;
+
+  consumers
+  .filter(
+    c=>c.status==="closed"
+  )
+  .forEach(c=>{
+
+    refundSelect.innerHTML+=`
+
+      <option value="${c.id}">
+        ${safe(c.name || c.email)}
+      </option>
+
+    `;
+
+  });
+
+
+  /*
+    Payment History:
+    ALL consumers are included,
+    including closed accounts.
+  */
+
+  const historySelect=
+  document.getElementById(
+    "paymentHistoryConsumer"
+  );
+
+  historySelect.innerHTML=
+  `<option value="">
+    All Consumers
+  </option>`;
+
+  consumers.forEach(c=>{
+
+    historySelect.innerHTML+=`
+
+      <option value="${c.id}">
+        ${safe(c.name || c.email)}
+        ${c.status==="closed" ? " (Closed)" : ""}
+      </option>
+
+    `;
+
+  });
 
 }
 
 
 /* =====================================================
-   SELECT
+   SELECT CONSUMER
 ===================================================== */
 
 window.selectConsumer=function(){
 
-const uid=
-document
-.getElementById(
-"ownerConsumerSelect"
-)
-.value;
+  const uid=
+  document.getElementById(
+    "ownerConsumerSelect"
+  ).value;
 
-const c=
-consumers.find(
-x=>x.id===uid
-);
+  const c=
+  consumers.find(
+    x=>x.id===uid
+  );
 
-if(!c){
+  if(!c){
 
-clearOwnerFields();
+    clearOwnerFields();
 
-return;
-}
+    return;
+  }
 
-document.getElementById("ownerName").value=
-c.name || "";
+  document.getElementById("ownerName").value=
+  c.name || "";
 
-document.getElementById("ownerEmail").value=
-c.email || "";
+  document.getElementById("ownerEmail").value=
+  c.email || "";
 
-document.getElementById("ownerMobile").value=
-c.mobile || "";
+  document.getElementById("ownerMobile").value=
+  c.mobile || "";
 
-document.getElementById("ownerProperty").value=
-c.propertyName || "";
+  document.getElementById("ownerProperty").value=
+  c.propertyName || "";
 
-document.getElementById("ownerRoom").value=
-c.roomNumber || "";
+  document.getElementById("ownerRoom").value=
+  c.roomNumber || "";
 
-document.getElementById("ownerRent").value=
-c.rent || "";
+  document.getElementById("ownerRent").value=
+  c.rent || "";
 
-document.getElementById("ownerSecurityDeposit").value=
-c.securityDeposit || "";
+  document.getElementById("ownerSecurityDeposit").value=
+  c.securityDeposit || "";
 
-document.getElementById("ownerJoinedDate").value=
-c.joinedDate || "";
+  document.getElementById("ownerJoinedDate").value=
+  c.joinedDate || "";
 
-document.getElementById("ownerDueDate").value=
-c.dueDate || "";
+  document.getElementById("ownerDueDate").value=
+  c.dueDate || "";
 
-document.getElementById("ownerAddress").value=
-c.address || "";
+  document.getElementById("ownerAddress").value=
+  c.address || "";
 
 };
 
 
 /* =====================================================
-   VERIFY SAVE
+   VERIFY + SAVE
 ===================================================== */
 
 window.verifyAndSaveConsumer=
 async function(){
 
-const uid=
-document
-.getElementById(
-"ownerConsumerSelect"
-)
-.value;
-
-if(!uid){
-
-alert("Select Consumer.");
-
-return;
-}
-
-const c=
-consumers.find(
-x=>x.id===uid
-);
-
-if(!c)return;
-
-const propertyName=
-document
-.getElementById("ownerProperty")
-.value
-.trim();
-
-const roomNumber=
-document
-.getElementById("ownerRoom")
-.value
-.trim();
-
-const rent=
-Number(
-document
-.getElementById("ownerRent")
-.value
-);
-
-const securityDeposit=
-Number(
-document
-.getElementById(
-"ownerSecurityDeposit"
-)
-.value
-);
-
-const joinedDate=
-document
-.getElementById(
-"ownerJoinedDate"
-)
-.value;
+  const uid=
+  document.getElementById(
+    "ownerConsumerSelect"
+  ).value;
 
-const dueDate=
-document
-.getElementById(
-"ownerDueDate"
-)
-.value;
+  if(!uid){
 
-const address=
-document
-.getElementById("ownerAddress")
-.value
-.trim();
+    alert("Select Consumer.");
 
+    return;
+  }
 
-if(
-!propertyName ||
-!roomNumber ||
-!rent ||
-securityDeposit<0 ||
-!joinedDate ||
-!dueDate
-){
+  const c=
+  consumers.find(
+    x=>x.id===uid
+  );
 
-alert(
-"Fill Property, Room, Rent, Security Deposit, Joined Date and Due Date."
-);
+  if(!c)return;
 
-return;
-}
 
+  if(c.status==="closed"){
 
-/*
-Joined Date is permanent after verification.
-*/
+    alert(
+      "Closed Consumer cannot be modified."
+    );
 
-if(
-c.status==="verified" &&
-c.joinedDate &&
-c.joinedDate!==joinedDate
-){
+    return;
+  }
 
-alert(
-"Joined Date cannot be changed after verification."
-);
 
-return;
-}
+  const propertyName=
+  document.getElementById(
+    "ownerProperty"
+  ).value.trim();
 
+  const roomNumber=
+  document.getElementById(
+    "ownerRoom"
+  ).value.trim();
 
-/*
-Security Deposit is permanent.
-*/
+  const rent=
+  Number(
+    document.getElementById(
+      "ownerRent"
+    ).value
+  );
 
-if(
-c.status==="verified" &&
-c.securityDeposit!==undefined &&
-securityDeposit!==Number(c.securityDeposit)
-){
+  const securityDeposit=
+  Number(
+    document.getElementById(
+      "ownerSecurityDeposit"
+    ).value
+  );
 
-alert(
-"Security Deposit cannot be changed after verification."
-);
+  const joinedDate=
+  document.getElementById(
+    "ownerJoinedDate"
+  ).value;
 
-return;
-}
+  const dueDate=
+  document.getElementById(
+    "ownerDueDate"
+  ).value;
 
+  const address=
+  document.getElementById(
+    "ownerAddress"
+  ).value.trim();
 
-try{
 
-await updateDoc(
-doc(db,"users",uid),
-{
+  if(
+    !propertyName ||
+    !roomNumber ||
+    !rent ||
+    securityDeposit<0 ||
+    !joinedDate ||
+    !dueDate
+  ){
 
-status:"verified",
+    alert(
+      "Fill Property, Room, Rent, Security Deposit, Joined Date and Due Date."
+    );
 
-propertyName:propertyName,
-roomNumber:roomNumber,
-rent:rent,
-securityDeposit:securityDeposit,
+    return;
+  }
 
-joinedDate:
-c.joinedDate || joinedDate,
 
-dueDate:dueDate,
+  /*
+    Security Deposit cannot be changed
+    after first verification.
+  */
 
-address:address,
+  if(
+    c.status==="verified" &&
+    c.securityDeposit!==undefined &&
+    securityDeposit !== Number(c.securityDeposit)
+  ){
 
-updatedAt:
-serverTimestamp()
+    alert(
+      "Security Deposit is permanent and cannot be changed."
+    );
 
-}
-);
+    return;
+  }
 
 
-/* PROPERTY */
+  /*
+    Joined Date cannot be changed
+    after first verification.
+  */
 
-const existingProperty=
-properties.find(
-p=>p.consumerId===uid
-);
+  if(
+    c.status==="verified" &&
+    c.joinedDate &&
+    joinedDate!==c.joinedDate
+  ){
 
-const propertyData={
+    alert(
+      "Joined Date is permanent and cannot be changed."
+    );
 
-consumerId:uid,
+    return;
+  }
 
-consumerName:
-c.name || "",
 
-propertyName:propertyName,
+  try{
 
-roomNumber:roomNumber,
+    await updateDoc(
+      doc(
+        db,
+        "users",
+        uid
+      ),
+      {
 
-rent:rent,
+        status:"verified",
 
-joinedDate:
-c.joinedDate || joinedDate,
+        propertyName:
+        propertyName,
 
-dueDate:dueDate,
+        roomNumber:
+        roomNumber,
 
-address:address,
+        rent:
+        rent,
 
-updatedAt:
-serverTimestamp()
+        securityDeposit:
+        securityDeposit,
 
-};
+        joinedDate:
+        joinedDate,
 
+        dueDate:
+        dueDate,
 
-if(existingProperty){
+        address:
+        address,
 
-await updateDoc(
-doc(
-db,
-"properties",
-existingProperty.id
-),
-propertyData
-);
+        updatedAt:
+        serverTimestamp()
 
-}
-else{
+      }
+    );
 
-await addDoc(
-collection(db,"properties"),
-{
 
-...propertyData,
+    const existingProperty=
+    properties.find(
+      p=>p.consumerId===uid
+    );
 
-createdAt:
-serverTimestamp()
 
-}
-);
+    const propertyData={
 
-}
+      consumerId:uid,
 
+      consumerName:
+      c.name || "",
 
-/* SECURITY DEPOSIT */
+      propertyName:
+      propertyName,
 
-const existingDeposit=
-deposits.find(
-d=>d.consumerId===uid
-);
+      roomNumber:
+      roomNumber,
 
-if(!existingDeposit){
+      rent:
+      rent,
 
-await addDoc(
-collection(
-db,
-"securityDeposits"
-),
-{
+      joinedDate:
+      joinedDate,
 
-consumerId:uid,
+      dueDate:
+      dueDate,
 
-consumerName:
-c.name || "",
+      address:
+      address,
 
-originalAmount:
-securityDeposit,
+      updatedAt:
+      serverTimestamp()
 
-currentAmount:
-securityDeposit,
+    };
 
-deduction:0,
 
-refundAmount:0,
+    if(existingProperty){
 
-status:"Held",
+      await updateDoc(
+        doc(
+          db,
+          "properties",
+          existingProperty.id
+        ),
+        propertyData
+      );
 
-refundDate:"",
+    }else{
 
-deductionReason:"",
+      await addDoc(
+        collection(
+          db,
+          "properties"
+        ),
+        {
 
-createdAt:
-serverTimestamp(),
+          ...propertyData,
 
-updatedAt:
-serverTimestamp()
+          createdAt:
+          serverTimestamp()
 
-}
-);
+        }
+      );
 
-}
+    }
 
 
-/*
-ONLY DUE RENT IS CREATED.
-*/
+    const existingDeposit=
+    deposits.find(
+      d=>d.consumerId===uid
+    );
 
-await ensureDueRentRecords(
-uid,
-c.name || "",
-propertyName,
-rent,
-c.joinedDate || joinedDate,
-dueDate
-);
 
-alert(
-"Consumer verified successfully."
-);
+    if(!existingDeposit){
 
-await loadOwner();
+      await addDoc(
+        collection(
+          db,
+          "securityDeposits"
+        ),
+        {
 
-}catch(e){
+          consumerId:uid,
 
-console.error(e);
+          consumerName:
+          c.name || "",
 
-alert(
-"Save failed: "+e.message
-);
+          originalAmount:
+          securityDeposit,
 
-}
+          currentAmount:
+          securityDeposit,
+
+          deduction:0,
+
+          refundAmount:0,
+
+          status:"Held",
+
+          refundDate:"",
+
+          deductionReason:"",
+
+          createdAt:
+          serverTimestamp(),
+
+          updatedAt:
+          serverTimestamp()
+
+        }
+      );
+
+    }
+
+
+    await ensureDueRentRecords(
+      uid,
+      c.name || "",
+      propertyName,
+      rent,
+      joinedDate,
+      dueDate
+    );
+
+
+    alert(
+      "Consumer verified successfully."
+    );
+
+
+    await loadOwner();
+
+  }catch(e){
+
+    console.error(e);
+
+    alert(
+      "Save failed: "+e.message
+    );
+
+  }
 
 };
 
 
 /* =====================================================
-   UPDATE
+   UPDATE DETAILS
 ===================================================== */
 
 window.updateConsumerDetails=
 async function(){
 
-const uid=
-document
-.getElementById(
-"ownerConsumerSelect"
-)
-.value;
+  const uid=
+  document.getElementById(
+    "ownerConsumerSelect"
+  ).value;
 
-if(!uid){
+  if(!uid){
 
-alert("Select Consumer.");
+    alert("Select Consumer.");
 
-return;
-}
+    return;
+  }
 
-const c=
-consumers.find(
-x=>x.id===uid
-);
+  const c=
+  consumers.find(
+    x=>x.id===uid
+  );
 
-if(!c)return;
-
-if(!c.joinedDate){
-
-alert(
-"Joined Date is missing."
-);
-
-return;
-}
-
-const propertyName=
-document
-.getElementById("ownerProperty")
-.value
-.trim();
-
-const roomNumber=
-document
-.getElementById("ownerRoom")
-.value
-.trim();
-
-const rent=
-Number(
-document
-.getElementById("ownerRent")
-.value
-);
-
-const dueDate=
-document
-.getElementById("ownerDueDate")
-.value;
-
-const address=
-document
-.getElementById("ownerAddress")
-.value
-.trim();
-
-if(
-!propertyName ||
-!roomNumber ||
-!rent ||
-!dueDate
-){
-
-alert(
-"Fill all required details."
-);
-
-return;
-}
-
-try{
-
-await updateDoc(
-doc(db,"users",uid),
-{
-
-propertyName:propertyName,
-
-roomNumber:roomNumber,
-
-rent:rent,
-
-securityDeposit:
-Number(c.securityDeposit||0),
-
-joinedDate:
-c.joinedDate,
-
-dueDate:dueDate,
-
-address:address,
-
-updatedAt:
-serverTimestamp()
-
-}
-);
+  if(!c)return;
 
 
-const property=
-properties.find(
-p=>p.consumerId===uid
-);
+  if(c.status==="closed"){
 
-if(property){
+    alert(
+      "Closed Consumer cannot be updated."
+    );
 
-await updateDoc(
-doc(
-db,
-"properties",
-property.id
-),
-{
-
-propertyName:propertyName,
-
-roomNumber:roomNumber,
-
-rent:rent,
-
-joinedDate:c.joinedDate,
-
-dueDate:dueDate,
-
-address:address,
-
-updatedAt:
-serverTimestamp()
-
-}
-);
-
-}
+    return;
+  }
 
 
-/*
-New rent amount applies to NEW due months.
-Old rent records remain unchanged.
-*/
+  const joinedDate=
+  c.joinedDate;
 
-await ensureDueRentRecords(
-uid,
-c.name || "",
-propertyName,
-rent,
-c.joinedDate,
-dueDate
-);
+  const securityDeposit=
+  Number(
+    c.securityDeposit || 0
+  );
 
-alert(
-"Details updated."
-);
 
-await loadOwner();
+  if(!joinedDate){
 
-}catch(e){
+    alert(
+      "Joined Date is missing."
+    );
 
-console.error(e);
+    return;
+  }
 
-alert(
-"Update failed: "+e.message
-);
 
-}
+  const propertyName=
+  document.getElementById(
+    "ownerProperty"
+  ).value.trim();
+
+  const roomNumber=
+  document.getElementById(
+    "ownerRoom"
+  ).value.trim();
+
+  const rent=
+  Number(
+    document.getElementById(
+      "ownerRent"
+    ).value
+  );
+
+  const dueDate=
+  document.getElementById(
+    "ownerDueDate"
+  ).value;
+
+  const address=
+  document.getElementById(
+    "ownerAddress"
+  ).value.trim();
+
+
+  if(
+    !propertyName ||
+    !roomNumber ||
+    !rent ||
+    !dueDate
+  ){
+
+    alert(
+      "Fill all required details."
+    );
+
+    return;
+  }
+
+
+  try{
+
+    await updateDoc(
+      doc(
+        db,
+        "users",
+        uid
+      ),
+      {
+
+        propertyName:
+        propertyName,
+
+        roomNumber:
+        roomNumber,
+
+        rent:
+        rent,
+
+        securityDeposit:
+        securityDeposit,
+
+        joinedDate:
+        joinedDate,
+
+        dueDate:
+        dueDate,
+
+        address:
+        address,
+
+        updatedAt:
+        serverTimestamp()
+
+      }
+    );
+
+
+    const property=
+    properties.find(
+      p=>p.consumerId===uid
+    );
+
+
+    if(property){
+
+      await updateDoc(
+        doc(
+          db,
+          "properties",
+          property.id
+        ),
+        {
+
+          propertyName:
+          propertyName,
+
+          roomNumber:
+          roomNumber,
+
+          rent:
+          rent,
+
+          joinedDate:
+          joinedDate,
+
+          dueDate:
+          dueDate,
+
+          address:
+          address,
+
+          updatedAt:
+          serverTimestamp()
+
+        }
+      );
+
+    }
+
+
+    await ensureDueRentRecords(
+      uid,
+      c.name || "",
+      propertyName,
+      rent,
+      joinedDate,
+      dueDate
+    );
+
+
+    alert(
+      "Details updated."
+    );
+
+
+    await loadOwner();
+
+  }catch(e){
+
+    console.error(e);
+
+    alert(
+      "Update failed: "+e.message
+    );
+
+  }
+
+};
+
+
+/* =====================================================
+   CLOSE CONSUMER ACCOUNT
+===================================================== */
+
+window.closeConsumerAccount=
+async function(){
+
+  const uid=
+  document.getElementById(
+    "closeConsumerSelect"
+  ).value;
+
+  const closeDate=
+  document.getElementById(
+    "closeDate"
+  ).value;
+
+  const reason=
+  document.getElementById(
+    "closeReason"
+  ).value.trim();
+
+
+  if(!uid){
+
+    alert(
+      "Select Consumer."
+    );
+
+    return;
+  }
+
+
+  if(!closeDate){
+
+    alert(
+      "Select Closing Date."
+    );
+
+    return;
+  }
+
+
+  const c=
+  consumers.find(
+    x=>x.id===uid
+  );
+
+  if(!c)return;
+
+
+  if(c.status==="closed"){
+
+    alert(
+      "Consumer is already closed."
+    );
+
+    return;
+  }
+
+
+  /*
+    Check unpaid rent.
+    Closing is allowed, but old dues remain saved.
+  */
+
+  const unpaid=
+  rentRecords.filter(
+    r=>
+    r.consumerId===uid &&
+    (
+      r.status==="Pending" ||
+      r.status==="Partial"
+    )
+  );
+
+
+  let message=
+  "Close this Consumer account?\n\n"+
+  "Old Rent Records and Payment History will remain saved.\n"+
+  "No future rent will be generated.";
+
+  if(unpaid.length>0){
+
+    message+=
+    "\n\nThere are "+unpaid.length+
+    " unpaid/partial rent record(s)."+
+    "\nThey will remain saved.";
+
+  }
+
+
+  const confirmClose=
+  confirm(message);
+
+  if(!confirmClose)return;
+
+
+  try{
+
+    await updateDoc(
+      doc(
+        db,
+        "users",
+        uid
+      ),
+      {
+
+        status:"closed",
+
+        closedDate:
+        closeDate,
+
+        closeReason:
+        reason,
+
+        updatedAt:
+        serverTimestamp()
+
+      }
+    );
+
+
+    /*
+      IMPORTANT:
+      We do NOT delete:
+      - rentRecords
+      - payments
+      - properties
+      - securityDeposits
+
+      Therefore old history remains available.
+    */
+
+
+    alert(
+      "Consumer account closed successfully.\n"+
+      "Old data has been preserved."
+    );
+
+
+    document.getElementById(
+      "closeReason"
+    ).value="";
+
+
+    await loadOwner();
+
+  }catch(e){
+
+    console.error(e);
+
+    alert(
+      "Account closing failed: "+e.message
+    );
+
+  }
 
 };
 
@@ -2317,397 +2839,378 @@ alert(
    MONTHLY RENT ENGINE
 ===================================================== */
 
-/*
-This function creates ONLY the current/due months.
-
-If today = 30-08-2026:
-August due 30-08 -> create
-September due 30-09 -> DO NOT create
-October -> DO NOT create
-*/
-
 async function ensureDueRentRecordsForAllConsumers(){
 
-for(const c of consumers){
+  for(const c of consumers){
 
-if(
-c.status!=="verified" ||
-!c.joinedDate ||
-!c.dueDate ||
-!c.rent
-){
+    /*
+      IMPORTANT:
+      Closed consumers are skipped.
+    */
 
-continue;
-}
+    if(
+      c.status!=="verified" ||
+      !c.joinedDate ||
+      !c.dueDate ||
+      !c.rent
+    ){
 
-await ensureDueRentRecords(
-c.id,
-c.name || "",
-c.propertyName || "",
-Number(c.rent),
-c.joinedDate,
-c.dueDate
-);
+      continue;
+    }
 
-}
+
+    await ensureDueRentRecords(
+      c.id,
+      c.name || "",
+      c.propertyName || "",
+      Number(c.rent),
+      c.joinedDate,
+      c.dueDate
+    );
+
+  }
 
 }
 
 
 async function ensureDueRentRecords(
-uid,
-consumerName,
-propertyName,
-rent,
-joinedDate,
-firstDueDate
+  uid,
+  consumerName,
+  propertyName,
+  rent,
+  joinedDate,
+  firstDueDate
 ){
 
-if(
-!joinedDate ||
-!firstDueDate ||
-!rent
-){
+  /*
+    Check current consumer status
+    before creating any new rent.
+  */
 
-return;
-}
-
-const start=
-parseDate(joinedDate);
-
-const firstDue=
-parseDate(firstDueDate);
-
-const now=
-parseDate(today());
+  const consumerSnap=
+  await getDoc(
+    doc(
+      db,
+      "users",
+      uid
+    )
+  );
 
 
-if(start>now){
-
-return;
-}
+  if(!consumerSnap.exists())return;
 
 
-/*
-Start from joined month.
-*/
-
-let current=
-new Date(
-start.getFullYear(),
-start.getMonth(),
-1
-);
+  const consumer=
+  consumerSnap.data();
 
 
-/*
-IMPORTANT:
-Only current month.
-No future months.
-*/
+  if(
+    consumer.status!=="verified"
+  ){
 
-const currentMonth=
-new Date(
-now.getFullYear(),
-now.getMonth(),
-1
-);
+    return;
+  }
 
 
-while(current<=currentMonth){
+  const start=
+  parseDate(joinedDate);
 
-const year=
-current.getFullYear();
+  const firstDue=
+  parseDate(firstDueDate);
 
-const month=
-current.getMonth();
-
-
-const dueDay=
-firstDue.getDate();
+  const now=
+  parseDate(today());
 
 
-const lastDay=
-new Date(
-year,
-month+1,
-0
-).getDate();
+  if(start>now){
+
+    return;
+  }
 
 
-const actualDay=
-Math.min(
-dueDay,
-lastDay
-);
+  let current=
+  new Date(
+    start.getFullYear(),
+    start.getMonth(),
+    1
+  );
 
 
-const dueDate=
-makeDateString(
-year,
-month,
-actualDay
-);
+  const end=
+  new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    1
+  );
 
 
-/*
-Do not create if due date is still in future.
-*/
+  while(current<=end){
 
-if(
-parseDate(dueDate)>now
-){
+    const year=
+    current.getFullYear();
 
-break;
-}
+    const month=
+    current.getMonth();
 
+    const dueDay=
+    firstDue.getDate();
 
-const recordKey=
-uid+
-"_"+
-year+
-"_"+
-String(month+1)
-.padStart(2,"0");
+    const lastDay=
+    new Date(
+      year,
+      month+1,
+      0
+    ).getDate();
 
+    const actualDay=
+    Math.min(
+      dueDay,
+      lastDay
+    );
 
-const exists=
-rentRecords.some(
-r=>r.recordKey===recordKey
-);
-
-
-if(!exists){
-
-const monthName=
-current.toLocaleString(
-"en-IN",
-{
-month:"long"
-}
-);
-
-await addDoc(
-collection(
-db,
-"rentRecords"
-),
-{
-
-recordKey:recordKey,
-
-consumerId:uid,
-
-consumerName:
-consumerName,
-
-propertyName:
-propertyName,
-
-month:
-monthName,
-
-year:
-year,
-
-monthNumber:
-month+1,
-
-rentAmount:
-rent,
-
-dueDate:
-dueDate,
-
-paidAmount:0,
-
-paymentDate:"",
-
-status:"Pending",
-
-createdAt:
-serverTimestamp(),
-
-updatedAt:
-serverTimestamp()
-
-}
-);
-
-}
+    const dueDate=
+    makeDateString(
+      year,
+      month,
+      actualDay
+    );
 
 
-/*
-Next month.
-*/
+    /*
+      Future due date:
+      Do not create.
+    */
 
-current=
-new Date(
-year,
-month+1,
-1
-);
+    if(
+      parseDate(dueDate)>now
+    ){
 
-}
+      current=
+      new Date(
+        year,
+        month+1,
+        1
+      );
+
+      continue;
+    }
+
+
+    const recordKey=
+    uid+
+    "_"+
+    year+
+    "_"+
+    String(
+      month+1
+    ).padStart(2,"0");
+
+
+    const exists=
+    rentRecords.some(
+      r=>r.recordKey===recordKey
+    );
+
+
+    if(!exists){
+
+      const monthName=
+      current.toLocaleString(
+        "en-IN",
+        {
+          month:"long"
+        }
+      );
+
+
+      await addDoc(
+        collection(
+          db,
+          "rentRecords"
+        ),
+        {
+
+          recordKey:
+          recordKey,
+
+          consumerId:
+          uid,
+
+          consumerName:
+          consumerName,
+
+          propertyName:
+          propertyName,
+
+          month:
+          monthName,
+
+          year:
+          year,
+
+          monthNumber:
+          month+1,
+
+          rentAmount:
+          rent,
+
+          dueDate:
+          dueDate,
+
+          paidAmount:0,
+
+          paymentDate:"",
+
+          status:"Pending",
+
+          createdAt:
+          serverTimestamp(),
+
+          updatedAt:
+          serverTimestamp()
+
+        }
+      );
+
+    }
+
+
+    current=
+    new Date(
+      year,
+      month+1,
+      1
+    );
+
+  }
 
 }
 
 
 /* =====================================================
-   DISPLAY RENT
+   RENT DISPLAY
 ===================================================== */
 
 function displayRentRecords(){
 
-const table=
-document
-.getElementById(
-"rentRecordsTable"
-);
+  const table=
+  document.getElementById(
+    "rentRecordsTable"
+  );
 
-table.innerHTML="";
-
-
-const now=
-parseDate(today());
+  table.innerHTML="";
 
 
-rentRecords
+  rentRecords
+  .sort(
+    (a,b)=>
+    String(a.dueDate||"")
+    .localeCompare(
+      String(b.dueDate||"")
+    )
+  )
+  .forEach(r=>{
 
-/*
-VERY IMPORTANT:
-Hide future records even if old data
-already exists in Firestore.
-*/
-
-.filter(
-r=>
-r.dueDate &&
-parseDate(r.dueDate)<=now
-)
-
-.sort(
-(a,b)=>
-String(a.dueDate||"")
-.localeCompare(
-String(b.dueDate||"")
-)
-)
-
-.forEach(r=>{
-
-const paid=
-Number(r.paidAmount||0);
-
-const rent=
-Number(r.rentAmount||0);
-
-const remaining=
-Math.max(
-rent-paid,
-0
-);
-
-const cls=
-r.status==="Paid"
-?"paid"
-:r.status==="Partial"
-?"partial"
-:"pending";
+    const cls=
+    r.status==="Paid"
+    ?"paid"
+    :r.status==="Partial"
+    ?"partial"
+    :"pending";
 
 
-table.innerHTML+=`
+    table.innerHTML+=`
 
-<tr>
+      <tr>
 
-<td>
-${safe(r.consumerName)}
-</td>
+        <td>
+          ${safe(r.consumerName)}
+        </td>
 
-<td>
-${safe(r.month)}
-${safe(String(r.year||""))}
-</td>
+        <td>
+          ${safe(r.month)}
+          ${safe(String(r.year||""))}
+        </td>
 
-<td>
-₹${rent}
-</td>
+        <td>
+          ₹${Number(r.rentAmount||0)}
+        </td>
 
-<td>
-${formatDate(r.dueDate)}
-</td>
+        <td>
+          ${formatDate(r.dueDate)}
+        </td>
 
-<td>
-₹${paid}
-</td>
+        <td>
+          ₹${Number(r.paidAmount||0)}
+        </td>
 
-<td>
-₹${remaining}
-</td>
+        <td>
+          ${formatDate(r.paymentDate)}
+        </td>
 
-<td>
-${formatDate(r.paymentDate)}
-</td>
+        <td class="${cls}">
+          ${safe(r.status)}
+        </td>
 
-<td class="${cls}">
-${safe(r.status)}
-</td>
+        <td>
 
-<td>
+          ${
+            r.status!=="Paid"
+            ?
+            `<button
+            class="success"
+            onclick="quickPay('${r.id}')"
+            >
+            Pay
+            </button>`
+            :
+            "✓"
+          }
 
-${
-r.status!=="Paid"
-?
-`<button
-class="success"
-onclick="quickPay('${r.id}')"
->
-Pay
-</button>`
-:
-"✓"
-}
+        </td>
 
-</td>
+      </tr>
 
-</tr>
+    `;
 
-`;
-
-});
+  });
 
 }
 
 
 window.quickPay=function(id){
 
-const r=
-rentRecords.find(
-x=>x.id===id
-);
+  const r=
+  rentRecords.find(
+    x=>x.id===id
+  );
 
-if(!r)return;
+  if(!r)return;
 
-document
-.getElementById(
-"paymentConsumer"
-)
-.value=
-r.consumerId;
 
-fillPaymentDetails();
+  /*
+    Payment is allowed for old rent records
+    even if Consumer is now closed.
+  */
 
-setTimeout(()=>{
+  document.getElementById(
+    "paymentConsumer"
+  ).value=
+  r.consumerId;
 
-document
-.getElementById(
-"paymentRentRecord"
-)
-.value=id;
 
-selectRentRecord();
+  fillPaymentDetails();
 
-},100);
+
+  setTimeout(()=>{
+
+    document.getElementById(
+      "paymentRentRecord"
+    ).value=id;
+
+    selectRentRecord();
+
+  },100);
 
 };
 
@@ -2718,509 +3221,451 @@ selectRentRecord();
 
 window.fillPaymentDetails=function(){
 
-const uid=
-document
-.getElementById(
-"paymentConsumer"
-)
-.value;
+  const uid=
+  document.getElementById(
+    "paymentConsumer"
+  ).value;
 
-const c=
-consumers.find(
-x=>x.id===uid
-);
+  const c=
+  consumers.find(
+    x=>x.id===uid
+  );
 
-if(!c)return;
+  if(!c)return;
 
-document
-.getElementById(
-"paymentName"
-).value=
-c.name || "";
 
-document
-.getElementById(
-"paymentProperty"
-).value=
-c.propertyName || "";
+  document.getElementById(
+    "paymentName"
+  ).value=
+  c.name || "";
 
-document
-.getElementById(
-"paymentRent"
-).value=
-"";
 
-document
-.getElementById(
-"paymentDueDate"
-).value=
-"";
+  document.getElementById(
+    "paymentProperty"
+  ).value=
+  c.propertyName || "";
 
-document
-.getElementById(
-"paymentRemaining"
-).value=
-"";
 
-document
-.getElementById(
-"paymentAmount"
-).value=
-"";
+  document.getElementById(
+    "paymentRent"
+  ).value=
+  c.rent || "";
 
-document
-.getElementById(
-"paymentDate"
-).value=
-today();
 
-fillRentRecordList(uid);
+  document.getElementById(
+    "paymentDueDate"
+  ).value="";
+
+
+  document.getElementById(
+    "paymentAmount"
+  ).value="";
+
+
+  document.getElementById(
+    "paymentDate"
+  ).value=
+  today();
+
+
+  fillRentRecordList(uid);
 
 };
 
 
 function fillRentRecordList(uid){
 
-const select=
-document
-.getElementById(
-"paymentRentRecord"
-);
+  const select=
+  document.getElementById(
+    "paymentRentRecord"
+  );
 
-select.innerHTML=
-`<option value="">
-Select Due Rent
-</option>`;
+  select.innerHTML=
+  `<option value="">
+    Select Due Rent
+  </option>`;
 
-const now=
-parseDate(today());
 
-rentRecords
+  rentRecords
+  .filter(
+    r=>
+    r.consumerId===uid &&
+    r.status!=="Paid" &&
+    parseDate(r.dueDate)<=parseDate(today())
+  )
+  .sort(
+    (a,b)=>
+    String(a.dueDate)
+    .localeCompare(
+      String(b.dueDate)
+    )
+  )
+  .forEach(r=>{
 
-.filter(
-r=>
-r.consumerId===uid &&
-r.status!=="Paid" &&
-r.dueDate &&
-parseDate(r.dueDate)<=now
-)
+    select.innerHTML+=`
 
-.sort(
-(a,b)=>
-String(a.dueDate)
-.localeCompare(
-String(b.dueDate)
-)
-)
+      <option value="${r.id}">
 
-.forEach(r=>{
+        ${safe(r.month)}
+        ${safe(String(r.year))}
+        -
+        ₹${Number(r.rentAmount||0)}
+        -
+        Due ${formatDate(r.dueDate)}
 
-const remaining=
-Math.max(
-Number(r.rentAmount||0)-
-Number(r.paidAmount||0),
-0
-);
+      </option>
 
-select.innerHTML+=`
+    `;
 
-<option value="${r.id}">
-
-${safe(r.month)}
-${safe(String(r.year))}
--
-₹${remaining}
--
-Due ${formatDate(r.dueDate)}
-
-</option>
-
-`;
-
-});
+  });
 
 }
 
 
 window.selectRentRecord=function(){
 
-const id=
-document
-.getElementById(
-"paymentRentRecord"
-)
-.value;
+  const id=
+  document.getElementById(
+    "paymentRentRecord"
+  ).value;
 
-const r=
-rentRecords.find(
-x=>x.id===id
-);
+  const r=
+  rentRecords.find(
+    x=>x.id===id
+  );
 
-if(!r)return;
+  if(!r)return;
 
-const rent=
-Number(r.rentAmount||0);
 
-const paid=
-Number(r.paidAmount||0);
+  document.getElementById(
+    "paymentRent"
+  ).value=
+  r.rentAmount || "";
 
-const remaining=
-Math.max(
-rent-paid,
-0
-);
 
-document
-.getElementById(
-"paymentRent"
-)
-.value=
-rent;
+  document.getElementById(
+    "paymentDueDate"
+  ).value=
+  r.dueDate || "";
 
-document
-.getElementById(
-"paymentDueDate"
-)
-.value=
-r.dueDate || "";
 
-document
-.getElementById(
-"paymentRemaining"
-)
-.value=
-remaining;
+  const remaining=
+  Math.max(
+    Number(r.rentAmount||0)-
+    Number(r.paidAmount||0),
+    0
+  );
 
-document
-.getElementById(
-"paymentAmount"
-)
-.value=
-remaining;
 
-document
-.getElementById(
-"paymentDate"
-)
-.value=
-today();
+  document.getElementById(
+    "paymentAmount"
+  ).value=
+  remaining;
+
+
+  document.getElementById(
+    "paymentDate"
+  ).value=
+  today();
 
 };
 
-
-/* =====================================================
-   RECORD PAYMENT
-===================================================== */
 
 window.recordPayment=async function(){
 
-const uid=
-document
-.getElementById(
-"paymentConsumer"
-)
-.value;
+  const uid=
+  document.getElementById(
+    "paymentConsumer"
+  ).value;
 
-const recordId=
-document
-.getElementById(
-"paymentRentRecord"
-)
-.value;
+  const recordId=
+  document.getElementById(
+    "paymentRentRecord"
+  ).value;
 
-const amount=
-Number(
-document
-.getElementById(
-"paymentAmount"
-)
-.value
-);
+  const amount=
+  Number(
+    document.getElementById(
+      "paymentAmount"
+    ).value
+  );
 
-const paymentDate=
-document
-.getElementById(
-"paymentDate"
-)
-.value;
-
-if(!uid || !recordId){
-
-alert(
-"Select Consumer and Rent Month."
-);
-
-return;
-}
-
-if(!amount || amount<=0){
-
-alert(
-"Enter valid amount."
-);
-
-return;
-}
-
-const r=
-rentRecords.find(
-x=>x.id===recordId
-);
-
-const c=
-consumers.find(
-x=>x.id===uid
-);
-
-if(!r || !c)return;
-
-const oldPaid=
-Number(r.paidAmount||0);
-
-const rent=
-Number(r.rentAmount||0);
-
-const remainingBefore=
-Math.max(
-rent-oldPaid,
-0
-);
+  const paymentDate=
+  document.getElementById(
+    "paymentDate"
+  ).value;
 
 
-/*
-Do not allow payment greater than remaining.
-*/
+  if(!uid || !recordId){
 
-if(amount>remainingBefore){
+    alert(
+      "Select Consumer and Rent Month."
+    );
 
-alert(
-"Payment cannot be greater than remaining rent ₹"+
-remainingBefore
-);
-
-return;
-}
-
-const totalPaid=
-oldPaid+amount;
-
-let status="Partial";
-
-if(totalPaid>=rent){
-
-status="Paid";
-}
-
-try{
-
-await updateDoc(
-doc(
-db,
-"rentRecords",
-recordId
-),
-{
-
-paidAmount:
-totalPaid,
-
-paymentDate:
-paymentDate,
-
-status:
-status,
-
-updatedAt:
-serverTimestamp()
-
-}
-);
+    return;
+  }
 
 
-await addDoc(
-collection(db,"payments"),
-{
+  if(!amount || amount<=0){
 
-consumerId:
-uid,
+    alert(
+      "Enter valid amount."
+    );
 
-consumerName:
-c.name || "",
+    return;
+  }
 
-propertyName:
-c.propertyName || "",
 
-rentRecordId:
-recordId,
+  const r=
+  rentRecords.find(
+    x=>x.id===recordId
+  );
 
-month:
-r.month,
+  const c=
+  consumers.find(
+    x=>x.id===uid
+  );
 
-year:
-r.year,
 
-amount:
-amount,
+  if(!r || !c)return;
 
-paymentDate:
-paymentDate,
 
-status:
-status,
+  const oldPaid=
+  Number(
+    r.paidAmount||0
+  );
 
-createdAt:
-serverTimestamp()
+  const totalPaid=
+  oldPaid+amount;
 
-}
-);
+  const rent=
+  Number(
+    r.rentAmount||0
+  );
 
-alert(
-status==="Paid"
-?
-"Rent Paid ✅"
-:
-"Partial Payment Saved."
-);
 
-await loadOwner();
+  if(amount>Math.max(rent-oldPaid,0)){
 
-}catch(e){
+    alert(
+      "Payment cannot be greater than remaining rent."
+    );
 
-console.error(e);
+    return;
+  }
 
-alert(
-"Payment failed: "+e.message
-);
 
-}
+  let status="Partial";
+
+  if(totalPaid>=rent){
+
+    status="Paid";
+
+  }
+
+
+  try{
+
+    await updateDoc(
+      doc(
+        db,
+        "rentRecords",
+        recordId
+      ),
+      {
+
+        paidAmount:
+        totalPaid,
+
+        paymentDate:
+        paymentDate,
+
+        status:
+        status,
+
+        updatedAt:
+        serverTimestamp()
+
+      }
+    );
+
+
+    await addDoc(
+      collection(
+        db,
+        "payments"
+      ),
+      {
+
+        consumerId:
+        uid,
+
+        consumerName:
+        c.name || "",
+
+        propertyName:
+        c.propertyName || "",
+
+        rentRecordId:
+        recordId,
+
+        month:
+        r.month,
+
+        year:
+        r.year,
+
+        amount:
+        amount,
+
+        paymentDate:
+        paymentDate,
+
+        status:
+        status,
+
+        createdAt:
+        serverTimestamp()
+
+      }
+    );
+
+
+    alert(
+      status==="Paid"
+      ?
+      "Rent Paid ✅"
+      :
+      "Partial Payment Saved."
+    );
+
+
+    await loadOwner();
+
+  }catch(e){
+
+    console.error(e);
+
+    alert(
+      "Payment failed: "+e.message
+    );
+
+  }
 
 };
 
 
 /* =====================================================
-   DEPOSIT
+   SECURITY DEPOSIT
 ===================================================== */
 
 function displayDeposits(){
 
-let total=0;
+  let total=0;
 
-deposits.forEach(d=>{
 
-if(d.status==="Held"){
+  deposits.forEach(d=>{
 
-total+=
-Number(
-d.currentAmount||0
-);
+    if(d.status==="Held"){
 
-}
+      total+=
+      Number(
+        d.currentAmount || 0
+      );
 
-});
+    }
 
-document
-.getElementById(
-"totalDepositLiability"
-)
-.innerText=
-"₹"+total;
+  });
+
+
+  document.getElementById(
+    "totalDepositLiability"
+  ).innerText=
+  "₹"+total;
 
 }
 
 
 window.loadRefundDetails=function(){
 
-const uid=
-document
-.getElementById(
-"refundConsumer"
-)
-.value;
+  const uid=
+  document.getElementById(
+    "refundConsumer"
+  ).value;
 
-const deposit=
-deposits.find(
-d=>d.consumerId===uid
-);
 
-if(!deposit){
+  const deposit=
+  deposits.find(
+    d=>d.consumerId===uid
+  );
 
-document
-.getElementById(
-"refundOriginalDeposit"
-)
-.value="";
 
-document
-.getElementById(
-"refundAmount"
-)
-.value="";
+  if(!deposit){
 
-return;
-}
+    document.getElementById(
+      "refundOriginalDeposit"
+    ).value="";
 
-document
-.getElementById(
-"refundOriginalDeposit"
-)
-.value=
-deposit.currentAmount || 0;
+    document.getElementById(
+      "refundAmount"
+    ).value="";
 
-document
-.getElementById(
-"refundDeduction"
-)
-.value=0;
+    return;
+  }
 
-document
-.getElementById(
-"refundAmount"
-)
-.value=
-deposit.currentAmount || 0;
 
-document
-.getElementById(
-"refundDate"
-)
-.value=
-today();
+  document.getElementById(
+    "refundOriginalDeposit"
+  ).value=
+  deposit.currentAmount || 0;
+
+
+  document.getElementById(
+    "refundDeduction"
+  ).value=0;
+
+
+  document.getElementById(
+    "refundAmount"
+  ).value=
+  deposit.currentAmount || 0;
+
+
+  document.getElementById(
+    "refundDate"
+  ).value=
+  today();
 
 };
 
 
 window.calculateRefund=function(){
 
-const original=
-Number(
-document
-.getElementById(
-"refundOriginalDeposit"
-)
-.value
-);
+  const original=
+  Number(
+    document.getElementById(
+      "refundOriginalDeposit"
+    ).value
+  );
 
-const deduction=
-Number(
-document
-.getElementById(
-"refundDeduction"
-)
-.value
-);
+  const deduction=
+  Number(
+    document.getElementById(
+      "refundDeduction"
+    ).value
+  );
 
-const refund=
-Math.max(
-original-deduction,
-0
-);
 
-document
-.getElementById(
-"refundAmount"
-)
-.value=
-refund;
+  const refund=
+  Math.max(
+    original-deduction,
+    0
+  );
+
+
+  document.getElementById(
+    "refundAmount"
+  ).value=
+  refund;
 
 };
 
@@ -3228,146 +3673,145 @@ refund;
 window.refundSecurityDeposit=
 async function(){
 
-const uid=
-document
-.getElementById(
-"refundConsumer"
-)
-.value;
+  const uid=
+  document.getElementById(
+    "refundConsumer"
+  ).value;
 
-const deposit=
-deposits.find(
-d=>d.consumerId===uid
-);
 
-if(!deposit){
+  const deposit=
+  deposits.find(
+    d=>d.consumerId===uid
+  );
 
-alert(
-"Security Deposit record not found."
-);
 
-return;
-}
+  if(!deposit){
 
-if(
-deposit.status==="Refunded"
-){
+    alert(
+      "Security Deposit record not found."
+    );
 
-alert(
-"Security Deposit already refunded."
-);
+    return;
+  }
 
-return;
-}
 
-const deduction=
-Number(
-document
-.getElementById(
-"refundDeduction"
-)
-.value
-);
+  if(deposit.status==="Refunded"){
 
-const refund=
-Number(
-document
-.getElementById(
-"refundAmount"
-)
-.value
-);
+    alert(
+      "Security Deposit already refunded."
+    );
 
-const refundDate=
-document
-.getElementById(
-"refundDate"
-)
-.value;
+    return;
+  }
 
-const reason=
-document
-.getElementById(
-"refundReason"
-)
-.value
-.trim();
 
-if(
-deduction<0 ||
-refund<0 ||
-!refundDate
-){
+  const deduction=
+  Number(
+    document.getElementById(
+      "refundDeduction"
+    ).value
+  );
 
-alert(
-"Enter valid refund information."
-);
 
-return;
-}
+  const refund=
+  Number(
+    document.getElementById(
+      "refundAmount"
+    ).value
+  );
 
-const original=
-Number(
-deposit.currentAmount||0
-);
 
-if(deduction>original){
+  const refundDate=
+  document.getElementById(
+    "refundDate"
+  ).value;
 
-alert(
-"Deduction cannot exceed deposit."
-);
 
-return;
-}
+  const reason=
+  document.getElementById(
+    "refundReason"
+  ).value.trim();
 
-try{
 
-await updateDoc(
-doc(
-db,
-"securityDeposits",
-deposit.id
-),
-{
+  if(
+    deduction<0 ||
+    refund<0 ||
+    !refundDate
+  ){
 
-deduction:
-deduction,
+    alert(
+      "Enter valid refund information."
+    );
 
-refundAmount:
-refund,
+    return;
+  }
 
-refundDate:
-refundDate,
 
-deductionReason:
-reason,
+  const original=
+  Number(
+    deposit.currentAmount||0
+  );
 
-status:
-"Refunded",
 
-currentAmount:0,
+  if(deduction>original){
 
-updatedAt:
-serverTimestamp()
+    alert(
+      "Deduction cannot exceed deposit."
+    );
 
-}
-);
+    return;
+  }
 
-alert(
-"Security Deposit refunded successfully."
-);
 
-await loadOwner();
+  try{
 
-}catch(e){
+    await updateDoc(
+      doc(
+        db,
+        "securityDeposits",
+        deposit.id
+      ),
+      {
 
-console.error(e);
+        deduction:
+        deduction,
 
-alert(
-"Refund failed: "+e.message
-);
+        refundAmount:
+        refund,
 
-}
+        refundDate:
+        refundDate,
+
+        deductionReason:
+        reason,
+
+        status:"Refunded",
+
+        currentAmount:0,
+
+        updatedAt:
+        serverTimestamp()
+
+      }
+    );
+
+
+    alert(
+      "Security Deposit refunded successfully."
+    );
+
+
+    await loadOwner();
+
+  }catch(e){
+
+    console.error(e);
+
+    alert(
+      "Refund failed: "+e.message
+    );
+
+  }
 
 };
 
@@ -3378,115 +3822,178 @@ alert(
 
 function displayProperties(){
 
-const table=
-document
-.getElementById(
-"propertyTable"
-);
+  const table=
+  document.getElementById(
+    "propertyTable"
+  );
 
-table.innerHTML="";
+  table.innerHTML="";
 
-properties.forEach(p=>{
 
-table.innerHTML+=`
+  properties.forEach(p=>{
 
-<tr>
+    const c=
+    consumers.find(
+      x=>x.id===p.consumerId
+    );
 
-<td>
-${safe(p.consumerName)}
-</td>
+    table.innerHTML+=`
 
-<td>
-${safe(p.propertyName)}
-</td>
+      <tr>
 
-<td>
-${safe(p.roomNumber)}
-</td>
+        <td>
+          ${safe(p.consumerName)}
+        </td>
 
-<td>
-₹${Number(p.rent||0)}
-</td>
+        <td>
+          ${safe(p.propertyName)}
+        </td>
 
-<td>
-${formatDate(p.joinedDate)}
-</td>
+        <td>
+          ${safe(p.roomNumber)}
+        </td>
 
-<td>
-${formatDate(p.dueDate)}
-</td>
+        <td>
+          ₹${Number(p.rent||0)}
+        </td>
 
-</tr>
+        <td>
+          ${formatDate(p.joinedDate)}
+        </td>
 
-`;
+        <td>
+          ${formatDate(p.dueDate)}
+        </td>
 
-});
+        <td>
+          ${
+            c?.status==="closed"
+            ?
+            `<span class="badge badge-closed">
+              Closed
+            </span>`
+            :
+            `<span class="badge badge-verified">
+              Active
+            </span>`
+          }
+        </td>
+
+      </tr>
+
+    `;
+
+  });
 
 }
 
 
 /* =====================================================
-   PAYMENT TABLE
+   PAYMENT HISTORY
 ===================================================== */
 
 function displayPayments(){
 
-const table=
-document
-.getElementById(
-"paymentTable"
-);
-
-table.innerHTML="";
-
-payments
-
-.sort(
-(a,b)=>
-String(b.paymentDate||"")
-.localeCompare(
-String(a.paymentDate||"")
-)
-)
-
-.forEach(p=>{
-
-table.innerHTML+=`
-
-<tr>
-
-<td>
-${safe(p.consumerName)}
-</td>
-
-<td>
-${safe(p.propertyName)}
-</td>
-
-<td>
-${safe(p.month)}
-${safe(String(p.year||""))}
-</td>
-
-<td>
-₹${Number(p.amount||0)}
-</td>
-
-<td>
-${formatDate(p.paymentDate)}
-</td>
-
-<td>
-${safe(p.status)}
-</td>
-
-</tr>
-
-`;
-
-});
+  displaySelectedPaymentHistory("");
 
 }
+
+
+window.displaySelectedPaymentHistory=function(){
+
+  const uid=
+  document.getElementById(
+    "paymentHistoryConsumer"
+  ).value;
+
+  const table=
+  document.getElementById(
+    "paymentTable"
+  );
+
+  table.innerHTML="";
+
+
+  let list=
+  payments.slice();
+
+
+  if(uid){
+
+    list=
+    list.filter(
+      p=>p.consumerId===uid
+    );
+
+  }
+
+
+  list.sort(
+    (a,b)=>
+    String(b.paymentDate||"")
+    .localeCompare(
+      String(a.paymentDate||"")
+    )
+  );
+
+
+  list.forEach(p=>{
+
+    const c=
+    consumers.find(
+      x=>x.id===p.consumerId
+    );
+
+
+    const closed=
+    c?.status==="closed";
+
+
+    table.innerHTML+=`
+
+      <tr>
+
+        <td>
+          ${safe(p.consumerName)}
+          ${
+            closed
+            ?
+            `<span class="badge badge-closed">
+              Closed
+            </span>`
+            :
+            ""
+          }
+        </td>
+
+        <td>
+          ${safe(p.propertyName)}
+        </td>
+
+        <td>
+          ${safe(p.month)}
+          ${safe(String(p.year||""))}
+        </td>
+
+        <td>
+          ₹${Number(p.amount||0)}
+        </td>
+
+        <td>
+          ${formatDate(p.paymentDate)}
+        </td>
+
+        <td>
+          ${safe(p.status)}
+        </td>
+
+      </tr>
+
+    `;
+
+  });
+
+};
 
 
 /* =====================================================
@@ -3495,460 +4002,476 @@ ${safe(p.status)}
 
 function updateDashboard(){
 
-const total=
-consumers.length;
+  const total=
+  consumers.length;
 
-const verified=
-consumers.filter(
-c=>c.status==="verified"
-).length;
+  const verified=
+  consumers.filter(
+    c=>c.status==="verified"
+  ).length;
 
-const pending=
-consumers.filter(
-c=>c.status==="pending"
-).length;
-
-
-const now=
-parseDate(today());
-
-let pendingAmount=0;
-
-rentRecords
-
-.filter(
-r=>
-r.dueDate &&
-parseDate(r.dueDate)<=now
-)
-
-.forEach(r=>{
-
-if(
-r.status==="Pending" ||
-r.status==="Partial"
-){
-
-pendingAmount +=
-Math.max(
-Number(r.rentAmount||0)-
-Number(r.paidAmount||0),
-0
-);
-
-}
-
-});
+  const pending=
+  consumers.filter(
+    c=>c.status==="pending"
+  ).length;
 
 
-document
-.getElementById(
-"totalConsumers"
-)
-.innerText=total;
+  let pendingAmount=0;
 
-document
-.getElementById(
-"verifiedConsumers"
-)
-.innerText=verified;
 
-document
-.getElementById(
-"pendingConsumers"
-)
-.innerText=pending;
+  rentRecords.forEach(r=>{
 
-document
-.getElementById(
-"pendingRent"
-)
-.innerText=
-"₹"+pendingAmount;
+    if(
+      r.status==="Pending" ||
+      r.status==="Partial"
+    ){
+
+      pendingAmount +=
+      Math.max(
+        Number(r.rentAmount||0)-
+        Number(r.paidAmount||0),
+        0
+      );
+
+    }
+
+  });
+
+
+  document.getElementById(
+    "totalConsumers"
+  ).innerText=total;
+
+
+  document.getElementById(
+    "verifiedConsumers"
+  ).innerText=verified;
+
+
+  document.getElementById(
+    "pendingConsumers"
+  ).innerText=pending;
+
+
+  document.getElementById(
+    "pendingRent"
+  ).innerText=
+  "₹"+pendingAmount;
 
 }
 
 
 /* =====================================================
-   CONSUMER
+   CONSUMER DASHBOARD
 ===================================================== */
 
 async function loadConsumer(){
 
-const uid=
-currentUser.uid;
-
-const profile=
-await getDoc(
-doc(
-db,
-"users",
-uid
-)
-);
+  const uid=
+  currentUser.uid;
 
-if(!profile.exists())return;
 
-const c=profile.data();
+  const profile=
+  await getDoc(
+    doc(
+      db,
+      "users",
+      uid
+    )
+  );
 
-document
-.getElementById(
-"consumerWelcome"
-)
-.innerText=
-c.name || "Consumer";
 
-document
-.getElementById(
-"consumerEmail"
-)
-.innerText=
-c.email || currentUser.email;
+  if(!profile.exists())return;
 
-document
-.getElementById(
-"consumerStatus"
-)
-.innerText=
-c.status || "pending";
 
+  const c=profile.data();
 
-if(c.status!=="verified"){
 
-document
-.getElementById(
-"pendingMessage"
-)
-.classList.remove("hidden");
+  document.getElementById(
+    "consumerWelcome"
+  ).innerText=
+  c.name || "Consumer";
 
-document
-.getElementById(
-"verifiedConsumerArea"
-)
-.classList.add("hidden");
 
-return;
-}
+  document.getElementById(
+    "consumerEmail"
+  ).innerText=
+  c.email || currentUser.email;
 
 
-/*
-Only due records.
-*/
+  document.getElementById(
+    "consumerStatus"
+  ).innerText=
+  c.status || "pending";
 
-await ensureDueRentRecords(
-uid,
-c.name || "",
-c.propertyName || "",
-Number(c.rent || 0),
-c.joinedDate,
-c.dueDate
-);
 
+  /*
+    CLOSED ACCOUNT
+  */
 
-document
-.getElementById(
-"pendingMessage"
-)
-.classList.add("hidden");
+  if(c.status==="closed"){
 
-document
-.getElementById(
-"verifiedConsumerArea"
-)
-.classList.remove("hidden");
+    document.getElementById(
+      "pendingMessage"
+    ).classList.add("hidden");
 
+    document.getElementById(
+      "verifiedConsumerArea"
+    ).classList.add("hidden");
 
-/* DETAILS */
+    document.getElementById(
+      "closedMessage"
+    ).classList.remove("hidden");
 
-document.getElementById("myName").value=
-c.name || "";
+    return;
 
-document.getElementById("myMobile").value=
-c.mobile || "";
+  }
 
-document.getElementById("myEmail").value=
-c.email || "";
 
-document.getElementById("myPropertyInput").value=
-c.propertyName || "";
+  document.getElementById(
+    "closedMessage"
+  ).classList.add("hidden");
 
-document.getElementById("myRoom").value=
-c.roomNumber || "";
 
-document.getElementById("myRentInput").value=
-c.rent || "";
+  if(c.status!=="verified"){
 
-document.getElementById("mySecurityDepositInput").value=
-c.securityDeposit || "";
+    document.getElementById(
+      "pendingMessage"
+    ).classList.remove("hidden");
 
-document.getElementById("myJoinedDate").value=
-c.joinedDate || "";
+    document.getElementById(
+      "verifiedConsumerArea"
+    ).classList.add("hidden");
 
-document.getElementById("myDueDateInput").value=
-c.dueDate || "";
+    return;
+  }
 
-document.getElementById("myAddress").value=
-c.address || "";
 
+  await ensureDueRentRecords(
+    uid,
+    c.name || "",
+    c.propertyName || "",
+    Number(c.rent || 0),
+    c.joinedDate,
+    c.dueDate
+  );
 
-document.getElementById("myProperty").innerText=
-c.propertyName || "-";
 
-document.getElementById("myRent").innerText=
-"₹"+Number(c.rent||0);
+  document.getElementById(
+    "pendingMessage"
+  ).classList.add("hidden");
 
-document.getElementById("mySecurityDeposit").innerText=
-"₹"+Number(c.securityDeposit||0);
 
-document.getElementById(
-"consumerDepositAmount"
-).innerText=
-Number(c.securityDeposit||0);
+  document.getElementById(
+    "verifiedConsumerArea"
+  ).classList.remove("hidden");
 
 
-/* DEPOSIT STATUS */
+  /* DETAILS */
 
-const depositSnap=
-await getDocs(
-collection(db,"securityDeposits")
-);
+  document.getElementById("myName").value=
+  c.name || "";
 
-let depositStatus=
-"Held by Owner";
+  document.getElementById("myMobile").value=
+  c.mobile || "";
 
-depositSnap.forEach(item=>{
+  document.getElementById("myEmail").value=
+  c.email || "";
 
-const d=item.data();
+  document.getElementById("myPropertyInput").value=
+  c.propertyName || "";
 
-if(
-d.consumerId===uid &&
-d.status==="Refunded"
-){
+  document.getElementById("myRoom").value=
+  c.roomNumber || "";
 
-depositStatus="Refunded";
+  document.getElementById("myRentInput").value=
+  c.rent || "";
 
-}
+  document.getElementById("mySecurityDepositInput").value=
+  c.securityDeposit || "";
 
-});
+  document.getElementById("myJoinedDate").value=
+  c.joinedDate || "";
 
-document
-.getElementById(
-"consumerDepositStatus"
-)
-.innerText=
-depositStatus;
+  document.getElementById("myDueDateInput").value=
+  c.dueDate || "";
 
+  document.getElementById("myAddress").value=
+  c.address || "";
 
-/* RENT */
 
-const rentSnap=
-await getDocs(
-collection(db,"rentRecords")
-);
+  document.getElementById("myProperty").innerText=
+  c.propertyName || "-";
 
-const myRecords=[];
 
-const now=
-parseDate(today());
+  document.getElementById("myRent").innerText=
+  "₹"+Number(c.rent||0);
 
-rentSnap.forEach(item=>{
 
-const r={
-id:item.id,
-...item.data()
-};
+  document.getElementById("mySecurityDeposit").innerText=
+  "₹"+Number(c.securityDeposit||0);
 
-if(
-r.consumerId===uid &&
-r.dueDate &&
-parseDate(r.dueDate)<=now
-){
 
-myRecords.push(r);
+  document.getElementById(
+    "consumerDepositAmount"
+  ).innerText=
+  Number(c.securityDeposit||0);
 
-}
 
-});
+  /* DEPOSIT */
 
+  const depositQuery=
+  query(
+    collection(
+      db,
+      "securityDeposits"
+    ),
+    where(
+      "consumerId",
+      "==",
+      uid
+    )
+  );
 
-myRecords.sort(
-(a,b)=>
-String(a.dueDate||"")
-.localeCompare(
-String(b.dueDate||"")
-)
-);
 
+  const depositSnap=
+  await getDocs(
+    depositQuery
+  );
 
-const currentRecord=
-myRecords.find(
-r=>r.status!=="Paid"
-);
 
-if(currentRecord){
+  let depositStatus=
+  "Held by Owner";
 
-document
-.getElementById(
-"myDueDate"
-)
-.innerText=
-formatDate(
-currentRecord.dueDate
-);
 
-}else{
+  depositSnap.forEach(item=>{
 
-document
-.getElementById(
-"myDueDate"
-)
-.innerText="-";
+    if(
+      item.data().status==="Refunded"
+    ){
 
-}
+      depositStatus=
+      "Refunded";
 
-displayConsumerRentRecords(
-myRecords
-);
+    }
 
+  });
 
-/* PAYMENT HISTORY */
 
-const paymentSnap=
-await getDocs(
-collection(db,"payments")
-);
+  document.getElementById(
+    "consumerDepositStatus"
+  ).innerText=
+  depositStatus;
 
-const table=
-document
-.getElementById(
-"consumerPayments"
-);
 
-table.innerHTML="";
+  /* RENT */
 
-const myPayments=[];
+  const rentQuery=
+  query(
+    collection(
+      db,
+      "rentRecords"
+    ),
+    where(
+      "consumerId",
+      "==",
+      uid
+    )
+  );
 
-paymentSnap.forEach(item=>{
 
-const p=item.data();
+  const rentSnap=
+  await getDocs(
+    rentQuery
+  );
 
-if(
-p.consumerId===uid
-){
 
-myPayments.push(p);
+  const myRecords=[];
 
-}
 
-});
+  rentSnap.forEach(item=>{
 
+    myRecords.push({
 
-myPayments.sort(
-(a,b)=>
-String(b.paymentDate||"")
-.localeCompare(
-String(a.paymentDate||"")
-)
-);
+      id:item.id,
+      ...item.data()
 
-myPayments.forEach(p=>{
+    });
 
-table.innerHTML+=`
+  });
 
-<tr>
 
-<td>
-${safe(p.month)}
-${safe(String(p.year||""))}
-</td>
+  myRecords.sort(
+    (a,b)=>
+    String(a.dueDate||"")
+    .localeCompare(
+      String(b.dueDate||"")
+    )
+  );
 
-<td>
-₹${Number(p.amount||0)}
-</td>
 
-<td>
-${formatDate(p.paymentDate)}
-</td>
+  const currentRecord=
+  myRecords.find(
+    r=>r.status!=="Paid"
+  );
 
-<td>
-${safe(p.status)}
-</td>
 
-</tr>
+  if(currentRecord){
 
-`;
+    document.getElementById(
+      "myDueDate"
+    ).innerText=
+    formatDate(
+      currentRecord.dueDate
+    );
 
-});
+  }else{
+
+    document.getElementById(
+      "myDueDate"
+    ).innerText="-";
+
+  }
+
+
+  displayConsumerRentRecords(
+    myRecords
+  );
+
+
+  /* PAYMENT HISTORY */
+
+  const paymentQuery=
+  query(
+    collection(
+      db,
+      "payments"
+    ),
+    where(
+      "consumerId",
+      "==",
+      uid
+    )
+  );
+
+
+  const paymentSnap=
+  await getDocs(
+    paymentQuery
+  );
+
+
+  const table=
+  document.getElementById(
+    "consumerPayments"
+  );
+
+  table.innerHTML="";
+
+
+  const myPayments=[];
+
+
+  paymentSnap.forEach(item=>{
+
+    myPayments.push(
+      item.data()
+    );
+
+  });
+
+
+  myPayments.sort(
+    (a,b)=>
+    String(b.paymentDate||"")
+    .localeCompare(
+      String(a.paymentDate||"")
+    )
+  );
+
+
+  myPayments.forEach(p=>{
+
+    table.innerHTML+=`
+
+      <tr>
+
+        <td>
+          ${safe(p.month)}
+          ${safe(String(p.year||""))}
+        </td>
+
+        <td>
+          ₹${Number(p.amount||0)}
+        </td>
+
+        <td>
+          ${formatDate(p.paymentDate)}
+        </td>
+
+        <td>
+          ${safe(p.status)}
+        </td>
+
+      </tr>
+
+    `;
+
+  });
 
 }
 
 
 /* =====================================================
-   CONSUMER RENT DISPLAY
+   CONSUMER RENT TABLE
 ===================================================== */
 
 function displayConsumerRentRecords(records){
 
-const table=
-document
-.getElementById(
-"consumerRentRecords"
-);
+  const table=
+  document.getElementById(
+    "consumerRentRecords"
+  );
 
-table.innerHTML="";
+  table.innerHTML="";
 
-records.forEach(r=>{
 
-const rent=
-Number(r.rentAmount||0);
+  records.forEach(r=>{
 
-const paid=
-Number(r.paidAmount||0);
+    table.innerHTML+=`
 
-const remaining=
-Math.max(
-rent-paid,
-0
-);
+      <tr>
 
-table.innerHTML+=`
+        <td>
+          ${safe(r.month)}
+          ${safe(String(r.year||""))}
+        </td>
 
-<tr>
+        <td>
+          ₹${Number(r.rentAmount||0)}
+        </td>
 
-<td>
-${safe(r.month)}
-${safe(String(r.year||""))}
-</td>
+        <td>
+          ${formatDate(r.dueDate)}
+        </td>
 
-<td>
-₹${rent}
-</td>
+        <td>
+          ₹${Number(r.paidAmount||0)}
+        </td>
 
-<td>
-${formatDate(r.dueDate)}
-</td>
+        <td>
+          ${formatDate(r.paymentDate)}
+        </td>
 
-<td>
-₹${paid}
-</td>
+        <td>
+          ${safe(r.status)}
+        </td>
 
-<td>
-₹${remaining}
-</td>
+      </tr>
 
-<td>
-${formatDate(r.paymentDate)}
-</td>
+    `;
 
-<td>
-${safe(r.status)}
-</td>
-
-</tr>
-
-`;
-
-});
+  });
 
 }
 
@@ -3959,155 +4482,153 @@ ${safe(r.status)}
 
 window.generateReceipt=function(){
 
-const uid=
-document
-.getElementById(
-"receiptConsumer"
-)
-.value;
+  const uid=
+  document.getElementById(
+    "receiptConsumer"
+  ).value;
 
-const c=
-consumers.find(
-x=>x.id===uid
-);
 
-if(!c){
+  const c=
+  consumers.find(
+    x=>x.id===uid
+  );
 
-alert(
-"Select Consumer."
-);
 
-return;
-}
+  if(!c){
 
-const ownPayments=
-payments
-.filter(
-p=>p.consumerId===uid
-)
-.sort(
-(a,b)=>
-String(b.paymentDate||"")
-.localeCompare(
-String(a.paymentDate||"")
-)
-);
+    alert(
+      "Select Consumer."
+    );
 
-const last=
-ownPayments[0];
+    return;
+  }
 
-const owner=
-document
-.getElementById(
-"receiptOwner"
-)
-.value ||
-"Owner";
 
-const mobile=
-document
-.getElementById(
-"receiptMobile"
-)
-.value ||
-"-";
+  const ownPayments=
+  payments
+  .filter(
+    p=>p.consumerId===uid
+  )
+  .sort(
+    (a,b)=>
+    String(b.paymentDate||"")
+    .localeCompare(
+      String(a.paymentDate||"")
+    )
+  );
 
-const address=
-document
-.getElementById(
-"receiptAddress"
-)
-.value ||
-c.address ||
-"-";
 
-document
-.getElementById(
-"receipt"
-)
-.innerHTML=`
+  const last=
+  ownPayments[0];
 
-<div class="receipt">
 
-<h2>🧾 RENT RECEIPT</h2>
+  const owner=
+  document.getElementById(
+    "receiptOwner"
+  ).value ||
+  "Owner";
 
-<hr>
 
-<p>
-<b>Owner:</b>
-${safe(owner)}
-</p>
+  const mobile=
+  document.getElementById(
+    "receiptMobile"
+  ).value ||
+  "-";
 
-<p>
-<b>Owner Mobile:</b>
-${safe(mobile)}
-</p>
 
-<p>
-<b>Address:</b>
-${safe(address)}
-</p>
+  const address=
+  document.getElementById(
+    "receiptAddress"
+  ).value ||
+  c.address ||
+  "-";
 
-<hr>
 
-<p>
-<b>Consumer:</b>
-${safe(c.name)}
-</p>
+  document.getElementById(
+    "receipt"
+  ).innerHTML=`
 
-<p>
-<b>Mobile:</b>
-${safe(c.mobile)}
-</p>
+    <div class="receipt">
 
-<p>
-<b>Property:</b>
-${safe(c.propertyName)}
-</p>
+      <h2>🧾 RENT RECEIPT</h2>
 
-<p>
-<b>Room / Shop:</b>
-${safe(c.roomNumber)}
-</p>
+      <hr>
 
-<p>
-<b>Monthly Rent:</b>
-₹${Number(c.rent||0)}
-</p>
+      <p>
+        <b>Owner:</b>
+        ${safe(owner)}
+      </p>
 
-<p>
-<b>Payment Month:</b>
-${safe(last?.month || "-")}
-${safe(String(last?.year || ""))}
-</p>
+      <p>
+        <b>Owner Mobile:</b>
+        ${safe(mobile)}
+      </p>
 
-<p>
-<b>Amount:</b>
-₹${Number(last?.amount || 0)}
-</p>
+      <p>
+        <b>Address:</b>
+        ${safe(address)}
+      </p>
 
-<p>
-<b>Payment Date:</b>
-${formatDate(last?.paymentDate)}
-</p>
+      <hr>
 
-<p>
-<b>Status:</b>
-${safe(last?.status || "-")}
-</p>
+      <p>
+        <b>Consumer:</b>
+        ${safe(c.name)}
+      </p>
 
-<hr>
+      <p>
+        <b>Mobile:</b>
+        ${safe(c.mobile)}
+      </p>
 
-<button
-class="success"
-onclick="window.print()"
->
-🖨️ Print Receipt
-</button>
+      <p>
+        <b>Property:</b>
+        ${safe(c.propertyName)}
+      </p>
 
-</div>
+      <p>
+        <b>Room / Shop:</b>
+        ${safe(c.roomNumber)}
+      </p>
 
-`;
+      <p>
+        <b>Monthly Rent:</b>
+        ₹${Number(c.rent||0)}
+      </p>
+
+      <p>
+        <b>Payment Month:</b>
+        ${safe(last?.month || "-")}
+        ${safe(String(last?.year || ""))}
+      </p>
+
+      <p>
+        <b>Amount:</b>
+        ₹${Number(last?.amount || 0)}
+      </p>
+
+      <p>
+        <b>Payment Date:</b>
+        ${formatDate(last?.paymentDate)}
+      </p>
+
+      <p>
+        <b>Status:</b>
+        ${safe(last?.status || "-")}
+      </p>
+
+      <hr>
+
+      <button
+      class="success"
+      onclick="window.print()"
+      >
+      🖨️ Print Receipt
+      </button>
+
+    </div>
+
+  `;
 
 };
 
@@ -4118,25 +4639,24 @@ onclick="window.print()"
 
 function clearOwnerFields(){
 
-[
-"ownerName",
-"ownerEmail",
-"ownerMobile",
-"ownerProperty",
-"ownerRoom",
-"ownerRent",
-"ownerSecurityDeposit",
-"ownerJoinedDate",
-"ownerDueDate",
-"ownerAddress"
-]
-.forEach(id=>{
+  [
+    "ownerName",
+    "ownerEmail",
+    "ownerMobile",
+    "ownerProperty",
+    "ownerRoom",
+    "ownerRent",
+    "ownerSecurityDeposit",
+    "ownerJoinedDate",
+    "ownerDueDate",
+    "ownerAddress"
+  ]
+  .forEach(id=>{
 
-document
-.getElementById(id)
-.value="";
+    document.getElementById(id)
+    .value="";
 
-});
+  });
 
 }
 
@@ -4147,77 +4667,80 @@ document
 
 function parseDate(str){
 
-const p=
-String(str||"")
-.split("-");
+  const p=
+  String(str||"")
+  .split("-");
 
-if(p.length!==3){
 
-return new Date();
+  if(p.length!==3){
 
-}
+    return new Date();
 
-return new Date(
-Number(p[0]),
-Number(p[1])-1,
-Number(p[2])
-);
+  }
+
+
+  return new Date(
+    Number(p[0]),
+    Number(p[1])-1,
+    Number(p[2])
+  );
 
 }
 
 
 function makeDateString(
-year,
-month,
-day
+  year,
+  month,
+  day
 ){
 
-return (
+  return (
 
-year+
-"-"+
-String(month+1)
-.padStart(2,"0")+
-"-"+
-String(day)
-.padStart(2,"0")
+    year+
+    "-" +
+    String(
+      month+1
+    ).padStart(2,"0")+
+    "-" +
+    String(day)
+    .padStart(2,"0")
 
-);
+  );
 
 }
 
 
 function today(){
 
-const d=
-new Date();
+  const d=
+  new Date();
 
-return makeDateString(
-d.getFullYear(),
-d.getMonth(),
-d.getDate()
-);
+  return makeDateString(
+    d.getFullYear(),
+    d.getMonth(),
+    d.getDate()
+  );
 
 }
 
 
 function formatDate(str){
 
-if(!str)return "-";
+  if(!str)return "-";
 
-const p=
-String(str)
-.split("-");
+  const p=
+  String(str)
+  .split("-");
 
-if(p.length!==3)return str;
+  if(p.length!==3)return str;
 
-return(
-p[2]+
-"-"+
-p[1]+
-"-"+
-p[0]
-);
+  return(
+    p[2]+
+    "-" +
+    p[1]+
+    "-" +
+    p[0]
+  );
 
 }
 
@@ -4228,14 +4751,14 @@ p[0]
 
 function safe(value){
 
-return String(
-value ?? ""
-)
-.replaceAll("&","&amp;")
-.replaceAll("<","&lt;")
-.replaceAll(">","&gt;")
-.replaceAll('"',"&quot;")
-.replaceAll("'","&#039;");
+  return String(
+    value ?? ""
+  )
+  .replaceAll("&","&amp;")
+  .replaceAll("<","&lt;")
+  .replaceAll(">","&gt;")
+  .replaceAll('"',"&quot;")
+  .replaceAll("'","&#039;");
 
 }
 
@@ -4243,4 +4766,3 @@ value ?? ""
 
 </body>
 </html>
-```
