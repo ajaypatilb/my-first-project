@@ -1,9 +1,8 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rent Management System</title>
 
   <style>
@@ -19,184 +18,120 @@
       color: #222;
     }
 
-    button {
-      cursor: pointer;
-      border: 0;
-      border-radius: 8px;
-      padding: 10px 15px;
-      font-weight: 600;
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
     }
 
-    input, select {
+    .login-box {
+      max-width: 400px;
+      margin: 80px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 25px rgba(0,0,0,.12);
+    }
+
+    h1, h2 {
+      margin-bottom: 20px;
+    }
+
+    input, select, button {
       width: 100%;
-      padding: 11px;
-      border: 1px solid #ddd;
+      padding: 12px;
+      margin: 7px 0;
       border-radius: 8px;
-      margin-top: 6px;
-      margin-bottom: 12px;
-      outline: none;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+
+    button {
+      border: none;
+      background: #2563eb;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      opacity: .9;
+    }
+
+    .logout {
+      background: #dc2626;
+      width: auto;
+      padding: 10px 18px;
+    }
+
+    .danger {
+      background: #dc2626;
+    }
+
+    .success {
+      background: #16a34a;
+    }
+
+    .warning {
+      background: #f59e0b;
     }
 
     .hidden {
       display: none !important;
     }
 
-    /* LOGIN */
-
-    #loginPage {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      background: linear-gradient(135deg, #1e3a8a, #2563eb);
-    }
-
-    .login-box {
-      width: 100%;
-      max-width: 400px;
-      background: white;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 15px 40px rgba(0,0,0,.2);
-    }
-
-    .login-box h1 {
-      margin-bottom: 8px;
-    }
-
-    .login-box p {
-      color: #666;
-      margin-bottom: 25px;
-    }
-
-    .primary {
-      background: #2563eb;
-      color: white;
-      width: 100%;
-    }
-
-    .danger {
-      background: #dc2626;
-      color: white;
-    }
-
-    .success {
-      background: #16a34a;
-      color: white;
-    }
-
-    .warning {
-      background: #f59e0b;
-      color: white;
-    }
-
-    /* APP */
-
-    #app {
-      min-height: 100vh;
-    }
-
     header {
-      background: #1e3a8a;
-      color: white;
+      background: white;
       padding: 15px 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.08);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 20;
+      gap: 15px;
+      flex-wrap: wrap;
     }
-
-    header h2 {
-      font-size: 20px;
-    }
-
-    .logout {
-      background: #dc2626;
-      color: white;
-    }
-
-    .container {
-      max-width: 1400px;
-      margin: auto;
-      padding: 20px;
-    }
-
-    /* DASHBOARD */
 
     .cards {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 15px;
-      margin-bottom: 20px;
+      margin: 20px 0;
     }
 
     .card {
       background: white;
-      border-radius: 12px;
       padding: 20px;
-      box-shadow: 0 3px 12px rgba(0,0,0,.06);
+      border-radius: 12px;
+      box-shadow: 0 3px 12px rgba(0,0,0,.07);
     }
 
-    .card small {
-      color: #777;
+    .card h3 {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 10px;
     }
 
-    .card h2 {
-      margin-top: 8px;
+    .card p {
+      font-size: 25px;
+      font-weight: bold;
     }
-
-    /* TABS */
-
-    .tabs {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
-
-    .tab {
-      background: white;
-      border: 1px solid #ddd;
-    }
-
-    .tab.active {
-      background: #2563eb;
-      color: white;
-    }
-
-    /* SECTION */
 
     .section {
       background: white;
+      margin-top: 20px;
       padding: 20px;
       border-radius: 12px;
-      margin-bottom: 20px;
-      box-shadow: 0 3px 12px rgba(0,0,0,.05);
+      box-shadow: 0 3px 12px rgba(0,0,0,.07);
     }
-
-    .section-title {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 15px;
-      flex-wrap: wrap;
-    }
-
-    /* TABLE */
 
     .table-wrapper {
-      width: 100%;
       overflow-x: auto;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 900px;
+      min-width: 950px;
     }
 
     th, td {
@@ -210,9 +145,8 @@
       background: #f8fafc;
     }
 
-    .badge {
-      display: inline-block;
-      padding: 5px 10px;
+    .status {
+      padding: 6px 10px;
       border-radius: 20px;
       font-size: 12px;
       font-weight: bold;
@@ -233,88 +167,70 @@
       color: #991b1b;
     }
 
-    .closed {
-      background: #e5e7eb;
-      color: #374151;
-    }
-
-    /* MODAL */
-
-    .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.55);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      z-index: 100;
-    }
-
-    .modal-box {
-      background: white;
-      width: 100%;
-      max-width: 500px;
-      max-height: 90vh;
-      overflow-y: auto;
-      border-radius: 14px;
-      padding: 25px;
-    }
-
-    .modal-head {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
-
-    .close {
-      background: #eee;
+    .small-btn {
+      width: auto;
+      padding: 7px 12px;
+      margin: 0 3px;
+      font-size: 13px;
     }
 
     .form-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       gap: 10px;
     }
 
-    .full {
-      grid-column: 1 / -1;
+    .message {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 8px;
+      display: none;
     }
 
     .error {
-      color: #dc2626;
-      margin-top: 10px;
-      font-size: 14px;
+      background: #fee2e2;
+      color: #991b1b;
     }
 
-    .empty {
-      text-align: center;
-      color: #777;
-      padding: 30px;
+    .info {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    .consumer-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
     }
 
     @media(max-width: 800px) {
       .cards {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media(max-width: 550px) {
-      .cards {
-        grid-template-columns: 1fr;
-      }
-
-      header {
-        align-items: flex-start;
-        gap: 10px;
+        grid-template-columns: repeat(2, 1fr);
       }
 
       .form-grid {
         grid-template-columns: 1fr;
       }
 
-      .full {
-        grid-column: auto;
+      .consumer-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media(max-width: 500px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        padding: 10px;
+      }
+
+      .login-box {
+        margin: 30px 10px;
       }
     }
   </style>
@@ -322,251 +238,148 @@
 
 <body>
 
-<!-- =========================
-     LOGIN
-========================= -->
+  <!-- =========================
+       LOGIN
+  ========================== -->
+  <div id="loginPage">
 
-<div id="loginPage">
+    <div class="login-box">
+      <h1>Owner Login</h1>
+      <p style="margin-bottom:15px;color:#666;">
+        Rent Management System
+      </p>
 
-  <div class="login-box">
-
-    <h1>Owner Login</h1>
-    <p>Rent Management System</p>
-
-    <form id="loginForm">
-
-      <label>Email</label>
       <input
         type="email"
         id="loginEmail"
-        placeholder="Owner email"
-        required
-      >
+        placeholder="Owner Email"
+      />
 
-      <label>Password</label>
       <input
         type="password"
         id="loginPassword"
         placeholder="Password"
-        required
-      >
+      />
 
-      <button class="primary" type="submit">
-        Login
-      </button>
+      <button onclick="loginOwner()">Login</button>
 
-      <div id="loginError" class="error"></div>
-
-    </form>
+      <div id="loginMessage" class="message error"></div>
+    </div>
 
   </div>
 
-</div>
 
+  <!-- =========================
+       DASHBOARD
+  ========================== -->
 
-<!-- =========================
-     APP
-========================= -->
+  <div id="dashboard" class="hidden">
 
-<div id="app" class="hidden">
-
-  <header>
-
-    <h2>Rent Management System</h2>
-
-    <button id="logoutBtn" class="logout">
-      Logout
-    </button>
-
-  </header>
-
-
-  <main class="container">
-
-    <!-- DASHBOARD CARDS -->
-
-    <div class="cards">
-
-      <div class="card">
-        <small>Total Consumers</small>
-        <h2 id="totalConsumers">0</h2>
+    <header>
+      <div>
+        <h2>Rent Management System</h2>
+        <small id="ownerEmail"></small>
       </div>
 
-      <div class="card">
-        <small>Active Consumers</small>
-        <h2 id="activeConsumers">0</h2>
+      <button class="logout" onclick="logoutOwner()">
+        Logout
+      </button>
+    </header>
+
+
+    <div class="container">
+
+      <!-- DASHBOARD CARDS -->
+
+      <div class="cards">
+
+        <div class="card">
+          <h3>Total Consumers</h3>
+          <p id="totalConsumers">0</p>
+        </div>
+
+        <div class="card">
+          <h3>Paid</h3>
+          <p id="paidCount">0</p>
+        </div>
+
+        <div class="card">
+          <h3>Partial</h3>
+          <p id="partialCount">0</p>
+        </div>
+
+        <div class="card">
+          <h3>Pending</h3>
+          <p id="pendingCount">0</p>
+        </div>
+
       </div>
 
-      <div class="card">
-        <small>Pending Rent</small>
-        <h2 id="pendingRent">₹0</h2>
-      </div>
 
-      <div class="card">
-        <small>Collected</small>
-        <h2 id="collectedRent">₹0</h2>
-      </div>
-
-    </div>
-
-
-    <!-- TABS -->
-
-    <div class="tabs">
-
-      <button class="tab active" data-tab="dashboard">
-        Dashboard
-      </button>
-
-      <button class="tab" data-tab="consumers">
-        Consumers
-      </button>
-
-      <button class="tab" data-tab="properties">
-        Properties
-      </button>
-
-      <button class="tab" data-tab="rent">
-        Monthly Rent
-      </button>
-
-      <button class="tab" data-tab="payments">
-        Payments
-      </button>
-
-      <button class="tab" data-tab="receipts">
-        Receipts
-      </button>
-
-    </div>
-
-
-    <!-- DASHBOARD -->
-
-    <section id="dashboardTab" class="tab-content">
+      <!-- =========================
+           ADD CONSUMER
+      ========================== -->
 
       <div class="section">
 
-        <div class="section-title">
-          <h3>Owner Dashboard</h3>
+        <h2>Add Consumer</h2>
+
+        <div class="form-grid">
+
+          <input
+            type="text"
+            id="consumerName"
+            placeholder="Consumer Name"
+          />
+
+          <input
+            type="text"
+            id="consumerPhone"
+            placeholder="Phone Number"
+          />
+
+          <input
+            type="number"
+            id="consumerRent"
+            placeholder="Monthly Rent"
+          />
+
         </div>
 
-        <p>
-          Firebase Authentication → Firestore Database
-        </p>
+        <button onclick="addConsumer()">
+          Add Consumer
+        </button>
 
-        <br>
-
-        <p>
-          Logged in as:
-          <strong id="ownerEmail"></strong>
-        </p>
+        <div id="consumerMessage" class="message"></div>
 
       </div>
 
-    </section>
 
-
-    <!-- CONSUMERS -->
-
-    <section id="consumersTab" class="tab-content hidden">
+      <!-- =========================
+           CONSUMERS
+      ========================== -->
 
       <div class="section">
 
-        <div class="section-title">
+        <h2>Consumers</h2>
 
-          <h3>Consumers</h3>
-
-          <button class="success" id="addConsumerBtn">
-            + Add Consumer
-          </button>
-
-        </div>
-
-        <div class="table-wrapper">
-
-          <table>
-
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Phone</th>
-                <th>Rent</th>
-                <th>Status</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-
-            <tbody id="consumerTable"></tbody>
-
-          </table>
-
+        <div id="consumerList">
+          Loading...
         </div>
 
       </div>
 
-    </section>
 
-
-    <!-- PROPERTIES -->
-
-    <section id="propertiesTab" class="tab-content hidden">
+      <!-- =========================
+           MONTHLY RENT
+      ========================== -->
 
       <div class="section">
 
-        <div class="section-title">
-
-          <h3>Properties</h3>
-
-          <button class="success" id="addPropertyBtn">
-            + Add Property
-          </button>
-
-        </div>
-
-        <div class="table-wrapper">
-
-          <table>
-
-            <thead>
-              <tr>
-                <th>Property</th>
-                <th>Consumer</th>
-                <th>Monthly Rent</th>
-                <th>Status</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-
-            <tbody id="propertyTable"></tbody>
-
-          </table>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- RENT -->
-
-    <section id="rentTab" class="tab-content hidden">
-
-      <div class="section">
-
-        <div class="section-title">
-
-          <h3>Monthly Rent Records</h3>
-
-          <button class="success" id="generateRentBtn">
-            Generate Due Rent
-          </button>
-
-        </div>
+        <h2>Monthly Rent Records</h2>
 
         <p style="color:#666;margin-bottom:15px;">
-          Only rent records whose due date has arrived are created.
+          Only rent records whose due date has arrived are shown.
           Future months will not show as Pending.
           Closed Consumers will not receive new rent records.
         </p>
@@ -590,43 +403,13 @@
 
             </thead>
 
-            <tbody id="rentTable"></tbody>
-
-          </table>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- PAYMENTS -->
-
-    <section id="paymentsTab" class="tab-content hidden">
-
-      <div class="section">
-
-        <div class="section-title">
-          <h3>Payments</h3>
-        </div>
-
-        <div class="table-wrapper">
-
-          <table>
-
-            <thead>
-
+            <tbody id="rentTable">
               <tr>
-                <th>Consumer</th>
-                <th>Amount</th>
-                <th>Date</th>
-                <th>Rent Record</th>
+                <td colspan="8">
+                  Loading...
+                </td>
               </tr>
-
-            </thead>
-
-            <tbody id="paymentTable"></tbody>
+            </tbody>
 
           </table>
 
@@ -634,1854 +417,998 @@
 
       </div>
 
-    </section>
-
-
-    <!-- RECEIPTS -->
-
-    <section id="receiptsTab" class="tab-content hidden">
-
-      <div class="section">
-
-        <div class="section-title">
-          <h3>Receipts</h3>
-        </div>
-
-        <div class="table-wrapper">
-
-          <table>
-
-            <thead>
-
-              <tr>
-                <th>Consumer</th>
-                <th>Amount</th>
-                <th>Date</th>
-                <th>Receipt ID</th>
-              </tr>
-
-            </thead>
-
-            <tbody id="receiptTable"></tbody>
-
-          </table>
-
-        </div>
-
-      </div>
-
-    </section>
-
-  </main>
-
-</div>
-
-
-<!-- =========================
-     CONSUMER MODAL
-========================= -->
-
-<div id="consumerModal" class="modal hidden">
-
-  <div class="modal-box">
-
-    <div class="modal-head">
-
-      <h3>Add Consumer</h3>
-
-      <button class="close" onclick="closeModal('consumerModal')">
-        ✕
-      </button>
-
     </div>
-
-    <form id="consumerForm">
-
-      <label>Name</label>
-      <input id="consumerName" required>
-
-      <label>Phone</label>
-      <input id="consumerPhone">
-
-      <label>Monthly Rent</label>
-      <input id="consumerRent" type="number" min="0" required>
-
-      <label>Start Date</label>
-      <input id="consumerStartDate" type="date" required>
-
-      <label>Status</label>
-
-      <select id="consumerStatus">
-
-        <option value="active">
-          Active
-        </option>
-
-        <option value="closed">
-          Closed
-        </option>
-
-      </select>
-
-      <button class="primary" type="submit">
-        Save Consumer
-      </button>
-
-    </form>
 
   </div>
 
-</div>
 
+  <!-- =========================
+       FIREBASE
+  ========================== -->
 
-<!-- =========================
-     PROPERTY MODAL
-========================= -->
+  <script type="module">
 
-<div id="propertyModal" class="modal hidden">
+    import {
+      initializeApp
+    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
-  <div class="modal-box">
+    import {
+      getAuth,
+      signInWithEmailAndPassword,
+      signOut,
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
-    <div class="modal-head">
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      getDocs,
+      doc,
+      getDoc,
+      setDoc,
+      updateDoc,
+      query,
+      where,
+      orderBy,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
-      <h3>Add Property</h3>
 
-      <button class="close" onclick="closeModal('propertyModal')">
-        ✕
-      </button>
+    // =========================
+    // FIREBASE CONFIG
+    // =========================
 
-    </div>
+    const firebaseConfig = {
 
-    <form id="propertyForm">
+      apiKey:
+        "AIzaSyBJPjJO0xlRlBCxLmbtFIcgYiiDA4JAWMM",
 
-      <label>Property Name / Number</label>
-      <input id="propertyName" required>
+      authDomain:
+        "rent-management-system-3babb.firebaseapp.com",
 
-      <label>Consumer</label>
-      <select id="propertyConsumer" required></select>
+      projectId:
+        "rent-management-system-3babb",
 
-      <label>Monthly Rent</label>
-      <input id="propertyRent" type="number" min="0" required>
+      storageBucket:
+        "rent-management-system-3babb.firebasestorage.app",
 
-      <label>Status</label>
+      messagingSenderId:
+        "25025742095",
 
-      <select id="propertyStatus">
+      appId:
+        "1:25025742095:web:f3b3f05bf2575c05e42a7a",
 
-        <option value="active">
-          Active
-        </option>
+      measurementId:
+        "G-PCPR2W35EX"
 
-        <option value="closed">
-          Closed
-        </option>
+    };
 
-      </select>
 
-      <button class="primary" type="submit">
-        Save Property
-      </button>
+    // =========================
+    // INITIALIZE
+    // =========================
 
-    </form>
+    const app = initializeApp(firebaseConfig);
 
-  </div>
+    const auth = getAuth(app);
 
-</div>
+    const db = getFirestore(app);
 
 
-<!-- =========================
-     PAYMENT MODAL
-========================= -->
+    // =========================
+    // OWNER UID
+    // =========================
 
-<div id="paymentModal" class="modal hidden">
+    const OWNER_UID =
+      "AE6neL3sp9MkpgoqKZe78Td9XAL2";
 
-  <div class="modal-box">
 
-    <div class="modal-head">
+    // =========================
+    // GLOBAL DATA
+    // =========================
 
-      <h3>Record Payment</h3>
+    let consumers = [];
+    let rentRecords = [];
 
-      <button class="close" onclick="closeModal('paymentModal')">
-        ✕
-      </button>
 
-    </div>
+    // =========================
+    // LOGIN
+    // =========================
 
-    <form id="paymentForm">
+    window.loginOwner = async function () {
 
-      <input type="hidden" id="paymentRentId">
+      const email =
+        document.getElementById("loginEmail").value.trim();
 
-      <label>Consumer</label>
-      <input id="paymentConsumer" readonly>
+      const password =
+        document.getElementById("loginPassword").value;
 
-      <label>Total Rent</label>
-      <input id="paymentTotalRent" readonly>
+      const message =
+        document.getElementById("loginMessage");
 
-      <label>Already Paid</label>
-      <input id="paymentAlreadyPaid" readonly>
 
-      <label>Payment Amount</label>
-      <input id="paymentAmount" type="number" min="1" required>
+      if (!email || !password) {
 
-      <label>Payment Date</label>
-      <input id="paymentDate" type="date" required>
+        message.innerText =
+          "Email आणि Password enter करा.";
 
-      <button class="primary" type="submit">
-        Save Payment
-      </button>
-
-    </form>
-
-  </div>
-
-</div>
-
-
-<script type="module">
-
-  import {
-    initializeApp
-  } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-
-  import {
-    getAnalytics
-  } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-analytics.js";
-
-  import {
-    getAuth,
-    signInWithEmailAndPassword,
-    onAuthStateChanged,
-    signOut
-  } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
-
-  import {
-    getFirestore,
-    collection,
-    doc,
-    getDoc,
-    getDocs,
-    addDoc,
-    updateDoc,
-    deleteDoc,
-    query,
-    where,
-    orderBy,
-    serverTimestamp
-  } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
-
-
-  /* =========================
-     FIREBASE CONFIG
-  ========================= */
-
-  const firebaseConfig = {
-
-    apiKey: "AIzaSyBJPjJO0xlRlBCxLmbtFIcgYiiDA4JAWMM",
-
-    authDomain:
-      "rent-management-system-3babb.firebaseapp.com",
-
-    projectId:
-      "rent-management-system-3babb",
-
-    storageBucket:
-      "rent-management-system-3babb.firebasestorage.app",
-
-    messagingSenderId:
-      "25025742095",
-
-    appId:
-      "1:25025742095:web:f3b3f05bf2575c05e42a7a",
-
-    measurementId:
-      "G-PCPR2W35EX"
-
-  };
-
-
-  const app = initializeApp(firebaseConfig);
-
-  try {
-    getAnalytics(app);
-  } catch (e) {
-    console.log("Analytics unavailable");
-  }
-
-  const auth = getAuth(app);
-
-  const db = getFirestore(app);
-
-
-  /* =========================
-     OWNER UID
-  ========================= */
-
-  const OWNER_UID =
-    "AE6neL3sp9MkpgoqKZe78Td9XAL2";
-
-
-  /* =========================
-     GLOBAL DATA
-  ========================= */
-
-  let consumers = [];
-  let properties = [];
-  let rentRecords = [];
-  let payments = [];
-  let receipts = [];
-
-
-  /* =========================
-     DOM
-  ========================= */
-
-  const loginPage =
-    document.getElementById("loginPage");
-
-  const appPage =
-    document.getElementById("app");
-
-  const loginForm =
-    document.getElementById("loginForm");
-
-  const loginError =
-    document.getElementById("loginError");
-
-
-  /* =========================
-     LOGIN
-  ========================= */
-
-  loginForm.addEventListener("submit", async (e) => {
-
-    e.preventDefault();
-
-    loginError.textContent = "";
-
-    const email =
-      document.getElementById("loginEmail").value.trim();
-
-    const password =
-      document.getElementById("loginPassword").value;
-
-    try {
-
-      await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-    } catch (error) {
-
-      console.error(error);
-
-      loginError.textContent =
-        getLoginError(error);
-
-    }
-
-  });
-
-
-  function getLoginError(error) {
-
-    switch (error.code) {
-
-      case "auth/invalid-credential":
-        return "Invalid email or password.";
-
-      case "auth/user-not-found":
-        return "Owner account not found.";
-
-      case "auth/wrong-password":
-        return "Wrong password.";
-
-      case "auth/too-many-requests":
-        return "Too many attempts. Try again later.";
-
-      default:
-        return error.message;
-
-    }
-
-  }
-
-
-  /* =========================
-     AUTH STATE
-  ========================= */
-
-  onAuthStateChanged(auth, async (user) => {
-
-    if (!user) {
-
-      loginPage.classList.remove("hidden");
-
-      appPage.classList.add("hidden");
-
-      return;
-
-    }
-
-
-    /* OWNER UID CHECK */
-
-    if (user.uid !== OWNER_UID) {
-
-      await signOut(auth);
-
-      loginPage.classList.remove("hidden");
-
-      appPage.classList.add("hidden");
-
-      loginError.textContent =
-        "Access denied. This account is not the Owner account.";
-
-      return;
-
-    }
-
-
-    /* FIRESTORE OWNER CHECK */
-
-    try {
-
-      const ownerRef =
-        doc(db, "users", user.uid);
-
-      const ownerSnap =
-        await getDoc(ownerRef);
-
-
-      if (
-        !ownerSnap.exists() ||
-        ownerSnap.data().role !== "owner"
-      ) {
-
-        await signOut(auth);
-
-        loginError.textContent =
-          "Owner profile not found in Firestore.";
+        message.style.display = "block";
 
         return;
-
       }
 
 
-      loginPage.classList.add("hidden");
+      try {
 
-      appPage.classList.remove("hidden");
+        const result =
+          await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
 
-      document.getElementById("ownerEmail").textContent =
-        user.email || "";
+
+        if (result.user.uid !== OWNER_UID) {
+
+          await signOut(auth);
+
+          throw new Error(
+            "हा account Owner account नाही."
+          );
+        }
 
 
-      await loadAllData();
+        message.style.display = "none";
 
-    } catch (error) {
 
-      console.error(error);
+      } catch (error) {
+
+        console.error(error);
+
+        message.innerText =
+          error.message;
+
+        message.style.display =
+          "block";
+      }
+
+    };
+
+
+    // =========================
+    // LOGOUT
+    // =========================
+
+    window.logoutOwner = async function () {
 
       await signOut(auth);
 
-      loginError.textContent =
-        "Unable to verify Owner profile.";
-
-    }
-
-  });
+    };
 
 
-  /* =========================
-     LOGOUT
-  ========================= */
+    // =========================
+    // AUTH STATE
+    // =========================
 
-  document
-    .getElementById("logoutBtn")
-    .addEventListener("click", async () => {
+    onAuthStateChanged(
+      auth,
+      async (user) => {
 
-      await signOut(auth);
+        if (!user) {
 
-    });
+          document
+            .getElementById("loginPage")
+            .classList.remove("hidden");
+
+          document
+            .getElementById("dashboard")
+            .classList.add("hidden");
+
+          return;
+        }
 
 
-  /* =========================
-     TABS
-  ========================= */
+        if (user.uid !== OWNER_UID) {
 
-  document.querySelectorAll(".tab")
-    .forEach(button => {
+          await signOut(auth);
 
-      button.addEventListener("click", () => {
-
-        const tab =
-          button.dataset.tab;
-
-        document.querySelectorAll(".tab")
-          .forEach(btn =>
-            btn.classList.remove("active")
+          alert(
+            "Access denied. Only Owner can login."
           );
 
-        button.classList.add("active");
-
-
-        document.querySelectorAll(".tab-content")
-          .forEach(section =>
-            section.classList.add("hidden")
-          );
+          return;
+        }
 
 
         document
-          .getElementById(tab + "Tab")
+          .getElementById("loginPage")
+          .classList.add("hidden");
+
+        document
+          .getElementById("dashboard")
           .classList.remove("hidden");
 
-      });
 
-    });
+        document
+          .getElementById("ownerEmail")
+          .innerText =
+          user.email || "";
 
-
-  /* =========================
-     LOAD ALL DATA
-  ========================= */
-
-  async function loadAllData() {
-
-    try {
-
-      await Promise.all([
-        loadConsumers(),
-        loadProperties(),
-        loadRentRecords(),
-        loadPayments(),
-        loadReceipts()
-      ]);
-
-
-      renderEverything();
-
-    } catch (error) {
-
-      console.error(
-        "Database loading error:",
-        error
-      );
-
-      alert(
-        "Firestore data load failed. Check Firestore Rules."
-      );
-
-    }
-
-  }
-
-
-  /* =========================
-     CONSUMERS
-  ========================= */
-
-  async function loadConsumers() {
-
-    const snap =
-      await getDocs(
-        collection(db, "users")
-      );
-
-    consumers = [];
-
-    snap.forEach(item => {
-
-      const data = item.data();
-
-      if (data.role === "consumer") {
-
-        consumers.push({
-          id: item.id,
-          ...data
-        });
-
-      }
-
-    });
-
-  }
-
-
-  async function saveConsumer(data) {
-
-    const newDoc =
-      await addDoc(
-        collection(db, "users"),
-        {
-          ...data,
-          role: "consumer",
-          createdAt: serverTimestamp()
-        }
-      );
-
-    return newDoc.id;
-
-  }
-
-
-  /* =========================
-     PROPERTIES
-  ========================= */
-
-  async function loadProperties() {
-
-    const snap =
-      await getDocs(
-        collection(db, "properties")
-      );
-
-    properties = [];
-
-    snap.forEach(item => {
-
-      properties.push({
-        id: item.id,
-        ...item.data()
-      });
-
-    });
-
-  }
-
-
-  /* =========================
-     RENT RECORDS
-  ========================= */
-
-  async function loadRentRecords() {
-
-    const snap =
-      await getDocs(
-        collection(db, "rentRecords")
-      );
-
-    rentRecords = [];
-
-    snap.forEach(item => {
-
-      rentRecords.push({
-        id: item.id,
-        ...item.data()
-      });
-
-    });
-
-    rentRecords.sort((a,b) =>
-      String(a.dueDate || "")
-        .localeCompare(
-          String(b.dueDate || "")
-        )
-    );
-
-  }
-
-
-  /* =========================
-     PAYMENTS
-  ========================= */
-
-  async function loadPayments() {
-
-    const snap =
-      await getDocs(
-        collection(db, "payments")
-      );
-
-    payments = [];
-
-    snap.forEach(item => {
-
-      payments.push({
-        id: item.id,
-        ...item.data()
-      });
-
-    });
-
-  }
-
-
-  /* =========================
-     RECEIPTS
-  ========================= */
-
-  async function loadReceipts() {
-
-    const snap =
-      await getDocs(
-        collection(db, "receipts")
-      );
-
-    receipts = [];
-
-    snap.forEach(item => {
-
-      receipts.push({
-        id: item.id,
-        ...item.data()
-      });
-
-    });
-
-  }
-
-
-  /* =========================
-     RENDER EVERYTHING
-  ========================= */
-
-  function renderEverything() {
-
-    renderConsumers();
-
-    renderProperties();
-
-    renderRent();
-
-    renderPayments();
-
-    renderReceipts();
-
-    updateDashboard();
-
-    fillPropertyConsumers();
-
-  }
-
-
-  /* =========================
-     CONSUMER RENDER
-  ========================= */
-
-  function renderConsumers() {
-
-    const tbody =
-      document.getElementById("consumerTable");
-
-    tbody.innerHTML = "";
-
-    if (!consumers.length) {
-
-      tbody.innerHTML =
-        `<tr>
-          <td colspan="5" class="empty">
-            No consumers found.
-          </td>
-        </tr>`;
-
-      return;
-
-    }
-
-
-    consumers.forEach(c => {
-
-      const status =
-        c.status || "active";
-
-      const badge =
-        status === "closed"
-          ? `<span class="badge closed">Closed</span>`
-          : `<span class="badge paid">Active</span>`;
-
-
-      const tr =
-        document.createElement("tr");
-
-
-      tr.innerHTML = `
-
-        <td>${escapeHtml(c.name || "-")}</td>
-
-        <td>${escapeHtml(c.phone || "-")}</td>
-
-        <td>₹${money(c.monthlyRent)}</td>
-
-        <td>${badge}</td>
-
-        <td>
-
-          <button
-            class="${status === "closed" ? "success" : "warning"}"
-            data-consumer-id="${c.id}"
-            data-consumer-action="toggle"
-          >
-            ${status === "closed" ? "Activate" : "Close"}
-          </button>
-
-        </td>
-
-      `;
-
-
-      tbody.appendChild(tr);
-
-    });
-
-
-    tbody
-      .querySelectorAll("[data-consumer-action='toggle']")
-      .forEach(btn => {
-
-        btn.addEventListener("click", async () => {
-
-          const id =
-            btn.dataset.consumerId;
-
-          const consumer =
-            consumers.find(c => c.id === id);
-
-          if (!consumer) return;
-
-
-          const newStatus =
-            consumer.status === "closed"
-              ? "active"
-              : "closed";
-
-
-          await updateDoc(
-            doc(db, "users", id),
-            {
-              status: newStatus
-            }
-          );
-
-
-          await loadConsumers();
-
-          renderEverything();
-
-        });
-
-      });
-
-  }
-
-
-  /* =========================
-     PROPERTY RENDER
-  ========================= */
-
-  function renderProperties() {
-
-    const tbody =
-      document.getElementById("propertyTable");
-
-    tbody.innerHTML = "";
-
-    if (!properties.length) {
-
-      tbody.innerHTML =
-        `<tr>
-          <td colspan="5" class="empty">
-            No properties found.
-          </td>
-        </tr>`;
-
-      return;
-
-    }
-
-
-    properties.forEach(p => {
-
-      const consumer =
-        consumers.find(
-          c => c.id === p.consumerId
-        );
-
-
-      const status =
-        p.status || "active";
-
-
-      const tr =
-        document.createElement("tr");
-
-
-      tr.innerHTML = `
-
-        <td>${escapeHtml(p.name || "-")}</td>
-
-        <td>${escapeHtml(
-          consumer?.name || p.consumerName || "-"
-        )}</td>
-
-        <td>₹${money(p.monthlyRent)}</td>
-
-        <td>
-          ${
-            status === "closed"
-            ? '<span class="badge closed">Closed</span>'
-            : '<span class="badge paid">Active</span>'
-          }
-        </td>
-
-        <td>
-
-          <button
-            class="${status === "closed" ? "success" : "warning"}"
-            data-property-id="${p.id}"
-            data-property-action="toggle"
-          >
-            ${status === "closed" ? "Activate" : "Close"}
-          </button>
-
-        </td>
-
-      `;
-
-
-      tbody.appendChild(tr);
-
-    });
-
-
-    tbody
-      .querySelectorAll("[data-property-action='toggle']")
-      .forEach(btn => {
-
-        btn.addEventListener("click", async () => {
-
-          const id =
-            btn.dataset.propertyId;
-
-          const property =
-            properties.find(p => p.id === id);
-
-          if (!property) return;
-
-
-          const newStatus =
-            property.status === "closed"
-              ? "active"
-              : "closed";
-
-
-          await updateDoc(
-            doc(db, "properties", id),
-            {
-              status: newStatus
-            }
-          );
-
-
-          await loadProperties();
-
-          renderEverything();
-
-        });
-
-      });
-
-  }
-
-
-  /* =========================
-     RENT RENDER
-  ========================= */
-
-  function renderRent() {
-
-    const tbody =
-      document.getElementById("rentTable");
-
-    tbody.innerHTML = "";
-
-
-    /*
-      IMPORTANT:
-      Future records are not shown.
-      Due date must be <= today.
-    */
-
-    const today =
-      startOfDay(new Date());
-
-
-    const dueRecords =
-      rentRecords.filter(record => {
-
-        const due =
-          parseDate(record.dueDate);
-
-        return due && due <= today;
-
-      });
-
-
-    if (!dueRecords.length) {
-
-      tbody.innerHTML =
-        `<tr>
-          <td colspan="8" class="empty">
-            No rent records due yet.
-          </td>
-        </tr>`;
-
-      return;
-
-    }
-
-
-    dueRecords.forEach(record => {
-
-      const consumer =
-        consumers.find(
-          c => c.id === record.consumerId
-        );
-
-
-      const paid =
-        Number(record.paidAmount || 0);
-
-      const rent =
-        Number(
-          record.rent ??
-          record.monthlyRent ??
-          consumer?.monthlyRent ??
-          0
-        );
-
-
-      const status =
-        calculateStatus(rent, paid);
-
-
-      const paymentDate =
-        record.paymentDate || "-";
-
-
-      const action =
-        status === "paid"
-          ? "✓"
-          : `<button
-              class="primary"
-              data-pay-id="${record.id}"
-            >
-              Pay
-            </button>`;
-
-
-      const tr =
-        document.createElement("tr");
-
-
-      tr.innerHTML = `
-
-        <td>${escapeHtml(
-          record.consumerName ||
-          consumer?.name ||
-          "-"
-        )}</td>
-
-        <td>${escapeHtml(
-          record.month || "-"
-        )}</td>
-
-        <td>₹${money(rent)}</td>
-
-        <td>${formatDate(record.dueDate)}</td>
-
-        <td>₹${money(paid)}</td>
-
-        <td>${formatDate(paymentDate)}</td>
-
-        <td>
-          ${statusBadge(status)}
-        </td>
-
-        <td>${action}</td>
-
-      `;
-
-
-      tbody.appendChild(tr);
-
-    });
-
-
-    tbody
-      .querySelectorAll("[data-pay-id]")
-      .forEach(btn => {
-
-        btn.addEventListener("click", () => {
-
-          openPaymentModal(
-            btn.dataset.payId
-          );
-
-        });
-
-      });
-
-  }
-
-
-  /* =========================
-     PAYMENT RENDER
-  ========================= */
-
-  function renderPayments() {
-
-    const tbody =
-      document.getElementById("paymentTable");
-
-    tbody.innerHTML = "";
-
-
-    if (!payments.length) {
-
-      tbody.innerHTML =
-        `<tr>
-          <td colspan="4" class="empty">
-            No payments found.
-          </td>
-        </tr>`;
-
-      return;
-
-    }
-
-
-    payments
-      .slice()
-      .reverse()
-      .forEach(p => {
-
-        const consumer =
-          consumers.find(
-            c => c.id === p.consumerId
-          );
-
-
-        const tr =
-          document.createElement("tr");
-
-
-        tr.innerHTML = `
-
-          <td>${escapeHtml(
-            p.consumerName ||
-            consumer?.name ||
-            "-"
-          )}</td>
-
-          <td>₹${money(p.amount)}</td>
-
-          <td>${formatDate(
-            p.paymentDate
-          )}</td>
-
-          <td>${escapeHtml(
-            p.rentRecordId || "-"
-          )}</td>
-
-        `;
-
-
-        tbody.appendChild(tr);
-
-      });
-
-  }
-
-
-  /* =========================
-     RECEIPT RENDER
-  ========================= */
-
-  function renderReceipts() {
-
-    const tbody =
-      document.getElementById("receiptTable");
-
-    tbody.innerHTML = "";
-
-
-    if (!receipts.length) {
-
-      tbody.innerHTML =
-        `<tr>
-          <td colspan="4" class="empty">
-            No receipts found.
-          </td>
-        </tr>`;
-
-      return;
-
-    }
-
-
-    receipts
-      .slice()
-      .reverse()
-      .forEach(r => {
-
-        const consumer =
-          consumers.find(
-            c => c.id === r.consumerId
-          );
-
-
-        const tr =
-          document.createElement("tr");
-
-
-        tr.innerHTML = `
-
-          <td>${escapeHtml(
-            r.consumerName ||
-            consumer?.name ||
-            "-"
-          )}</td>
-
-          <td>₹${money(r.amount)}</td>
-
-          <td>${formatDate(
-            r.paymentDate
-          )}</td>
-
-          <td>${escapeHtml(
-            r.id
-          )}</td>
-
-        `;
-
-
-        tbody.appendChild(tr);
-
-      });
-
-  }
-
-
-  /* =========================
-     DASHBOARD
-  ========================= */
-
-  function updateDashboard() {
-
-    const active =
-      consumers.filter(
-        c => c.status !== "closed"
-      );
-
-
-    let pending = 0;
-
-    let collected = 0;
-
-
-    const today =
-      startOfDay(new Date());
-
-
-    rentRecords.forEach(record => {
-
-      const due =
-        parseDate(record.dueDate);
-
-      if (!due || due > today) return;
-
-
-      const rent =
-        Number(record.rent || 0);
-
-      const paid =
-        Number(record.paidAmount || 0);
-
-
-      collected += paid;
-
-      pending +=
-        Math.max(0, rent - paid);
-
-    });
-
-
-    document.getElementById(
-      "totalConsumers"
-    ).textContent =
-      consumers.length;
-
-
-    document.getElementById(
-      "activeConsumers"
-    ).textContent =
-      active.length;
-
-
-    document.getElementById(
-      "pendingRent"
-    ).textContent =
-      "₹" + money(pending);
-
-
-    document.getElementById(
-      "collectedRent"
-    ).textContent =
-      "₹" + money(collected);
-
-  }
-
-
-  /* =========================
-     ADD CONSUMER
-  ========================= */
-
-  document
-    .getElementById("addConsumerBtn")
-    .addEventListener("click", () => {
-
-      document
-        .getElementById("consumerForm")
-        .reset();
-
-      openModal("consumerModal");
-
-    });
-
-
-  document
-    .getElementById("consumerForm")
-    .addEventListener("submit", async e => {
-
-      e.preventDefault();
-
-
-      const data = {
-
-        name:
-          document.getElementById(
-            "consumerName"
-          ).value.trim(),
-
-        phone:
-          document.getElementById(
-            "consumerPhone"
-          ).value.trim(),
-
-        monthlyRent:
-          Number(
-            document.getElementById(
-              "consumerRent"
-            ).value
-          ),
-
-        startDate:
-          document.getElementById(
-            "consumerStartDate"
-          ).value,
-
-        status:
-          document.getElementById(
-            "consumerStatus"
-          ).value
-
-      };
-
-
-      try {
-
-        await saveConsumer(data);
-
-        closeModal("consumerModal");
 
         await loadConsumers();
 
-        renderEverything();
-
-      } catch (error) {
-
-        console.error(error);
-
-        alert(
-          "Consumer save failed: " +
-          error.message
-        );
+        await loadRentRecords();
 
       }
-
-    });
-
-
-  /* =========================
-     ADD PROPERTY
-  ========================= */
-
-  document
-    .getElementById("addPropertyBtn")
-    .addEventListener("click", () => {
-
-      fillPropertyConsumers();
-
-      document
-        .getElementById("propertyForm")
-        .reset();
-
-      openModal("propertyModal");
-
-    });
+    );
 
 
-  function fillPropertyConsumers() {
+    // =========================
+    // ADD CONSUMER
+    // =========================
 
-    const select =
-      document.getElementById(
-        "propertyConsumer"
-      );
+    window.addConsumer = async function () {
 
-    select.innerHTML =
-      `<option value="">Select Consumer</option>`;
+      const name =
+        document
+          .getElementById("consumerName")
+          .value.trim();
 
+      const phone =
+        document
+          .getElementById("consumerPhone")
+          .value.trim();
 
-    consumers
-      .filter(c => c.status !== "closed")
-      .forEach(c => {
-
-        const option =
-          document.createElement("option");
-
-        option.value = c.id;
-
-        option.textContent =
-          c.name;
-
-        select.appendChild(option);
-
-      });
-
-  }
-
-
-  document
-    .getElementById("propertyForm")
-    .addEventListener("submit", async e => {
-
-      e.preventDefault();
-
-
-      const consumerId =
-        document.getElementById(
-          "propertyConsumer"
-        ).value;
-
-
-      const consumer =
-        consumers.find(
-          c => c.id === consumerId
+      const rent =
+        Number(
+          document
+            .getElementById("consumerRent")
+            .value
         );
 
 
-      if (!consumer) {
+      if (!name || !rent) {
 
-        alert("Select a consumer.");
+        showMessage(
+          "consumerMessage",
+          "Consumer Name आणि Rent required आहे.",
+          true
+        );
 
         return;
-
       }
-
-
-      const data = {
-
-        name:
-          document.getElementById(
-            "propertyName"
-          ).value.trim(),
-
-        consumerId,
-
-        consumerName:
-          consumer.name,
-
-        monthlyRent:
-          Number(
-            document.getElementById(
-              "propertyRent"
-            ).value
-          ),
-
-        status:
-          document.getElementById(
-            "propertyStatus"
-          ).value,
-
-        createdAt:
-          serverTimestamp()
-
-      };
 
 
       try {
+
+        const userRef =
+          await addDoc(
+            collection(db, "users"),
+            {
+              name: name,
+              phone: phone,
+              rent: rent,
+              role: "consumer",
+              status: "active",
+              createdAt: serverTimestamp()
+            }
+          );
+
+
+        /*
+          Property document
+        */
 
         await addDoc(
           collection(db, "properties"),
-          data
+          {
+            consumerId: userRef.id,
+            consumerName: name,
+            monthlyRent: rent,
+            status: "active",
+            createdAt: serverTimestamp()
+          }
         );
 
 
-        closeModal("propertyModal");
+        document
+          .getElementById("consumerName")
+          .value = "";
 
-        await loadProperties();
+        document
+          .getElementById("consumerPhone")
+          .value = "";
 
-        renderEverything();
+        document
+          .getElementById("consumerRent")
+          .value = "";
 
-      } catch (error) {
 
-        console.error(error);
-
-        alert(
-          "Property save failed: " +
-          error.message
+        showMessage(
+          "consumerMessage",
+          "Consumer successfully added.",
+          false
         );
 
-      }
 
-    });
-
-
-  /* =========================
-     GENERATE DUE RENT
-  ========================= */
-
-  document
-    .getElementById("generateRentBtn")
-    .addEventListener("click", async () => {
-
-      try {
-
-        await generateDueRentRecords();
+        await loadConsumers();
 
         await loadRentRecords();
 
-        renderEverything();
-
-        alert(
-          "Due rent records generated successfully."
-        );
 
       } catch (error) {
 
         console.error(error);
 
-        alert(
-          "Rent generation failed: " +
-          error.message
+        showMessage(
+          "consumerMessage",
+          error.message,
+          true
         );
 
       }
 
-    });
+    };
 
 
-  async function generateDueRentRecords() {
+    // =========================
+    // LOAD CONSUMERS
+    // =========================
 
-    const today =
-      startOfDay(new Date());
+    async function loadConsumers() {
 
+      consumers = [];
 
-    for (const consumer of consumers) {
-
-      /*
-        Closed consumers don't receive
-        new rent records.
-      */
-
-      if (consumer.status === "closed") {
-        continue;
-      }
-
-
-      const startDate =
-        parseDate(
-          consumer.startDate
+      const snapshot =
+        await getDocs(
+          collection(db, "users")
         );
 
 
-      if (!startDate) continue;
+      snapshot.forEach(
+        (document) => {
+
+          const data =
+            document.data();
 
 
-      /*
-        Generate only the current month
-        when its due date has arrived.
-      */
+          if (
+            data.role === "consumer"
+          ) {
 
-      const year =
-        today.getFullYear();
+            consumers.push({
+              id: document.id,
+              ...data
+            });
 
-      const month =
-        today.getMonth();
-
-
-      const dueDay =
-        Math.min(
-          startDate.getDate(),
-          daysInMonth(year, month)
-        );
-
-
-      const dueDate =
-        new Date(
-          year,
-          month,
-          dueDay
-        );
-
-
-      if (dueDate > today) {
-        continue;
-      }
-
-
-      const monthName =
-        new Intl.DateTimeFormat(
-          "en-US",
-          {
-            month: "long",
-            year: "numeric"
           }
-        ).format(dueDate);
+
+        }
+      );
 
 
-      /*
-        Prevent duplicate record.
-      */
+      document
+        .getElementById("totalConsumers")
+        .innerText =
+        consumers.length;
 
-      const alreadyExists =
-        rentRecords.some(record =>
 
-          record.consumerId === consumer.id &&
-          record.month === monthName
+      renderConsumers();
 
+    }
+
+
+    // =========================
+    // RENDER CONSUMERS
+    // =========================
+
+    function renderConsumers() {
+
+      const box =
+        document.getElementById(
+          "consumerList"
         );
 
 
-      if (alreadyExists) {
-        continue;
+      if (!consumers.length) {
+
+        box.innerHTML =
+          "<p>No consumers found.</p>";
+
+        return;
       }
 
 
-      await addDoc(
-        collection(db, "rentRecords"),
-        {
+      box.innerHTML = "";
 
-          consumerId:
-            consumer.id,
 
-          consumerName:
-            consumer.name,
+      consumers.forEach(
+        consumer => {
 
-          month:
-            monthName,
+          const row =
+            document.createElement("div");
 
-          rent:
-            Number(
-              consumer.monthlyRent || 0
-            ),
+          row.className =
+            "consumer-row";
 
-          dueDate:
-            dateToString(dueDate),
 
-          paidAmount:
-            0,
+          row.innerHTML = `
 
-          paymentDate:
-            null,
+            <div>
+              <b>${escapeHtml(consumer.name || "")}</b>
+            </div>
 
-          status:
-            "pending",
+            <div>
+              ₹${Number(consumer.rent || 0)}
+            </div>
 
-          createdAt:
-            serverTimestamp()
+            <div>
+              ${escapeHtml(consumer.phone || "-")}
+            </div>
+
+            <div>
+              <button
+                class="small-btn ${
+                  consumer.status === "closed"
+                    ? "success"
+                    : "danger"
+                }"
+                onclick="toggleConsumerStatus('${consumer.id}')"
+              >
+                ${
+                  consumer.status === "closed"
+                    ? "Activate"
+                    : "Close"
+                }
+              </button>
+            </div>
+          `;
+
+
+          box.appendChild(row);
 
         }
       );
 
     }
 
-  }
+
+    // =========================
+    // CLOSE / ACTIVATE
+    // =========================
+
+    window.toggleConsumerStatus =
+      async function (id) {
+
+        const consumer =
+          consumers.find(
+            c => c.id === id
+          );
 
 
-  /* =========================
-     PAYMENT MODAL
-  ========================= */
-
-  function openPaymentModal(rentId) {
-
-    const record =
-      rentRecords.find(
-        r => r.id === rentId
-      );
+        if (!consumer) return;
 
 
-    if (!record) return;
+        const newStatus =
+          consumer.status === "closed"
+            ? "active"
+            : "closed";
 
-
-    const consumer =
-      consumers.find(
-        c => c.id === record.consumerId
-      );
-
-
-    const rent =
-      Number(record.rent || 0);
-
-    const paid =
-      Number(record.paidAmount || 0);
-
-    const remaining =
-      Math.max(
-        0,
-        rent - paid
-      );
-
-
-    document.getElementById(
-      "paymentRentId"
-    ).value = rentId;
-
-
-    document.getElementById(
-      "paymentConsumer"
-    ).value =
-      record.consumerName ||
-      consumer?.name ||
-      "";
-
-
-    document.getElementById(
-      "paymentTotalRent"
-    ).value =
-      "₹" + money(rent);
-
-
-    document.getElementById(
-      "paymentAlreadyPaid"
-    ).value =
-      "₹" + money(paid);
-
-
-    document.getElementById(
-      "paymentAmount"
-    ).value = "";
-
-
-    document.getElementById(
-      "paymentAmount"
-    ).max =
-      remaining;
-
-
-    document.getElementById(
-      "paymentDate"
-    ).value =
-      dateToString(new Date());
-
-
-    openModal("paymentModal");
-
-  }
-
-
-  document
-    .getElementById("paymentForm")
-    .addEventListener("submit", async e => {
-
-      e.preventDefault();
-
-
-      const rentId =
-        document.getElementById(
-          "paymentRentId"
-        ).value;
-
-
-      const record =
-        rentRecords.find(
-          r => r.id === rentId
-        );
-
-
-      if (!record) return;
-
-
-      const amount =
-        Number(
-          document.getElementById(
-            "paymentAmount"
-          ).value
-        );
-
-
-      const oldPaid =
-        Number(
-          record.paidAmount || 0
-        );
-
-
-      const rent =
-        Number(
-          record.rent || 0
-        );
-
-
-      const newPaid =
-        oldPaid + amount;
-
-
-      if (amount <= 0) {
-
-        alert(
-          "Enter a valid payment amount."
-        );
-
-        return;
-
-      }
-
-
-      if (newPaid > rent) {
-
-        alert(
-          "Payment cannot be greater than remaining rent."
-        );
-
-        return;
-
-      }
-
-
-      const paymentDate =
-        document.getElementById(
-          "paymentDate"
-        ).value;
-
-
-      const newStatus =
-        calculateStatus(
-          rent,
-          newPaid
-        );
-
-
-      try {
-
-        /* UPDATE RENT */
 
         await updateDoc(
-          doc(db, "rentRecords", rentId),
+          doc(db, "users", id),
+          {
+            status: newStatus
+          }
+        );
+
+
+        await loadConsumers();
+
+        await loadRentRecords();
+
+      };
+
+
+    // =========================
+    // LOAD RENT RECORDS
+    // =========================
+
+    async function loadRentRecords() {
+
+      rentRecords = [];
+
+
+      /*
+        Existing rent records
+      */
+
+      const snapshot =
+        await getDocs(
+          collection(db, "rentRecords")
+        );
+
+
+      snapshot.forEach(
+        document => {
+
+          rentRecords.push({
+            id: document.id,
+            ...document.data()
+          });
+
+        }
+      );
+
+
+      /*
+        IMPORTANT:
+
+        Future months are NOT created.
+
+        We only create current/due
+        rent record.
+      */
+
+      await createDueRentRecords();
+
+
+      /*
+        Reload after creating records
+      */
+
+      rentRecords = [];
+
+
+      const newSnapshot =
+        await getDocs(
+          collection(db, "rentRecords")
+        );
+
+
+      newSnapshot.forEach(
+        document => {
+
+          rentRecords.push({
+            id: document.id,
+            ...document.data()
+          });
+
+        }
+      );
+
+
+      renderRentRecords();
+
+    }
+
+
+    // =========================
+    // CREATE DUE RENT RECORDS
+    // =========================
+
+    async function createDueRentRecords() {
+
+      const today =
+        new Date();
+
+      today.setHours(
+        0, 0, 0, 0
+      );
+
+
+      for (
+        const consumer of consumers
+      ) {
+
+        /*
+          Closed consumer:
+          no new rent record
+        */
+
+        if (
+          consumer.status === "closed"
+        ) {
+          continue;
+        }
+
+
+        /*
+          Existing records for
+          this consumer
+        */
+
+        const existing =
+          rentRecords.filter(
+            r =>
+              r.consumerId ===
+              consumer.id
+          );
+
+
+        /*
+          Determine rent day.
+
+          Default:
+          1st of every month.
+        */
+
+        const rentDay = 1;
+
+
+        const currentYear =
+          today.getFullYear();
+
+        const currentMonth =
+          today.getMonth();
+
+
+        const dueDate =
+          new Date(
+            currentYear,
+            currentMonth,
+            rentDay
+          );
+
+
+        dueDate.setHours(
+          0, 0, 0, 0
+        );
+
+
+        /*
+          Do not create before
+          due date.
+        */
+
+        if (today < dueDate) {
+          continue;
+        }
+
+
+        const monthKey =
+          `${currentYear}-${String(
+            currentMonth + 1
+          ).padStart(2, "0")}`;
+
+
+        const alreadyExists =
+          existing.some(
+            r =>
+              r.monthKey === monthKey
+          );
+
+
+        if (alreadyExists) {
+          continue;
+        }
+
+
+        await addDoc(
+          collection(db, "rentRecords"),
+          {
+
+            consumerId:
+              consumer.id,
+
+            consumerName:
+              consumer.name || "",
+
+            monthKey:
+              monthKey,
+
+            month:
+              dueDate.toLocaleString(
+                "en-IN",
+                {
+                  month: "long",
+                  year: "numeric"
+                }
+              ),
+
+            rent:
+              Number(
+                consumer.rent || 0
+              ),
+
+            dueDate:
+              formatDate(dueDate),
+
+            paidAmount:
+              0,
+
+            paymentDate:
+              null,
+
+            status:
+              "Pending",
+
+            createdAt:
+              serverTimestamp()
+
+          }
+        );
+
+      }
+
+    }
+
+
+    // =========================
+    // RENDER RENT RECORDS
+    // =========================
+
+    function renderRentRecords() {
+
+      const table =
+        document.getElementById(
+          "rentTable"
+        );
+
+
+      table.innerHTML = "";
+
+
+      /*
+        Sort oldest first
+      */
+
+      rentRecords.sort(
+        (a, b) =>
+          String(a.dueDate || "")
+            .localeCompare(
+              String(b.dueDate || "")
+            )
+      );
+
+
+      let paid = 0;
+      let partial = 0;
+      let pending = 0;
+
+
+      if (!rentRecords.length) {
+
+        table.innerHTML = `
+          <tr>
+            <td colspan="8">
+              No due rent records found.
+            </td>
+          </tr>
+        `;
+
+        updateCounts(
+          paid,
+          partial,
+          pending
+        );
+
+        return;
+      }
+
+
+      rentRecords.forEach(
+        record => {
+
+          const amount =
+            Number(record.rent || 0);
+
+          const paidAmount =
+            Number(
+              record.paidAmount || 0
+            );
+
+
+          let status =
+            "Pending";
+
+
+          if (
+            paidAmount >= amount &&
+            amount > 0
+          ) {
+
+            status = "Paid";
+
+            paid++;
+
+          } else if (
+            paidAmount > 0
+          ) {
+
+            status = "Partial";
+
+            partial++;
+
+          } else {
+
+            pending++;
+
+          }
+
+
+          const tr =
+            document.createElement("tr");
+
+
+          tr.innerHTML = `
+
+            <td>
+              ${escapeHtml(
+                record.consumerName || ""
+              )}
+            </td>
+
+            <td>
+              ${escapeHtml(
+                record.month || ""
+              )}
+            </td>
+
+            <td>
+              ₹${amount}
+            </td>
+
+            <td>
+              ${record.dueDate || "-"}
+            </td>
+
+            <td>
+              ₹${paidAmount}
+            </td>
+
+            <td>
+              ${
+                record.paymentDate || "-"
+              }
+            </td>
+
+            <td>
+              <span class="status ${
+                status === "Paid"
+                  ? "paid"
+                  : status === "Partial"
+                  ? "partial"
+                  : "pending"
+              }">
+                ${status}
+              </span>
+            </td>
+
+            <td>
+
+              ${
+                status !== "Paid"
+                  ? `
+                    <button
+                      class="small-btn success"
+                      onclick="payRent('${record.id}')"
+                    >
+                      Pay
+                    </button>
+                  `
+                  : `
+                    ✓
+                  `
+              }
+
+            </td>
+
+          `;
+
+
+          table.appendChild(tr);
+
+        }
+      );
+
+
+      updateCounts(
+        paid,
+        partial,
+        pending
+      );
+
+    }
+
+
+    // =========================
+    // PAYMENT
+    // =========================
+
+    window.payRent =
+      async function (recordId) {
+
+        const record =
+          rentRecords.find(
+            r => r.id === recordId
+          );
+
+
+        if (!record) return;
+
+
+        const rent =
+          Number(record.rent || 0);
+
+        const oldPaid =
+          Number(
+            record.paidAmount || 0
+          );
+
+
+        const remaining =
+          rent - oldPaid;
+
+
+        const input =
+          prompt(
+            `Remaining amount: ₹${remaining}\n\nEnter payment amount:`
+          );
+
+
+        if (input === null) {
+          return;
+        }
+
+
+        const payment =
+          Number(input);
+
+
+        if (
+          !payment ||
+          payment <= 0
+        ) {
+
+          alert(
+            "Valid payment amount enter करा."
+          );
+
+          return;
+        }
+
+
+        if (
+          payment > remaining
+        ) {
+
+          alert(
+            "Payment remaining amount पेक्षा जास्त आहे."
+          );
+
+          return;
+        }
+
+
+        const newPaid =
+          oldPaid + payment;
+
+
+        const newStatus =
+          newPaid >= rent
+            ? "Paid"
+            : "Partial";
+
+
+        const today =
+          new Date();
+
+
+        await updateDoc(
+          doc(
+            db,
+            "rentRecords",
+            recordId
+          ),
           {
 
             paidAmount:
               newPaid,
 
-            paymentDate,
+            paymentDate:
+              formatDate(today),
 
             status:
               newStatus
@@ -2490,41 +1417,16 @@
         );
 
 
-        /* CREATE PAYMENT */
-
-        const paymentRef =
-          await addDoc(
-            collection(db, "payments"),
-            {
-
-              consumerId:
-                record.consumerId,
-
-              consumerName:
-                record.consumerName,
-
-              rentRecordId:
-                rentId,
-
-              amount,
-
-              paymentDate,
-
-              createdAt:
-                serverTimestamp()
-
-            }
-          );
-
-
-        /* CREATE RECEIPT */
+        /*
+          Payment history
+        */
 
         await addDoc(
-          collection(db, "receipts"),
+          collection(db, "payments"),
           {
 
-            paymentId:
-              paymentRef.id,
+            rentRecordId:
+              recordId,
 
             consumerId:
               record.consumerId,
@@ -2532,12 +1434,11 @@
             consumerName:
               record.consumerName,
 
-            rentRecordId:
-              rentId,
+            amount:
+              payment,
 
-            amount,
-
-            paymentDate,
+            paymentDate:
+              formatDate(today),
 
             createdAt:
               serverTimestamp()
@@ -2546,249 +1447,164 @@
         );
 
 
-        closeModal("paymentModal");
+        /*
+          Receipt
+        */
 
+        await addDoc(
+          collection(db, "receipts"),
+          {
 
-        await Promise.all([
+            rentRecordId:
+              recordId,
 
-          loadRentRecords(),
+            consumerId:
+              record.consumerId,
 
-          loadPayments(),
+            consumerName:
+              record.consumerName,
 
-          loadReceipts()
+            amount:
+              payment,
 
-        ]);
+            paymentDate:
+              formatDate(today),
 
+            createdAt:
+              serverTimestamp()
 
-        renderEverything();
-
-
-      } catch (error) {
-
-        console.error(error);
-
-        alert(
-          "Payment failed: " +
-          error.message
+          }
         );
 
-      }
 
-    });
-
-
-  /* =========================
-     MODAL FUNCTIONS
-  ========================= */
-
-  window.openModal = function(id) {
-
-    document
-      .getElementById(id)
-      .classList.remove("hidden");
-
-  };
+        alert(
+          "Payment successfully saved."
+        );
 
 
-  window.closeModal = function(id) {
+        await loadRentRecords();
 
-    document
-      .getElementById(id)
-      .classList.add("hidden");
-
-  };
+      };
 
 
-  /* =========================
-     HELPERS
-  ========================= */
+    // =========================
+    // COUNTS
+    // =========================
 
-  function money(value) {
-
-    return Number(
-      value || 0
-    ).toLocaleString("en-IN");
-
-  }
-
-
-  function escapeHtml(value) {
-
-    return String(value ?? "")
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
-
-  }
-
-
-  function parseDate(value) {
-
-    if (!value) return null;
-
-
-    if (
-      value &&
-      typeof value.toDate === "function"
+    function updateCounts(
+      paid,
+      partial,
+      pending
     ) {
 
-      return startOfDay(
-        value.toDate()
+      document
+        .getElementById("paidCount")
+        .innerText = paid;
+
+      document
+        .getElementById("partialCount")
+        .innerText = partial;
+
+      document
+        .getElementById("pendingCount")
+        .innerText = pending;
+
+    }
+
+
+    // =========================
+    // DATE FORMAT
+    // =========================
+
+    function formatDate(date) {
+
+      const day =
+        String(
+          date.getDate()
+        ).padStart(2, "0");
+
+      const month =
+        String(
+          date.getMonth() + 1
+        ).padStart(2, "0");
+
+      const year =
+        date.getFullYear();
+
+
+      return `${day}-${month}-${year}`;
+
+    }
+
+
+    // =========================
+    // MESSAGE
+    // =========================
+
+    function showMessage(
+      id,
+      text,
+      error
+    ) {
+
+      const element =
+        document.getElementById(id);
+
+
+      element.innerText = text;
+
+      element.style.display =
+        "block";
+
+
+      element.className =
+        error
+          ? "message error"
+          : "message info";
+
+
+      setTimeout(
+        () => {
+          element.style.display =
+            "none";
+        },
+        4000
       );
 
     }
 
 
-    const date =
-      new Date(value);
+    // =========================
+    // HTML SECURITY
+    // =========================
 
+    function escapeHtml(text) {
 
-    if (isNaN(date.getTime())) {
-      return null;
-    }
-
-
-    return startOfDay(date);
-
-  }
-
-
-  function startOfDay(date) {
-
-    return new Date(
-      date.getFullYear(),
-      date.getMonth(),
-      date.getDate()
-    );
-
-  }
-
-
-  function dateToString(date) {
-
-    const y =
-      date.getFullYear();
-
-    const m =
-      String(
-        date.getMonth() + 1
-      ).padStart(2, "0");
-
-    const d =
-      String(
-        date.getDate()
-      ).padStart(2, "0");
-
-
-    return `${y}-${m}-${d}`;
-
-  }
-
-
-  function formatDate(value) {
-
-    if (!value || value === "-") {
-      return "-";
-    }
-
-
-    const date =
-      parseDate(value);
-
-
-    if (!date) {
-      return "-";
-    }
-
-
-    return String(
-      date.getDate()
-    ).padStart(2, "0")
-      + "-" +
-      String(
-        date.getMonth() + 1
-      ).padStart(2, "0")
-      + "-" +
-      date.getFullYear();
-
-  }
-
-
-  function daysInMonth(year, month) {
-
-    return new Date(
-      year,
-      month + 1,
-      0
-    ).getDate();
-
-  }
-
-
-  function calculateStatus(rent, paid) {
-
-    rent =
-      Number(rent || 0);
-
-    paid =
-      Number(paid || 0);
-
-
-    if (paid >= rent && rent > 0) {
-
-      return "paid";
+      return String(text)
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+        .replace(
+          /</g,
+          "&lt;"
+        )
+        .replace(
+          />/g,
+          "&gt;"
+        )
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+        .replace(
+          /'/g,
+          "&#039;"
+        );
 
     }
 
-
-    if (paid > 0) {
-
-      return "partial";
-
-    }
-
-
-    return "pending";
-
-  }
-
-
-  function statusBadge(status) {
-
-    if (status === "paid") {
-
-      return `
-        <span class="badge paid">
-          Paid
-        </span>
-      `;
-
-    }
-
-
-    if (status === "partial") {
-
-      return `
-        <span class="badge partial">
-          Partial
-        </span>
-      `;
-
-    }
-
-
-    return `
-      <span class="badge pending">
-        Pending
-      </span>
-    `;
-
-  }
-
-</script>
+  </script>
 
 </body>
 </html>
-```
