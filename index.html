@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Rent Management System</title>
 
 <style>
@@ -22,7 +21,7 @@ body{
 
 header{
   background:#1f2937;
-  color:white;
+  color:#fff;
   padding:18px;
   text-align:center;
 }
@@ -44,7 +43,7 @@ header{
 .login-box{
   width:92%;
   max-width:450px;
-  background:white;
+  background:#fff;
   padding:28px;
   border-radius:15px;
   box-shadow:0 4px 20px #ccc;
@@ -65,7 +64,7 @@ button{
   border-radius:7px;
   cursor:pointer;
   background:#1f2937;
-  color:white;
+  color:#fff;
 }
 
 .primary{background:#2563eb}
@@ -74,7 +73,7 @@ button{
 .warning{background:#d97706}
 
 .section{
-  background:white;
+  background:#fff;
   margin-top:20px;
   padding:20px;
   border-radius:12px;
@@ -89,7 +88,7 @@ button{
 }
 
 .card{
-  background:white;
+  background:#fff;
   padding:18px;
   border-radius:12px;
   box-shadow:0 2px 8px #ddd;
@@ -143,11 +142,6 @@ th,td{
   font-weight:bold;
 }
 
-.refunded{
-  color:#2563eb;
-  font-weight:bold;
-}
-
 .closed{
   color:#6b7280;
   font-weight:bold;
@@ -169,11 +163,6 @@ th,td{
 .badge-verified{
   background:#dcfce7;
   color:#15803d;
-}
-
-.badge-held{
-  background:#fef3c7;
-  color:#92400e;
 }
 
 .badge-closed{
@@ -206,7 +195,7 @@ th,td{
   margin-top:20px;
   border:2px solid #222;
   padding:25px;
-  background:white;
+  background:#fff;
 }
 
 .small{
@@ -215,7 +204,6 @@ th,td{
 }
 
 @media(max-width:700px){
-
   .cards{
     grid-template-columns:repeat(2,1fr);
   }
@@ -223,11 +211,9 @@ th,td{
   .form-grid{
     grid-template-columns:1fr;
   }
-
 }
 
 @media print{
-
   body *{
     visibility:hidden;
   }
@@ -243,16 +229,14 @@ th,td{
     top:0;
     width:100%;
   }
-
 }
 </style>
 </head>
 
 <body>
 
-
 <!-- =====================================================
-     LOGIN
+LOGIN
 ===================================================== -->
 
 <div id="loginPage" class="login-page">
@@ -297,7 +281,7 @@ onclick="showRegister()"
 
 
 <!-- =====================================================
-     CONSUMER REGISTRATION
+REGISTER
 ===================================================== -->
 
 <div id="registerPage" class="login-page hidden">
@@ -311,10 +295,7 @@ After registration, Owner will verify your account and add
 Rent, Security Deposit, Property and Joined Date.
 </div>
 
-<input
-id="regName"
-placeholder="Full Name"
->
+<input id="regName" placeholder="Full Name">
 
 <input
 id="regEmail"
@@ -357,7 +338,7 @@ onclick="showLogin()"
 
 
 <!-- =====================================================
-     OWNER DASHBOARD
+OWNER DASHBOARD
 ===================================================== -->
 
 <div id="ownerDashboard" class="hidden">
@@ -378,7 +359,6 @@ onclick="logoutUser()"
 </header>
 
 <div class="container">
-
 
 <!-- DASHBOARD -->
 
@@ -407,7 +387,7 @@ onclick="logoutUser()"
 </div>
 
 
-<!-- SECURITY DEPOSIT LIABILITY -->
+<!-- SECURITY LIABILITY -->
 
 <div class="section">
 
@@ -417,9 +397,7 @@ onclick="logoutUser()"
 
 <h3>
 Total Security Deposit Held:
-<span id="totalDepositLiability">
-₹0
-</span>
+<span id="totalDepositLiability">₹0</span>
 </h3>
 
 <p>
@@ -480,33 +458,15 @@ Select Consumer
 
 <div class="form-grid">
 
-<input
-id="ownerName"
-placeholder="Consumer Name"
-readonly
->
+<input id="ownerName" placeholder="Consumer Name" readonly>
 
-<input
-id="ownerEmail"
-placeholder="Email"
-readonly
->
+<input id="ownerEmail" placeholder="Email" readonly>
 
-<input
-id="ownerMobile"
-placeholder="Mobile"
-readonly
->
+<input id="ownerMobile" placeholder="Mobile" readonly>
 
-<input
-id="ownerProperty"
-placeholder="Property / Shop Name"
->
+<input id="ownerProperty" placeholder="Property / Shop Name">
 
-<input
-id="ownerRoom"
-placeholder="Room / Shop Number"
->
+<input id="ownerRoom" placeholder="Room / Shop Number">
 
 <input
 id="ownerRent"
@@ -522,32 +482,20 @@ placeholder="Security Deposit ₹"
 
 <label>
 Joined Date
-<input
-id="ownerJoinedDate"
-type="date"
->
+<input id="ownerJoinedDate" type="date">
 </label>
 
 <label>
 First Rent Due Date
-<input
-id="ownerDueDate"
-type="date"
->
+<input id="ownerDueDate" type="date">
 </label>
 
-<input
-id="ownerAddress"
-placeholder="Property Address"
->
+<input id="ownerAddress" placeholder="Property Address">
 
 </div>
 
 <div class="info-box">
-
-🔒 <b>Joined Date and Security Deposit are permanent.</b><br>
-Consumer cannot change these details.
-
+🔒 Joined Date and Security Deposit are permanent after verification.
 </div>
 
 <button
@@ -567,9 +515,7 @@ onclick="updateConsumerDetails()"
 </div>
 
 
-<!-- =====================================================
-     CLOSE CONSUMER
-===================================================== -->
+<!-- CLOSE ACCOUNT -->
 
 <div class="section">
 
@@ -578,24 +524,21 @@ onclick="updateConsumerDetails()"
 <div class="close-box">
 
 <p>
-Closing a Consumer does <b>not delete their old data</b>.
+Closing a Consumer does <b>not delete old data</b>.
 </p>
 
 <p>
-Previous Rent Records, Payment History and Security Deposit
-records will remain saved permanently.
+Old Rent Records, Payment History and Security Deposit records
+remain saved.
 </p>
 
 <p>
-After closing, <b>no new monthly rent records</b> will be
-created for that Consumer.
+After closing, <b>no new monthly rent records</b> are generated.
 </p>
 
 </div>
 
-<select
-id="closeConsumerSelect"
->
+<select id="closeConsumerSelect">
 
 <option value="">
 Select Consumer
@@ -623,9 +566,7 @@ onclick="closeConsumerAccount()"
 </div>
 
 
-<!-- =====================================================
-     CLOSED CONSUMERS
-===================================================== -->
+<!-- CLOSED CONSUMERS -->
 
 <div class="section">
 
@@ -656,9 +597,7 @@ onclick="closeConsumerAccount()"
 </div>
 
 
-<!-- =====================================================
-     SECURITY DEPOSIT REFUND
-===================================================== -->
+<!-- SECURITY REFUND -->
 
 <div class="section">
 
@@ -670,7 +609,7 @@ onchange="loadRefundDetails()"
 >
 
 <option value="">
-Select Consumer
+Select Closed Consumer
 </option>
 
 </select>
@@ -680,7 +619,7 @@ Select Consumer
 <input
 id="refundOriginalDeposit"
 type="number"
-placeholder="Deposit ₹"
+placeholder="Current Deposit ₹"
 readonly
 >
 
@@ -721,9 +660,7 @@ onclick="refundSecurityDeposit()"
 </div>
 
 
-<!-- =====================================================
-     MONTHLY RENT
-===================================================== -->
+<!-- MONTHLY RENT -->
 
 <div class="section">
 
@@ -731,8 +668,8 @@ onclick="refundSecurityDeposit()"
 
 <div class="info-box">
 Only rent records whose <b>due date has arrived</b> are created.
-Future months will not show as Pending.
-Closed Consumers will not receive new rent records.
+Future months are never created as Pending.
+Closed Consumers receive no new rent records.
 </div>
 
 <div class="table-wrap">
@@ -746,6 +683,7 @@ Closed Consumers will not receive new rent records.
 <th>Rent</th>
 <th>Due Date</th>
 <th>Paid</th>
+<th>Remaining</th>
 <th>Payment Date</th>
 <th>Status</th>
 <th>Action</th>
@@ -761,9 +699,7 @@ Closed Consumers will not receive new rent records.
 </div>
 
 
-<!-- =====================================================
-     RENT COLLECTION
-===================================================== -->
+<!-- RENT COLLECTION -->
 
 <div class="section">
 
@@ -819,6 +755,13 @@ readonly
 >
 
 <input
+id="paymentRemaining"
+type="number"
+placeholder="Remaining Amount"
+readonly
+>
+
+<input
 id="paymentAmount"
 type="number"
 placeholder="Payment Amount ₹"
@@ -841,18 +784,15 @@ onclick="recordPayment()"
 </div>
 
 
-<!-- =====================================================
-     PAYMENT HISTORY
-===================================================== -->
+<!-- PAYMENT HISTORY -->
 
 <div class="section">
 
 <h2>📋 Payment History</h2>
 
 <div class="info-box">
-Select a Consumer to see only that Consumer's complete
-payment history. Old records remain available even after
-the Consumer account is closed.
+Use <b>Select Account</b> to see one Consumer's complete
+payment history. Closed Consumers are also included.
 </div>
 
 <select
@@ -861,7 +801,11 @@ onchange="displaySelectedPaymentHistory()"
 >
 
 <option value="">
-All Consumers
+Select Account
+</option>
+
+<option value="ALL">
+All Accounts
 </option>
 
 </select>
@@ -890,9 +834,7 @@ All Consumers
 </div>
 
 
-<!-- =====================================================
-     PROPERTY
-===================================================== -->
+<!-- PROPERTY -->
 
 <div class="section">
 
@@ -923,9 +865,7 @@ All Consumers
 </div>
 
 
-<!-- =====================================================
-     RECEIPT
-===================================================== -->
+<!-- RECEIPT -->
 
 <div class="section">
 
@@ -965,13 +905,12 @@ onclick="generateReceipt()"
 
 </div>
 
-
 </div>
 </div>
 
 
 <!-- =====================================================
-     CONSUMER DASHBOARD
+CONSUMER DASHBOARD
 ===================================================== -->
 
 <div id="consumerDashboard" class="hidden">
@@ -1010,10 +949,7 @@ Account Status:
 </div>
 
 
-<div
-id="pendingMessage"
-class="section hidden"
->
+<div id="pendingMessage" class="section hidden">
 
 <h2>⏳ Verification Pending</h2>
 
@@ -1026,10 +962,7 @@ become available.
 </div>
 
 
-<div
-id="closedMessage"
-class="section hidden"
->
+<div id="closedMessage" class="section hidden">
 
 <h2>🚪 Account Closed</h2>
 
@@ -1045,11 +978,7 @@ No new rent will be generated for this account.
 </div>
 
 
-<div
-id="verifiedConsumerArea"
-class="hidden"
->
-
+<div id="verifiedConsumerArea" class="hidden">
 
 <div class="cards">
 
@@ -1084,35 +1013,15 @@ class="hidden"
 
 <div class="form-grid">
 
-<input
-id="myName"
-placeholder="Name"
-readonly
->
+<input id="myName" placeholder="Name" readonly>
 
-<input
-id="myMobile"
-placeholder="Mobile"
-readonly
->
+<input id="myMobile" placeholder="Mobile" readonly>
 
-<input
-id="myEmail"
-placeholder="Email"
-readonly
->
+<input id="myEmail" placeholder="Email" readonly>
 
-<input
-id="myPropertyInput"
-placeholder="Property"
-readonly
->
+<input id="myPropertyInput" placeholder="Property" readonly>
 
-<input
-id="myRoom"
-placeholder="Room / Shop"
-readonly
->
+<input id="myRoom" placeholder="Room / Shop" readonly>
 
 <input
 id="myRentInput"
@@ -1140,11 +1049,7 @@ type="date"
 readonly
 >
 
-<input
-id="myAddress"
-placeholder="Address"
-readonly
->
+<input id="myAddress" placeholder="Address" readonly>
 
 </div>
 
@@ -1155,7 +1060,7 @@ readonly
 </div>
 
 
-<!-- RENT -->
+<!-- MY RENT -->
 
 <div class="section">
 
@@ -1171,6 +1076,7 @@ readonly
 <th>Rent</th>
 <th>Due Date</th>
 <th>Paid</th>
+<th>Remaining</th>
 <th>Payment Date</th>
 <th>Status</th>
 </tr>
@@ -1185,7 +1091,7 @@ readonly
 </div>
 
 
-<!-- PAYMENT -->
+<!-- MY PAYMENTS -->
 
 <div class="section">
 
@@ -1234,14 +1140,12 @@ Held by Owner
 </p>
 
 <p>
-The Security Deposit is a liability of the Owner and is
-separate from monthly rent.
+Security Deposit is separate from monthly rent.
 </p>
 
 </div>
 
 </div>
-
 
 </div>
 </div>
@@ -1284,7 +1188,7 @@ from
 
 
 /* =====================================================
-   FIREBASE CONFIG
+FIREBASE CONFIG
 ===================================================== */
 
 const firebaseConfig = {
@@ -1309,14 +1213,22 @@ const firebaseConfig = {
 
   measurementId:
   "G-PCPR2W35EX"
-
 };
+
 
 const app=initializeApp(firebaseConfig);
 
 const auth=getAuth(app);
 
 const db=getFirestore(app);
+
+
+/*
+  Owner UID supplied by you.
+  Login is still authenticated through Firebase Authentication.
+*/
+const OWNER_UID="AE6neL3sp9MkpgoqKZe78Td9XAL2";
+
 
 let currentUser=null;
 let currentRole=null;
@@ -1329,7 +1241,7 @@ let deposits=[];
 
 
 /* =====================================================
-   PAGE
+PAGE
 ===================================================== */
 
 window.showLogin=function(){
@@ -1354,18 +1266,16 @@ window.showRegister=function(){
 
 
 /* =====================================================
-   LOGIN
+LOGIN
 ===================================================== */
 
 window.loginUser=async function(){
 
   const email=
-  document.getElementById("loginEmail")
-  .value.trim();
+  document.getElementById("loginEmail").value.trim();
 
   const password=
-  document.getElementById("loginPassword")
-  .value;
+  document.getElementById("loginPassword").value;
 
   const error=
   document.getElementById("loginError");
@@ -1401,26 +1311,22 @@ window.loginUser=async function(){
 
 
 /* =====================================================
-   REGISTER
+REGISTER CONSUMER
 ===================================================== */
 
 window.registerConsumer=async function(){
 
   const name=
-  document.getElementById("regName")
-  .value.trim();
+  document.getElementById("regName").value.trim();
 
   const email=
-  document.getElementById("regEmail")
-  .value.trim();
+  document.getElementById("regEmail").value.trim();
 
   const password=
-  document.getElementById("regPassword")
-  .value;
+  document.getElementById("regPassword").value;
 
   const mobile=
-  document.getElementById("regMobile")
-  .value.trim();
+  document.getElementById("regMobile").value.trim();
 
   const error=
   document.getElementById("registerError");
@@ -1438,8 +1344,7 @@ window.registerConsumer=async function(){
     !mobile
   ){
 
-    error.innerText=
-    "Fill all details.";
+    error.innerText="Fill all details.";
 
     return;
   }
@@ -1464,17 +1369,15 @@ window.registerConsumer=async function(){
     const uid=result.user.uid;
 
     await setDoc(
-      doc(
-        db,
-        "users",
-        uid
-      ),
+      doc(db,"users",uid),
       {
 
         name:name,
         email:email,
         mobile:mobile,
+
         role:"consumer",
+
         status:"pending",
 
         createdAt:
@@ -1493,8 +1396,7 @@ window.registerConsumer=async function(){
 
     console.error(e);
 
-    error.innerText=
-    e.message;
+    error.innerText=e.message;
 
   }
 
@@ -1502,7 +1404,7 @@ window.registerConsumer=async function(){
 
 
 /* =====================================================
-   AUTH
+AUTH STATE
 ===================================================== */
 
 onAuthStateChanged(
@@ -1510,6 +1412,9 @@ onAuthStateChanged(
   async(user)=>{
 
     if(!user){
+
+      currentUser=null;
+      currentRole=null;
 
       showLogin();
 
@@ -1522,18 +1427,12 @@ onAuthStateChanged(
 
       const snap=
       await getDoc(
-        doc(
-          db,
-          "users",
-          user.uid
-        )
+        doc(db,"users",user.uid)
       );
 
       if(!snap.exists()){
 
-        alert(
-          "User profile not found."
-        );
+        alert("User profile not found.");
 
         await signOut(auth);
 
@@ -1543,6 +1442,23 @@ onAuthStateChanged(
       const data=snap.data();
 
       currentRole=data.role;
+
+      /*
+        Extra Owner UID validation.
+      */
+
+      if(
+        data.role==="owner" &&
+        user.uid!==OWNER_UID
+      ){
+
+        alert("Unauthorized Owner account.");
+
+        await signOut(auth);
+
+        return;
+      }
+
 
       if(currentRole==="owner"){
 
@@ -1571,7 +1487,7 @@ onAuthStateChanged(
       console.error(e);
 
       alert(
-        "Unable to load account."
+        "Unable to load account: "+e.message
       );
 
     }
@@ -1581,7 +1497,7 @@ onAuthStateChanged(
 
 
 /* =====================================================
-   SHOW DASHBOARDS
+SHOW DASHBOARDS
 ===================================================== */
 
 function showOwner(){
@@ -1616,6 +1532,7 @@ function showConsumer(){
 
 }
 
+
 window.logoutUser=async function(){
 
   await signOut(auth);
@@ -1624,7 +1541,7 @@ window.logoutUser=async function(){
 
 
 /* =====================================================
-   OWNER LOAD
+OWNER LOAD
 ===================================================== */
 
 async function loadOwner(){
@@ -1638,6 +1555,10 @@ async function loadOwner(){
   await loadRentRecords();
 
   await loadDeposits();
+
+  /*
+    Create ONLY due rent records.
+  */
 
   await ensureDueRentRecordsForAllConsumers();
 
@@ -1663,7 +1584,7 @@ async function loadOwner(){
 
 
 /* =====================================================
-   LOAD COLLECTIONS
+LOAD COLLECTIONS
 ===================================================== */
 
 async function loadConsumers(){
@@ -1672,10 +1593,7 @@ async function loadConsumers(){
 
   const snap=
   await getDocs(
-    collection(
-      db,
-      "users"
-    )
+    collection(db,"users")
   );
 
   snap.forEach(item=>{
@@ -1685,10 +1603,8 @@ async function loadConsumers(){
     if(data.role==="consumer"){
 
       consumers.push({
-
         id:item.id,
         ...data
-
       });
 
     }
@@ -1697,30 +1613,27 @@ async function loadConsumers(){
 
 }
 
+
 async function loadProperties(){
 
   properties=[];
 
   const snap=
   await getDocs(
-    collection(
-      db,
-      "properties"
-    )
+    collection(db,"properties")
   );
 
   snap.forEach(item=>{
 
     properties.push({
-
       id:item.id,
       ...item.data()
-
     });
 
   });
 
 }
+
 
 async function loadPayments(){
 
@@ -1728,24 +1641,20 @@ async function loadPayments(){
 
   const snap=
   await getDocs(
-    collection(
-      db,
-      "payments"
-    )
+    collection(db,"payments")
   );
 
   snap.forEach(item=>{
 
     payments.push({
-
       id:item.id,
       ...item.data()
-
     });
 
   });
 
 }
+
 
 async function loadRentRecords(){
 
@@ -1753,24 +1662,20 @@ async function loadRentRecords(){
 
   const snap=
   await getDocs(
-    collection(
-      db,
-      "rentRecords"
-    )
+    collection(db,"rentRecords")
   );
 
   snap.forEach(item=>{
 
     rentRecords.push({
-
       id:item.id,
       ...item.data()
-
     });
 
   });
 
 }
+
 
 async function loadDeposits(){
 
@@ -1778,19 +1683,14 @@ async function loadDeposits(){
 
   const snap=
   await getDocs(
-    collection(
-      db,
-      "securityDeposits"
-    )
+    collection(db,"securityDeposits")
   );
 
   snap.forEach(item=>{
 
     deposits.push({
-
       id:item.id,
       ...item.data()
-
     });
 
   });
@@ -1799,7 +1699,7 @@ async function loadDeposits(){
 
 
 /* =====================================================
-   PENDING CONSUMERS
+PENDING CONSUMERS
 ===================================================== */
 
 function displayPendingConsumers(){
@@ -1812,9 +1712,7 @@ function displayPendingConsumers(){
   table.innerHTML="";
 
   consumers
-  .filter(
-    c=>c.status==="pending"
-  )
+  .filter(c=>c.status==="pending")
   .forEach(c=>{
 
     table.innerHTML+=`
@@ -1834,23 +1732,21 @@ function displayPendingConsumers(){
         </td>
 
         <td>
-
           <button
           class="primary"
           onclick="choosePendingConsumer('${c.id}')"
           >
           Verify
           </button>
-
         </td>
 
       </tr>
-
     `;
 
   });
 
 }
+
 
 window.choosePendingConsumer=function(uid){
 
@@ -1870,7 +1766,7 @@ window.choosePendingConsumer=function(uid){
 
 
 /* =====================================================
-   CLOSED CONSUMERS
+CLOSED CONSUMERS
 ===================================================== */
 
 function displayClosedConsumers(){
@@ -1883,9 +1779,7 @@ function displayClosedConsumers(){
   table.innerHTML="";
 
   consumers
-  .filter(
-    c=>c.status==="closed"
-  )
+  .filter(c=>c.status==="closed")
   .forEach(c=>{
 
     table.innerHTML+=`
@@ -1903,7 +1797,7 @@ function displayClosedConsumers(){
         <td>${formatDate(c.closedDate)}</td>
 
         <td>
-          ₹${Number(c.securityDeposit||0)}
+          ₹${money(c.securityDeposit)}
         </td>
 
         <td>
@@ -1922,7 +1816,7 @@ function displayClosedConsumers(){
 
 
 /* =====================================================
-   CONSUMER LISTS
+CONSUMER LISTS
 ===================================================== */
 
 function fillConsumerLists(){
@@ -1938,14 +1832,12 @@ function fillConsumerLists(){
   </option>`;
 
   consumers
-  .filter(
-    c=>c.status!=="closed"
-  )
+  .filter(c=>c.status!=="closed")
   .forEach(c=>{
 
     ownerSelect.innerHTML+=`
 
-      <option value="${c.id}">
+      <option value="${safe(c.id)}">
         ${safe(c.name || c.email)}
       </option>
 
@@ -1965,14 +1857,12 @@ function fillConsumerLists(){
   </option>`;
 
   consumers
-  .filter(
-    c=>c.status==="verified"
-  )
+  .filter(c=>c.status==="verified")
   .forEach(c=>{
 
     closeSelect.innerHTML+=`
 
-      <option value="${c.id}">
+      <option value="${safe(c.id)}">
         ${safe(c.name || c.email)}
       </option>
 
@@ -1981,6 +1871,13 @@ function fillConsumerLists(){
   });
 
 
+  /*
+    Payment Collection:
+    Include ACTIVE and CLOSED consumers.
+    This is important because old Pending/Partial
+    rent of a closed consumer must still be payable.
+  */
+
   const paymentSelect=
   document.getElementById(
     "paymentConsumer"
@@ -1988,19 +1885,17 @@ function fillConsumerLists(){
 
   paymentSelect.innerHTML=
   `<option value="">
-    Select Active Consumer
+    Select Account
   </option>`;
 
   consumers
-  .filter(
-    c=>c.status==="verified"
-  )
   .forEach(c=>{
 
     paymentSelect.innerHTML+=`
 
-      <option value="${c.id}">
+      <option value="${safe(c.id)}">
         ${safe(c.name || c.email)}
+        ${c.status==="closed" ? " (Closed)" : ""}
       </option>
 
     `;
@@ -2022,7 +1917,7 @@ function fillConsumerLists(){
 
     receiptSelect.innerHTML+=`
 
-      <option value="${c.id}">
+      <option value="${safe(c.id)}">
         ${safe(c.name || c.email)}
       </option>
 
@@ -2038,18 +1933,16 @@ function fillConsumerLists(){
 
   refundSelect.innerHTML=
   `<option value="">
-    Select Consumer
+    Select Closed Consumer
   </option>`;
 
   consumers
-  .filter(
-    c=>c.status==="closed"
-  )
+  .filter(c=>c.status==="closed")
   .forEach(c=>{
 
     refundSelect.innerHTML+=`
 
-      <option value="${c.id}">
+      <option value="${safe(c.id)}">
         ${safe(c.name || c.email)}
       </option>
 
@@ -2058,27 +1951,27 @@ function fillConsumerLists(){
   });
 
 
-  /*
-    Payment History:
-    ALL consumers are included,
-    including closed accounts.
-  */
-
   const historySelect=
   document.getElementById(
     "paymentHistoryConsumer"
   );
 
   historySelect.innerHTML=
-  `<option value="">
-    All Consumers
-  </option>`;
+  `
+    <option value="">
+      Select Account
+    </option>
+
+    <option value="ALL">
+      All Accounts
+    </option>
+  `;
 
   consumers.forEach(c=>{
 
     historySelect.innerHTML+=`
 
-      <option value="${c.id}">
+      <option value="${safe(c.id)}">
         ${safe(c.name || c.email)}
         ${c.status==="closed" ? " (Closed)" : ""}
       </option>
@@ -2091,7 +1984,7 @@ function fillConsumerLists(){
 
 
 /* =====================================================
-   SELECT CONSUMER
+SELECT CONSUMER
 ===================================================== */
 
 window.selectConsumer=function(){
@@ -2102,9 +1995,7 @@ window.selectConsumer=function(){
   ).value;
 
   const c=
-  consumers.find(
-    x=>x.id===uid
-  );
+  consumers.find(x=>x.id===uid);
 
   if(!c){
 
@@ -2132,7 +2023,7 @@ window.selectConsumer=function(){
   c.rent || "";
 
   document.getElementById("ownerSecurityDeposit").value=
-  c.securityDeposit || "";
+  c.securityDeposit ?? "";
 
   document.getElementById("ownerJoinedDate").value=
   c.joinedDate || "";
@@ -2147,7 +2038,7 @@ window.selectConsumer=function(){
 
 
 /* =====================================================
-   VERIFY + SAVE
+VERIFY + SAVE
 ===================================================== */
 
 window.verifyAndSaveConsumer=
@@ -2166,12 +2057,9 @@ async function(){
   }
 
   const c=
-  consumers.find(
-    x=>x.id===uid
-  );
+  consumers.find(x=>x.id===uid);
 
   if(!c)return;
-
 
   if(c.status==="closed"){
 
@@ -2226,7 +2114,7 @@ async function(){
   if(
     !propertyName ||
     !roomNumber ||
-    !rent ||
+    rent<=0 ||
     securityDeposit<0 ||
     !joinedDate ||
     !dueDate
@@ -2241,14 +2129,13 @@ async function(){
 
 
   /*
-    Security Deposit cannot be changed
-    after first verification.
+    Permanent Security Deposit.
   */
 
   if(
     c.status==="verified" &&
     c.securityDeposit!==undefined &&
-    securityDeposit !== Number(c.securityDeposit)
+    Number(c.securityDeposit)!==securityDeposit
   ){
 
     alert(
@@ -2260,8 +2147,7 @@ async function(){
 
 
   /*
-    Joined Date cannot be changed
-    after first verification.
+    Permanent Joined Date.
   */
 
   if(
@@ -2281,35 +2167,24 @@ async function(){
   try{
 
     await updateDoc(
-      doc(
-        db,
-        "users",
-        uid
-      ),
+      doc(db,"users",uid),
       {
 
         status:"verified",
 
-        propertyName:
-        propertyName,
+        propertyName:propertyName,
 
-        roomNumber:
-        roomNumber,
+        roomNumber:roomNumber,
 
-        rent:
-        rent,
+        rent:rent,
 
-        securityDeposit:
-        securityDeposit,
+        securityDeposit:securityDeposit,
 
-        joinedDate:
-        joinedDate,
+        joinedDate:joinedDate,
 
-        dueDate:
-        dueDate,
+        dueDate:dueDate,
 
-        address:
-        address,
+        address:address,
 
         updatedAt:
         serverTimestamp()
@@ -2328,26 +2203,19 @@ async function(){
 
       consumerId:uid,
 
-      consumerName:
-      c.name || "",
+      consumerName:c.name || "",
 
-      propertyName:
-      propertyName,
+      propertyName:propertyName,
 
-      roomNumber:
-      roomNumber,
+      roomNumber:roomNumber,
 
-      rent:
-      rent,
+      rent:rent,
 
-      joinedDate:
-      joinedDate,
+      joinedDate:joinedDate,
 
-      dueDate:
-      dueDate,
+      dueDate:dueDate,
 
-      address:
-      address,
+      address:address,
 
       updatedAt:
       serverTimestamp()
@@ -2366,13 +2234,11 @@ async function(){
         propertyData
       );
 
-    }else{
+    }
+    else{
 
       await addDoc(
-        collection(
-          db,
-          "properties"
-        ),
+        collection(db,"properties"),
         {
 
           ...propertyData,
@@ -2395,22 +2261,16 @@ async function(){
     if(!existingDeposit){
 
       await addDoc(
-        collection(
-          db,
-          "securityDeposits"
-        ),
+        collection(db,"securityDeposits"),
         {
 
           consumerId:uid,
 
-          consumerName:
-          c.name || "",
+          consumerName:c.name || "",
 
-          originalAmount:
-          securityDeposit,
+          originalAmount:securityDeposit,
 
-          currentAmount:
-          securityDeposit,
+          currentAmount:securityDeposit,
 
           deduction:0,
 
@@ -2434,6 +2294,11 @@ async function(){
     }
 
 
+    /*
+      IMPORTANT:
+      Only due records are created.
+    */
+
     await ensureDueRentRecords(
       uid,
       c.name || "",
@@ -2447,7 +2312,6 @@ async function(){
     alert(
       "Consumer verified successfully."
     );
-
 
     await loadOwner();
 
@@ -2465,7 +2329,7 @@ async function(){
 
 
 /* =====================================================
-   UPDATE DETAILS
+UPDATE DETAILS
 ===================================================== */
 
 window.updateConsumerDetails=
@@ -2484,12 +2348,9 @@ async function(){
   }
 
   const c=
-  consumers.find(
-    x=>x.id===uid
-  );
+  consumers.find(x=>x.id===uid);
 
   if(!c)return;
-
 
   if(c.status==="closed"){
 
@@ -2501,13 +2362,10 @@ async function(){
   }
 
 
-  const joinedDate=
-  c.joinedDate;
+  const joinedDate=c.joinedDate;
 
   const securityDeposit=
-  Number(
-    c.securityDeposit || 0
-  );
+  Number(c.securityDeposit || 0);
 
 
   if(!joinedDate){
@@ -2551,7 +2409,7 @@ async function(){
   if(
     !propertyName ||
     !roomNumber ||
-    !rent ||
+    rent<=0 ||
     !dueDate
   ){
 
@@ -2566,33 +2424,22 @@ async function(){
   try{
 
     await updateDoc(
-      doc(
-        db,
-        "users",
-        uid
-      ),
+      doc(db,"users",uid),
       {
 
-        propertyName:
-        propertyName,
+        propertyName:propertyName,
 
-        roomNumber:
-        roomNumber,
+        roomNumber:roomNumber,
 
-        rent:
-        rent,
+        rent:rent,
 
-        securityDeposit:
-        securityDeposit,
+        securityDeposit:securityDeposit,
 
-        joinedDate:
-        joinedDate,
+        joinedDate:joinedDate,
 
-        dueDate:
-        dueDate,
+        dueDate:dueDate,
 
-        address:
-        address,
+        address:address,
 
         updatedAt:
         serverTimestamp()
@@ -2617,23 +2464,17 @@ async function(){
         ),
         {
 
-          propertyName:
-          propertyName,
+          propertyName:propertyName,
 
-          roomNumber:
-          roomNumber,
+          roomNumber:roomNumber,
 
-          rent:
-          rent,
+          rent:rent,
 
-          joinedDate:
-          joinedDate,
+          joinedDate:joinedDate,
 
-          dueDate:
-          dueDate,
+          dueDate:dueDate,
 
-          address:
-          address,
+          address:address,
 
           updatedAt:
           serverTimestamp()
@@ -2643,6 +2484,11 @@ async function(){
 
     }
 
+
+    /*
+      Existing old records are NOT modified.
+      Only missing due months may be created.
+    */
 
     await ensureDueRentRecords(
       uid,
@@ -2654,10 +2500,7 @@ async function(){
     );
 
 
-    alert(
-      "Details updated."
-    );
-
+    alert("Details updated.");
 
     await loadOwner();
 
@@ -2675,7 +2518,7 @@ async function(){
 
 
 /* =====================================================
-   CLOSE CONSUMER ACCOUNT
+CLOSE CONSUMER
 ===================================================== */
 
 window.closeConsumerAccount=
@@ -2699,28 +2542,21 @@ async function(){
 
   if(!uid){
 
-    alert(
-      "Select Consumer."
-    );
+    alert("Select Consumer.");
 
     return;
   }
 
-
   if(!closeDate){
 
-    alert(
-      "Select Closing Date."
-    );
+    alert("Select Closing Date.");
 
     return;
   }
 
 
   const c=
-  consumers.find(
-    x=>x.id===uid
-  );
+  consumers.find(x=>x.id===uid);
 
   if(!c)return;
 
@@ -2734,11 +2570,6 @@ async function(){
     return;
   }
 
-
-  /*
-    Check unpaid rent.
-    Closing is allowed, but old dues remain saved.
-  */
 
   const unpaid=
   rentRecords.filter(
@@ -2756,39 +2587,31 @@ async function(){
   "Old Rent Records and Payment History will remain saved.\n"+
   "No future rent will be generated.";
 
-  if(unpaid.length>0){
+  if(unpaid.length){
 
     message+=
-    "\n\nThere are "+unpaid.length+
+    "\n\nThere are "+
+    unpaid.length+
     " unpaid/partial rent record(s)."+
-    "\nThey will remain saved.";
+    "\nThey will remain payable.";
 
   }
 
 
-  const confirmClose=
-  confirm(message);
-
-  if(!confirmClose)return;
+  if(!confirm(message))return;
 
 
   try{
 
     await updateDoc(
-      doc(
-        db,
-        "users",
-        uid
-      ),
+      doc(db,"users",uid),
       {
 
         status:"closed",
 
-        closedDate:
-        closeDate,
+        closedDate:closeDate,
 
-        closeReason:
-        reason,
+        closeReason:reason,
 
         updatedAt:
         serverTimestamp()
@@ -2798,16 +2621,8 @@ async function(){
 
 
     /*
-      IMPORTANT:
-      We do NOT delete:
-      - rentRecords
-      - payments
-      - properties
-      - securityDeposits
-
-      Therefore old history remains available.
+      NOTHING is deleted.
     */
-
 
     alert(
       "Consumer account closed successfully.\n"+
@@ -2836,7 +2651,7 @@ async function(){
 
 
 /* =====================================================
-   MONTHLY RENT ENGINE
+MONTHLY RENT ENGINE
 ===================================================== */
 
 async function ensureDueRentRecordsForAllConsumers(){
@@ -2844,15 +2659,14 @@ async function ensureDueRentRecordsForAllConsumers(){
   for(const c of consumers){
 
     /*
-      IMPORTANT:
-      Closed consumers are skipped.
+      Closed = NEVER generate.
     */
 
     if(
       c.status!=="verified" ||
       !c.joinedDate ||
       !c.dueDate ||
-      !c.rent
+      Number(c.rent)<=0
     ){
 
       continue;
@@ -2883,29 +2697,30 @@ async function ensureDueRentRecords(
 ){
 
   /*
-    Check current consumer status
-    before creating any new rent.
+    Re-check live account status.
   */
 
   const consumerSnap=
   await getDoc(
-    doc(
-      db,
-      "users",
-      uid
-    )
+    doc(db,"users",uid)
   );
 
-
   if(!consumerSnap.exists())return;
-
 
   const consumer=
   consumerSnap.data();
 
 
+  if(consumer.status!=="verified"){
+
+    return;
+  }
+
+
   if(
-    consumer.status!=="verified"
+    !joinedDate ||
+    !firstDueDate ||
+    Number(rent)<=0
   ){
 
     return;
@@ -2922,11 +2737,12 @@ async function ensureDueRentRecords(
   parseDate(today());
 
 
-  if(start>now){
+  if(start>now)return;
 
-    return;
-  }
 
+  /*
+    Start from Joined Date month.
+  */
 
   let current=
   new Date(
@@ -2952,8 +2768,10 @@ async function ensureDueRentRecords(
     const month=
     current.getMonth();
 
+
     const dueDay=
     firstDue.getDate();
+
 
     const lastDay=
     new Date(
@@ -2962,11 +2780,13 @@ async function ensureDueRentRecords(
       0
     ).getDate();
 
+
     const actualDay=
     Math.min(
       dueDay,
       lastDay
     );
+
 
     const dueDate=
     makeDateString(
@@ -2977,13 +2797,12 @@ async function ensureDueRentRecords(
 
 
     /*
-      Future due date:
-      Do not create.
+      KEY RULE:
+      If today's date is before due date,
+      DO NOT CREATE the record.
     */
 
-    if(
-      parseDate(dueDate)>now
-    ){
+    if(parseDate(dueDate)>now){
 
       current=
       new Date(
@@ -2997,13 +2816,11 @@ async function ensureDueRentRecords(
 
 
     const recordKey=
-    uid+
-    "_"+
-    year+
-    "_"+
-    String(
-      month+1
-    ).padStart(2,"0");
+      uid+
+      "_"+
+      year+
+      "_"+
+      String(month+1).padStart(2,"0");
 
 
     const exists=
@@ -3024,38 +2841,26 @@ async function ensureDueRentRecords(
 
 
       await addDoc(
-        collection(
-          db,
-          "rentRecords"
-        ),
+        collection(db,"rentRecords"),
         {
 
-          recordKey:
-          recordKey,
+          recordKey:recordKey,
 
-          consumerId:
-          uid,
+          consumerId:uid,
 
-          consumerName:
-          consumerName,
+          consumerName:consumerName,
 
-          propertyName:
-          propertyName,
+          propertyName:propertyName,
 
-          month:
-          monthName,
+          month:monthName,
 
-          year:
-          year,
+          year:year,
 
-          monthNumber:
-          month+1,
+          monthNumber:month+1,
 
-          rentAmount:
-          rent,
+          rentAmount:Number(rent),
 
-          dueDate:
-          dueDate,
+          dueDate:dueDate,
 
           paidAmount:0,
 
@@ -3088,7 +2893,7 @@ async function ensureDueRentRecords(
 
 
 /* =====================================================
-   RENT DISPLAY
+RENT DISPLAY
 ===================================================== */
 
 function displayRentRecords(){
@@ -3111,6 +2916,19 @@ function displayRentRecords(){
   )
   .forEach(r=>{
 
+    const paid=
+    Number(r.paidAmount||0);
+
+    const rent=
+    Number(r.rentAmount||0);
+
+    const remaining=
+    Math.max(
+      rent-paid,
+      0
+    );
+
+
     const cls=
     r.status==="Paid"
     ?"paid"
@@ -3123,30 +2941,22 @@ function displayRentRecords(){
 
       <tr>
 
-        <td>
-          ${safe(r.consumerName)}
-        </td>
+        <td>${safe(r.consumerName)}</td>
 
         <td>
           ${safe(r.month)}
           ${safe(String(r.year||""))}
         </td>
 
-        <td>
-          ₹${Number(r.rentAmount||0)}
-        </td>
+        <td>₹${money(rent)}</td>
 
-        <td>
-          ${formatDate(r.dueDate)}
-        </td>
+        <td>${formatDate(r.dueDate)}</td>
 
-        <td>
-          ₹${Number(r.paidAmount||0)}
-        </td>
+        <td>₹${money(paid)}</td>
 
-        <td>
-          ${formatDate(r.paymentDate)}
-        </td>
+        <td>₹${money(remaining)}</td>
+
+        <td>${formatDate(r.paymentDate)}</td>
 
         <td class="${cls}">
           ${safe(r.status)}
@@ -3159,7 +2969,7 @@ function displayRentRecords(){
             ?
             `<button
             class="success"
-            onclick="quickPay('${r.id}')"
+            onclick="quickPay('${safe(r.id)}')"
             >
             Pay
             </button>`
@@ -3178,6 +2988,10 @@ function displayRentRecords(){
 }
 
 
+/* =====================================================
+QUICK PAY
+===================================================== */
+
 window.quickPay=function(id){
 
   const r=
@@ -3187,11 +3001,6 @@ window.quickPay=function(id){
 
   if(!r)return;
 
-
-  /*
-    Payment is allowed for old rent records
-    even if Consumer is now closed.
-  */
 
   document.getElementById(
     "paymentConsumer"
@@ -3216,7 +3025,7 @@ window.quickPay=function(id){
 
 
 /* =====================================================
-   PAYMENT
+PAYMENT DETAILS
 ===================================================== */
 
 window.fillPaymentDetails=function(){
@@ -3231,7 +3040,13 @@ window.fillPaymentDetails=function(){
     x=>x.id===uid
   );
 
-  if(!c)return;
+
+  if(!c){
+
+    clearPaymentFields();
+
+    return;
+  }
 
 
   document.getElementById(
@@ -3249,17 +3064,25 @@ window.fillPaymentDetails=function(){
   document.getElementById(
     "paymentRent"
   ).value=
-  c.rent || "";
+  "";
 
 
   document.getElementById(
     "paymentDueDate"
-  ).value="";
+  ).value=
+  "";
+
+
+  document.getElementById(
+    "paymentRemaining"
+  ).value=
+  "";
 
 
   document.getElementById(
     "paymentAmount"
-  ).value="";
+  ).value=
+  "";
 
 
   document.getElementById(
@@ -3302,14 +3125,24 @@ function fillRentRecordList(uid){
   )
   .forEach(r=>{
 
+    const remaining=
+    Math.max(
+      Number(r.rentAmount||0)-
+      Number(r.paidAmount||0),
+      0
+    );
+
+
     select.innerHTML+=`
 
-      <option value="${r.id}">
+      <option value="${safe(r.id)}">
 
         ${safe(r.month)}
         ${safe(String(r.year))}
         -
-        ₹${Number(r.rentAmount||0)}
+        ₹${money(r.rentAmount)}
+        -
+        Remaining ₹${money(remaining)}
         -
         Due ${formatDate(r.dueDate)}
 
@@ -3321,6 +3154,10 @@ function fillRentRecordList(uid){
 
 }
 
+
+/* =====================================================
+SELECT RENT RECORD
+===================================================== */
 
 window.selectRentRecord=function(){
 
@@ -3334,19 +3171,27 @@ window.selectRentRecord=function(){
     x=>x.id===id
   );
 
-  if(!r)return;
 
+  if(!r){
 
-  document.getElementById(
-    "paymentRent"
-  ).value=
-  r.rentAmount || "";
+    document.getElementById(
+      "paymentRent"
+    ).value="";
 
+    document.getElementById(
+      "paymentDueDate"
+    ).value="";
 
-  document.getElementById(
-    "paymentDueDate"
-  ).value=
-  r.dueDate || "";
+    document.getElementById(
+      "paymentRemaining"
+    ).value="";
+
+    document.getElementById(
+      "paymentAmount"
+    ).value="";
+
+    return;
+  }
 
 
   const remaining=
@@ -3356,6 +3201,28 @@ window.selectRentRecord=function(){
     0
   );
 
+
+  document.getElementById(
+    "paymentRent"
+  ).value=
+  Number(r.rentAmount||0);
+
+
+  document.getElementById(
+    "paymentDueDate"
+  ).value=
+  r.dueDate || "";
+
+
+  document.getElementById(
+    "paymentRemaining"
+  ).value=
+  remaining;
+
+
+  /*
+    Default payment = remaining.
+  */
 
   document.getElementById(
     "paymentAmount"
@@ -3370,6 +3237,10 @@ window.selectRentRecord=function(){
 
 };
 
+
+/* =====================================================
+RECORD PAYMENT
+===================================================== */
 
 window.recordPayment=async function(){
 
@@ -3406,10 +3277,20 @@ window.recordPayment=async function(){
   }
 
 
-  if(!amount || amount<=0){
+  if(amount<=0){
 
     alert(
       "Enter valid amount."
+    );
+
+    return;
+  }
+
+
+  if(!paymentDate){
+
+    alert(
+      "Select Payment Date."
     );
 
     return;
@@ -3430,21 +3311,25 @@ window.recordPayment=async function(){
   if(!r || !c)return;
 
 
-  const oldPaid=
-  Number(
-    r.paidAmount||0
-  );
+  /*
+    Payment can be made for CLOSED consumer
+    because old rent remains payable.
+  */
 
-  const totalPaid=
-  oldPaid+amount;
+  const oldPaid=
+  Number(r.paidAmount||0);
 
   const rent=
-  Number(
-    r.rentAmount||0
+  Number(r.rentAmount||0);
+
+  const remaining=
+  Math.max(
+    rent-oldPaid,
+    0
   );
 
 
-  if(amount>Math.max(rent-oldPaid,0)){
+  if(amount>remaining){
 
     alert(
       "Payment cannot be greater than remaining rent."
@@ -3452,6 +3337,10 @@ window.recordPayment=async function(){
 
     return;
   }
+
+
+  const totalPaid=
+  oldPaid+amount;
 
 
   let status="Partial";
@@ -3473,14 +3362,11 @@ window.recordPayment=async function(){
       ),
       {
 
-        paidAmount:
-        totalPaid,
+        paidAmount:totalPaid,
 
-        paymentDate:
-        paymentDate,
+        paymentDate:paymentDate,
 
-        status:
-        status,
+        status:status,
 
         updatedAt:
         serverTimestamp()
@@ -3490,14 +3376,10 @@ window.recordPayment=async function(){
 
 
     await addDoc(
-      collection(
-        db,
-        "payments"
-      ),
+      collection(db,"payments"),
       {
 
-        consumerId:
-        uid,
+        consumerId:uid,
 
         consumerName:
         c.name || "",
@@ -3508,20 +3390,15 @@ window.recordPayment=async function(){
         rentRecordId:
         recordId,
 
-        month:
-        r.month,
+        month:r.month,
 
-        year:
-        r.year,
+        year:r.year,
 
-        amount:
-        amount,
+        amount:amount,
 
-        paymentDate:
-        paymentDate,
+        paymentDate:paymentDate,
 
-        status:
-        status,
+        status:status,
 
         createdAt:
         serverTimestamp()
@@ -3535,7 +3412,7 @@ window.recordPayment=async function(){
       ?
       "Rent Paid ✅"
       :
-      "Partial Payment Saved."
+      "Partial Payment Saved ✅"
     );
 
 
@@ -3555,7 +3432,7 @@ window.recordPayment=async function(){
 
 
 /* =====================================================
-   SECURITY DEPOSIT
+SECURITY DEPOSIT DISPLAY
 ===================================================== */
 
 function displayDeposits(){
@@ -3580,10 +3457,14 @@ function displayDeposits(){
   document.getElementById(
     "totalDepositLiability"
   ).innerText=
-  "₹"+total;
+  "₹"+money(total);
 
 }
 
+
+/* =====================================================
+REFUND DETAILS
+===================================================== */
 
 window.loadRefundDetails=function(){
 
@@ -3616,7 +3497,7 @@ window.loadRefundDetails=function(){
   document.getElementById(
     "refundOriginalDeposit"
   ).value=
-  deposit.currentAmount || 0;
+  Number(deposit.currentAmount||0);
 
 
   document.getElementById(
@@ -3627,7 +3508,7 @@ window.loadRefundDetails=function(){
   document.getElementById(
     "refundAmount"
   ).value=
-  deposit.currentAmount || 0;
+  Number(deposit.currentAmount||0);
 
 
   document.getElementById(
@@ -3637,6 +3518,10 @@ window.loadRefundDetails=function(){
 
 };
 
+
+/* =====================================================
+CALCULATE REFUND
+===================================================== */
 
 window.calculateRefund=function(){
 
@@ -3669,6 +3554,10 @@ window.calculateRefund=function(){
 
 };
 
+
+/* =====================================================
+REFUND SECURITY DEPOSIT
+===================================================== */
 
 window.refundSecurityDeposit=
 async function(){
@@ -3763,6 +3652,16 @@ async function(){
   }
 
 
+  if(refund!==Math.max(original-deduction,0)){
+
+    alert(
+      "Refund amount is incorrect."
+    );
+
+    return;
+  }
+
+
   try{
 
     await updateDoc(
@@ -3773,17 +3672,13 @@ async function(){
       ),
       {
 
-        deduction:
-        deduction,
+        deduction:deduction,
 
-        refundAmount:
-        refund,
+        refundAmount:refund,
 
-        refundDate:
-        refundDate,
+        refundDate:refundDate,
 
-        deductionReason:
-        reason,
+        deductionReason:reason,
 
         status:"Refunded",
 
@@ -3799,6 +3694,11 @@ async function(){
     alert(
       "Security Deposit refunded successfully."
     );
+
+
+    document.getElementById(
+      "refundReason"
+    ).value="";
 
 
     await loadOwner();
@@ -3817,7 +3717,7 @@ async function(){
 
 
 /* =====================================================
-   PROPERTY
+PROPERTY
 ===================================================== */
 
 function displayProperties(){
@@ -3837,46 +3737,41 @@ function displayProperties(){
       x=>x.id===p.consumerId
     );
 
+
     table.innerHTML+=`
 
       <tr>
 
-        <td>
-          ${safe(p.consumerName)}
-        </td>
+        <td>${safe(p.consumerName)}</td>
+
+        <td>${safe(p.propertyName)}</td>
+
+        <td>${safe(p.roomNumber)}</td>
+
+        <td>₹${money(p.rent)}</td>
+
+        <td>${formatDate(p.joinedDate)}</td>
+
+        <td>${formatDate(p.dueDate)}</td>
 
         <td>
-          ${safe(p.propertyName)}
-        </td>
 
-        <td>
-          ${safe(p.roomNumber)}
-        </td>
-
-        <td>
-          ₹${Number(p.rent||0)}
-        </td>
-
-        <td>
-          ${formatDate(p.joinedDate)}
-        </td>
-
-        <td>
-          ${formatDate(p.dueDate)}
-        </td>
-
-        <td>
           ${
             c?.status==="closed"
+
             ?
+
             `<span class="badge badge-closed">
               Closed
             </span>`
+
             :
+
             `<span class="badge badge-verified">
               Active
             </span>`
           }
+
         </td>
 
       </tr>
@@ -3889,12 +3784,32 @@ function displayProperties(){
 
 
 /* =====================================================
-   PAYMENT HISTORY
+PAYMENT HISTORY
 ===================================================== */
 
 function displayPayments(){
 
-  displaySelectedPaymentHistory("");
+  const select=
+  document.getElementById(
+    "paymentHistoryConsumer"
+  );
+
+  /*
+    Default = Select Account,
+    therefore no history shown until user chooses.
+  */
+
+  if(!select.value){
+
+    document.getElementById(
+      "paymentTable"
+    ).innerHTML="";
+
+    return;
+  }
+
+
+  displaySelectedPaymentHistory();
 
 }
 
@@ -3914,11 +3829,14 @@ window.displaySelectedPaymentHistory=function(){
   table.innerHTML="";
 
 
+  if(!uid)return;
+
+
   let list=
   payments.slice();
 
 
-  if(uid){
+  if(uid!=="ALL"){
 
     list=
     list.filter(
@@ -3954,38 +3872,37 @@ window.displaySelectedPaymentHistory=function(){
       <tr>
 
         <td>
+
           ${safe(p.consumerName)}
+
           ${
             closed
+
             ?
+
             `<span class="badge badge-closed">
               Closed
             </span>`
+
             :
+
             ""
           }
+
         </td>
 
-        <td>
-          ${safe(p.propertyName)}
-        </td>
+        <td>${safe(p.propertyName)}</td>
 
         <td>
           ${safe(p.month)}
           ${safe(String(p.year||""))}
         </td>
 
-        <td>
-          ₹${Number(p.amount||0)}
-        </td>
+        <td>₹${money(p.amount)}</td>
 
-        <td>
-          ${formatDate(p.paymentDate)}
-        </td>
+        <td>${formatDate(p.paymentDate)}</td>
 
-        <td>
-          ${safe(p.status)}
-        </td>
+        <td>${safe(p.status)}</td>
 
       </tr>
 
@@ -3997,7 +3914,7 @@ window.displaySelectedPaymentHistory=function(){
 
 
 /* =====================================================
-   DASHBOARD
+DASHBOARD
 ===================================================== */
 
 function updateDashboard(){
@@ -4056,13 +3973,13 @@ function updateDashboard(){
   document.getElementById(
     "pendingRent"
   ).innerText=
-  "₹"+pendingAmount;
+  "₹"+money(pendingAmount);
 
 }
 
 
 /* =====================================================
-   CONSUMER DASHBOARD
+CONSUMER DASHBOARD
 ===================================================== */
 
 async function loadConsumer(){
@@ -4073,11 +3990,7 @@ async function loadConsumer(){
 
   const profile=
   await getDoc(
-    doc(
-      db,
-      "users",
-      uid
-    )
+    doc(db,"users",uid)
   );
 
 
@@ -4123,6 +4036,11 @@ async function loadConsumer(){
       "closedMessage"
     ).classList.remove("hidden");
 
+    /*
+      We intentionally return.
+      Closed account gets no new rent.
+    */
+
     return;
 
   }
@@ -4147,6 +4065,11 @@ async function loadConsumer(){
   }
 
 
+  /*
+    Only verified consumer can trigger
+    due rent generation.
+  */
+
   await ensureDueRentRecords(
     uid,
     c.name || "",
@@ -4160,7 +4083,6 @@ async function loadConsumer(){
   document.getElementById(
     "pendingMessage"
   ).classList.add("hidden");
-
 
   document.getElementById(
     "verifiedConsumerArea"
@@ -4188,7 +4110,7 @@ async function loadConsumer(){
   c.rent || "";
 
   document.getElementById("mySecurityDepositInput").value=
-  c.securityDeposit || "";
+  c.securityDeposit || 0;
 
   document.getElementById("myJoinedDate").value=
   c.joinedDate || "";
@@ -4205,27 +4127,24 @@ async function loadConsumer(){
 
 
   document.getElementById("myRent").innerText=
-  "₹"+Number(c.rent||0);
+  "₹"+money(c.rent);
 
 
   document.getElementById("mySecurityDeposit").innerText=
-  "₹"+Number(c.securityDeposit||0);
+  "₹"+money(c.securityDeposit);
 
 
   document.getElementById(
     "consumerDepositAmount"
   ).innerText=
-  Number(c.securityDeposit||0);
+  money(c.securityDeposit);
 
 
   /* DEPOSIT */
 
   const depositQuery=
   query(
-    collection(
-      db,
-      "securityDeposits"
-    ),
+    collection(db,"securityDeposits"),
     where(
       "consumerId",
       "==",
@@ -4235,9 +4154,7 @@ async function loadConsumer(){
 
 
   const depositSnap=
-  await getDocs(
-    depositQuery
-  );
+  await getDocs(depositQuery);
 
 
   let depositStatus=
@@ -4268,10 +4185,7 @@ async function loadConsumer(){
 
   const rentQuery=
   query(
-    collection(
-      db,
-      "rentRecords"
-    ),
+    collection(db,"rentRecords"),
     where(
       "consumerId",
       "==",
@@ -4281,9 +4195,7 @@ async function loadConsumer(){
 
 
   const rentSnap=
-  await getDocs(
-    rentQuery
-  );
+  await getDocs(rentQuery);
 
 
   const myRecords=[];
@@ -4310,6 +4222,10 @@ async function loadConsumer(){
   );
 
 
+  /*
+    First unpaid/partial record = next due.
+  */
+
   const currentRecord=
   myRecords.find(
     r=>r.status!=="Paid"
@@ -4325,7 +4241,8 @@ async function loadConsumer(){
       currentRecord.dueDate
     );
 
-  }else{
+  }
+  else{
 
     document.getElementById(
       "myDueDate"
@@ -4343,10 +4260,7 @@ async function loadConsumer(){
 
   const paymentQuery=
   query(
-    collection(
-      db,
-      "payments"
-    ),
+    collection(db,"payments"),
     where(
       "consumerId",
       "==",
@@ -4356,9 +4270,7 @@ async function loadConsumer(){
 
 
   const paymentSnap=
-  await getDocs(
-    paymentQuery
-  );
+  await getDocs(paymentQuery);
 
 
   const table=
@@ -4402,7 +4314,7 @@ async function loadConsumer(){
         </td>
 
         <td>
-          ₹${Number(p.amount||0)}
+          ₹${money(p.amount)}
         </td>
 
         <td>
@@ -4423,7 +4335,7 @@ async function loadConsumer(){
 
 
 /* =====================================================
-   CONSUMER RENT TABLE
+CONSUMER RENT TABLE
 ===================================================== */
 
 function displayConsumerRentRecords(records){
@@ -4438,6 +4350,19 @@ function displayConsumerRentRecords(records){
 
   records.forEach(r=>{
 
+    const paid=
+    Number(r.paidAmount||0);
+
+    const rent=
+    Number(r.rentAmount||0);
+
+    const remaining=
+    Math.max(
+      rent-paid,
+      0
+    );
+
+
     table.innerHTML+=`
 
       <tr>
@@ -4448,7 +4373,7 @@ function displayConsumerRentRecords(records){
         </td>
 
         <td>
-          ₹${Number(r.rentAmount||0)}
+          ₹${money(rent)}
         </td>
 
         <td>
@@ -4456,7 +4381,11 @@ function displayConsumerRentRecords(records){
         </td>
 
         <td>
-          ₹${Number(r.paidAmount||0)}
+          ₹${money(paid)}
+        </td>
+
+        <td>
+          ₹${money(remaining)}
         </td>
 
         <td>
@@ -4477,7 +4406,7 @@ function displayConsumerRentRecords(records){
 
 
 /* =====================================================
-   RECEIPT
+RECEIPT
 ===================================================== */
 
 window.generateReceipt=function(){
@@ -4525,21 +4454,21 @@ window.generateReceipt=function(){
   const owner=
   document.getElementById(
     "receiptOwner"
-  ).value ||
+  ).value.trim() ||
   "Owner";
 
 
   const mobile=
   document.getElementById(
     "receiptMobile"
-  ).value ||
+  ).value.trim() ||
   "-";
 
 
   const address=
   document.getElementById(
     "receiptAddress"
-  ).value ||
+  ).value.trim() ||
   c.address ||
   "-";
 
@@ -4593,7 +4522,7 @@ window.generateReceipt=function(){
 
       <p>
         <b>Monthly Rent:</b>
-        ₹${Number(c.rent||0)}
+        ₹${money(c.rent)}
       </p>
 
       <p>
@@ -4604,7 +4533,7 @@ window.generateReceipt=function(){
 
       <p>
         <b>Amount:</b>
-        ₹${Number(last?.amount || 0)}
+        ₹${money(last?.amount)}
       </p>
 
       <p>
@@ -4634,7 +4563,7 @@ window.generateReceipt=function(){
 
 
 /* =====================================================
-   CLEAR
+CLEAR
 ===================================================== */
 
 function clearOwnerFields(){
@@ -4661,8 +4590,28 @@ function clearOwnerFields(){
 }
 
 
+function clearPaymentFields(){
+
+  [
+    "paymentName",
+    "paymentProperty",
+    "paymentRent",
+    "paymentDueDate",
+    "paymentRemaining",
+    "paymentAmount"
+  ]
+  .forEach(id=>{
+
+    document.getElementById(id)
+    .value="";
+
+  });
+
+}
+
+
 /* =====================================================
-   DATE
+DATE
 ===================================================== */
 
 function parseDate(str){
@@ -4674,7 +4623,7 @@ function parseDate(str){
 
   if(p.length!==3){
 
-    return new Date();
+    return new Date(0);
 
   }
 
@@ -4694,17 +4643,12 @@ function makeDateString(
   day
 ){
 
-  return (
-
+  return(
     year+
     "-" +
-    String(
-      month+1
-    ).padStart(2,"0")+
+    String(month+1).padStart(2,"0")+
     "-" +
-    String(day)
-    .padStart(2,"0")
-
+    String(day).padStart(2,"0")
   );
 
 }
@@ -4729,8 +4673,7 @@ function formatDate(str){
   if(!str)return "-";
 
   const p=
-  String(str)
-  .split("-");
+  String(str).split("-");
 
   if(p.length!==3)return str;
 
@@ -4746,7 +4689,22 @@ function formatDate(str){
 
 
 /* =====================================================
-   HTML SAFETY
+MONEY
+===================================================== */
+
+function money(value){
+
+  return Number(
+    value || 0
+  ).toLocaleString(
+    "en-IN"
+  );
+
+}
+
+
+/* =====================================================
+HTML SAFETY
 ===================================================== */
 
 function safe(value){
