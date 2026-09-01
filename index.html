@@ -114,29 +114,50 @@ position:absolute;left:0;top:0;width:100%
 }
 }
 </style>
-<style>
 
+<style>
 /* ===== OWNER SIDEBAR / SEPARATE SCREENS ===== */
 .owner-layout{display:flex;min-height:100vh}
-.owner-sidebar{width:255px;background:#111827;color:#fff;position:fixed;left:0;top:0;bottom:0;z-index:100;padding:15px;overflow-y:auto}
-.owner-brand{font-size:20px;font-weight:700;padding:14px 8px 20px;border-bottom:1px solid #374151;margin-bottom:10px}
-.owner-nav{width:100%;padding:11px 12px;margin:3px 0;border:0;border-radius:8px;text-align:left;background:transparent;color:#fff;cursor:pointer}
+.owner-sidebar{
+width:255px;background:#111827;color:#fff;position:fixed;
+left:0;top:0;bottom:0;z-index:100;padding:15px;
+overflow-y:auto
+}
+.owner-brand{
+font-size:20px;font-weight:700;padding:14px 8px 20px;
+border-bottom:1px solid #374151;margin-bottom:10px
+}
+.owner-nav{
+width:100%;padding:11px 12px;margin:3px 0;border:0;
+border-radius:8px;text-align:left;background:transparent;
+color:#fff;cursor:pointer
+}
 .owner-nav:hover,.owner-nav.active{background:#2563eb}
 .owner-logout{margin-top:18px;width:100%}
-.owner-main{margin-left:255px;width:calc(100% - 255px);min-width:0}
-.owner-top{display:flex;align-items:center;justify-content:space-between;background:#1f2937;color:#fff;padding:14px 20px}
+.owner-main{
+margin-left:255px;width:calc(100% - 255px);min-width:0
+}
+.owner-top{
+display:flex;align-items:center;justify-content:space-between;
+background:#1f2937;color:#fff;padding:14px 20px
+}
 .owner-top h1{margin:0}
 .owner-screen{display:none}
 .owner-screen.active{display:block}
 .mobile-menu{display:none}
-@media(max-width:800px){
-  .owner-sidebar{transform:translateX(-100%);transition:.2s}
-  .owner-sidebar.open{transform:translateX(0)}
-  .owner-main{margin-left:0;width:100%}
-  .owner-top{display:none}
-  .mobile-menu{display:flex;background:#1f2937;color:#fff;padding:10px;align-items:center;gap:10px;position:sticky;top:0;z-index:90}
-}
 
+@media(max-width:800px){
+.owner-sidebar{
+transform:translateX(-100%);transition:.2s
+}
+.owner-sidebar.open{transform:translateX(0)}
+.owner-main{margin-left:0;width:100%}
+.owner-top{display:none}
+.mobile-menu{
+display:flex;background:#1f2937;color:#fff;padding:10px;
+align-items:center;gap:10px;position:sticky;top:0;z-index:90
+}
+}
 </style>
 </head>
 
@@ -147,56 +168,83 @@ LOGIN
 ===================================================== -->
 
 <div id="loginPage" class="login-page">
+
 <div class="login-box">
 
 <h1>🏠 Rent Management</h1>
-<p>Owner / Consumer Login</p>
 
-<input id="loginEmail" type="email" placeholder="Email">
-<input id="loginPassword" type="password" placeholder="Password">
+<p>Owner / Tenant Login</p>
 
-<button class="primary" style="width:100%" onclick="loginUser()">
+<input id="loginEmail"
+type="email"
+placeholder="Email">
+
+<input id="loginPassword"
+type="password"
+placeholder="Password">
+
+<button class="primary"
+style="width:100%"
+onclick="loginUser()">
+
 🔐 Login
+
 </button>
 
-<button style="width:100%" onclick="showRegister()">
-👤 New Consumer? Register
+<button
+style="width:100%"
+onclick="showRegister()">
+
+👤 New Tenant? Register
+
 </button>
 
 <p id="loginError" style="color:red"></p>
 
 </div>
+
 </div>
 
 
 <!-- =====================================================
-CONSUMER REGISTRATION
+TENANT REGISTRATION
 ===================================================== -->
 
 <div id="registerPage" class="login-page hidden">
 
 <div class="login-box">
 
-<h1>👤 Consumer Registration</h1>
+<h1>👤 Tenant Registration</h1>
 
 <div class="info-box">
-Consumer must fill all details correctly.
+
+Tenant must fill all details correctly.
 Owner will verify the submitted details before activating the account.
+
 </div>
 
-<h3 class="registration-title">👤 Personal Details</h3>
+<h3 class="registration-title">
+👤 Personal Details
+</h3>
 
-<input id="regName" placeholder="Consumer Name *">
+<input id="regName"
+placeholder="Tenant Name *">
 
-<input id="regEmail" type="email" placeholder="Email *">
+<input id="regEmail"
+type="email"
+placeholder="Email *">
 
-<input id="regPassword" type="password"
+<input id="regPassword"
+type="password"
 placeholder="Password - minimum 6 characters *">
 
-<input id="regMobile" placeholder="Mobile Number *">
+<input id="regMobile"
+placeholder="Mobile Number *">
 
 
-<h3 class="registration-title">🏢 Property Details</h3>
+<h3 class="registration-title">
+🏢 Property Details
+</h3>
 
 <input id="regProperty"
 placeholder="Property / Shop Name *">
@@ -204,24 +252,31 @@ placeholder="Property / Shop Name *">
 <input id="regRoom"
 placeholder="Room / Shop Number *">
 
-<textarea id="regAddress"
+<textarea
+id="regAddress"
 placeholder="Property Address *"></textarea>
 
 
-<h3 class="registration-title">💰 Rent & Deposit</h3>
+<h3 class="registration-title">
+💰 Rent & Deposit
+</h3>
 
-<input id="regRent"
+<input
+id="regRent"
 type="number"
 min="0"
 placeholder="Monthly Rent ₹ *">
 
-<input id="regSecurityDeposit"
+<input
+id="regSecurityDeposit"
 type="number"
 min="0"
 placeholder="Security Deposit ₹ *">
 
 
-<h3 class="registration-title">📅 Dates</h3>
+<h3 class="registration-title">
+📅 Dates
+</h3>
 
 <label>
 Joined Date *
@@ -235,23 +290,34 @@ First Rent Due Date *
 
 
 <div class="info-box">
+
 🔒 After registration, these details will be sent to Owner for verification.
-Consumer cannot activate the account by himself.
+Tenant cannot activate the account by himself.
+
 </div>
 
-<button class="success" style="width:100%"
-onclick="registerConsumer()">
+<button
+class="success"
+style="width:100%"
+onclick="registerTenant()">
+
 💾 Submit Registration
+
 </button>
 
-<button style="width:100%" onclick="showLogin()">
+<button
+style="width:100%"
+onclick="showLogin()">
+
 ⬅ Back to Login
+
 </button>
 
 <p id="registerError" style="color:red"></p>
 <p id="registerSuccess" style="color:green"></p>
 
 </div>
+
 </div>
 
 
@@ -262,57 +328,195 @@ OWNER DASHBOARD
 <div id="ownerDashboard" class="hidden">
 
 <div class="owner-layout">
-  <aside id="ownerSidebar" class="owner-sidebar">
-    <div class="owner-brand">🏠 Rent Management</div>
-    <button class="owner-nav active" data-screen="dashboard">🏠 Dashboard</button>
-    <button class="owner-nav" data-screen="verification">⏳ Consumer Verification</button>
-    <button class="owner-nav" data-screen="consumerDetails">👤 Consumers</button>
-    <button class="owner-nav" data-screen="properties">🏢 Properties</button>
-    <button class="owner-nav" data-screen="rent">📅 Monthly Rent</button>
-    <button class="owner-nav" data-screen="collection">💵 Rent Collection</button>
-    <button class="owner-nav" data-screen="history">📋 Payment History</button>
-    <button class="owner-nav" data-screen="refund">💸 Refund</button>
-    <button class="owner-nav" data-screen="closeConsumer">🚪 Close Consumer</button>
-    <button class="owner-nav" data-screen="closed">📁 Closed Consumers</button>
-    <button class="owner-nav" data-screen="receipt">🧾 Rent Receipt</button>
-    <button class="danger owner-logout" onclick="logoutUser()">🚪 Logout</button>
-  </aside>
-  <main class="owner-main">
-    <div class="mobile-menu">
-      <button class="primary" onclick="toggleOwnerSidebar()">☰</button>
-      <b>Owner Dashboard</b>
-    </div>
-    <div class="owner-top">
-      <div><h1>🏠 Rent Management</h1><p>Owner Dashboard</p></div>
-      <button class="danger" onclick="logoutUser()">🚪 Logout</button>
-    </div>
-    <div class="container">
-      <section class="owner-screen active" data-screen="dashboard"><div class="cards">
+
+<aside id="ownerSidebar" class="owner-sidebar">
+
+<div class="owner-brand">
+🏠 Rent Management
+</div>
+
+<button
+class="owner-nav active"
+data-screen="dashboard">
+
+🏠 Dashboard
+
+</button>
+
+<button
+class="owner-nav"
+data-screen="verification">
+
+⏳ Tenant Verification
+
+</button>
+
+<button
+class="owner-nav"
+data-screen="tenantDetails">
+
+👤 Tenants
+
+</button>
+
+<button
+class="owner-nav"
+data-screen="properties">
+
+🏢 Properties
+
+</button>
+
+<button
+class="owner-nav"
+data-screen="rent">
+
+📅 Monthly Rent
+
+</button>
+
+<button
+class="owner-nav"
+data-screen="collection">
+
+💵 Rent Collection
+
+</button>
+
+<button
+class="owner-nav"
+data-screen="history">
+
+📋 Payment History
+
+</button>
+
+<button
+class="owner-nav"
+data-screen="refund">
+
+💸 Refund
+
+</button>
+
+<button
+class="owner-nav"
+data-screen="closeTenant">
+
+🚪 Close Tenant
+
+</button>
+
+<button
+class="owner-nav"
+data-screen="closed">
+
+📁 Closed Tenants
+
+</button>
+
+<button
+class="owner-nav"
+data-screen="receipt">
+
+🧾 Rent Receipt
+
+</button>
+
+<button
+class="danger owner-logout"
+onclick="logoutUser()">
+
+🚪 Logout
+
+</button>
+
+</aside>
+
+
+<main class="owner-main">
+
+<div class="mobile-menu">
+
+<button
+class="primary"
+onclick="toggleOwnerSidebar()">
+
+☰
+
+</button>
+
+<b>Owner Dashboard</b>
+
+</div>
+
+
+<div class="owner-top">
+
+<div>
+
+<h1>🏠 Rent Management</h1>
+
+<p>Owner Dashboard</p>
+
+</div>
+
+<button
+class="danger"
+onclick="logoutUser()">
+
+🚪 Logout
+
+</button>
+
+</div>
+
+
+<div class="container">
+
+
+<!-- DASHBOARD -->
+
+<section
+class="owner-screen active"
+data-screen="dashboard">
+
+<div class="cards">
 
 <div class="card">
-<h3>Total Consumers</h3>
-<p id="totalConsumers">0</p>
+
+<h3>Total Tenants</h3>
+
+<p id="totalTenants">0</p>
+
 </div>
 
 <div class="card">
-<h3>Active Consumers</h3>
-<p id="verifiedConsumers">0</p>
+
+<h3>Active Tenants</h3>
+
+<p id="verifiedTenants">0</p>
+
 </div>
 
 <div class="card">
+
 <h3>Pending Verification</h3>
-<p id="pendingConsumers">0</p>
+
+<p id="pendingTenants">0</p>
+
 </div>
 
 <div class="card">
+
 <h3>Pending Rent</h3>
+
 <p id="pendingRent">₹0</p>
-</div>
 
 </div>
 
+</div>
 
-<!-- SECURITY LIABILITY -->
 
 <div class="section">
 
@@ -321,28 +525,42 @@ OWNER DASHBOARD
 <div class="liability-box">
 
 <h3>
+
 Total Security Deposit Held:
+
 <span id="totalDepositLiability">₹0</span>
+
 </h3>
 
 <p>
+
 Security Deposit is not monthly rent.
 It remains Owner's liability until refunded.
+
 </p>
 
 </div>
-</div></section>
-<section class="owner-screen" data-screen="verification"><!-- =====================================================
-PENDING VERIFICATION
-===================================================== -->
+
+</div>
+
+</section>
+
+
+<!-- TENANT VERIFICATION -->
+
+<section
+class="owner-screen"
+data-screen="verification">
 
 <div class="section">
 
-<h2>⏳ New Consumer Verification</h2>
+<h2>⏳ New Tenant Verification</h2>
 
 <div class="info-box">
-Click <b>Verify</b> to view all details submitted by the Consumer.
+
+Click <b>Verify</b> to view all details submitted by the Tenant.
 You can check them and modify them before approval.
+
 </div>
 
 <div class="table-wrap">
@@ -350,7 +568,9 @@ You can check them and modify them before approval.
 <table>
 
 <thead>
+
 <tr>
+
 <th>Name</th>
 <th>Email</th>
 <th>Mobile</th>
@@ -358,70 +578,100 @@ You can check them and modify them before approval.
 <th>Rent</th>
 <th>Status</th>
 <th>Action</th>
+
 </tr>
+
 </thead>
 
-<tbody id="pendingConsumerTable"></tbody>
+<tbody id="pendingTenantTable"></tbody>
 
 </table>
 
 </div>
-</div></section>
-<section class="owner-screen" data-screen="consumerDetails"><!-- =====================================================
-CONSUMER DETAILS
-===================================================== -->
+
+</div>
+
+</section>
+
+
+<!-- TENANT DETAILS -->
+
+<section
+class="owner-screen"
+data-screen="tenantDetails">
 
 <div class="section">
 
-<h2>👤 Consumer Details</h2>
+<h2>👤 Tenant Details</h2>
 
-<select id="ownerConsumerSelect"
-onchange="selectConsumer()">
+<select
+id="ownerTenantSelect"
+onchange="selectTenant()">
 
-<option value="">Select Consumer</option>
+<option value="">
+Select Tenant
+</option>
 
 </select>
 
 
 <div class="form-grid">
 
-<input id="ownerName"
-placeholder="Consumer Name"
+<input
+id="ownerName"
+placeholder="Tenant Name"
 readonly>
 
-<input id="ownerEmail"
+<input
+id="ownerEmail"
 placeholder="Email"
 readonly>
 
-<input id="ownerMobile"
+<input
+id="ownerMobile"
 placeholder="Mobile"
 readonly>
 
-<input id="ownerProperty"
+<input
+id="ownerProperty"
 placeholder="Property / Shop Name">
 
-<input id="ownerRoom"
+<input
+id="ownerRoom"
 placeholder="Room / Shop Number">
 
-<input id="ownerRent"
+<input
+id="ownerRent"
 type="number"
 placeholder="Monthly Rent ₹">
 
-<input id="ownerSecurityDeposit"
+<input
+id="ownerSecurityDeposit"
 type="number"
 placeholder="Security Deposit ₹">
 
 <label>
+
 Joined Date
-<input id="ownerJoinedDate" type="date">
+
+<input
+id="ownerJoinedDate"
+type="date">
+
 </label>
 
 <label>
+
 First Rent Due Date
-<input id="ownerDueDate" type="date">
+
+<input
+id="ownerDueDate"
+type="date">
+
 </label>
 
-<textarea id="ownerAddress"
+<textarea
+id="ownerAddress"
 placeholder="Property Address"></textarea>
 
 </div>
@@ -433,7 +683,7 @@ placeholder="Property Address"></textarea>
 
 <br><br>
 
-1️⃣ Check Consumer Name, Email and Mobile.
+1️⃣ Check Tenant Name, Email and Mobile.
 
 <br>
 2️⃣ Check Property / Shop details.
@@ -462,29 +712,41 @@ If something is wrong → modify it and then save.
 </div>
 
 
-<button class="success"
-onclick="verifyAndSaveConsumer()">
+<button
+class="success"
+onclick="verifyAndSaveTenant()">
+
 ✅ Verify & Save
+
 </button>
 
-<button class="warning"
-onclick="updateConsumerDetails()">
+<button
+class="warning"
+onclick="updateTenantDetails()">
+
 ✏️ Modify Details
+
 </button>
 
-</div></section>
-<section class="owner-screen" data-screen="closeConsumer"><!-- =====================================================
-CLOSE CONSUMER
-===================================================== -->
+</div>
+
+</section>
+
+
+<!-- CLOSE TENANT -->
+
+<section
+class="owner-screen"
+data-screen="closeTenant">
 
 <div class="section">
 
-<h2>🚪 Close Consumer Account</h2>
+<h2>🚪 Close Tenant Account</h2>
 
 <div class="close-box">
 
 <p>
-Closing a Consumer does <b>not delete old data</b>.
+Closing a Tenant does <b>not delete old data</b>.
 </p>
 
 <p>
@@ -497,33 +759,53 @@ After closing, <b>no new monthly rent records</b> are created.
 
 </div>
 
-<select id="closeConsumerSelect">
-<option value="">Select Consumer</option>
+<select id="closeTenantSelect">
+
+<option value="">
+Select Tenant
+</option>
+
 </select>
 
-<input id="closeDate" type="date">
+<input
+id="closeDate"
+type="date">
 
-<input id="closeReason"
+<input
+id="closeReason"
 placeholder="Closing Reason">
 
-<button class="danger"
-onclick="closeConsumerAccount()">
-🚪 Close Consumer
+<button
+class="danger"
+onclick="closeTenantAccount()">
+
+🚪 Close Tenant
+
 </button>
 
-</div></section>
-<section class="owner-screen" data-screen="closed"><!-- CLOSED CONSUMERS -->
+</div>
+
+</section>
+
+
+<!-- CLOSED TENANTS -->
+
+<section
+class="owner-screen"
+data-screen="closed">
 
 <div class="section">
 
-<h2>📁 Closed Consumers</h2>
+<h2>📁 Closed Tenants</h2>
 
 <div class="table-wrap">
 
 <table>
 
 <thead>
+
 <tr>
+
 <th>Name</th>
 <th>Email</th>
 <th>Property</th>
@@ -531,63 +813,91 @@ onclick="closeConsumerAccount()">
 <th>Closed Date</th>
 <th>Security Deposit</th>
 <th>Status</th>
+
 </tr>
+
 </thead>
 
-<tbody id="closedConsumerTable"></tbody>
+<tbody id="closedTenantTable"></tbody>
 
 </table>
 
 </div>
-</div></section>
-<section class="owner-screen" data-screen="refund"><!-- SECURITY REFUND -->
+
+</div>
+
+</section>
+
+
+<!-- REFUND -->
+
+<section
+class="owner-screen"
+data-screen="refund">
 
 <div class="section">
 
 <h2>💸 Security Deposit Refund</h2>
 
-<select id="refundConsumer"
+<select
+id="refundTenant"
 onchange="loadRefundDetails()">
 
-<option value="">Select Consumer</option>
+<option value="">
+Select Tenant
+</option>
 
 </select>
 
 <div class="form-grid">
 
-<input id="refundOriginalDeposit"
+<input
+id="refundOriginalDeposit"
 type="number"
 placeholder="Deposit ₹"
 readonly>
 
-<input id="refundDeduction"
+<input
+id="refundDeduction"
 type="number"
 placeholder="Deduction ₹"
 value="0"
 oninput="calculateRefund()">
 
-<input id="refundAmount"
+<input
+id="refundAmount"
 type="number"
 placeholder="Refund Amount ₹"
 readonly>
 
-<input id="refundDate"
+<input
+id="refundDate"
 type="date">
 
-<input id="refundReason"
+<input
+id="refundReason"
 placeholder="Deduction Reason">
 
 </div>
 
-<button class="danger"
+<button
+class="danger"
 onclick="refundSecurityDeposit()">
+
 💸 Refund Security Deposit
+
 </button>
 
-</div></section>
-<section class="owner-screen" data-screen="rent"><!-- =====================================================
-RENT RECORDS
-===================================================== -->
+</div>
+
+</section>
+
+
+<!-- RENT -->
+
+<section
+class="owner-screen"
+data-screen="rent">
 
 <div class="section">
 
@@ -607,13 +917,12 @@ are created and shown.
 ❌ Future months are NOT shown as Pending.
 
 <br>
-❌ Closed Consumers receive no new rent records.
+❌ Closed Tenants receive no new rent records.
 
 <br>
 ✅ Existing Paid / Partial records remain saved.
 
 </div>
-
 
 <div class="table-wrap">
 
@@ -622,7 +931,8 @@ are created and shown.
 <thead>
 
 <tr>
-<th>Consumer</th>
+
+<th>Tenant</th>
 <th>Month</th>
 <th>Rent</th>
 <th>Due Date</th>
@@ -630,6 +940,7 @@ are created and shown.
 <th>Payment Date</th>
 <th>Status</th>
 <th>Action</th>
+
 </tr>
 
 </thead>
@@ -640,80 +951,112 @@ are created and shown.
 
 </div>
 
-</div></section>
-<section class="owner-screen" data-screen="collection"><!-- =====================================================
-RENT COLLECTION
-===================================================== -->
+</div>
+
+</section>
+
+
+<!-- COLLECTION -->
+
+<section
+class="owner-screen"
+data-screen="collection">
 
 <div class="section">
 
 <h2>💵 Rent Collection</h2>
 
-<select id="paymentConsumer"
+<select
+id="paymentTenant"
 onchange="fillPaymentDetails()">
 
-<option value="">Select Active Consumer</option>
+<option value="">
+Select Active Tenant
+</option>
 
 </select>
 
-<select id="paymentRentRecord"
+<select
+id="paymentRentRecord"
 onchange="selectRentRecord()">
 
-<option value="">Select Due Rent</option>
+<option value="">
+Select Due Rent
+</option>
 
 </select>
 
 
 <div class="form-grid">
 
-<input id="paymentName"
-placeholder="Consumer"
+<input
+id="paymentName"
+placeholder="Tenant"
 readonly>
 
-<input id="paymentProperty"
+<input
+id="paymentProperty"
 placeholder="Property"
 readonly>
 
-<input id="paymentRent"
+<input
+id="paymentRent"
 type="number"
 placeholder="Rent"
 readonly>
 
-<input id="paymentDueDate"
+<input
+id="paymentDueDate"
 type="date"
 readonly>
 
-<input id="paymentAmount"
+<input
+id="paymentAmount"
 type="number"
 placeholder="Payment Amount ₹">
 
-<input id="paymentDate"
+<input
+id="paymentDate"
 type="date">
 
 </div>
 
-<button class="success"
+<button
+class="success"
 onclick="recordPayment()">
+
 💰 Record Payment
+
 </button>
 
-</div></section>
-<section class="owner-screen" data-screen="history"><!-- =====================================================
-PAYMENT HISTORY
-===================================================== -->
+</div>
+
+</section>
+
+
+<!-- HISTORY -->
+
+<section
+class="owner-screen"
+data-screen="history">
 
 <div class="section">
 
 <h2>📋 Payment History</h2>
 
 <div class="info-box">
-Old payment history remains available even after the Consumer is closed.
+
+Old payment history remains available even after the Tenant is closed.
+
 </div>
 
-<select id="paymentHistoryConsumer"
+<select
+id="paymentHistoryTenant"
 onchange="displaySelectedPaymentHistory()">
 
-<option value="">All Consumers</option>
+<option value="">
+All Tenants
+</option>
 
 </select>
 
@@ -724,12 +1067,14 @@ onchange="displaySelectedPaymentHistory()">
 <thead>
 
 <tr>
-<th>Consumer</th>
+
+<th>Tenant</th>
 <th>Property</th>
 <th>Month</th>
 <th>Amount</th>
 <th>Payment Date</th>
 <th>Status</th>
+
 </tr>
 
 </thead>
@@ -740,8 +1085,16 @@ onchange="displaySelectedPaymentHistory()">
 
 </div>
 
-</div></section>
-<section class="owner-screen" data-screen="properties"><!-- PROPERTY -->
+</div>
+
+</section>
+
+
+<!-- PROPERTIES -->
+
+<section
+class="owner-screen"
+data-screen="properties">
 
 <div class="section">
 
@@ -754,13 +1107,15 @@ onchange="displaySelectedPaymentHistory()">
 <thead>
 
 <tr>
-<th>Consumer</th>
+
+<th>Tenant</th>
 <th>Property</th>
 <th>Room</th>
 <th>Rent</th>
 <th>Joined Date</th>
 <th>Due Date</th>
 <th>Status</th>
+
 </tr>
 
 </thead>
@@ -771,54 +1126,79 @@ onchange="displaySelectedPaymentHistory()">
 
 </div>
 
-</div></section>
-<section class="owner-screen" data-screen="receipt"><!-- RECEIPT -->
+</div>
+
+</section>
+
+
+<!-- RECEIPT -->
+
+<section
+class="owner-screen"
+data-screen="receipt">
 
 <div class="section">
 
 <h2>🧾 Rent Receipt</h2>
 
-<input id="receiptOwner"
+<input
+id="receiptOwner"
 placeholder="Owner Name">
 
-<input id="receiptMobile"
+<input
+id="receiptMobile"
 placeholder="Owner Mobile">
 
-<input id="receiptAddress"
+<input
+id="receiptAddress"
 placeholder="Owner Address">
 
-<select id="receiptConsumer">
+<select id="receiptTenant">
 
-<option value="">Select Consumer</option>
+<option value="">
+Select Tenant
+</option>
 
 </select>
 
-<button class="primary"
+<button
+class="primary"
 onclick="generateReceipt()">
 
 🧾 Generate Receipt
 
 </button>
 
-<div id="receipt"></section>
-    </div>
-  </main>
+<div id="receipt"></div>
+
+</div>
+
+</section>
+
+
+</div>
+
+</main>
+
 </div>
 
 </div>
+
+
 <!-- =====================================================
-CONSUMER DASHBOARD
+TENANT DASHBOARD
 ===================================================== -->
 
-<div id="consumerDashboard" class="hidden">
+<div id="tenantDashboard" class="hidden">
 
 <header>
 
 <h1>🏠 Rent Management</h1>
 
-<p>Consumer Dashboard</p>
+<p>Tenant Dashboard</p>
 
-<button class="danger"
+<button
+class="danger"
 onclick="logoutUser()">
 
 🚪 Logout
@@ -833,21 +1213,27 @@ onclick="logoutUser()">
 <div class="section">
 
 <h2>
+
 👋 Welcome,
-<span id="consumerWelcome"></span>
+<span id="tenantWelcome"></span>
+
 </h2>
 
-<p id="consumerEmail"></p>
+<p id="tenantEmail"></p>
 
 <p>
+
 Account Status:
-<strong id="consumerStatus"></strong>
+
+<strong id="tenantStatus"></strong>
+
 </p>
 
 </div>
 
 
-<div id="pendingMessage"
+<div
+id="pendingMessage"
 class="section hidden">
 
 <h2>⏳ Verification Pending</h2>
@@ -863,13 +1249,14 @@ Owner must verify your details before your account becomes active.
 </div>
 
 
-<div id="closedMessage"
+<div
+id="closedMessage"
 class="section hidden">
 
 <h2>🚪 Account Closed</h2>
 
 <p>
-Your Consumer account has been closed by the Owner.
+Your Tenant account has been closed by the Owner.
 </p>
 
 <p>
@@ -883,30 +1270,43 @@ No new rent will be generated.
 </div>
 
 
-<div id="verifiedConsumerArea"
+<div
+id="verifiedTenantArea"
 class="hidden">
 
 
 <div class="cards">
 
 <div class="card">
+
 <h3>Property</h3>
+
 <p id="myProperty">-</p>
+
 </div>
 
 <div class="card">
+
 <h3>Monthly Rent</h3>
+
 <p id="myRent">₹0</p>
+
 </div>
 
 <div class="card">
+
 <h3>Security Deposit</h3>
+
 <p id="mySecurityDeposit">₹0</p>
+
 </div>
 
 <div class="card">
+
 <h3>Next Due Date</h3>
+
 <p id="myDueDate">-</p>
+
 </div>
 
 </div>
@@ -920,45 +1320,55 @@ class="hidden">
 
 <div class="form-grid">
 
-<input id="myName"
+<input
+id="myName"
 placeholder="Name"
 readonly>
 
-<input id="myMobile"
+<input
+id="myMobile"
 placeholder="Mobile"
 readonly>
 
-<input id="myEmail"
+<input
+id="myEmail"
 placeholder="Email"
 readonly>
 
-<input id="myPropertyInput"
+<input
+id="myPropertyInput"
 placeholder="Property"
 readonly>
 
-<input id="myRoom"
+<input
+id="myRoom"
 placeholder="Room / Shop"
 readonly>
 
-<input id="myRentInput"
+<input
+id="myRentInput"
 type="number"
 placeholder="Monthly Rent"
 readonly>
 
-<input id="mySecurityDepositInput"
+<input
+id="mySecurityDepositInput"
 type="number"
 placeholder="Security Deposit"
 readonly>
 
-<input id="myJoinedDate"
+<input
+id="myJoinedDate"
 type="date"
 readonly>
 
-<input id="myDueDateInput"
+<input
+id="myDueDateInput"
 type="date"
 readonly>
 
-<textarea id="myAddress"
+<textarea
+id="myAddress"
 placeholder="Address"
 readonly></textarea>
 
@@ -986,17 +1396,19 @@ readonly></textarea>
 <thead>
 
 <tr>
+
 <th>Month</th>
 <th>Rent</th>
 <th>Due Date</th>
 <th>Paid</th>
 <th>Payment Date</th>
 <th>Status</th>
+
 </tr>
 
 </thead>
 
-<tbody id="consumerRentRecords"></tbody>
+<tbody id="tenantRentRecords"></tbody>
 
 </table>
 
@@ -1018,15 +1430,17 @@ readonly></textarea>
 <thead>
 
 <tr>
+
 <th>Month</th>
 <th>Amount</th>
 <th>Payment Date</th>
 <th>Status</th>
+
 </tr>
 
 </thead>
 
-<tbody id="consumerPayments"></tbody>
+<tbody id="tenantPayments"></tbody>
 
 </table>
 
@@ -1044,15 +1458,21 @@ readonly></textarea>
 <div class="liability-box">
 
 <p>
+
 <b>Security Deposit:</b>
-₹<span id="consumerDepositAmount">0</span>
+
+₹<span id="tenantDepositAmount">0</span>
+
 </p>
 
 <p>
+
 <b>Status:</b>
-<span id="consumerDepositStatus">
+
+<span id="tenantDepositStatus">
 Held by Owner
 </span>
+
 </p>
 
 <p>
@@ -1064,32 +1484,83 @@ Security Deposit is separate from monthly rent.
 </div>
 
 </div>
+
 </div>
+
 </div>
 
 
+<!-- =====================================================
+OWNER SCREEN SCRIPT
+===================================================== -->
 
 <script>
+
 function showOwnerScreen(screen){
-  document.querySelectorAll(".owner-screen").forEach(function(el){
-    el.classList.toggle("active", el.dataset.screen === screen);
-  });
-  document.querySelectorAll(".owner-nav").forEach(function(btn){
-    btn.classList.toggle("active", btn.dataset.screen === screen);
-  });
-  var side=document.getElementById("ownerSidebar");
-  if(side) side.classList.remove("open");
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-function toggleOwnerSidebar(){
-  var side=document.getElementById("ownerSidebar");
-  if(side) side.classList.toggle("open");
-}
-document.addEventListener("click",function(e){
-  var btn=e.target.closest(".owner-nav");
-  if(btn) showOwnerScreen(btn.dataset.screen);
+
+document
+.querySelectorAll(".owner-screen")
+.forEach(function(el){
+
+el.classList.toggle(
+"active",
+el.dataset.screen===screen
+);
+
 });
+
+
+document
+.querySelectorAll(".owner-nav")
+.forEach(function(btn){
+
+btn.classList.toggle(
+"active",
+btn.dataset.screen===screen
+);
+
+});
+
+
+var side=
+document.getElementById("ownerSidebar");
+
+if(side)
+side.classList.remove("open");
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+function toggleOwnerSidebar(){
+
+var side=
+document.getElementById("ownerSidebar");
+
+if(side)
+side.classList.toggle("open");
+
+}
+
+
+document.addEventListener(
+"click",
+function(e){
+
+var btn=
+e.target.closest(".owner-nav");
+
+if(btn)
+showOwnerScreen(btn.dataset.screen);
+
+});
+
 </script>
+
 
 <!-- =====================================================
 FIREBASE
@@ -1128,6 +1599,10 @@ serverTimestamp
 from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
+/* =====================================================
+FIREBASE CONFIG - UNCHANGED
+===================================================== */
+
 const firebaseConfig={
 
 apiKey:"AIzaSyBJPjJO0xlRlBCxLmbtFIcgYiiDA4JAWMM",
@@ -1153,18 +1628,21 @@ measurementId:
 };
 
 
-const app=initializeApp(firebaseConfig);
+const app=
+initializeApp(firebaseConfig);
 
-const auth=getAuth(app);
+const auth=
+getAuth(app);
 
-const db=getFirestore(app);
+const db=
+getFirestore(app);
 
 
 let currentUser=null;
 
 let currentRole=null;
 
-let consumers=[];
+let tenants=[];
 
 let properties=[];
 
@@ -1212,11 +1690,13 @@ LOGIN
 window.loginUser=async()=>{
 
 const email=
-document.getElementById("loginEmail")
+document
+.getElementById("loginEmail")
 .value.trim();
 
 const password=
-document.getElementById("loginPassword")
+document
+.getElementById("loginPassword")
 .value;
 
 const error=
@@ -1236,7 +1716,9 @@ return;
 try{
 
 await signInWithEmailAndPassword(
-auth,email,password
+auth,
+email,
+password
 );
 
 }catch(e){
@@ -1252,10 +1734,10 @@ error.innerText=
 
 
 /* =====================================================
-NEW CONSUMER REGISTRATION
+TENANT REGISTRATION
 ===================================================== */
 
-window.registerConsumer=async()=>{
+window.registerTenant=async()=>{
 
 const name=
 document.getElementById("regName")
@@ -1286,30 +1768,40 @@ document.getElementById("regAddress")
 .value.trim();
 
 const rent=
-Number(document.getElementById("regRent").value);
+Number(
+document.getElementById("regRent").value
+);
 
 const securityDeposit=
 Number(
-document.getElementById("regSecurityDeposit").value
+document.getElementById(
+"regSecurityDeposit"
+).value
 );
 
 const joinedDate=
-document.getElementById("regJoinedDate").value;
+document.getElementById(
+"regJoinedDate"
+).value;
 
 const dueDate=
-document.getElementById("regDueDate").value;
+document.getElementById(
+"regDueDate"
+).value;
 
 const error=
-document.getElementById("registerError");
+document.getElementById(
+"registerError"
+);
 
 const success=
-document.getElementById("registerSuccess");
+document.getElementById(
+"registerSuccess"
+);
 
 error.innerText="";
 success.innerText="";
 
-
-/* VALIDATION */
 
 if(
 !name||
@@ -1364,14 +1856,20 @@ try{
 
 const result=
 await createUserWithEmailAndPassword(
-auth,email,password
+auth,
+email,
+password
 );
 
 
-/* SAVE COMPLETE PENDING PROFILE */
+/* SAVE TENANT PROFILE */
 
 await setDoc(
-doc(db,"users",result.user.uid),
+doc(
+db,
+"users",
+result.user.uid
+),
 {
 
 name:name,
@@ -1380,7 +1878,7 @@ email:email,
 
 mobile:mobile,
 
-role:"consumer",
+role:"tenant",
 
 status:"pending",
 
@@ -1398,26 +1896,21 @@ dueDate:dueDate,
 
 address:address,
 
-createdAt:serverTimestamp(),
+createdAt:
+serverTimestamp(),
 
-updatedAt:serverTimestamp()
+updatedAt:
+serverTimestamp()
 
 }
 );
 
 
-/*
-Do not create property,
-deposit or rent records yet.
-
-Owner must verify first.
-*/
-
 success.innerText=
 "✅ Registration submitted successfully. Owner verification is required.";
 
 
-/* SIGN OUT AFTER REGISTRATION */
+/* SIGN OUT */
 
 await signOut(auth);
 
@@ -1436,9 +1929,12 @@ await signOut(auth);
 "regSecurityDeposit",
 "regJoinedDate",
 "regDueDate"
-].forEach(id=>{
+]
+.forEach(id=>{
 
-document.getElementById(id).value="";
+document
+.getElementById(id)
+.value="";
 
 });
 
@@ -1458,7 +1954,9 @@ error.innerText=e.message;
 AUTH STATE
 ===================================================== */
 
-onAuthStateChanged(auth,async(user)=>{
+onAuthStateChanged(
+auth,
+async(user)=>{
 
 if(!user){
 
@@ -1479,7 +1977,9 @@ doc(db,"users",user.uid)
 
 if(!snap.exists()){
 
-alert("User profile not found.");
+alert(
+"User profile not found."
+);
 
 await signOut(auth);
 
@@ -1491,6 +1991,7 @@ const data=snap.data();
 
 currentRole=data.role;
 
+
 if(currentRole==="owner"){
 
 showOwner();
@@ -1499,11 +2000,11 @@ await loadOwner();
 
 }
 
-else if(currentRole==="consumer"){
+else if(currentRole==="tenant"){
 
-showConsumer();
+showTenant();
 
-await loadConsumer();
+await loadTenant();
 
 }
 
@@ -1520,7 +2021,8 @@ await signOut(auth);
 console.error(e);
 
 alert(
-"Unable to load account: "+e.message
+"Unable to load account: "+
+e.message
 );
 
 }
@@ -1534,33 +2036,41 @@ SHOW DASHBOARDS
 
 function showOwner(){
 
-document.getElementById("loginPage")
+document
+.getElementById("loginPage")
 .classList.add("hidden");
 
-document.getElementById("registerPage")
+document
+.getElementById("registerPage")
 .classList.add("hidden");
 
-document.getElementById("consumerDashboard")
+document
+.getElementById("tenantDashboard")
 .classList.add("hidden");
 
-document.getElementById("ownerDashboard")
+document
+.getElementById("ownerDashboard")
 .classList.remove("hidden");
 
 }
 
 
-function showConsumer(){
+function showTenant(){
 
-document.getElementById("loginPage")
+document
+.getElementById("loginPage")
 .classList.add("hidden");
 
-document.getElementById("registerPage")
+document
+.getElementById("registerPage")
 .classList.add("hidden");
 
-document.getElementById("ownerDashboard")
+document
+.getElementById("ownerDashboard")
 .classList.add("hidden");
 
-document.getElementById("consumerDashboard")
+document
+.getElementById("tenantDashboard")
 .classList.remove("hidden");
 
 }
@@ -1572,7 +2082,7 @@ LOAD OWNER
 
 async function loadOwner(){
 
-await loadConsumers();
+await loadTenants();
 
 await loadProperties();
 
@@ -1584,15 +2094,15 @@ await loadDeposits();
 
 await cleanupFutureRentRecords();
 
-await ensureDueRentRecordsForAllConsumers();
+await ensureDueRentRecordsForAllTenants();
 
 await loadRentRecords();
 
-fillConsumerLists();
+fillTenantLists();
 
-displayPendingConsumers();
+displayPendingTenants();
 
-displayClosedConsumers();
+displayClosedTenants();
 
 displayProperties();
 
@@ -1611,9 +2121,9 @@ updateDashboard();
 LOAD COLLECTIONS
 ===================================================== */
 
-async function loadConsumers(){
+async function loadTenants(){
 
-consumers=[];
+tenants=[];
 
 const snap=
 await getDocs(
@@ -1624,11 +2134,14 @@ snap.forEach(item=>{
 
 const d=item.data();
 
-if(d.role==="consumer"){
+if(d.role==="tenant"){
 
-consumers.push({
+tenants.push({
+
 id:item.id,
+
 ...d
+
 });
 
 }
@@ -1650,8 +2163,11 @@ collection(db,"properties")
 snap.forEach(item=>{
 
 properties.push({
+
 id:item.id,
+
 ...item.data()
+
 });
 
 });
@@ -1671,8 +2187,11 @@ collection(db,"payments")
 snap.forEach(item=>{
 
 payments.push({
+
 id:item.id,
+
 ...item.data()
+
 });
 
 });
@@ -1692,8 +2211,11 @@ collection(db,"rentRecords")
 snap.forEach(item=>{
 
 rentRecords.push({
+
 id:item.id,
+
 ...item.data()
+
 });
 
 });
@@ -1713,8 +2235,11 @@ collection(db,"securityDeposits")
 snap.forEach(item=>{
 
 deposits.push({
+
 id:item.id,
+
 ...item.data()
+
 });
 
 });
@@ -1723,26 +2248,26 @@ id:item.id,
 
 
 /* =====================================================
-LISTS
+TENANT LISTS
 ===================================================== */
 
-function fillConsumerLists(){
+function fillTenantLists(){
 
 const owner=
 document.getElementById(
-"ownerConsumerSelect"
+"ownerTenantSelect"
 );
 
 owner.innerHTML=
-'<option value="">Select Consumer</option>';
+'<option value="">Select Tenant</option>';
 
-consumers
-.filter(c=>c.status!=="closed")
-.forEach(c=>{
+tenants
+.filter(t=>t.status!=="closed")
+.forEach(t=>{
 
 owner.innerHTML+=
-`<option value="${c.id}">
-${safe(c.name||c.email)}
+`<option value="${t.id}">
+${safe(t.name||t.email)}
 </option>`;
 
 });
@@ -1750,19 +2275,19 @@ ${safe(c.name||c.email)}
 
 const close=
 document.getElementById(
-"closeConsumerSelect"
+"closeTenantSelect"
 );
 
 close.innerHTML=
-'<option value="">Select Consumer</option>';
+'<option value="">Select Tenant</option>';
 
-consumers
-.filter(c=>c.status==="verified")
-.forEach(c=>{
+tenants
+.filter(t=>t.status==="verified")
+.forEach(t=>{
 
 close.innerHTML+=
-`<option value="${c.id}">
-${safe(c.name||c.email)}
+`<option value="${t.id}">
+${safe(t.name||t.email)}
 </option>`;
 
 });
@@ -1770,19 +2295,19 @@ ${safe(c.name||c.email)}
 
 const pay=
 document.getElementById(
-"paymentConsumer"
+"paymentTenant"
 );
 
 pay.innerHTML=
-'<option value="">Select Active Consumer</option>';
+'<option value="">Select Active Tenant</option>';
 
-consumers
-.filter(c=>c.status==="verified")
-.forEach(c=>{
+tenants
+.filter(t=>t.status==="verified")
+.forEach(t=>{
 
 pay.innerHTML+=
-`<option value="${c.id}">
-${safe(c.name||c.email)}
+`<option value="${t.id}">
+${safe(t.name||t.email)}
 </option>`;
 
 });
@@ -1790,17 +2315,17 @@ ${safe(c.name||c.email)}
 
 const receipt=
 document.getElementById(
-"receiptConsumer"
+"receiptTenant"
 );
 
 receipt.innerHTML=
-'<option value="">Select Consumer</option>';
+'<option value="">Select Tenant</option>';
 
-consumers.forEach(c=>{
+tenants.forEach(t=>{
 
 receipt.innerHTML+=
-`<option value="${c.id}">
-${safe(c.name||c.email)}
+`<option value="${t.id}">
+${safe(t.name||t.email)}
 </option>`;
 
 });
@@ -1808,19 +2333,19 @@ ${safe(c.name||c.email)}
 
 const refund=
 document.getElementById(
-"refundConsumer"
+"refundTenant"
 );
 
 refund.innerHTML=
-'<option value="">Select Consumer</option>';
+'<option value="">Select Tenant</option>';
 
-consumers
-.filter(c=>c.status==="closed")
-.forEach(c=>{
+tenants
+.filter(t=>t.status==="closed")
+.forEach(t=>{
 
 refund.innerHTML+=
-`<option value="${c.id}">
-${safe(c.name||c.email)}
+`<option value="${t.id}">
+${safe(t.name||t.email)}
 </option>`;
 
 });
@@ -1828,18 +2353,18 @@ ${safe(c.name||c.email)}
 
 const history=
 document.getElementById(
-"paymentHistoryConsumer"
+"paymentHistoryTenant"
 );
 
 history.innerHTML=
-'<option value="">All Consumers</option>';
+'<option value="">All Tenants</option>';
 
-consumers.forEach(c=>{
+tenants.forEach(t=>{
 
 history.innerHTML+=
-`<option value="${c.id}">
-${safe(c.name||c.email)}
-${c.status==="closed"?" (Closed)":""}
+`<option value="${t.id}">
+${safe(t.name||t.email)}
+${t.status==="closed"?" (Closed)":""}
 </option>`;
 
 });
@@ -1848,47 +2373,49 @@ ${c.status==="closed"?" (Closed)":""}
 
 
 /* =====================================================
-PENDING CONSUMERS
+PENDING TENANTS
 ===================================================== */
 
-function displayPendingConsumers(){
+function displayPendingTenants(){
 
 const table=
 document.getElementById(
-"pendingConsumerTable"
+"pendingTenantTable"
 );
 
 table.innerHTML="";
 
-consumers
-.filter(c=>c.status==="pending")
-.forEach(c=>{
+tenants
+.filter(t=>t.status==="pending")
+.forEach(t=>{
 
 table.innerHTML+=`
 
 <tr>
 
-<td>${safe(c.name)}</td>
+<td>${safe(t.name)}</td>
 
-<td>${safe(c.email)}</td>
+<td>${safe(t.email)}</td>
 
-<td>${safe(c.mobile)}</td>
+<td>${safe(t.mobile)}</td>
 
-<td>${safe(c.propertyName)}</td>
+<td>${safe(t.propertyName)}</td>
 
-<td>₹${Number(c.rent||0)}</td>
+<td>₹${Number(t.rent||0)}</td>
 
 <td>
+
 <span class="badge badge-pending">
 Pending
 </span>
+
 </td>
 
 <td>
 
 <button
 class="primary"
-onclick="selectPending('${c.id}')">
+onclick="selectPendingTenant('${t.id}')">
 
 🔍 Verify / Check
 
@@ -1905,17 +2432,19 @@ onclick="selectPending('${c.id}')">
 }
 
 
-window.selectPending=(uid)=>{
+window.selectPendingTenant=(uid)=>{
 
 document.getElementById(
-"ownerConsumerSelect"
+"ownerTenantSelect"
 ).value=uid;
 
-selectConsumer();
+selectTenant();
 
-document.getElementById(
-"ownerConsumerSelect"
-).scrollIntoView({
+showOwnerScreen("tenantDetails");
+
+document
+.getElementById("ownerTenantSelect")
+.scrollIntoView({
 behavior:"smooth"
 });
 
@@ -1923,20 +2452,20 @@ behavior:"smooth"
 
 
 /* =====================================================
-SELECT CONSUMER
+SELECT TENANT
 ===================================================== */
 
-window.selectConsumer=()=>{
+window.selectTenant=()=>{
 
 const uid=
 document.getElementById(
-"ownerConsumerSelect"
+"ownerTenantSelect"
 ).value;
 
-const c=
-consumers.find(x=>x.id===uid);
+const t=
+tenants.find(x=>x.id===uid);
 
-if(!c){
+if(!t){
 
 clearOwnerFields();
 
@@ -1944,73 +2473,92 @@ return;
 
 }
 
-document.getElementById("ownerName").value=
-c.name||"";
+document.getElementById(
+"ownerName"
+).value=
+t.name||"";
 
-document.getElementById("ownerEmail").value=
-c.email||"";
+document.getElementById(
+"ownerEmail"
+).value=
+t.email||"";
 
-document.getElementById("ownerMobile").value=
-c.mobile||"";
+document.getElementById(
+"ownerMobile"
+).value=
+t.mobile||"";
 
-document.getElementById("ownerProperty").value=
-c.propertyName||"";
+document.getElementById(
+"ownerProperty"
+).value=
+t.propertyName||"";
 
-document.getElementById("ownerRoom").value=
-c.roomNumber||"";
+document.getElementById(
+"ownerRoom"
+).value=
+t.roomNumber||"";
 
-document.getElementById("ownerRent").value=
-c.rent??"";
+document.getElementById(
+"ownerRent"
+).value=
+t.rent??"";
 
-document.getElementById("ownerSecurityDeposit").value=
-c.securityDeposit??"";
+document.getElementById(
+"ownerSecurityDeposit"
+).value=
+t.securityDeposit??"";
 
-document.getElementById("ownerJoinedDate").value=
-c.joinedDate||"";
+document.getElementById(
+"ownerJoinedDate"
+).value=
+t.joinedDate||"";
 
-document.getElementById("ownerDueDate").value=
-c.dueDate||"";
+document.getElementById(
+"ownerDueDate"
+).value=
+t.dueDate||"";
 
-document.getElementById("ownerAddress").value=
-c.address||"";
+document.getElementById(
+"ownerAddress"
+).value=
+t.address||"";
 
 };
 
 
 /* =====================================================
-VERIFY + SAVE
+VERIFY + SAVE TENANT
 ===================================================== */
 
-window.verifyAndSaveConsumer=async()=>{
+window.verifyAndSaveTenant=async()=>{
 
 const uid=
 document.getElementById(
-"ownerConsumerSelect"
+"ownerTenantSelect"
 ).value;
 
 if(!uid){
 
-alert("Select Consumer.");
+alert("Select Tenant.");
 
 return;
 
 }
 
-const c=
-consumers.find(x=>x.id===uid);
+const t=
+tenants.find(x=>x.id===uid);
 
-if(!c)return;
+if(!t)return;
 
-if(c.status==="closed"){
+if(t.status==="closed"){
 
 alert(
-"Closed Consumer cannot be modified."
+"Closed Tenant cannot be modified."
 );
 
 return;
 
 }
-
 
 const propertyName=
 document.getElementById(
@@ -2063,7 +2611,7 @@ securityDeposit<0||
 ){
 
 alert(
-"Fill ALL Consumer Details before verification."
+"Fill ALL Tenant Details before verification."
 );
 
 return;
@@ -2077,9 +2625,9 @@ cannot be changed after verification.
 */
 
 if(
-c.status==="verified" &&
-c.securityDeposit!==undefined &&
-Number(c.securityDeposit)!==securityDeposit
+t.status==="verified" &&
+t.securityDeposit!==undefined &&
+Number(t.securityDeposit)!==securityDeposit
 ){
 
 alert(
@@ -2091,9 +2639,9 @@ return;
 }
 
 if(
-c.status==="verified" &&
-c.joinedDate &&
-joinedDate!==c.joinedDate
+t.status==="verified" &&
+t.joinedDate &&
+joinedDate!==t.joinedDate
 ){
 
 alert(
@@ -2127,7 +2675,8 @@ dueDate,
 
 address,
 
-updatedAt:serverTimestamp()
+updatedAt:
+serverTimestamp()
 
 }
 );
@@ -2144,7 +2693,7 @@ const propertyData={
 
 consumerId:uid,
 
-consumerName:c.name||"",
+consumerName:t.name||"",
 
 propertyName,
 
@@ -2158,7 +2707,8 @@ dueDate,
 
 address,
 
-updatedAt:serverTimestamp()
+updatedAt:
+serverTimestamp()
 
 };
 
@@ -2178,7 +2728,8 @@ collection(db,"properties"),
 
 ...propertyData,
 
-createdAt:serverTimestamp()
+createdAt:
+serverTimestamp()
 
 }
 );
@@ -2201,7 +2752,7 @@ collection(db,"securityDeposits"),
 
 consumerId:uid,
 
-consumerName:c.name||"",
+consumerName:t.name||"",
 
 originalAmount:securityDeposit,
 
@@ -2217,9 +2768,11 @@ refundDate:"",
 
 deductionReason:"",
 
-createdAt:serverTimestamp(),
+createdAt:
+serverTimestamp(),
 
-updatedAt:serverTimestamp()
+updatedAt:
+serverTimestamp()
 
 }
 );
@@ -2230,7 +2783,7 @@ updatedAt:serverTimestamp()
 await loadOwner();
 
 alert(
-"✅ Consumer verified successfully."
+"✅ Tenant verified successfully."
 );
 
 }catch(e){
@@ -2238,7 +2791,8 @@ alert(
 console.error(e);
 
 alert(
-"Verification failed: "+e.message
+"Verification failed: "+
+e.message
 );
 
 }
@@ -2247,39 +2801,38 @@ alert(
 
 
 /* =====================================================
-MODIFY VERIFIED / PENDING DETAILS
+MODIFY TENANT DETAILS
 ===================================================== */
 
-window.updateConsumerDetails=async()=>{
+window.updateTenantDetails=async()=>{
 
 const uid=
 document.getElementById(
-"ownerConsumerSelect"
+"ownerTenantSelect"
 ).value;
 
 if(!uid){
 
-alert("Select Consumer.");
+alert("Select Tenant.");
 
 return;
 
 }
 
-const c=
-consumers.find(x=>x.id===uid);
+const t=
+tenants.find(x=>x.id===uid);
 
-if(!c)return;
+if(!t)return;
 
-if(c.status==="closed"){
+if(t.status==="closed"){
 
 alert(
-"Closed Consumer cannot be updated."
+"Closed Tenant cannot be updated."
 );
 
 return;
 
 }
-
 
 const propertyName=
 document.getElementById(
@@ -2313,7 +2866,7 @@ if(
 !propertyName||
 !roomNumber||
 rent<=0||
-!c.joinedDate||
+!t.joinedDate||
 !dueDate||
 !address
 ){
@@ -2343,7 +2896,8 @@ dueDate,
 
 address,
 
-updatedAt:serverTimestamp()
+updatedAt:
+serverTimestamp()
 
 }
 );
@@ -2370,7 +2924,8 @@ dueDate,
 
 address,
 
-updatedAt:serverTimestamp()
+updatedAt:
+serverTimestamp()
 
 }
 );
@@ -2378,14 +2933,14 @@ updatedAt:serverTimestamp()
 }
 
 
-if(c.status==="verified"){
+if(t.status==="verified"){
 
 await ensureDueRentRecords(
 uid,
-c.name||"",
+t.name||"",
 propertyName,
 rent,
-c.joinedDate,
+t.joinedDate,
 dueDate
 );
 
@@ -2394,7 +2949,7 @@ dueDate
 await loadOwner();
 
 alert(
-"✅ Details modified successfully."
+"✅ Tenant details modified successfully."
 );
 
 }catch(e){
@@ -2402,7 +2957,8 @@ alert(
 console.error(e);
 
 alert(
-"Update failed: "+e.message
+"Update failed: "+
+e.message
 );
 
 }
@@ -2411,14 +2967,14 @@ alert(
 
 
 /* =====================================================
-CLOSE CONSUMER
+CLOSE TENANT
 ===================================================== */
 
-window.closeConsumerAccount=async()=>{
+window.closeTenantAccount=async()=>{
 
 const uid=
 document.getElementById(
-"closeConsumerSelect"
+"closeTenantSelect"
 ).value;
 
 const closeDate=
@@ -2434,7 +2990,7 @@ document.getElementById(
 
 if(!uid){
 
-alert("Select Consumer.");
+alert("Select Tenant.");
 
 return;
 
@@ -2448,16 +3004,15 @@ return;
 
 }
 
-const c=
-consumers.find(x=>x.id===uid);
+const t=
+tenants.find(x=>x.id===uid);
 
-if(!c)return;
+if(!t)return;
 
-
-if(c.status==="closed"){
+if(t.status==="closed"){
 
 alert(
-"Consumer is already closed."
+"Tenant is already closed."
 );
 
 return;
@@ -2466,7 +3021,7 @@ return;
 
 
 if(!confirm(
-"Close this Consumer account?\n\n"+
+"Close this Tenant account?\n\n"+
 "Old Rent Records and Payment History will remain saved.\n"+
 "No future rent will be generated."
 ))return;
@@ -2484,7 +3039,8 @@ closedDate:closeDate,
 
 closeReason:reason,
 
-updatedAt:serverTimestamp()
+updatedAt:
+serverTimestamp()
 
 }
 );
@@ -2497,7 +3053,7 @@ document.getElementById(
 await loadOwner();
 
 alert(
-"Consumer account closed successfully."
+"Tenant account closed successfully."
 );
 
 }catch(e){
@@ -2505,7 +3061,8 @@ alert(
 console.error(e);
 
 alert(
-"Account closing failed: "+e.message
+"Account closing failed: "+
+e.message
 );
 
 }
@@ -2514,44 +3071,46 @@ alert(
 
 
 /* =====================================================
-CLOSED
+CLOSED TENANTS
 ===================================================== */
 
-function displayClosedConsumers(){
+function displayClosedTenants(){
 
 const table=
 document.getElementById(
-"closedConsumerTable"
+"closedTenantTable"
 );
 
 table.innerHTML="";
 
-consumers
-.filter(c=>c.status==="closed")
-.forEach(c=>{
+tenants
+.filter(t=>t.status==="closed")
+.forEach(t=>{
 
 table.innerHTML+=`
 
 <tr>
 
-<td>${safe(c.name)}</td>
+<td>${safe(t.name)}</td>
 
-<td>${safe(c.email)}</td>
+<td>${safe(t.email)}</td>
 
-<td>${safe(c.propertyName)}</td>
+<td>${safe(t.propertyName)}</td>
 
-<td>${formatDate(c.joinedDate)}</td>
+<td>${formatDate(t.joinedDate)}</td>
 
-<td>${formatDate(c.closedDate)}</td>
+<td>${formatDate(t.closedDate)}</td>
 
 <td>
-₹${Number(c.securityDeposit||0)}
+₹${Number(t.securityDeposit||0)}
 </td>
 
 <td>
+
 <span class="badge badge-closed">
 Closed
 </span>
+
 </td>
 
 </tr>
@@ -2610,30 +3169,30 @@ e
 }
 
 
-async function ensureDueRentRecordsForAllConsumers(){
+async function ensureDueRentRecordsForAllTenants(){
 
-for(const c of consumers){
+for(const t of tenants){
 
 if(
-c.status!=="verified"||
-!c.joinedDate||
-!c.dueDate||
-!Number(c.rent)
+t.status!=="verified"||
+!t.joinedDate||
+!t.dueDate||
+!Number(t.rent)
 )continue;
 
 await ensureDueRentRecords(
 
-c.id,
+t.id,
 
-c.name||"",
+t.name||"",
 
-c.propertyName||"",
+t.propertyName||"",
 
-Number(c.rent),
+Number(t.rent),
 
-c.joinedDate,
+t.joinedDate,
 
-c.dueDate
+t.dueDate
 
 );
 
@@ -2645,7 +3204,7 @@ c.dueDate
 async function ensureDueRentRecords(
 
 uid,
-consumerName,
+tenantName,
 propertyName,
 rent,
 joinedDate,
@@ -2661,17 +3220,18 @@ if(
 )return;
 
 
-const consumerSnap=
+const tenantSnap=
 await getDoc(
 doc(db,"users",uid)
 );
 
-if(!consumerSnap.exists())return;
+if(!tenantSnap.exists())
+return;
 
-const consumer=
-consumerSnap.data();
+const tenant=
+tenantSnap.data();
 
-if(consumer.status!=="verified")
+if(tenant.status!=="verified")
 return;
 
 
@@ -2684,7 +3244,8 @@ parseDate(firstDueDate);
 const now=
 parseDate(today());
 
-if(start>now)return;
+if(start>now)
+return;
 
 
 let current=
@@ -2734,11 +3295,7 @@ actualDay
 );
 
 
-/* HARD STOP */
-
-if(
-parseDate(dueDate)>now
-){
+if(parseDate(dueDate)>now){
 
 current=
 new Date(
@@ -2769,7 +3326,6 @@ current.toLocaleString(
 {month:"long"}
 );
 
-
 await addDoc(
 collection(db,"rentRecords"),
 {
@@ -2778,7 +3334,7 @@ recordKey,
 
 consumerId:uid,
 
-consumerName,
+consumerName:tenantName,
 
 propertyName,
 
@@ -2798,9 +3354,11 @@ paymentDate:"",
 
 status:"Pending",
 
-createdAt:serverTimestamp(),
+createdAt:
+serverTimestamp(),
 
-updatedAt:serverTimestamp()
+updatedAt:
+serverTimestamp()
 
 }
 );
@@ -2842,7 +3400,6 @@ rentRecords
 .filter(r=>
 
 r.dueDate&&
-
 parseDate(r.dueDate)<=now
 
 )
@@ -2941,11 +3498,14 @@ x=>x.id===id
 
 if(!r)return;
 
+
 document.getElementById(
-"paymentConsumer"
-).value=r.consumerId;
+"paymentTenant"
+).value=
+r.consumerId;
 
 fillPaymentDetails();
+
 
 setTimeout(()=>{
 
@@ -2968,30 +3528,31 @@ window.fillPaymentDetails=()=>{
 
 const uid=
 document.getElementById(
-"paymentConsumer"
+"paymentTenant"
 ).value;
 
-const c=
-consumers.find(
+const t=
+tenants.find(
 x=>x.id===uid
 );
 
-if(!c)return;
+if(!t)return;
 
 
 document.getElementById(
 "paymentName"
-).value=c.name||"";
+).value=
+t.name||"";
 
 document.getElementById(
 "paymentProperty"
 ).value=
-c.propertyName||"";
+t.propertyName||"";
 
 document.getElementById(
 "paymentRent"
 ).value=
-c.rent||"";
+t.rent||"";
 
 document.getElementById(
 "paymentDueDate"
@@ -3029,11 +3590,8 @@ rentRecords
 .filter(r=>
 
 r.consumerId===uid&&
-
 r.status!=="Paid"&&
-
 r.dueDate&&
-
 parseDate(r.dueDate)<=now
 
 )
@@ -3113,7 +3671,7 @@ window.recordPayment=async()=>{
 
 const uid=
 document.getElementById(
-"paymentConsumer"
+"paymentTenant"
 ).value;
 
 const recordId=
@@ -3137,7 +3695,7 @@ document.getElementById(
 if(!uid||!recordId){
 
 alert(
-"Select Consumer and Rent Month."
+"Select Tenant and Rent Month."
 );
 
 return;
@@ -3150,12 +3708,12 @@ rentRecords.find(
 x=>x.id===recordId
 );
 
-const c=
-consumers.find(
+const t=
+tenants.find(
 x=>x.id===uid
 );
 
-if(!r||!c)return;
+if(!r||!t)return;
 
 
 if(
@@ -3249,10 +3807,10 @@ collection(db,"payments"),
 consumerId:uid,
 
 consumerName:
-c.name||"",
+t.name||"",
 
 propertyName:
-c.propertyName||"",
+t.propertyName||"",
 
 rentRecordId:
 recordId,
@@ -3289,7 +3847,8 @@ status==="Paid"
 console.error(e);
 
 alert(
-"Payment failed: "+e.message
+"Payment failed: "+
+e.message
 );
 
 }
@@ -3326,7 +3885,7 @@ window.loadRefundDetails=()=>{
 
 const uid=
 document.getElementById(
-"refundConsumer"
+"refundTenant"
 ).value;
 
 const d=
@@ -3401,7 +3960,7 @@ window.refundSecurityDeposit=async()=>{
 
 const uid=
 document.getElementById(
-"refundConsumer"
+"refundTenant"
 ).value;
 
 const d=
@@ -3530,7 +4089,8 @@ alert(
 console.error(e);
 
 alert(
-"Refund failed: "+e.message
+"Refund failed: "+
+e.message
 );
 
 }
@@ -3554,8 +4114,8 @@ table.innerHTML="";
 
 properties.forEach(p=>{
 
-const c=
-consumers.find(
+const t=
+tenants.find(
 x=>x.id===p.consumerId
 );
 
@@ -3591,7 +4151,7 @@ ${formatDate(p.dueDate)}
 <td>
 
 ${
-c?.status==="closed"
+t?.status==="closed"
 
 ?
 
@@ -3620,7 +4180,7 @@ PAYMENT HISTORY
 
 function displayPayments(){
 
-displaySelectedPaymentHistory("");
+displaySelectedPaymentHistory();
 
 }
 
@@ -3629,7 +4189,7 @@ window.displaySelectedPaymentHistory=()=>{
 
 const uid=
 document.getElementById(
-"paymentHistoryConsumer"
+"paymentHistoryTenant"
 ).value;
 
 const table=
@@ -3645,6 +4205,7 @@ payments.slice();
 
 
 if(uid)
+
 list=
 list.filter(
 p=>p.consumerId===uid
@@ -3662,8 +4223,8 @@ String(a.paymentDate||"")
 
 list.forEach(p=>{
 
-const c=
-consumers.find(
+const t=
+tenants.find(
 x=>x.id===p.consumerId
 );
 
@@ -3677,7 +4238,7 @@ table.innerHTML+=`
 ${safe(p.consumerName)}
 
 ${
-c?.status==="closed"
+t?.status==="closed"
 ?
 ' <span class="badge badge-closed">Closed</span>'
 :""
@@ -3722,24 +4283,24 @@ DASHBOARD
 function updateDashboard(){
 
 document.getElementById(
-"totalConsumers"
+"totalTenants"
 ).innerText=
-consumers.length;
+tenants.length;
 
 
 document.getElementById(
-"verifiedConsumers"
+"verifiedTenants"
 ).innerText=
-consumers.filter(
-c=>c.status==="verified"
+tenants.filter(
+t=>t.status==="verified"
 ).length;
 
 
 document.getElementById(
-"pendingConsumers"
+"pendingTenants"
 ).innerText=
-consumers.filter(
-c=>c.status==="pending"
+tenants.filter(
+t=>t.status==="pending"
 ).length;
 
 
@@ -3774,10 +4335,10 @@ document.getElementById(
 
 
 /* =====================================================
-CONSUMER DASHBOARD
+TENANT DASHBOARD
 ===================================================== */
 
-async function loadConsumer(){
+async function loadTenant(){
 
 const uid=
 currentUser.uid;
@@ -3790,36 +4351,36 @@ doc(db,"users",uid)
 if(!profile.exists())
 return;
 
-const c=
+const t=
 profile.data();
 
 
 document.getElementById(
-"consumerWelcome"
+"tenantWelcome"
 ).innerText=
-c.name||"Consumer";
+t.name||"Tenant";
 
 
 document.getElementById(
-"consumerEmail"
+"tenantEmail"
 ).innerText=
-c.email||currentUser.email;
+t.email||currentUser.email;
 
 
 document.getElementById(
-"consumerStatus"
+"tenantStatus"
 ).innerText=
-c.status||"pending";
+t.status||"pending";
 
 
-if(c.status==="closed"){
+if(t.status==="closed"){
 
 document.getElementById(
 "pendingMessage"
 ).classList.add("hidden");
 
 document.getElementById(
-"verifiedConsumerArea"
+"verifiedTenantArea"
 ).classList.add("hidden");
 
 document.getElementById(
@@ -3836,14 +4397,14 @@ document.getElementById(
 ).classList.add("hidden");
 
 
-if(c.status!=="verified"){
+if(t.status!=="verified"){
 
 document.getElementById(
 "pendingMessage"
 ).classList.remove("hidden");
 
 document.getElementById(
-"verifiedConsumerArea"
+"verifiedTenantArea"
 ).classList.add("hidden");
 
 return;
@@ -3855,15 +4416,15 @@ await ensureDueRentRecords(
 
 uid,
 
-c.name||"",
+t.name||"",
 
-c.propertyName||"",
+t.propertyName||"",
 
-Number(c.rent||0),
+Number(t.rent||0),
 
-c.joinedDate,
+t.joinedDate,
 
-c.dueDate
+t.dueDate
 
 );
 
@@ -3873,75 +4434,75 @@ document.getElementById(
 ).classList.add("hidden");
 
 document.getElementById(
-"verifiedConsumerArea"
+"verifiedTenantArea"
 ).classList.remove("hidden");
 
 
 document.getElementById(
 "myName"
-).value=c.name||"";
+).value=t.name||"";
 
 document.getElementById(
 "myMobile"
-).value=c.mobile||"";
+).value=t.mobile||"";
 
 document.getElementById(
 "myEmail"
-).value=c.email||"";
+).value=t.email||"";
 
 document.getElementById(
 "myPropertyInput"
-).value=c.propertyName||"";
+).value=t.propertyName||"";
 
 document.getElementById(
 "myRoom"
-).value=c.roomNumber||"";
+).value=t.roomNumber||"";
 
 document.getElementById(
 "myRentInput"
-).value=c.rent||"";
+).value=t.rent||"";
 
 document.getElementById(
 "mySecurityDepositInput"
 ).value=
-c.securityDeposit||"";
+t.securityDeposit||"";
 
 document.getElementById(
 "myJoinedDate"
 ).value=
-c.joinedDate||"";
+t.joinedDate||"";
 
 document.getElementById(
 "myDueDateInput"
 ).value=
-c.dueDate||"";
+t.dueDate||"";
 
 document.getElementById(
 "myAddress"
 ).value=
-c.address||"";
+t.address||"";
 
 
 document.getElementById(
 "myProperty"
 ).innerText=
-c.propertyName||"-";
+t.propertyName||"-";
 
 document.getElementById(
 "myRent"
 ).innerText=
-"₹"+Number(c.rent||0);
+"₹"+Number(t.rent||0);
 
 document.getElementById(
 "mySecurityDeposit"
 ).innerText=
-"₹"+Number(c.securityDeposit||0);
+"₹"+Number(t.securityDeposit||0);
 
 
 document.getElementById(
-"consumerDepositAmount"
+"tenantDepositAmount"
 ).innerText=
-Number(c.securityDeposit||0);
+Number(t.securityDeposit||0);
 
 
 /* DEPOSIT STATUS */
@@ -3964,13 +4525,14 @@ depositSnap.forEach(i=>{
 if(
 i.data().status==="Refunded"
 )
+
 depositStatus="Refunded";
 
 });
 
 
 document.getElementById(
-"consumerDepositStatus"
+"tenantDepositStatus"
 ).innerText=
 depositStatus;
 
@@ -4038,7 +4600,7 @@ currentRecord.dueDate
 "-";
 
 
-displayConsumerRentRecords(
+displayTenantRentRecords(
 records
 );
 
@@ -4056,7 +4618,7 @@ where("consumerId","==",uid)
 
 const table=
 document.getElementById(
-"consumerPayments"
+"tenantPayments"
 );
 
 table.innerHTML="";
@@ -4116,14 +4678,14 @@ ${safe(p.status)}
 
 
 /* =====================================================
-CONSUMER RENT
+TENANT RENT
 ===================================================== */
 
-function displayConsumerRentRecords(records){
+function displayTenantRentRecords(records){
 
 const table=
 document.getElementById(
-"consumerRentRecords"
+"tenantRentRecords"
 );
 
 table.innerHTML="";
@@ -4177,18 +4739,18 @@ window.generateReceipt=()=>{
 
 const uid=
 document.getElementById(
-"receiptConsumer"
+"receiptTenant"
 ).value;
 
-const c=
-consumers.find(
+const t=
+tenants.find(
 x=>x.id===uid
 );
 
-if(!c){
+if(!t){
 
 alert(
-"Select Consumer."
+"Select Tenant."
 );
 
 return;
@@ -4230,7 +4792,7 @@ const address=
 document.getElementById(
 "receiptAddress"
 ).value||
-c.address||
+t.address||
 "-";
 
 
@@ -4262,28 +4824,28 @@ ${safe(address)}
 <hr>
 
 <p>
-<b>Consumer:</b>
-${safe(c.name)}
+<b>Tenant:</b>
+${safe(t.name)}
 </p>
 
 <p>
 <b>Mobile:</b>
-${safe(c.mobile)}
+${safe(t.mobile)}
 </p>
 
 <p>
 <b>Property:</b>
-${safe(c.propertyName)}
+${safe(t.propertyName)}
 </p>
 
 <p>
 <b>Room / Shop:</b>
-${safe(c.roomNumber)}
+${safe(t.roomNumber)}
 </p>
 
 <p>
 <b>Monthly Rent:</b>
-₹${Number(c.rent||0)}
+₹${Number(t.rent||0)}
 </p>
 
 <p>
@@ -4344,7 +4906,9 @@ function clearOwnerFields(){
 ]
 .forEach(id=>{
 
-document.getElementById(id).value="";
+document
+.getElementById(id)
+.value="";
 
 });
 
@@ -4436,4 +5000,4 @@ await signOut(auth);
 </script>
 
 </body>
-  </html>
+</html>
