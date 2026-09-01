@@ -113,23 +113,29 @@ body *{visibility:hidden}
 position:absolute;left:0;top:0;width:100%
 }
 }
+</style>
+<style>
 
-/* OWNER SIDEBAR / SCREEN NAVIGATION */
-.owner-layout{display:flex;gap:20px;align-items:flex-start}
-.owner-sidebar{width:235px;flex:0 0 235px;background:#fff;border-radius:12px;box-shadow:0 2px 8px #ddd;padding:12px;position:sticky;top:15px}
-.owner-sidebar h3{margin:8px 10px 12px}
-.owner-sidebar button{display:block;width:100%;margin:4px 0;text-align:left;background:#f3f4f6;color:#1f2937}
-.owner-sidebar button.active{background:#2563eb;color:#fff}
-.owner-main{flex:1;min-width:0}
+/* ===== OWNER SIDEBAR / SEPARATE SCREENS ===== */
+.owner-layout{display:flex;min-height:100vh}
+.owner-sidebar{width:255px;background:#111827;color:#fff;position:fixed;left:0;top:0;bottom:0;z-index:100;padding:15px;overflow-y:auto}
+.owner-brand{font-size:20px;font-weight:700;padding:14px 8px 20px;border-bottom:1px solid #374151;margin-bottom:10px}
+.owner-nav{width:100%;padding:11px 12px;margin:3px 0;border:0;border-radius:8px;text-align:left;background:transparent;color:#fff;cursor:pointer}
+.owner-nav:hover,.owner-nav.active{background:#2563eb}
+.owner-logout{margin-top:18px;width:100%}
+.owner-main{margin-left:255px;width:calc(100% - 255px);min-width:0}
+.owner-top{display:flex;align-items:center;justify-content:space-between;background:#1f2937;color:#fff;padding:14px 20px}
+.owner-top h1{margin:0}
 .owner-screen{display:none}
 .owner-screen.active{display:block}
-@media(max-width:850px){
-.owner-layout{display:block}
-.owner-sidebar{position:static;width:100%;margin-bottom:15px}
-.owner-sidebar button{display:inline-block;width:auto}
-.owner-main{width:100%}
+.mobile-menu{display:none}
+@media(max-width:800px){
+  .owner-sidebar{transform:translateX(-100%);transition:.2s}
+  .owner-sidebar.open{transform:translateX(0)}
+  .owner-main{margin-left:0;width:100%}
+  .owner-top{display:none}
+  .mobile-menu{display:flex;background:#1f2937;color:#fff;padding:10px;align-items:center;gap:10px;position:sticky;top:0;z-index:90}
 }
-@media(max-width:500px){.owner-sidebar button{width:100%}}
 
 </style>
 </head>
@@ -255,37 +261,33 @@ OWNER DASHBOARD
 
 <div id="ownerDashboard" class="hidden">
 
-<header>
-<h1>🏠 Rent Management</h1>
-<p>Owner Dashboard</p>
-<button class="danger" onclick="logoutUser()">🚪 Logout</button>
-</header>
-
-<div class="container">
-
 <div class="owner-layout">
-
-<aside class="owner-sidebar">
-<h3>☰ Owner Menu</h3>
-<button class="owner-nav active" data-screen="dashboard" onclick="showOwnerScreen('dashboard')">📊 Dashboard</button>
-<button class="owner-nav" data-screen="verification" onclick="showOwnerScreen('verification')">⏳ Consumer Verification</button>
-<button class="owner-nav" data-screen="consumers" onclick="showOwnerScreen('consumers')">👥 Consumers</button>
-<button class="owner-nav" data-screen="properties" onclick="showOwnerScreen('properties')">🏢 Properties</button>
-<button class="owner-nav" data-screen="rent" onclick="showOwnerScreen('rent')">📅 Monthly Rent</button>
-<button class="owner-nav" data-screen="collection" onclick="showOwnerScreen('collection')">💵 Rent Collection</button>
-<button class="owner-nav" data-screen="history" onclick="showOwnerScreen('history')">📋 Payment History</button>
-<button class="owner-nav" data-screen="deposit" onclick="showOwnerScreen('deposit')">🔐 Security Deposit</button>
-<button class="owner-nav" data-screen="refund" onclick="showOwnerScreen('refund')">💸 Refund</button>
-<button class="owner-nav" data-screen="closed" onclick="showOwnerScreen('closed')">📁 Closed Consumers</button>
-<button class="owner-nav" data-screen="receipt" onclick="showOwnerScreen('receipt')">🧾 Rent Receipt</button>
-<button class="danger" onclick="logoutUser()">🚪 Logout</button>
-</aside>
-
-<main class="owner-main">
-
-<div id="ownerScreen-dashboard" class="owner-screen active" data-screen="dashboard">
-
-<div class="cards">
+  <aside id="ownerSidebar" class="owner-sidebar">
+    <div class="owner-brand">🏠 Rent Management</div>
+    <button class="owner-nav active" data-screen="dashboard">🏠 Dashboard</button>
+    <button class="owner-nav" data-screen="verification">⏳ Consumer Verification</button>
+    <button class="owner-nav" data-screen="consumerDetails">👤 Consumers</button>
+    <button class="owner-nav" data-screen="properties">🏢 Properties</button>
+    <button class="owner-nav" data-screen="rent">📅 Monthly Rent</button>
+    <button class="owner-nav" data-screen="collection">💵 Rent Collection</button>
+    <button class="owner-nav" data-screen="history">📋 Payment History</button>
+    <button class="owner-nav" data-screen="refund">💸 Refund</button>
+    <button class="owner-nav" data-screen="closeConsumer">🚪 Close Consumer</button>
+    <button class="owner-nav" data-screen="closed">📁 Closed Consumers</button>
+    <button class="owner-nav" data-screen="receipt">🧾 Rent Receipt</button>
+    <button class="danger owner-logout" onclick="logoutUser()">🚪 Logout</button>
+  </aside>
+  <main class="owner-main">
+    <div class="mobile-menu">
+      <button class="primary" onclick="toggleOwnerSidebar()">☰</button>
+      <b>Owner Dashboard</b>
+    </div>
+    <div class="owner-top">
+      <div><h1>🏠 Rent Management</h1><p>Owner Dashboard</p></div>
+      <button class="danger" onclick="logoutUser()">🚪 Logout</button>
+    </div>
+    <div class="container">
+      <section class="owner-screen active" data-screen="dashboard"><div class="cards">
 
 <div class="card">
 <h3>Total Consumers</h3>
@@ -329,16 +331,12 @@ It remains Owner's liability until refunded.
 </p>
 
 </div>
-</div>
-
-</div>
-
-
-<!-- =====================================================
+</div></section>
+<section class="owner-screen" data-screen="verification"><!-- =====================================================
 PENDING VERIFICATION
 ===================================================== -->
 
-<div id="ownerSection-verification" class="section owner-screen" data-screen="verification">
+<div class="section">
 
 <h2>⏳ New Consumer Verification</h2>
 
@@ -368,23 +366,14 @@ You can check them and modify them before approval.
 </table>
 
 </div>
-</div>
-
-
-<!-- =====================================================
+</div></section>
+<section class="owner-screen" data-screen="consumerDetails"><!-- =====================================================
 CONSUMER DETAILS
 ===================================================== -->
 
-<div id="ownerSection-consumers-55520" class="section owner-screen" data-screen="consumers">
+<div class="section">
 
 <h2>👤 Consumer Details</h2>
-
-<div class="table-wrap">
-<table>
-<thead><tr><th>Name</th><th>Email</th><th>Mobile</th><th>Property</th><th>Rent</th><th>Status</th></tr></thead>
-<tbody id="allConsumerTable"></tbody>
-</table>
-</div>
 
 <select id="ownerConsumerSelect"
 onchange="selectConsumer()">
@@ -483,14 +472,12 @@ onclick="updateConsumerDetails()">
 ✏️ Modify Details
 </button>
 
-</div>
-
-
-<!-- =====================================================
+</div></section>
+<section class="owner-screen" data-screen="closeConsumer"><!-- =====================================================
 CLOSE CONSUMER
 ===================================================== -->
 
-<div id="ownerSection-consumers-55591" class="section owner-screen" data-screen="consumers">
+<div class="section">
 
 <h2>🚪 Close Consumer Account</h2>
 
@@ -524,12 +511,10 @@ onclick="closeConsumerAccount()">
 🚪 Close Consumer
 </button>
 
-</div>
+</div></section>
+<section class="owner-screen" data-screen="closed"><!-- CLOSED CONSUMERS -->
 
-
-<!-- CLOSED CONSUMERS -->
-
-<div id="ownerSection-closed-55662" class="section owner-screen" data-screen="closed">
+<div class="section">
 
 <h2>📁 Closed Consumers</h2>
 
@@ -554,12 +539,10 @@ onclick="closeConsumerAccount()">
 </table>
 
 </div>
-</div>
+</div></section>
+<section class="owner-screen" data-screen="refund"><!-- SECURITY REFUND -->
 
-
-<!-- SECURITY REFUND -->
-
-<div id="ownerSection-refund-55727" class="section owner-screen" data-screen="refund">
+<div class="section">
 
 <h2>💸 Security Deposit Refund</h2>
 
@@ -601,35 +584,12 @@ onclick="refundSecurityDeposit()">
 💸 Refund Security Deposit
 </button>
 
-</div>
-
-
-<!-- SECURITY DEPOSIT SCREEN -->
-
-<div id="ownerScreen-deposit" class="section owner-screen" data-screen="deposit">
-
-<h2>🔐 Security Deposit</h2>
-
-<div class="liability-box">
-<h3>Total Security Deposit Held: <span id="totalDepositLiability2">₹0</span></h3>
-<p>Security Deposit is not monthly rent. It remains Owner's liability until refunded.</p>
-</div>
-
-<div class="table-wrap">
-<table>
-<thead><tr><th>Consumer</th><th>Original</th><th>Current</th><th>Deduction</th><th>Refund</th><th>Status</th></tr></thead>
-<tbody id="depositTable"></tbody>
-</table>
-</div>
-
-</div>
-
-
-<!-- =====================================================
+</div></section>
+<section class="owner-screen" data-screen="rent"><!-- =====================================================
 RENT RECORDS
 ===================================================== -->
 
-<div id="ownerSection-rent-55792" class="section owner-screen" data-screen="rent">
+<div class="section">
 
 <h2>📅 Monthly Rent Records</h2>
 
@@ -680,14 +640,12 @@ are created and shown.
 
 </div>
 
-</div>
-
-
-<!-- =====================================================
+</div></section>
+<section class="owner-screen" data-screen="collection"><!-- =====================================================
 RENT COLLECTION
 ===================================================== -->
 
-<div id="ownerSection-collection-55853" class="section owner-screen" data-screen="collection">
+<div class="section">
 
 <h2>💵 Rent Collection</h2>
 
@@ -739,14 +697,12 @@ onclick="recordPayment()">
 💰 Record Payment
 </button>
 
-</div>
-
-
-<!-- =====================================================
+</div></section>
+<section class="owner-screen" data-screen="history"><!-- =====================================================
 PAYMENT HISTORY
 ===================================================== -->
 
-<div id="ownerSection-history-55926" class="section owner-screen" data-screen="history">
+<div class="section">
 
 <h2>📋 Payment History</h2>
 
@@ -784,12 +740,10 @@ onchange="displaySelectedPaymentHistory()">
 
 </div>
 
-</div>
+</div></section>
+<section class="owner-screen" data-screen="properties"><!-- PROPERTY -->
 
-
-<!-- PROPERTY -->
-
-<div id="ownerSection-properties-55993" class="section owner-screen" data-screen="properties">
+<div class="section">
 
 <h2>🏢 Property Records</h2>
 
@@ -817,12 +771,10 @@ onchange="displaySelectedPaymentHistory()">
 
 </div>
 
-</div>
+</div></section>
+<section class="owner-screen" data-screen="receipt"><!-- RECEIPT -->
 
-
-<!-- RECEIPT -->
-
-<div id="ownerSection-receipt-56066" class="section owner-screen" data-screen="receipt">
+<div class="section">
 
 <h2>🧾 Rent Receipt</h2>
 
@@ -848,16 +800,12 @@ onclick="generateReceipt()">
 
 </button>
 
-<div id="receipt"></div>
-
+<div id="receipt"></section>
+    </div>
+  </main>
 </div>
 
-</main>
 </div>
-</div>
-</div>
-
-
 <!-- =====================================================
 CONSUMER DASHBOARD
 ===================================================== -->
@@ -1120,6 +1068,29 @@ Security Deposit is separate from monthly rent.
 </div>
 
 
+
+<script>
+function showOwnerScreen(screen){
+  document.querySelectorAll(".owner-screen").forEach(function(el){
+    el.classList.toggle("active", el.dataset.screen === screen);
+  });
+  document.querySelectorAll(".owner-nav").forEach(function(btn){
+    btn.classList.toggle("active", btn.dataset.screen === screen);
+  });
+  var side=document.getElementById("ownerSidebar");
+  if(side) side.classList.remove("open");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function toggleOwnerSidebar(){
+  var side=document.getElementById("ownerSidebar");
+  if(side) side.classList.toggle("open");
+}
+document.addEventListener("click",function(e){
+  var btn=e.target.closest(".owner-nav");
+  if(btn) showOwnerScreen(btn.dataset.screen);
+});
+</script>
+
 <!-- =====================================================
 FIREBASE
 ===================================================== -->
@@ -1203,23 +1174,6 @@ let rentRecords=[];
 
 let deposits=[];
 
-
-/* =====================================================
-OWNER SCREEN NAVIGATION
-===================================================== */
-
-window.showOwnerScreen=(screen)=>{
-
-document.querySelectorAll(".owner-screen").forEach(el=>{
-  el.classList.toggle("active", el.dataset.screen===screen);
-});
-
-document.querySelectorAll(".owner-nav").forEach(btn=>{
-  btn.classList.toggle("active", btn.dataset.screen===screen);
-});
-
-window.scrollTo({top:0,behavior:"smooth"});
-};
 
 /* =====================================================
 PAGE
@@ -1398,15 +1352,6 @@ if(securityDeposit<0){
 
 error.innerText=
 "Enter valid Security Deposit.";
-
-return;
-
-}
-
-if(parseDate(dueDate) < parseDate(joinedDate)){
-
-error.innerText=
-"First Rent Due Date cannot be before Joined Date.";
 
 return;
 
@@ -1656,10 +1601,8 @@ displayRentRecords();
 displayPayments();
 
 displayDeposits();
-displayAllConsumers();
 
 updateDashboard();
-showOwnerScreen("dashboard");
 
 }
 
@@ -1872,10 +1815,7 @@ refund.innerHTML=
 '<option value="">Select Consumer</option>';
 
 consumers
-.filter(c=>{
-  const d=deposits.find(x=>x.consumerId===c.id);
-  return c.status==="closed" && d && d.status!=="Refunded" && Number(d.currentAmount||0)>0;
-})
+.filter(c=>c.status==="closed")
 .forEach(c=>{
 
 refund.innerHTML+=
@@ -1906,26 +1846,6 @@ ${c.status==="closed"?" (Closed)":""}
 
 }
 
-
-function displayAllConsumers(){
-
-const table=document.getElementById("allConsumerTable");
-if(!table)return;
-table.innerHTML="";
-
-consumers.forEach(c=>{
-  table.innerHTML+=`
-  <tr onclick="document.getElementById('ownerConsumerSelect').value='${safe(c.id)}';selectConsumer()" style="cursor:pointer">
-    <td>${safe(c.name)}</td>
-    <td>${safe(c.email)}</td>
-    <td>${safe(c.mobile)}</td>
-    <td>${safe(c.propertyName)}</td>
-    <td>₹${Number(c.rent||0)}</td>
-    <td><span class="badge ${c.status==="verified"?"badge-verified":c.status==="closed"?"badge-closed":"badge-pending"}">${safe(c.status||"pending")}</span></td>
-  </tr>`;
-});
-
-}
 
 /* =====================================================
 PENDING CONSUMERS
@@ -3399,24 +3319,6 @@ document.getElementById(
 ).innerText=
 "₹"+total;
 
-const total2=document.getElementById("totalDepositLiability2");
-if(total2) total2.innerText="₹"+total;
-
-const table=document.getElementById("depositTable");
-if(table){
-  table.innerHTML="";
-  deposits.forEach(d=>{
-    table.innerHTML+=`<tr>
-      <td>${safe(d.consumerName)}</td>
-      <td>₹${Number(d.originalAmount||0)}</td>
-      <td>₹${Number(d.currentAmount||0)}</td>
-      <td>₹${Number(d.deduction||0)}</td>
-      <td>₹${Number(d.refundAmount||0)}</td>
-      <td>${safe(d.status||"Held")}</td>
-    </tr>`;
-  });
-}
-
 }
 
 
@@ -3464,8 +3366,6 @@ d.currentAmount||0;
 document.getElementById(
 "refundDate"
 ).value=today();
-
-document.getElementById("refundReason").value="";
 
 };
 
@@ -3951,6 +3851,23 @@ return;
 }
 
 
+await ensureDueRentRecords(
+
+uid,
+
+c.name||"",
+
+c.propertyName||"",
+
+Number(c.rent||0),
+
+c.joinedDate,
+
+c.dueDate
+
+);
+
+
 document.getElementById(
 "pendingMessage"
 ).classList.add("hidden");
@@ -4295,11 +4212,6 @@ String(a.paymentDate||"")
 
 const last=
 ownPayments[0];
-
-if(!last){
-  alert("No payment found for this Consumer. Record a rent payment first.");
-  return;
-}
 
 
 const owner=
