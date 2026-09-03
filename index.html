@@ -3008,6 +3008,16 @@ serverTimestamp()
 }
 
 
+/* Create due rent record immediately after verification */
+await ensureDueRentRecords(
+uid,
+t.name||"",
+propertyName,
+rent,
+joinedDate,
+dueDate
+);
+
 await loadOwner();
 
 alert(
@@ -4716,21 +4726,7 @@ return;
 }
 
 
-await ensureDueRentRecords(
-
-uid,
-
-t.name||"",
-
-t.propertyName||"",
-
-Number(t.rent||0),
-
-t.joinedDate,
-
-t.dueDate
-
-);
+/* Rent records are created by Owner only. Tenant only reads records. */
 
 
 document.getElementById(
