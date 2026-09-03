@@ -1875,12 +1875,21 @@ PAGE
 
 window.showLogin=()=>{
 
+/* Always hide both dashboards when returning to Login */
 document
 .getElementById("loginPage")
 .classList.remove("hidden");
 
 document
 .getElementById("registerPage")
+.classList.add("hidden");
+
+document
+.getElementById("ownerDashboard")
+.classList.add("hidden");
+
+document
+.getElementById("tenantDashboard")
 .classList.add("hidden");
 
 };
@@ -5381,7 +5390,23 @@ LOGOUT
 
 window.logoutUser=async()=>{
 
+try{
+
+currentUser=null;
+currentRole=null;
+
 await signOut(auth);
+
+/* Immediately return to Login page */
+showLogin();
+
+}catch(e){
+
+console.error("Logout error:",e);
+
+alert("Logout failed. Please try again.");
+
+}
 
 };
 
