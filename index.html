@@ -1856,6 +1856,8 @@ let currentUser=null;
 
 let currentRole=null;
 
+let isRegistering=false;
+
 let tenants=[];
 
 let properties=[];
@@ -2077,6 +2079,8 @@ return;
 
 try{
 
+isRegistering=true;
+
 const result=
 await createUserWithEmailAndPassword(
 auth,
@@ -2134,6 +2138,14 @@ success.innerText=
 await signOut(auth);
 
 
+isRegistering=false;
+
+showLogin();
+
+document.getElementById("loginError").innerText=
+"Registration submitted successfully. Owner verification is required.";
+
+
 [
 "regName",
 "regEmail",
@@ -2176,10 +2188,16 @@ async(user)=>{
 
 if(!user){
 
+if(!isRegistering){
 showLogin();
+}
 
 return;
 
+}
+
+if(isRegistering){
+return;
 }
 
 currentUser=user;
